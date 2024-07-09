@@ -1,5 +1,5 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
-from .products import Tags
+from .product import Tags
 
 class Article(db.Model):
     __tablename__ = 'articles'
