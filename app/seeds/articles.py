@@ -34,10 +34,10 @@ def seed_articles():
 # it will reset the primary keys for you as well.
 def undo_articles():
     if environment == "production":
-        db.session.execute(f"TRUNCATE table {SCHEMA}.articleTags RESTART IDENTITY CASCADE;")
+        db.session.execute(f"TRUNCATE table {SCHEMA}.article_tags RESTART IDENTITY CASCADE;")
         db.session.execute(f"TRUNCATE table {SCHEMA}.articles RESTART IDENTITY CASCADE;")
     else:
-        db.session.execute(text("DELETE FROM articleTags"))
+        db.session.execute(text("DELETE FROM article_tags"))
         db.session.execute(text("DELETE FROM articles"))
 
     db.session.commit()

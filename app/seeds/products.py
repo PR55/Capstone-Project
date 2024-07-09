@@ -52,12 +52,12 @@ def seed_products():
 # it will reset the primary keys for you as well.
 def undo_products():
     if environment == "production":
-        db.session.execute(f"TRUNCATE table {SCHEMA}.productImages RESTART IDENTITY CASCADE;")
-        db.session.execute(f"TRUNCATE table {SCHEMA}.productTags RESTART IDENTITY CASCADE;")
+        db.session.execute(f"TRUNCATE table {SCHEMA}.product_images RESTART IDENTITY CASCADE;")
+        db.session.execute(f"TRUNCATE table {SCHEMA}.product_tags RESTART IDENTITY CASCADE;")
         db.session.execute(f"TRUNCATE table {SCHEMA}.products RESTART IDENTITY CASCADE;")
     else:
-        db.session.execute(text("DELETE FROM productImages"))
-        db.session.execute(text("DELETE FROM productTags"))
+        db.session.execute(text("DELETE FROM product_images"))
+        db.session.execute(text("DELETE FROM product_tags"))
         db.session.execute(text("DELETE FROM products"))
 
     db.session.commit()

@@ -28,7 +28,7 @@ class Article(db.Model):
 
 
 class ArticleTag(db.Model):
-    __tablename__ = 'articleTags'
+    __tablename__ = 'article_tags'
 
     if environment == "production":
         __table_args__ = {'schema': SCHEMA}

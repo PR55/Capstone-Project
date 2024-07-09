@@ -38,7 +38,7 @@ class Tags(Enum):
     pve = 'PVE'
 
 class ProductTag(db.Model):
-    __tablename__ = 'productTags'
+    __tablename__ = 'product_tags'
 
     if environment == "production":
         __table_args__ = {'schema': SCHEMA}
@@ -55,7 +55,7 @@ class ProductTag(db.Model):
         }
 
 class ProductImage(db.Model):
-    __tablename__ = 'productImages'
+    __tablename__ = 'product_images'
 
     if environment == "production":
         __table_args__ = {'schema': SCHEMA}
