@@ -21,6 +21,15 @@ export const thunkProductsLoad = () => async (dispatch) => {
     }
 }
 
+export const thunkProductLoadOne = (id) => async (dispatch) => {
+    const response = await fetch(`/api/products/${id}`)
+    if(response.ok){
+        const data = await response.json()
+        await dispatch(loadProduct(data.product));
+        return data.product
+    }
+}
+
 export const thunkNewProduct = (payload) => async (dispatch) => {
     const response = await fetch("/api/products/",{
         method:'POST',
@@ -28,11 +37,12 @@ export const thunkNewProduct = (payload) => async (dispatch) => {
     })
     if (response.ok) {
         const { product } = await response.json();
-        await dispatch(addPost(product));
+        await dispatch(loadProduct(product));
         return product
     } else {
         console.log("There was an error making your post!")
         const data = await response.json()
+        console.log(data)
         return data
     }
 }
@@ -41,13 +51,18 @@ const initialState = {};
 
 function productReducer(state = initialState, action) {
     switch (action.type) {
-    case GET_PRODUCTS:
+    case GET_PRODUCTS:{
         let newState = {}
         for (let product of action.payload){
             newState[product.id] = product
         }
         return newState
-
+    }
+    case GET_PRODUCT:{
+        let newState = {...state}
+        newState[action.payload.id] = action.payload
+        return newState
+    }
     default:
         return state;
   }

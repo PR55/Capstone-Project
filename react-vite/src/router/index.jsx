@@ -4,6 +4,8 @@ import SignupFormPage from '../components/SignupFormPage';
 import Layout from './Layout';
 import ProductBrowser from '../components/ProductBrowser';
 import ProductForm from '../components/ProductForm';
+import ProductDetail from '../components/ProductDetail';
+import HomePage from '../components/HomePage';
 
 export const router = createBrowserRouter([
   {
@@ -11,7 +13,7 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <h1>Welcome!</h1>,
+        element: <HomePage/>,
       },
       {
         path: "/login",
@@ -22,7 +24,11 @@ export const router = createBrowserRouter([
         element: <SignupFormPage />,
       },
       {
-        path:"/products",
+        path:"/traditional/products",
+        element:<ProductBrowser/>
+      },
+      {
+        path:"/electronic/products",
         element:<ProductBrowser/>
       },
       {
@@ -30,7 +36,8 @@ export const router = createBrowserRouter([
         element:<ProductForm/>
       },
       {
-        path:"/products/:productId"
+        path:"/products/:productId",
+        element:<ProductDetail/>
       }
     ],
   },

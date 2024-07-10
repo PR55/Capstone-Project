@@ -13,7 +13,8 @@ function Navigation() {
     <div className="navBar">
       <div className="navLinks">
       <NavLink to="/">Home</NavLink>
-      <NavLink to="/products">Products</NavLink>
+      <NavLink to="/traditional/products">Traditional Products</NavLink>
+      <NavLink to="/electronic/products">Electronic Products</NavLink>
       {user ? <NavLink to="/products/new">Post Product</NavLink>:null}
       <NavLink to="/">Articles</NavLink>
       {user ? <NavLink to="/">Post Article</NavLink>:null}

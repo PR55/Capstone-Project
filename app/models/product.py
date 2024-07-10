@@ -25,6 +25,7 @@ class Product(db.Model):
             'description': self.description,
             'price':self.price,
             'owner' : self.ownerId,
+            'isTraditonal':self.isTraditional,
             'timeCreated': self.time_created,
             'timeUpdated': self.time_updated,
         }

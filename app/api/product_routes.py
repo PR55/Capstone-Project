@@ -1,21 +1,41 @@
-from app.models import db, Tags, Product, ProductImage, ProductTag
-from flask import Blueprint, jsonify
-from flask_login import login_required
+from app.models import db, Tags, Product, ProductImage, ProductTag, User
+from flask import Blueprint, jsonify,request
+from flask_login import login_required, current_user
 from app.forms import ProductForm
 from app.api.aws_helpers import upload_file_to_s3, get_unique_filename
 product_routes = Blueprint('products', __name__)
 
 @product_routes.route('/')
-def products():
-    product_list = [ x.to_dict() for x in Product.query.all()]
-    return {'products':product_list}
+def all_products():
+    products = [ x.to_dict() for x in Product.query.all()]
+    for product in products:
+        img = ProductImage.query.filter_by(productId = product['id']).first()
+        if img != None:
+            product['imageUrl'] = img.image_url
+        else:
+            product['imageUrl'] = img
+        tags = [x.to_dict() for x in ProductTag.query.filter_by(productId = product['id']).all()]
+        product['tags'] = tags
+        user = User.query.get(product['owner'])
+        product['owner'] = user.to_dict()
+    return {'products':products}
 
 @product_routes.route('/<int:id>')
 def one_product(id):
     product = Product.query.filter_by(id=id).first()
     if product == None:
         return {'message':'Product not found', 'errors':{'product':'Product does not exist'}}, 404
-    return {'product': product.to_dict()}
+    safe_product = product.to_dict()
+    img = ProductImage.query.filter_by(productId = product.id).first()
+    if img != None:
+            safe_product['imageUrl'] = img.image_url
+    else:
+            safe_product['imageUrl'] = img
+    tags = [x.to_dict() for x in ProductTag.query.filter_by(productId = product.id).all()]
+    safe_product['tags'] = tags
+    user = User.query.get(product.ownerId)
+    safe_product['owner'] = user.to_dict()
+    return {'product': safe_product}
 
 
 @product_routes.route('/', methods=['POST'])
@@ -23,13 +43,13 @@ def one_product(id):
 def new_product():
 
     form = ProductForm()
-
+    form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         data = form.data
         image = data['image']
-        image.filename = get_unique_filename(image)
+        image.filename = get_unique_filename(image.filename)
         upload = upload_file_to_s3(image)
-        print(upload)
+        # print(upload)
 
         if "url" not in upload:
             # if the dictionary doesn't have a url key
@@ -39,11 +59,17 @@ def new_product():
 
         url = upload['url']
 
+        state = False
+
+        if data['isTraditional'] != 'false':
+             state = True
+
         product_new = Product(
             name = data['name'],
             description = data['description'],
             price = data['price'],
-            isTraditional = data['isTraditional'],
+            isTraditional = state,
+            ownerId = current_user.id
         )
 
         db.session.add(product_new)
@@ -72,6 +98,11 @@ def new_product():
         safe_product['imageUrl'] = image_new.image_url
 
         safe_product['tags'] = tagList
+
+        safe_product['owner'] = current_user.to_dict()
+
+        print(form.data)
+
 
         return {'product':safe_product}
 

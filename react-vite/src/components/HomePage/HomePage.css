@@ -1,0 +1,87 @@
+.splashPage{
+    margin: 0;
+    height: 600px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+
+.splashLeft{
+    margin: 0;
+    margin-left: 0;
+    height: 100%;
+    width:50%;
+    /* border: 2px solid; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    background-color: blue;
+}
+
+.splashRight{
+    margin: 0;
+    margin-right: 0;
+    height: 100%;
+    width:50%;
+    /* border: 2px solid; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    background-color: blueviolet;
+}
+
+.electronicButton{
+    height: 50px;
+    width: 150px;
+    margin-bottom: 0%;
+    border-radius: 2rem;
+    background-color: rgb(227, 227, 227);
+
+}
+
+.electronicButton:hover{
+    cursor: pointer;
+    /* animation: fillBottom 1s .1s ease-out; */
+    /* animation: name duration timing-function delay iteration-count direction fill-mode; */
+    animation-name: fillBottom;
+    animation-duration: .25s;
+    animation-timing-function: ease-in;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+.electronicButton:not(:hover){
+    animation-name: exitHover;
+    animation-duration: .175s;
+    animation-timing-function: ease-in;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+
+.electronicButton:active{
+    background-color: rgb(227, 227, 227);
+}
+
+@keyframes exitHover{
+    to {
+        background-color: rgb(227, 227, 227);
+    }
+
+    from{
+        background-color: rgb(153, 153, 153);
+    }
+}
+
+@keyframes fillBottom{
+    from {
+        background-color: rgb(227, 227, 227);
+    }
+
+    to{
+        background-color: rgb(153, 153, 153);
+    }
+}

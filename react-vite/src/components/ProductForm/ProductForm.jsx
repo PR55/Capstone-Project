@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
 import { thunkNewProduct } from "../../redux/product";
 import './ProductForm.css'
+import { useDispatch} from "react-redux";
+import { useNavigate } from 'react-router-dom'
 
 function ProductForm() {
 
+    // const history = useHistory()
     const [name, setName] = useState('')
     const [body, setBody] = useState('')
     const [price, setPrice] = useState(0.10)
@@ -14,6 +17,8 @@ function ProductForm() {
     const [isPosting, setPosting] = useState(false)
 
     const [errors, setErrors] = useState({})
+
+    const dispatch = useDispatch()
 
     useEffect(()=>{
         const newErrors = {}
@@ -41,32 +46,45 @@ function ProductForm() {
         setErrors(newErrors)
     },[name, body,image, price])
 
+    const navigate = useNavigate()
+
     async function onSubmit(e){
         e.preventDefault();
         const formData = new FormData();
         formData.append("name", name);
         formData.append("description", body);
         formData.append("price", price);
-        formData.append("tags", ['Multiplayer', 'Nintendo', 'Switch']);
+        formData.append("tags", ['Multiplayer']);
+        formData.append("tags", ['Nintendo']);
+        formData.append("tags", ['Nintendo Switch']);
         formData.append("isTraditional", type);
         formData.append("image", image);
-        await console.log(formData.entries().toArray());
-        return
+        console.log(formData.entries().toArray());
+        // return
         // aws uploads can be a bit slow—displaying
         // some sort of loading message is a good idea
-        setImageLoading(true);
+        setPosting(true);
         let d = await dispatch(thunkNewProduct(formData));
-
+        // console.log(d?.errors)
         if(d?.errors){
             setErrors(d.errors)
+            console.log(d.errors)
+            return
         }
+
+        navigate(`/products/${d.id}`)
         // history.push("/images");
     }
 
+    console.log(type)
+
     return (
-        <div className='productFormDiv'>
+        <div className='productFormDiv'
+        >
             <h1>Product Form</h1>
-            <form onSubmit={e => onSubmit(e)} className="productForm">
+            <form
+            encType="multipart/form-data"
+            onSubmit={e => onSubmit(e)} className="productForm">
                 <div className="inputHolders">
                     <label htmlFor="productName">Product Name:</label>
                     <input type="text" id='productName' value={name} onChange={e => setName(e.target.value)}/>
@@ -86,14 +104,15 @@ function ProductForm() {
                     <label htmlFor="productTags">Product Tags:</label>
                     <input type="text"id='productTags' value={tags} onChange={e => setTags(e.target.value)}/>
                 </div>
+                {errors?.tags ?<p className="errors">{errors.tags}</p> :null}
                 <div className="inputHolders">
                     <label htmlFor="productType">Is Traditional?</label>
-                    <input type="checkbox" id='productType' value={type} onChange={e => setType(e.target.value)}/>
+                    <input type="checkbox" id='productType' value={type} onChange={() => setType(!type)}/>
                 </div>
                 <div className="inputHolders">
                     <label htmlFor="productType">Image:</label>
                     <input type="file" id='productType'
-                    accept=".png,.jpg,.jpeg,.gif"
+                    accept="image/*"
                     onChange={e => setImage(e.target.files[0])}/>
                 </div>
                 {errors?.image ?<p className="errors">{errors.image}</p> :null}

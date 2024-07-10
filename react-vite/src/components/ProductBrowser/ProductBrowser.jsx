@@ -2,51 +2,83 @@ import { useEffect, useState } from 'react'
 import './ProductBrowser.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { thunkProductsLoad } from '../../redux/product'
+import { useNavigate } from 'react-router-dom'
 
-function ProductBrowser(){
+function ProductBrowser() {
     const dispatch = useDispatch()
     const products = useSelector(store => store.products)
     const [productsArr, setProducts] = useState([])
 
-    useEffect(()=>{
+    const [searchName, setSearch] = useState('')
+
+    useEffect(() => {
         dispatch(thunkProductsLoad())
-    }, [])
+    }, [window.location.pathname])
 
-    useEffect(()=>{
-        if(products){
-            setProducts(Object.values(products))
+    useEffect(() => {
+        if (products) {
+            let disArr = []
+
+            console.log()
+
+            for (let product of Object.values(products)) {
+                if ((!product.isTraditonal && window.location.pathname === '/electronic/products') ||
+                (product.isTraditonal && window.location.pathname === '/traditional/products')
+                ) {
+                    console.log(product)
+                    if (searchName && product.name.toLowerCase().includes(searchName.toLowerCase())) {
+                        disArr.push(product)
+                    } else if (!searchName) {
+                        disArr.push(product)
+                    }
+                }
+            }
+
+            setProducts(disArr)
         }
-    }, [products])
+    }, [products, searchName])
 
-    return(
-        <div>
-            <div className='Products Display'>
+    useEffect
+
+    const navigate = useNavigate()
+
+    return (
+        <div className='displayHolder'>
+            <div className='productsDisplay'>
+                <div>
+                    <input type="search" value={searchName} onChange={e => setSearch(e.target.value)} />
+                </div>
                 {
                     productsArr.length
-                    ?
-                    <div>
-                    <h1>Products Available to display!</h1>
-                    {
-                        productsArr.map(product => {
-                            return(
-                                <div key = {product.id}>
-                                    <div>
-                                    <p>{product.name}</p>
-                                    <p>{product.description}</p>
-                                    </div>
-                                    <div>
-                                    <p>${product.price}</p>
-                                    <button>Buy Now</button>
-                                    <button>Add to Cart</button>
-                                    </div>
-                                </div>
-                            )
-                        })
-                    }
-                    </div>
+                        ?
+                        <div className='blockHolder'>
 
-                    :
-                    <h1>No Products to display</h1>
+                            {
+                                productsArr.map(product => {
+                                    return (
+                                        <div key={product.id} className='productBlock'>
+                                            <div className='imageHolder'>
+                                                <img src={product.imageUrl} alt={'gameImg'} />
+                                            </div>
+                                            <div className='description'>
+                                                <p className='title' onClick={() => navigate(`/products/${product.id}`)}>{product.name}</p>
+                                                <p className='creator'>{product.owner?.username}</p>
+                                                <p className='body'>{product.description.length > 250 ? product.description.slice(0, 250) + "..." : product.description}</p>
+                                            </div>
+                                            <div className='Purchase'>
+                                                <p>${product.price.toFixed(2)}</p>
+                                                <button>Buy Now</button>
+                                                <button>Add to Cart</button>
+                                            </div>
+                                        </div>
+                                    )
+                                })
+                            }
+                        </div>
+
+                        :
+                        <h1>No Products matching that name</h1>
+
                 }
             </div>
         </div>

@@ -1,0 +1,83 @@
+.displayHolder{
+    padding: 30px 0;
+    min-height:600px;
+}
+.productsDisplay{
+    padding-top: 50px;
+}
+.blockHolder{
+    display:flex;
+    flex-direction: column;
+    row-gap: 20px;
+}
+.productBlock{
+    display: flex;
+    margin: 0 auto;
+    flex-direction: row;
+    border: 5px solid darkgray;
+    height: 200px;
+    width: 950px;
+    padding: 5px;
+    justify-content: center;
+    background-color: darkgray;
+    border-radius: 3rem;
+}
+
+
+
+.imageHolder{
+    margin-right: 1%;
+    padding: 0%;
+    max-height: 100%;
+    width: 250px;
+    border: 5px solid gray;
+    border-radius: 1rem;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    background-color: beige;
+}
+
+.imageHolder > img{
+    height: 100%;
+}
+
+.description{
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+}
+
+.title{
+    padding: 0;
+    margin: 0;
+    font-weight: bolder;
+    text-wrap: wrap;
+    word-break: normal;
+    display: block;
+    /* border: 2px solid; */
+}
+
+.title:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.creator{
+    /* border: 2px solid; */
+    padding: 0;
+    margin: 0;
+    font-weight: bold;
+    text-wrap: wrap;
+    word-break: normal;
+}
+
+.body{
+    /* border: 2px solid; */
+    padding: 0;
+    margin: 0;
+    margin-top: 10px;
+    text-wrap: wrap;
+    word-break: normal;
+}
