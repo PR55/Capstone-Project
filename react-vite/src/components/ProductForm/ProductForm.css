@@ -1,0 +1,35 @@
+.errors{
+    color: red;
+    font-weight: bold;
+}
+
+.productFormDiv{
+    display: flex;
+    flex-direction: column;
+    height: 500px;
+    width:400px;
+    /* border: 2px solid; */
+    /* justify-content: center; */
+    align-content: center;
+    margin: 0 auto;
+    padding: 50px 0;
+}
+
+.productForm{
+    display: flex;
+    flex-direction: column;
+    height: 500px;
+    width:400px;
+    /* border: 2px solid; */
+    justify-content: center;
+    align-content: center;
+    margin: 0 auto;
+    padding: 50px 0;
+}
+
+.inputHolders{
+    display: inline;
+    flex-direction: column;
+    /* border: 2px solid; */
+    justify-content: start;
+}

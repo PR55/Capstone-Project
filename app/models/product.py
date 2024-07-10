@@ -16,11 +16,13 @@ class Product(db.Model):
     time_created = db.Column(db.DateTime(timezone=True), server_default=db.func.now())
     time_updated = db.Column(db.DateTime(timezone=True), server_default=db.func.now(), onupdate=db.func.now())
 
+
+
     def to_dict(self):
         return {
             'id': self.id,
             'name': self.name,
-            'email': self.description,
+            'description': self.description,
             'price':self.price,
             'owner' : self.ownerId,
             'timeCreated': self.time_created,

@@ -1,3 +1,32 @@
 .profile-dropdown {
   position: absolute;
+  height: 150px;
+  width: 100px;
+  background-color: azure;
+  border: 2px solid;
+  /* margin-left: auto; */
+  z-index: 1;
+  top:25px;
+  right:0.5%;
+}
+
+.navBar{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navLinks{
+  display: flex;
+  gap:20px;
+}
+
+.loginButtons{
+  display: flex;
+  gap: 200px;
+}
+
+.loggedInButtons{
+  display: flex;
+  gap: 200px;
 }
