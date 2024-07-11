@@ -47,6 +47,24 @@ export const thunkNewProduct = (payload) => async (dispatch) => {
     }
 }
 
+export const thunkUpdateProduct = (payload, id) => async (dispatch) => {
+    const response = await fetch(`/api/products/${id}`,{
+        method:'PUT',
+        body: payload
+    })
+    if (response.ok) {
+        const { product } = await response.json();
+        await dispatch(loadProduct(product));
+        return product
+    } else {
+        console.log("There was an error making your post!")
+        console.log(response)
+        const data = await response.json()
+        console.log(data)
+        return data
+    }
+}
+
 const initialState = {};
 
 function productReducer(state = initialState, action) {

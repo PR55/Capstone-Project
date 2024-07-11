@@ -1,8 +1,10 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { thunkProductLoadOne } from "../../redux/product";
+import ProductImageModal from "./ProductImageModal";
 import './ProductDetail.css'
+import OpenModalImageItem from "./OpenModalImageItem";
 
 function ProductDetail() {
 
@@ -11,12 +13,15 @@ function ProductDetail() {
 
     const product = useSelector(store => store.products[productId])
 
+    const [curPhoto, setCurPhoto] = useState(0)
+
     useEffect(() => {
         if (productId)
             dispatch(thunkProductLoadOne(productId))
     }, [productId])
 
 
+    const navigate = useNavigate()
 
     return (
         <div className="detailHolder">
@@ -24,9 +29,44 @@ function ProductDetail() {
                 product
                     ?
                     <div>
+                        <div className="navBack">
+                            <p
+                                className='placeholderNav'
+                                onClick={() => navigate(product.isTraditional ? '/traditional/products' : '/electronic/products')}
+                            >{'< Back'}</p>
+                        </div>
                         <div className='topInfo'>
-                            <div className="topImage">
-                                <img src={product.imageUrl} alt="" />
+                            <div className="previewImageHolder">
+                                {
+                                    product.images.map((image, index) => {
+                                        console.log(index)
+                                        return (
+                                            <div
+                                            key={index}
+                                                className={curPhoto == index ? "selected previewImageNot":"previewImage"}
+                                            >
+                                                <img
+                                                    src={image.imageUrl}
+                                                    onClick={() => {
+                                                        if (curPhoto != index) {
+                                                            setCurPhoto(index)
+                                                        }
+                                                    }}
+                                                />
+                                            </div>
+                                        )
+                                    })
+                                }
+                            </div>
+                            <div
+                            className="topImage"
+
+                            >
+                                <OpenModalImageItem
+                                    itemText={'Current active photo'}
+                                    modalComponent={<ProductImageModal imageUrl = {product?.images[curPhoto].imageUrl}/>}
+                                    imageObj={product?.images[curPhoto]}
+                                 />
                             </div>
                             <div className="topDescrip">
                                 <p>{product.name}</p>
@@ -40,6 +80,7 @@ function ProductDetail() {
                                 </div>
                             </div>
                             <div className="topButtons">
+                                <p>${product.price.toFixed(2)}</p>
                                 <button>Buy Now</button>
                                 <button>Add to cart</button>
                             </div>

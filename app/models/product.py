@@ -25,20 +25,62 @@ class Product(db.Model):
             'description': self.description,
             'price':self.price,
             'owner' : self.ownerId,
-            'isTraditonal':self.isTraditional,
+            'isTraditional':self.isTraditional,
             'timeCreated': self.time_created,
             'timeUpdated': self.time_updated,
         }
 
 class Tags(Enum):
-    nintentdo = 'Nintendo'
+    #---Electronic Tags
+    nintendo = 'Nintendo'
     nsixfour = 'Nintendo 64'
     switch = 'Nintendo Switch'
+    game_boy = 'GameBoy'
+    game_boy_color = 'GameBoy Color'
+    game_boy_advanced = 'Gameboy Advanced'
+    pokemon = 'Pokémon'
+    nintendo_ds = 'Nintendo DS'
+    gamecube = 'GameCube'
+    xbox='Xbox'
+    xbox_360='Xbox 360'
+    xbox_one='Xbox One'
+    xbox_series_x='Xbox Series X'
+    playstation = 'Playstation'
+    playstation_2 = 'Playstation 2'
+    playstation_3 = 'Playstation 3'
+    playstation_4 = 'Playstation 4'
+    playstation_5 = 'Playstation 5'
     retro = 'Retro'
     coop = 'Co-Op'
     multiplayer = 'Multiplayer'
     pvp = 'PVP'
     pve = 'PVE'
+    #---Traditional Tags
+    hasbro='Hasbro'
+    fantasy='Fantasy'
+    medieval = 'Medieval'
+    ww1 = 'WW1'
+    video_game_theme = 'Video Game Theme'
+    tcg = 'Trading Card Game'
+    modern_warfare = 'Modern Warfare'
+    classic = 'Classic'
+    civilization = 'Civilization'
+    acw = 'American Civil War'
+    bluffing = 'Bluffing'
+    medical = 'Medical'
+    rage = 'Rage Inducing'
+    economy = 'Economy'
+    party = 'Party Game'
+    noire = 'Noire'
+    mafia = 'Mafia'
+    rp = 'RolePlay'
+    racing = 'Racing'
+    travel = 'Travel'
+    pirates = 'Pirates'
+    military = 'Military'
+    book = 'Book'
+    farming = 'Farming'
+
 
 class ProductTag(db.Model):
     __tablename__ = 'product_tags'

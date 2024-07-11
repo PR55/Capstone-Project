@@ -17,3 +17,14 @@ class ProductForm(FlaskForm):
     isTraditional = StringField("Traditional Product", validators=[DataRequired()])
     image = FileField("Image File", validators=[FileRequired(), FileAllowed(list(ALLOWED_EXTENSIONS))])
     submit = SubmitField("Create Post")
+
+class ProductFormUpdate(FlaskForm):
+    name = StringField("Product Name", validators=[DataRequired()])
+    description = StringField("Description", validators=[DataRequired()])
+    price = FloatField("Price", validators=[DataRequired()])
+    tags = SelectMultipleField("Tags", choices=[x.value for x in Tags],validators=[DataRequired()])
+    isTraditional = StringField("Traditional Product", validators=[DataRequired()])
+    addImage = StringField("Add Image?",validators=[DataRequired()])
+    deleteImages = StringField("Delete all Images?",validators=[DataRequired()])
+    image = FileField("Image File", validators=[FileAllowed(list(ALLOWED_EXTENSIONS))])
+    submit = SubmitField("Create Post")

@@ -1,28 +1,63 @@
 import { useEffect, useState } from "react";
-import { thunkNewProduct } from "../../redux/product";
-import './ProductForm.css'
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import { useNavigate } from 'react-router-dom'
 import { electronic_tags, traditional_tags } from "../tags";
-function ProductForm() {
+import { thunkProductLoadOne, thunkUpdateProduct } from "../../redux/product";
+function EditProductForm() {
 
-    // const history = useHistory()
+    const { productId } = useParams()
+    const dispatch = useDispatch()
+    const product = useSelector(store => store.products[productId])
+
     const [name, setName] = useState('')
     const [body, setBody] = useState('')
     const [price, setPrice] = useState(0.10)
     const [tags, setTags] = useState([])
     const [type, setType] = useState(false)
+    const [addImage, setAddImage] = useState(false)
+    const [deleteAll, setDeleteAll] = useState(false)
     const [image, setImage] = useState(null)
-
-    const [tagArr, setTagArr] = useState(electronic_tags.map(() => false))
 
     const [isPosting, setPosting] = useState(false)
 
-    const [errors, setErrors] = useState({})
+    const [tagArr, setTagArr] = useState(electronic_tags.map(() => false))
 
     const [tagChangeBool, setTagChangeBool] = useState(false)
+    const [errors, setErrors] = useState({})
 
-    const dispatch = useDispatch()
+    useEffect(() => {
+        if (productId)
+            dispatch(thunkProductLoadOne(productId))
+    }, [productId])
+
+    useEffect(() => {
+        if (product) {
+            setName(product.name)
+            setBody(product.description)
+            setPrice(product.price)
+            setType(product.isTraditional)
+            let tagArr = []
+
+            for (let tag of product.tags) {
+                tagArr.push(tag.tag)
+            }
+
+            setTags(tagArr)
+            setTagChangeBool(!tagChangeBool)
+            console.log(product.isTraditional)
+        }
+    }, [product])
+
+    useEffect(() => {
+        if (product && type == product.isTraditional) {
+            setTags(product.tags.map(tag => tag.tag))
+            setTagChangeBool(!tagChangeBool)
+        } else {
+            setTags([])
+            setTagChangeBool(!tagChangeBool)
+        }
+    }, [type])
 
     useEffect(() => {
         const newErrors = {}
@@ -47,26 +82,18 @@ function ProductForm() {
             newErrors.tags = "Please select at least 1 tag"
         }
 
-        if (!image) {
+        if (typeof image == File) {
             newErrors.image = 'Please upload an image'
         }
 
-        for(let tag of tags){
-            if(type && electronic_tags.includes(tag)){
-                setTags([]);
-                setTagChangeBool(!tagChangeBool)
-                break;
-            }else if(!type && traditional_tags.includes(tag)){
-                setTags([]);
-                setTagChangeBool(!tagChangeBool)
-                break;
-            }
+        if(deleteAll && !image){
+            newErrors.image = 'Must add an image if deleting all'
         }
 
-        setTagArr(type ? traditional_tags.map(tag => tags.includes(tag)) : electronic_tags.map(tag=> tags.includes(tag)))
+        setTagArr(type ? traditional_tags.map(tag => tags.includes(tag)) : electronic_tags.map(tag => tags.includes(tag)))
 
         setErrors(newErrors)
-    }, [name, body, image, price, tagChangeBool,type])
+    }, [name, body, image, price, tagChangeBool, type, deleteAll, addImage])
 
     const navigate = useNavigate()
 
@@ -99,13 +126,15 @@ function ProductForm() {
             formData.append("tags", tag)
         }
         formData.append("isTraditional", type);
+        formData.append("deleteImages",deleteAll)
+        formData.append("addImage",addImage)
         formData.append("image", image);
         console.log(formData.entries().toArray());
         // return
         // aws uploads can be a bit slow—displaying
         // some sort of loading message is a good idea
         setPosting(true);
-        let d = await dispatch(thunkNewProduct(formData));
+        let d = await dispatch(thunkUpdateProduct(formData, productId));
         // console.log(d?.errors)
         if (d?.errors) {
             setErrors(d.errors)
@@ -117,22 +146,22 @@ function ProductForm() {
         // history.push("/images");
     }
 
-    // console.log(type)
-
     return (
         <div className='productFormDiv'
         >
             <h1>Product Form</h1>
             <form
+                onSubmit={e => onSubmit(e)}
                 encType="multipart/form-data"
-                onSubmit={e => onSubmit(e)} className="productForm">
+                className="productForm"
+            >
                 <div className="inputHolders">
                     <label htmlFor="productName">Product Name:</label>
                     <input type="text" id='productName' value={name} onChange={e => setName(e.target.value)} />
                 </div>
                 {errors?.name ? <p className="errors">{errors.name}</p> : null}
                 <div className="inputHolders">
-                    <label htmlFor="productBody">Description:</label>
+                    <label htmlFor="prouctBody">Description:</label>
                     <textarea name="productBody" id="prouctBody" value={body} onChange={e => setBody(e.target.value)} />
                 </div>
                 {errors?.description ? <p className="errors">{errors.description}</p> : null}
@@ -151,7 +180,7 @@ function ProductForm() {
                                         <input type="checkbox"
                                             value={tagName}
                                             onChange={e => manageTags(e)}
-                                            checked = {tagArr[index]}
+                                            checked={tagArr[index]}
                                         />
                                         <label>{tagName}</label>
                                     </div>
@@ -162,7 +191,7 @@ function ProductForm() {
                                         <input type="checkbox"
                                             value={tagName}
                                             onChange={e => manageTags(e)}
-                                            checked = {tagArr[index]}
+                                            checked={tagArr[index]}
                                         />
                                         <label>{tagName}</label>
                                     </div>
@@ -176,11 +205,29 @@ function ProductForm() {
                     <input type="checkbox" id='productType' value={type} onChange={() => setType(!type)} />
                 </div>
                 <div className="inputHolders">
-                    <label htmlFor="productType">Image:</label>
-                    <input type="file" id='productType'
-                        accept="image/*"
-                        onChange={e => setImage(e.target.files[0])} />
+                    <label htmlFor="productType">Delete all images?</label>
+                    <input type="checkbox" id='productType' value={deleteAll} onChange={() => setDeleteAll(!deleteAll)} />
                 </div>
+                {
+                    product?.images.length < 3 || (product?.images.length == 3 && deleteAll) ?
+                        <div className="inputHolders">
+                            <label htmlFor="productType">Add Image?</label>
+                            <input type="checkbox" id='productType' value={addImage} onChange={() => setAddImage(!addImage)} />
+                        </div>
+                        : null
+                }
+                {
+                    addImage
+                        ?
+                        <div className="inputHolders">
+                            <label htmlFor="productType">Image:</label>
+                            <input type="file" id='productType'
+                                accept="image/*"
+                                onChange={e => setImage(e.target.files[0])} />
+                        </div>
+                        : null
+                }
+
                 {errors?.image ? <p className="errors">{errors.image}</p> : null}
                 {isPosting ? <h3>Posting your product...</h3> : null}
                 <button disabled={isPosting || Object.values(errors).length}>Submit</button>
@@ -189,4 +236,4 @@ function ProductForm() {
     )
 }
 
-export default ProductForm;
+export default EditProductForm;

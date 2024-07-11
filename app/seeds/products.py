@@ -28,12 +28,12 @@ def seed_products():
     )
 
     testTag3 = ProductTag(
-        tag = Tags.nintentdo,
+        tag = Tags.nintendo,
         productId = 1
     )
 
     testImage = ProductImage(
-        image_url = 'https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTvVN8hWRYVuDPjJtKKlYMPVbF53VvrJ0Qnl10LY1Ag0lTJ8CK6eNgNbzzeg0UzRodRwIXX',
+        image_url = 'https://elot-bucket.s3.us-east-2.amazonaws.com/conkers-bad-fur-day.jpg',
         productId = 1
     )
 

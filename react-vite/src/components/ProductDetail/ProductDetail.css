@@ -2,6 +2,63 @@
     min-height: 650px;
 }
 
+.navBack{
+    /* border: 2px solid gray; */
+    display: inline-block;
+    position:relative;
+    left: 19%;
+    padding:10px 0;
+}
+
+.placeholderNav{
+    padding: 0;
+    margin: 0;
+    font-weight: bolder;
+}
+
+.placeholderNav:hover{
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.previewImage{
+    height: 90px;
+    width: 90px;
+    overflow: hidden;
+    background-color: rgba(245, 245, 220, 0.633);
+    border: 10px solid grey;
+    border-radius: 1rem;
+    margin-right: 15px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.previewImageNot{
+    height: 90px;
+    width: 90px;
+    overflow: hidden;
+    border: 10px solid grey;
+    border-radius: 1rem;
+    margin-right: 15px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.previewImage:hover{
+    cursor: pointer;
+    box-shadow: 1px 1px .5rem;
+}
+
+.selected{
+    border-color: blue;
+    background-color: rgba(240, 255, 255, 0.633);
+}
+
+.previewImage > img{
+    height: 100%;
+}
 .topInfo{
     display: flex;
     flex-direction: row;

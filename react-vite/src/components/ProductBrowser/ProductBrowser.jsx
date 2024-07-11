@@ -22,8 +22,8 @@ function ProductBrowser() {
             console.log()
 
             for (let product of Object.values(products)) {
-                if ((!product.isTraditonal && window.location.pathname === '/electronic/products') ||
-                (product.isTraditonal && window.location.pathname === '/traditional/products')
+                if ((!product.isTraditional && window.location.pathname === '/electronic/products') ||
+                (product.isTraditional && window.location.pathname === '/traditional/products')
                 ) {
                     console.log(product)
                     if (searchName && product.name.toLowerCase().includes(searchName.toLowerCase())) {
@@ -58,7 +58,7 @@ function ProductBrowser() {
                                     return (
                                         <div key={product.id} className='productBlock'>
                                             <div className='imageHolder'>
-                                                <img src={product.imageUrl} alt={'gameImg'} />
+                                                <img src={product.images[0].imageUrl} alt={'gameImg'} />
                                             </div>
                                             <div className='description'>
                                                 <p className='title' onClick={() => navigate(`/products/${product.id}`)}>{product.name}</p>
