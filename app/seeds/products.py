@@ -27,10 +27,10 @@ def seed_products():
         productId = 1
     )
 
-    # testTag3 = ProductTag(
-    #     tag = Tags.nintendo,
-    #     productId = 1
-    # )
+    testTag3 = ProductTag(
+        tag = Tags.nintendo,
+        productId = 1
+    )
 
     testImage = ProductImage(
         image_url = 'https://elot-bucket.s3.us-east-2.amazonaws.com/conkers-bad-fur-day.jpg',
@@ -39,7 +39,7 @@ def seed_products():
 
     db.session.add(testTag1)
     db.session.add(testTag2)
-    # db.session.add(testTag3)
+    db.session.add(testTag3)
     db.session.add(testImage)
     db.session.commit()
 
