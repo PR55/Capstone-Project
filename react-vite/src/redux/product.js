@@ -65,6 +65,18 @@ export const thunkUpdateProduct = (payload, id) => async (dispatch) => {
     }
 }
 
+export const thunkDeleteOneImage = (id) => async (dispatch) => {
+    const response = await fetch(`/api/images/${id}`, {
+        method:'DELETE'
+    })
+
+    if(response.ok){
+        const {product} = await response.json()
+        await dispatch(loadProduct(product))
+        return product
+    }
+}
+
 const initialState = {};
 
 function productReducer(state = initialState, action) {

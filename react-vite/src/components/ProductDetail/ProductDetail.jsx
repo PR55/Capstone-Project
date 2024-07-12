@@ -21,6 +21,12 @@ function ProductDetail() {
     }, [productId])
 
 
+    useEffect(()=>{
+        if(product && !product.images[curPhoto]){
+            setCurPhoto(curPhoto-1)
+        }
+    }, [product, curPhoto])
+
     const navigate = useNavigate()
 
     return (
@@ -64,7 +70,7 @@ function ProductDetail() {
                             >
                                 <OpenModalImageItem
                                     itemText={'Current active photo'}
-                                    modalComponent={<ProductImageModal imageUrl = {product?.images[curPhoto].imageUrl}/>}
+                                    modalComponent={<ProductImageModal imgsLength = {product?.images.length} imageUrl = {product?.images[curPhoto]} ownerId={product.owner.id}/>}
                                     imageObj={product?.images[curPhoto]}
                                  />
                             </div>

@@ -11,3 +11,11 @@ class ArticleForm(FlaskForm):
     tags = SelectMultipleField("Tags", choices=[x.value for x in Tags],validators=[DataRequired()])
     image = FileField("Image File", validators=[FileRequired(), FileAllowed(list(ALLOWED_EXTENSIONS))])
     submit = SubmitField("Create Post")
+
+class ArticleFormUpdate(FlaskForm):
+    title = StringField("Title", validators=[DataRequired()])
+    body = StringField("Body", validators=[DataRequired()])
+    tags = SelectMultipleField("Tags", choices=[x.value for x in Tags],validators=[DataRequired()])
+    changeImage = StringField("Change Image?", validators=[DataRequired()])
+    image = FileField("Image File", validators=[FileAllowed(list(ALLOWED_EXTENSIONS))])
+    submit = SubmitField("Create Post")

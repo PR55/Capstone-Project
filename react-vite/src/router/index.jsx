@@ -7,6 +7,9 @@ import ProductForm from '../components/ProductForm';
 import ProductDetail from '../components/ProductDetail';
 import HomePage from '../components/HomePage';
 import EditProductForm from '../components/EditProduct/EditProductForm';
+import ArticleBrowser from '../components/ArticleBrowser';
+import ArticleDetail from '../components/ArticleDetail';
+import PostArticle from '../components/PostArticle';
 
 export const router = createBrowserRouter([
   {
@@ -43,6 +46,18 @@ export const router = createBrowserRouter([
       {
         path:"/products/:productId/edit",
         element:<EditProductForm/>
+      },
+      {
+        path:'/articles',
+        element:<ArticleBrowser/>
+      },
+      {
+        path:'/articles/:articleId',
+        element:<ArticleDetail/>
+      },
+      {
+        path:'/articles/new',
+        element:<PostArticle/>
       }
     ],
   },

@@ -50,3 +50,5 @@ export const traditional_tags = [
     'Book',
     'Farming',
     ]
+
+export const allTags = [...traditional_tags, ...electronic_tags]

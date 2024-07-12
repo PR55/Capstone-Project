@@ -128,3 +128,117 @@
     word-break: normal;
     background-color:#012f19
 }
+
+.modalImageContained{
+    height: 400px;
+    width: 500px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: end;
+    /* border: 2px solid white; */
+}
+
+/* .buttonContainerModal{
+
+} */
+
+.modalImageCont{
+    height: 100%;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    /* border: 2px solid white; */
+}
+
+.modalImage{
+    height: 80%;
+    max-width: 80%;
+    align-self: center;
+    place-self: center;
+}
+
+.exit{
+    position: absolute;
+    font-weight: bolder;
+    font-size: 48px;
+    padding: 0;
+    margin: 0;
+}
+
+.exit:hover{
+    cursor: pointer;
+}
+
+.delete{
+    top: 15%;
+    position: absolute;
+    font-weight: bolder;
+    font-size: 48px;
+    padding: 0;
+    margin: 0;
+}
+
+.delete:hover{
+    cursor: pointer;
+}
+
+.confirmTrashHolder{
+    height: 400px;
+    width: 500px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.confirmTrashButtons{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 200px;
+    gap: 10px;
+}
+
+.confirm{
+    height: 30px;
+    width:100px;
+    font-size: large;
+    background-color: red;
+    color: azure;
+    border: 2px solid red;
+    padding: 20px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: .5rem;
+}
+
+.confirm:hover{
+    background-color: rgb(214, 0, 0);
+    border-color: rgb(214, 0, 0);
+    cursor: pointer;
+}
+
+.deny{
+    height: 30px;
+    width:100px;
+    font-size: large;
+    background-color: rgb(38, 38, 38);
+    color: azure;
+    border: 2px solid rgb(38, 38, 38);
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: .5rem;
+}
+
+.deny:hover{
+    background-color: rgb(31, 31, 31);
+    border-color: rgb(31, 31, 31);
+    cursor: pointer;
+}

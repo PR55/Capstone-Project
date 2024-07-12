@@ -110,6 +110,7 @@ function ProductForm() {
         if (d?.errors) {
             setErrors(d.errors)
             console.log(d.errors)
+            setPosting(false)
             return
         }
 
