@@ -20,3 +20,17 @@ product_images = [
     'https://elot-bucket.s3.us-east-2.amazonaws.com/Hey_You%2C_Pikachu!_Coverart.png',
     'https://elot-bucket.s3.us-east-2.amazonaws.com/Battletoads.jpg',
 ]
+
+article_images=[
+    'https://elot-bucket.s3.us-east-2.amazonaws.com/e3.jpg',
+    'https://elot-bucket.s3.us-east-2.amazonaws.com/switch_pro.jpg',
+    'https://elot-bucket.s3.us-east-2.amazonaws.com/psvr2.jpg',
+    'https://elot-bucket.s3.us-east-2.amazonaws.com/xbox-bethesda-image.jpg',
+    'https://elot-bucket.s3.us-east-2.amazonaws.com/fortnite.jpg',
+    'https://elot-bucket.s3.us-east-2.amazonaws.com/elden-ring.jpg',
+    'https://elot-bucket.s3.us-east-2.amazonaws.com/apex-legends.jpg',
+    'https://elot-bucket.s3.us-east-2.amazonaws.com/valorant.jfif',
+    'https://elot-bucket.s3.us-east-2.amazonaws.com/horizon-forbidden-west.jfif',
+    'https://elot-bucket.s3.us-east-2.amazonaws.com/hades.jfif',
+    'https://elot-bucket.s3.us-east-2.amazonaws.com/animal_crossing_nh.png',
+]
