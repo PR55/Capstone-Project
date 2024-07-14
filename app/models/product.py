@@ -55,6 +55,7 @@ class Tags(Enum):
     multiplayer = 'Multiplayer'
     pvp = 'PVP'
     pve = 'PVE'
+    singleplayer = 'Singleplayer'
     #---Traditional Tags
     hasbro='Hasbro'
     fantasy='Fantasy'

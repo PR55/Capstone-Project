@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 83cd54b02ea6
+Revision ID: 691112597ad5
 Revises: ffdc0a98111c
-Create Date: 2024-07-11 18:49:00.893919
+Create Date: 2024-07-14 08:46:27.442010
 
 """
 from alembic import op
@@ -12,8 +12,9 @@ import os
 environment = os.getenv("FLASK_ENV")
 SCHEMA = os.environ.get("SCHEMA")
 
+
 # revision identifiers, used by Alembic.
-revision = '83cd54b02ea6'
+revision = '691112597ad5'
 down_revision = 'ffdc0a98111c'
 branch_labels = None
 depends_on = None
@@ -50,7 +51,7 @@ def upgrade():
         op.execute(f"ALTER TABLE products SET SCHEMA {SCHEMA};")
     op.create_table('article_tags',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('tag', sa.Enum('nintendo', 'nsixfour', 'switch', 'game_boy', 'game_boy_color', 'game_boy_advanced', 'pokemon', 'nintendo_ds', 'gamecube', 'xbox', 'xbox_360', 'xbox_one', 'xbox_series_x', 'playstation', 'playstation_2', 'playstation_3', 'playstation_4', 'playstation_5', 'retro', 'coop', 'multiplayer', 'pvp', 'pve', 'hasbro', 'fantasy', 'medieval', 'ww1', 'video_game_theme', 'tcg', 'modern_warfare', 'classic', 'civilization', 'acw', 'bluffing', 'medical', 'rage', 'economy', 'party', 'noire', 'mafia', 'rp', 'racing', 'travel', 'pirates', 'military', 'book', 'farming', name='tags'), nullable=False),
+    sa.Column('tag', sa.Enum('nintendo', 'nsixfour', 'switch', 'game_boy', 'game_boy_color', 'game_boy_advanced', 'pokemon', 'nintendo_ds', 'gamecube', 'xbox', 'xbox_360', 'xbox_one', 'xbox_series_x', 'playstation', 'playstation_2', 'playstation_3', 'playstation_4', 'playstation_5', 'retro', 'coop', 'multiplayer', 'pvp', 'pve', 'singleplayer', 'hasbro', 'fantasy', 'medieval', 'ww1', 'video_game_theme', 'tcg', 'modern_warfare', 'classic', 'civilization', 'acw', 'bluffing', 'medical', 'rage', 'economy', 'party', 'noire', 'mafia', 'rp', 'racing', 'travel', 'pirates', 'military', 'book', 'farming', name='tags'), nullable=False),
     sa.Column('articleId', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['articleId'], ['articles.id'], ),
     sa.PrimaryKeyConstraint('id')
@@ -68,7 +69,7 @@ def upgrade():
         op.execute(f"ALTER TABLE product_images SET SCHEMA {SCHEMA};")
     op.create_table('product_tags',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('tag', sa.Enum('nintendo', 'nsixfour', 'switch', 'game_boy', 'game_boy_color', 'game_boy_advanced', 'pokemon', 'nintendo_ds', 'gamecube', 'xbox', 'xbox_360', 'xbox_one', 'xbox_series_x', 'playstation', 'playstation_2', 'playstation_3', 'playstation_4', 'playstation_5', 'retro', 'coop', 'multiplayer', 'pvp', 'pve', 'hasbro', 'fantasy', 'medieval', 'ww1', 'video_game_theme', 'tcg', 'modern_warfare', 'classic', 'civilization', 'acw', 'bluffing', 'medical', 'rage', 'economy', 'party', 'noire', 'mafia', 'rp', 'racing', 'travel', 'pirates', 'military', 'book', 'farming', name='tags'), nullable=False),
+    sa.Column('tag', sa.Enum('nintendo', 'nsixfour', 'switch', 'game_boy', 'game_boy_color', 'game_boy_advanced', 'pokemon', 'nintendo_ds', 'gamecube', 'xbox', 'xbox_360', 'xbox_one', 'xbox_series_x', 'playstation', 'playstation_2', 'playstation_3', 'playstation_4', 'playstation_5', 'retro', 'coop', 'multiplayer', 'pvp', 'pve', 'singleplayer', 'hasbro', 'fantasy', 'medieval', 'ww1', 'video_game_theme', 'tcg', 'modern_warfare', 'classic', 'civilization', 'acw', 'bluffing', 'medical', 'rage', 'economy', 'party', 'noire', 'mafia', 'rp', 'racing', 'travel', 'pirates', 'military', 'book', 'farming', name='tags'), nullable=False),
     sa.Column('productId', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['productId'], ['products.id'], ),
     sa.PrimaryKeyConstraint('id')

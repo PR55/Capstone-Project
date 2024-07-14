@@ -1,3 +1,22 @@
 product_images = [
-    'https://elot-bucket.s3.us-east-2.amazonaws.com/conkers-bad-fur-day.jpg'
+    'https://elot-bucket.s3.us-east-2.amazonaws.com/conkers-bad-fur-day.jpg',
+    'https://elot-bucket.s3.us-east-2.amazonaws.com/giant-connect-4.jpg',
+    'https://elot-bucket.s3.us-east-2.amazonaws.com/pokemon-monopoly.jpg',
+    'https://elot-bucket.s3.us-east-2.amazonaws.com/scrabble.jpg',
+    'https://elot-bucket.s3.us-east-2.amazonaws.com/gloomhaven.png',
+    'https://elot-bucket.s3.us-east-2.amazonaws.com/uno.png',
+    'https://elot-bucket.s3.us-east-2.amazonaws.com/operation.jpg',
+    'https://elot-bucket.s3.us-east-2.amazonaws.com/game-of-life.jpg',
+    'https://elot-bucket.s3.us-east-2.amazonaws.com/sorry.jpg',
+    'https://elot-bucket.s3.us-east-2.amazonaws.com/persona5.jpg',
+    'https://elot-bucket.s3.us-east-2.amazonaws.com/darksouls3.jpg',
+    'https://elot-bucket.s3.us-east-2.amazonaws.com/witcher3.jpg',
+    'https://elot-bucket.s3.us-east-2.amazonaws.com/botw.jpg',
+    'https://elot-bucket.s3.us-east-2.amazonaws.com/Control.jpg',
+    'https://elot-bucket.s3.us-east-2.amazonaws.com/outerwilds.jpg',
+    'https://elot-bucket.s3.us-east-2.amazonaws.com/cuphead.jpg',
+    'https://elot-bucket.s3.us-east-2.amazonaws.com/dead-cells.jpg',
+    'https://elot-bucket.s3.us-east-2.amazonaws.com/firewatch.jpg',
+    'https://elot-bucket.s3.us-east-2.amazonaws.com/Hey_You%2C_Pikachu!_Coverart.png',
+    'https://elot-bucket.s3.us-east-2.amazonaws.com/Battletoads.jpg',
 ]
