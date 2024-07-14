@@ -65,7 +65,7 @@ With its cutting-edge features and exclusive content, the PSVR2 is poised to ele
         'image':'https://elot-bucket.s3.us-east-2.amazonaws.com/psvr2.jpg',
     },
     {
-        'title':'Microsoft Acquires Bethesda: What It Means for Xbox',
+        'title':'Microsoft Acquires Bethesda',
         'body':'''In a landmark move, Microsoft has finalized its acquisition of ZeniMax Media, the parent company of Bethesda Softworks. This strategic acquisition is set to have far-reaching implications for the Xbox ecosystem and the broader gaming industry.
 
 One of the most significant outcomes of the acquisition is that future Bethesda titles will be available exclusively on Xbox and PC. This includes highly anticipated releases like "Starfield" and the next installment in "The Elder Scrolls" series. Xbox players can look forward to exclusive content and experiences from one of the most renowned RPG developers.
@@ -182,7 +182,7 @@ The success of "Hades" underscores the growing recognition and influence of indi
         'image':'https://elot-bucket.s3.us-east-2.amazonaws.com/hades.jfif',
     },
     {
-        'title':' Major Update for Animal Crossing: New Horizons',
+        'title':'Major Update for Animal Crossing: New Horizons',
         'body':'''
 Nintendo has rolled out a major update for "Animal Crossing: New Horizons," introducing a host of new features and improvements that promise to enhance the beloved life simulation game.
 
