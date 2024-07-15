@@ -11,6 +11,7 @@ import ArticleBrowser from '../components/ArticleBrowser';
 import ArticleDetail from '../components/ArticleDetail';
 import PostArticle from '../components/PostArticle';
 import ManagementPage from '../components/ManagementPage';
+import EditArticle from '../components/EditArticle/EditArticle';
 
 export const router = createBrowserRouter([
   {
@@ -59,6 +60,10 @@ export const router = createBrowserRouter([
       {
         path:'/articles/new',
         element:<PostArticle/>
+      },
+      {
+        path:'/articles/:articleId/edit',
+        element:<EditArticle/>
       },
       {
         path:'/manage',

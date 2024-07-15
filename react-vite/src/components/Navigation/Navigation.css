@@ -1,3 +1,14 @@
+.navLogo{
+  margin: 0;
+  padding: 0;
+  height: 93px;
+  width: 300px;
+}
+
+.navLogo:hover{
+  cursor: pointer;
+}
+
 .profile-dropdown {
   position: absolute;
   height: 150px;
@@ -20,6 +31,7 @@
   background-color: #EEF4ED;
   height: 95px;
   /* border: 10px solid #EEF4ED ; */
+  overflow: hidden;
 }
 
 .navLinks{
@@ -34,7 +46,7 @@
   text-decoration: none;
   color: black;
   border: 2px solid;
-  height: 95px;
+  height: 90px;
   width: 125px;
   display: flex;
   justify-content: center;

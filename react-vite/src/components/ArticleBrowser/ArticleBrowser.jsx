@@ -52,7 +52,7 @@ function ArticleBrowser() {
                             {
                                 productsArr.map(product => {
                                     return (
-                                        <div key={product.id} className='productBlock'>
+                                        <div key={product.id} className='productBlockArticle'>
                                             <div className='imageHolder'>
                                                 <img src={product.imageUrl} alt={'gameImg'} />
                                             </div>

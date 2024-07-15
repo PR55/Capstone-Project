@@ -8,7 +8,7 @@ class Article(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(50), nullable=False)
+    title = db.Column(db.String(200), nullable=False)
     body = db.Column(db.String(5000), nullable=False)
     ownerId = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
     articleImage = db.Column(db.String, nullable=False)

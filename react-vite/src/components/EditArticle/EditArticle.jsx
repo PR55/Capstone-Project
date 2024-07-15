@@ -1,10 +1,14 @@
 import { useEffect, useState } from "react";
-import { makeOneArticle } from "../../redux/article";
+import { makeOneArticle, thunkLoadOneArticle } from "../../redux/article";
 import { allTags } from "../tags";
-import { useDispatch } from "react-redux";
-import { useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useParams } from 'react-router-dom';
 
-function PostArticle() {
+function EditArticle(){
+
+    const {articleId} = useParams()
+
+    const article = useSelector(store => store.articles[articleId])
 
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
@@ -18,6 +22,21 @@ function PostArticle() {
     const [errors, setErrors] = useState({})
 
     const [isPosting, setPosting] = useState(false)
+
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+
+    useEffect(()=>{
+        dispatch(thunkLoadOneArticle(articleId))
+    }, [articleId])
+
+    useEffect(()=>{
+        if(article){
+            setTitle(article.title)
+            setBody(article.body)
+            setTags(article.tags.map(tag => tag.tag))
+        }
+    }, [article])
 
     useEffect(() => {
 
@@ -34,7 +53,7 @@ function PostArticle() {
         if (!filtered.length) {
             errObj.title = 'Cannot submit an empty string'
         } else if (title.length < 5) {
-            errObj.title = 'Title must be at least 5 characters long'
+            errObj.title = 'title must be at least 5 characters long'
         } else if (title.length > 200) {
             errObj.title = 'Title cannot be longer than 200 characters'
         }
@@ -86,8 +105,7 @@ function PostArticle() {
         setTagChangeBool(!tagChangeBool)
     }
 
-    const dispatch = useDispatch()
-    const navigate = useNavigate()
+
 
     const onSubmit = async (e) => {
         e.preventDefault();
@@ -157,4 +175,4 @@ function PostArticle() {
     )
 }
 
-export default PostArticle;
+export default EditArticle;

@@ -10,7 +10,7 @@
     flex-direction: column;
     row-gap: 20px;
 }
-.productBlock{
+.productBlockArticle{
     display: flex;
     margin: 0 auto;
     flex-direction: row;

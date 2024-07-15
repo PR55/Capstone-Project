@@ -62,15 +62,29 @@ function EditProductForm() {
     useEffect(() => {
         const newErrors = {}
 
-        if (name.length < 10) {
-            newErrors.name = 'Must be at least 10 characters long'
-        } else if (name.length > 75) {
-            newErrors.name = 'NAme cannot be longer than 75 characters'
+        const splitName = name.split('')
+
+        const nameChecker = []
+
+        for(let char of splitName){
+            if(char && char != ' '){
+                nameChecker.push(char)
+            }
         }
 
-        if (body.length < 30) {
+        if (nameChecker.length < 1) {
+            newErrors.name = 'Must be at least 1 character long'
+        } else if (nameChecker.length > 200) {
+            newErrors.name = 'Name cannot be longer than 200 characters'
+        }
+
+        const splitBody = body.split('')
+
+        const bodyChecker = splitBody.filter(char => char && char != ' ')
+
+        if (bodyChecker.length < 30) {
             newErrors.description = 'Must be at least 30 characters long'
-        } else if (body.length > 2000) {
+        } else if (bodyChecker.length > 2000) {
             newErrors.description = 'Description cannot be longer than 2000 characters'
         }
 

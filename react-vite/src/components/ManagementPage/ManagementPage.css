@@ -1,3 +1,15 @@
+.manageHolder{
+    min-height: 500px;
+    padding-bottom: 50px;
+}
+
+.manageInfo{
+    display: flex;
+    justify-content: space-evenly;
+    font-size: 24px;
+}
+
+
 .toUpdateButton{
     border: 1px solid;
     display: flex;
@@ -5,4 +17,63 @@
     align-items: center;
     background-color: aliceblue;
     padding: 5px 15px;
+}
+
+.toUpdateButton:hover{
+    cursor: pointer;
+}
+
+.activeHeader{
+    text-decoration: underline;
+    font-weight: bold;
+    cursor: default;
+}
+
+.inactiveHeader{
+    color: gray;
+}
+
+.inactiveHeader:hover{
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.manageTags{
+    display: flex;
+    column-gap: 5px;
+}
+
+.manageTags > p{
+    background-color: gray;
+    border: 2px solid gray;
+    color: azure;
+    border-radius: .5rem;
+    padding: 4px;
+}
+
+.manageDisplay{
+    display:flex;
+    flex-direction: column;
+    row-gap: 20px;
+    margin: 0 auto;
+}
+
+.productBlockManage{
+    display: flex;
+    margin: 0 auto;
+    flex-direction: row;
+    border: 5px solid darkgray;
+    height: 200px;
+    width: 950px;
+    padding: 25px;
+    justify-content: center;
+    background-color: darkgray;
+    border-radius: 3rem;
+}
+
+.manageDescription{
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    gap:10px;
 }
