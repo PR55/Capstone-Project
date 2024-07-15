@@ -82,10 +82,6 @@ function EditProductForm() {
             newErrors.tags = "Please select at least 1 tag"
         }
 
-        if (typeof image == File) {
-            newErrors.image = 'Please upload an image'
-        }
-
         if(deleteAll && !image){
             newErrors.image = 'Must add an image if deleting all'
         }

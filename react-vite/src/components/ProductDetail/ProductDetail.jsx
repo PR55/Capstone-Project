@@ -5,8 +5,12 @@ import { thunkProductLoadOne } from "../../redux/product";
 import ProductImageModal from "./ProductImageModal";
 import './ProductDetail.css'
 import OpenModalImageItem from "./OpenModalImageItem";
+import OpenAddPhoto from "./openModalIonItems/OpenAddPhoto";
+import AddImage from "./modalComponent/AddImage";
 
 function ProductDetail() {
+
+    const user = useSelector(store => store.session.user)
 
     const { productId } = useParams()
     const dispatch = useDispatch()
@@ -63,6 +67,12 @@ function ProductDetail() {
                                         )
                                     })
                                 }
+                                {product.images.length < 3 && user
+                                ?
+                                <OpenAddPhoto
+                                        modalComponent={<AddImage obj={product}/>}
+                                    />
+                                :null}
                             </div>
                             <div
                             className="topImage"

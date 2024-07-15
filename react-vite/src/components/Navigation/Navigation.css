@@ -6,8 +6,9 @@
   border: 2px solid;
   /* margin-left: auto; */
   z-index: 1;
-  top:25px;
+  top:6.5%;
   right:0.5%;
+  color: black;
 }
 
 .navBar{
@@ -17,18 +18,38 @@
   justify-content: space-between;
   align-items: center;
   background-color: #EEF4ED;
-  height: 75px;
-  border: 10px solid #EEF4ED ;
+  height: 95px;
+  /* border: 10px solid #EEF4ED ; */
 }
 
 .navLinks{
+  padding: 0;
+  margin: 0;
   display: flex;
-  gap:20px;
+}
+
+.navL {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  color: black;
+  border: 2px solid;
+  height: 95px;
+  width: 125px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: aliceblue;
+}
+
+.navL:hover {
+  background-color: rgb(188, 195, 201);
 }
 
 .loginButtons{
   display: flex;
-  gap: 200px;
+  gap: 20px;
 }
 
 .loggedInButtons{

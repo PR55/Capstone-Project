@@ -12,12 +12,12 @@ function Navigation() {
   return (
     <div className="navBar">
       <div className="navLinks">
-      <NavLink to="/">Home</NavLink>
-      <NavLink to="/traditional/products">Traditional Products</NavLink>
-      <NavLink to="/electronic/products">Electronic Products</NavLink>
-      {user ? <NavLink to="/products/new">Post Product</NavLink>:null}
-      <NavLink to="/articles">Articles</NavLink>
-      {user ? <NavLink to="/articles/new">Post Article</NavLink>:null}
+      <NavLink className='navL' to="/">Home</NavLink>
+      <NavLink className='navL' to="/traditional/products">Traditional Products</NavLink>
+      <NavLink className='navL' to="/electronic/products">Electronic Products</NavLink>
+      {user ? <NavLink className='navL' to="/products/new">Post Product</NavLink>:null}
+      <NavLink className='navL' to="/articles">Articles</NavLink>
+      {user ? <NavLink className='navL' to="/articles/new">Post Article</NavLink>:null}
       </div>
       {
         !user

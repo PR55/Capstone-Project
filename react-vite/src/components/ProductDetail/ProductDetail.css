@@ -22,8 +22,8 @@
 }
 
 .previewImage{
-    height: 90px;
-    width: 90px;
+    height: 86px;
+    width: 86px;
     overflow: hidden;
     background-color: rgba(245, 245, 220, 0.633);
     border: 10px solid grey;
@@ -35,8 +35,8 @@
 }
 
 .previewImageNot{
-    height: 90px;
-    width: 90px;
+    height: 86px;
+    width: 86px;
     overflow: hidden;
     border: 10px solid grey;
     border-radius: 1rem;
@@ -241,4 +241,47 @@
     background-color: rgb(31, 31, 31);
     border-color: rgb(31, 31, 31);
     cursor: pointer;
+}
+
+.previewAdd{
+    background-color: azure;
+    height: 86px;
+    width:86px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 10px solid grey;
+    border-radius: 1rem;
+    margin-right: 15px;
+}
+.previewAdd > *{
+    color: gray;
+    font-size: 20px;
+}
+
+.previewAdd:hover{
+    cursor: pointer;
+    border-color: rgb(152, 152, 152);
+}
+
+.previewImageHolder{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.Currimage:hover{
+    cursor: pointer;
+}
+
+.addPhoto{
+    height: 175px;
+    background-color: black;
+    border: 35px solid black;
+    border-radius: 2rem;
+}
+
+.inputHoldersModal{
+    display: flex;
+    flex-direction: column;
 }

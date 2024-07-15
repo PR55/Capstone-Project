@@ -3,6 +3,7 @@ from flask_login import login_required, current_user
 from app.api.aws_helpers import upload_file_to_s3, get_unique_filename,remove_file_from_s3
 from app.models import Article, ArticleTag, User, db, Tags
 from app.forms import ArticleForm, ArticleFormUpdate
+from app.api.protected_urls import article_images
 
 article_routes = Blueprint('articles', __name__)
 
@@ -103,7 +104,11 @@ def update_article(id):
         article.body = data['body']
 
         if data['changeImage'] == 'true':
-            delCheck = remove_file_from_s3(article.imageUrl)
+
+            delCheck = True
+
+            if article.articleImage not in article_images:
+                delCheck = remove_file_from_s3(article.articleImage)
 
             if delCheck == True:
                 image = data['image']
@@ -118,7 +123,7 @@ def update_article(id):
                     return {'message':'Upload Failed', 'errors':[upload]}
 
                 url = upload['url']
-                article.imageUrl = url
+                article.articleImage = url
             else:
                 return {'message':'An aws error occurred', 'errors':delCheck.errors}, 500
 

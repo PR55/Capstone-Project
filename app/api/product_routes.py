@@ -188,7 +188,7 @@ def update_product(id):
 
         safe_product = product.to_dict()
         safe_product['images'] = [x.to_dict() for x in ProductImage.query.filter_by(productId = id).all()]
-        safe_product['tags'] = [x.to_dict() for x in ProductImage.query.filter_by(productId = id).all()]
+        safe_product['tags'] = [x.to_dict() for x in ProductTag.query.filter_by(productId = id).all()]
         return {'product':safe_product}
 
 

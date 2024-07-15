@@ -36,6 +36,12 @@ function ProfileButton() {
 
   const navigate = useNavigate()
 
+  const toManage = (e) => {
+    e.preventDefault()
+    closeMenu();
+    navigate('/manage')
+  }
+
   const logout = (e) => {
     e.preventDefault();
     dispatch(thunkLogout());
@@ -54,6 +60,9 @@ function ProfileButton() {
             <>
               <li>{user.username}</li>
               <li>{user.email}</li>
+              <li>
+                <button onClick={toManage}>Manage</button>
+              </li>
               <li>
                 <button onClick={logout}>Log Out</button>
               </li>

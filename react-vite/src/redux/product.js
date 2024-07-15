@@ -21,6 +21,15 @@ export const thunkProductsLoad = () => async (dispatch) => {
     }
 }
 
+export const thunkCurrentUserProducts = () => async (dispatch) => {
+    const response = await fetch('/api/users/products')
+
+    if(response.ok){
+        const {products} = await response.json()
+        await dispatch(loadProducts(products))
+    }
+}
+
 export const thunkProductLoadOne = (id) => async (dispatch) => {
     const response = await fetch(`/api/products/${id}`)
     if(response.ok){
@@ -44,6 +53,21 @@ export const thunkNewProduct = (payload) => async (dispatch) => {
         const data = await response.json()
         console.log(data)
         return data
+    }
+}
+export const thunkaddOneImage = (payload,id) => async (dispatch) => {
+    const response = await fetch(`/api/images/${id}`, {
+        method:'POST',
+        body:payload
+    })
+
+    if(response.ok){
+        const {product} = await response.json()
+        await dispatch(loadProduct(product))
+        return product
+    }else{
+        const data = await response.json();
+        return data;
     }
 }
 

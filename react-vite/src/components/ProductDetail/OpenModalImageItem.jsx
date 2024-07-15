@@ -16,7 +16,7 @@ function OpenModalImageItem({
   };
 
   return (
-    <img src={imageObj?.imageUrl} onClick={() => onClick()} alt={itemText}/>
+    <img src={imageObj?.imageUrl} className='Currimage' onClick={() => onClick()} alt={itemText}/>
   );
 }
 

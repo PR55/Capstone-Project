@@ -10,6 +10,7 @@ import EditProductForm from '../components/EditProduct/EditProductForm';
 import ArticleBrowser from '../components/ArticleBrowser';
 import ArticleDetail from '../components/ArticleDetail';
 import PostArticle from '../components/PostArticle';
+import ManagementPage from '../components/ManagementPage';
 
 export const router = createBrowserRouter([
   {
@@ -58,6 +59,10 @@ export const router = createBrowserRouter([
       {
         path:'/articles/new',
         element:<PostArticle/>
+      },
+      {
+        path:'/manage',
+        element:<ManagementPage/>
       }
     ],
   },
