@@ -1,7 +1,7 @@
 .navLogo{
   margin: 0;
   padding: 0;
-  height: 93px;
+  height: 95px;
   width: 300px;
 }
 
@@ -32,6 +32,7 @@
   height: 95px;
   /* border: 10px solid #EEF4ED ; */
   overflow: hidden;
+  box-shadow: 0px 1px;
 }
 
 .navLinks{
@@ -46,7 +47,7 @@
   text-decoration: none;
   color: black;
   border: 2px solid;
-  height: 90px;
+  height: 92px;
   width: 125px;
   display: flex;
   justify-content: center;
