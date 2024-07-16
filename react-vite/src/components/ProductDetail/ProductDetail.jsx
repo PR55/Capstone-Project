@@ -73,7 +73,7 @@ function ProductDetail() {
                                         )
                                     })
                                 }
-                                {product.images.length < 3 && user
+                                {product.images.length < 3 && (user && product.owner.id == user.id)
                                     ?
                                     <OpenAddPhoto
                                         modalComponent={<AddImage obj={product} />}
