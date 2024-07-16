@@ -143,7 +143,37 @@ def update_article(id):
         db.session.commit()
 
         safe_article = article.to_dict()
-        safe_article['owner'] = current_user
+        safe_article['owner'] = current_user.to_dict()
+        safe_article['tags'] = [x.to_dict() for x in ArticleTag.query.filter_by(articleId = id).all()]
+
+        return{'article':safe_article}
 
     if form.errors:
         return {"message":'Bad Request', 'errors':form.errors}, 400
+
+@article_routes.route('/<int:id>', methods=['DELETE'])
+@login_required
+def delete_article(id):
+    user = current_user
+
+    article = Article.query.get(id)
+
+    if not article:
+        return {'message':'Article could not be found'}, 404
+
+    if article.ownerId != user.id:
+        return {'message':'Not owner of the article'}, 403
+
+    res = True
+    if article.articleImage not in article_images:
+        res = remove_file_from_s3(article.articleImage)
+        if res != True:
+            return {'message':'An AWS error occured', 'errors':res['errors']}, 500
+
+    tags = ArticleTag.query.filter_by(articleId = id).all()
+    _ = [db.session.delete(x) for x in tags]
+    db.session.commit()
+    db.session.delete(article)
+    db.session.commit()
+
+    return {'id':id}

@@ -4,19 +4,30 @@ import { useDispatch, useSelector } from 'react-redux'
 import { thunkProductsLoad } from '../../redux/product'
 import { useNavigate } from 'react-router-dom'
 import { electronic_tags, traditional_tags } from '../tags'
+import { addToCart, isInCart } from '../cart'
+import { IoIosSearch } from "react-icons/io";
 
 function ProductBrowser() {
+
+    const user = useSelector(store => store.session.user)
+
     const dispatch = useDispatch()
     const products = useSelector(store => store.products)
     const [productsArr, setProducts] = useState([])
 
     const [searchName, setSearch] = useState('')
 
-    const [tagArr, setTagArr] = useState(!(window.location.pathname === '/electronic/products') ? electronic_tags.map(() => false): traditional_tags.map(()=>false))
+    const [tagArr, setTagArr] = useState(!(window.location.pathname === '/electronic/products') ? electronic_tags.map(() => false) : traditional_tags.map(() => false))
 
     const [searchTags, setTagSearch] = useState([])
 
     const [tagChangeBool, setTagChangeBool] = useState(false)
+
+    const [processCart, setProcess] = useState(false)
+
+    useEffect(() => {
+        console.log('adding to cart!')
+    })
 
     useEffect(() => {
         dispatch(thunkProductsLoad())
@@ -57,13 +68,13 @@ function ProductBrowser() {
         }
     }, [products, searchName, searchTags.length])
 
-    useEffect(()=>{
-        setTagArr(!(window.location.pathname === '/electronic/products') ? traditional_tags.map(tag => searchTags.includes(tag)) : electronic_tags.map(tag=> searchTags.includes(tag)))
+    useEffect(() => {
+        setTagArr(!(window.location.pathname === '/electronic/products') ? traditional_tags.map(tag => searchTags.includes(tag)) : electronic_tags.map(tag => searchTags.includes(tag)))
     }, [tagChangeBool])
 
-    useEffect(()=> {
+    useEffect(() => {
         setTagSearch([])
-        setTagArr(!(window.location.pathname === '/electronic/products') ? traditional_tags.map(tag => searchTags.includes(tag)) : electronic_tags.map(tag=> searchTags.includes(tag)))
+        setTagArr(!(window.location.pathname === '/electronic/products') ? traditional_tags.map(tag => searchTags.includes(tag)) : electronic_tags.map(tag => searchTags.includes(tag)))
     }, [window.location.pathname])
 
     const manageTags = (e) => {
@@ -90,35 +101,36 @@ function ProductBrowser() {
     return (
         <div className='displayHolder'>
             <div className='productsDisplay'>
-                <div>
-                    <input type="search" value={searchName} onChange={e => setSearch(e.target.value)} />
+                <div className='searchBarVisual'>
+                    <IoIosSearch />
+                    <input className='searchBar' type="search" value={searchName} onChange={e => setSearch(e.target.value)} />
                 </div>
-                <div className='displayAndFilter'>
-                    <div className='tagFilter'>
-                        <div>
-                            <p>Please select tags to filter by*</p>
-                            <div className='tagFilterSelect'>
-                                {
-                                    window.location.pathname === '/electronic/products'
+                <div className='tagFilter'>
+                    <div>
+                        <p>Please select tags to filter by*</p>
+                        <div className='tagFilterSelect'>
+                            {
+                                window.location.pathname === '/electronic/products'
                                     ?
-                                    electronic_tags.map((tag, index)=> (
+                                    electronic_tags.map((tag, index) => (
                                         <div key={index} className='tagVisualFilter'>
-                                            <input type='checkbox' checked={tagArr[index]} value={tag} onChange={e => manageTags(e)}/>
+                                            <input type='checkbox' checked={tagArr[index]} value={tag} onChange={e => manageTags(e)} />
                                             <p>{tag}</p>
                                         </div>
                                     ))
                                     :
-                                    traditional_tags.map((tag, index)=> (
+                                    traditional_tags.map((tag, index) => (
                                         <div key={index} className='tagVisualFilter'>
-                                            <input type='checkbox' checked={tagArr[index]} value={tag} onChange={e => manageTags(e)}/>
+                                            <input type='checkbox' checked={tagArr[index]} value={tag} onChange={e => manageTags(e)} />
                                             <p>{tag}</p>
                                         </div>
                                     ))
-                                }
-                            </div>
-                            <p>*Tag filter is inclusive, displays all posts that are related to at least one of the selected tags</p>
+                            }
                         </div>
+                        <p>*Tag filter is inclusive, displays all posts that are related to at least one of the selected tags</p>
                     </div>
+                </div>
+                <div className='displayAndFilter'>
                     <div>
                         {
                             productsArr.length
@@ -136,11 +148,32 @@ function ProductBrowser() {
                                                         <p className='title' onClick={() => navigate(`/products/${product.id}`)}>{product.name}</p>
                                                         <p className='creator'>{product.owner?.username}</p>
                                                         <p className='body'>{product.description.length > 250 ? product.description.slice(0, 250) + "..." : product.description}</p>
+                                                        <div className='browseTags'>
+                                                            {
+                                                                product.tags.map(tag => (
+                                                                    <p
+                                                                        className={searchTags.includes(tag.tag) ? 'tagHighlight' : 'tag'}
+                                                                    >{tag.tag}</p>
+                                                                ))
+                                                            }
+                                                        </div>
                                                     </div>
-                                                    <div className='Purchase'>
-                                                        <p>${product.price.toFixed(2)}</p>
-                                                        <button>Buy Now</button>
-                                                        <button>Add to Cart</button>
+                                                    <div className='purchase'>
+                                                        <p className='displayPrice'>${product.price.toFixed(2)}</p>
+                                                        {/* <button>Buy Now</button> */}
+                                                        {
+                                                            (user && product.owner.id == user.id) ?
+                                                                <button
+                                                                    onClick={() => navigate(`/products/${product.id}/edit`)}
+                                                                    className="addToCart">Update Product</button>
+                                                                :
+                                                                <button
+                                                                    className='addToCart'
+                                                                    disabled={isInCart(product.id)} onClick={() => {
+                                                                        addToCart(product.id)
+                                                                        setProcess(!processCart)
+                                                                    }}>Add to Cart</button>
+                                                        }
                                                     </div>
                                                 </div>
                                             )

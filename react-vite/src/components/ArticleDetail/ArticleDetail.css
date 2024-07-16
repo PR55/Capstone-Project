@@ -11,7 +11,7 @@
     height:400px;
     display: flex;
     justify-content: center;
-    background-color: rgba(127, 255, 212, 0.315);
+    background-color: beige;
     position: relative;
     z-index: -1;
 }
@@ -21,10 +21,12 @@
 }
 
 .mainInfo{
-    /* background-color: gray; */
-    width: 700px;
+    padding: 0px 10%;
+    background-color: lightgray;
+    /* width: 700px; */
 }
 
 .articleBody{
     font-size: 28px;
+    /* background-color: lightgray; */
 }

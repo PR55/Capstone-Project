@@ -1,3 +1,25 @@
+.searchBarVisual{
+    margin-left: 25%;
+    display: flex;
+    padding: 0;
+    align-items: center;
+    background-color: white;
+    border: 1px solid;
+    width:200px;
+    color: black;
+    font-size: 16px;
+}
+
+.searchBar{
+    border: none;
+    width: 100%;
+    font-size: 16px;
+}
+
+.searchBar:active{
+    border: none;
+}
+
 .displayHolder{
     /* padding: 30px 0; */
     min-height:600px;
@@ -9,7 +31,9 @@
     display:flex;
     flex-direction: column;
     row-gap: 20px;
-    margin: 0 auto;
+    margin: 10px auto;
+    justify-content: center;
+    align-items: center;
 }
 .productBlock{
     display: flex;
@@ -86,12 +110,20 @@
 .displayAndFilter{
     display: flex;
     margin: 0 auto;
+    justify-content: center;
     /* border: 2px solid; */
 }
 
 .tagFilter{
-    /* border: 2px solid; */
-    width: 275px;
+    position: fixed;
+    top: 15%;
+    margin-left: 2px;
+    padding: 5px;
+    border: 5px solid;
+    width: 235px;
+    height: 430px;
+    background-color: rgb(225, 225, 225);
+    border-radius: 2rem;
 }
 
 .tagFilterSelect{
@@ -101,9 +133,66 @@
     flex-direction: column;
     flex-wrap: wrap;
     overflow-x: scroll;
-    width: 80%;
+    width: 100%;
+    background-color: white;
 }
 
 .tagVisualFilter{
     display: flex;
+}
+
+.purchase{
+    height: 70%;
+    width:100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.addToCart{
+    width: 85px;
+    height: 40px;
+    border-radius: 1rem;
+    padding: 5px 10px;
+    background-color: white;
+}
+
+.addToCart:enabled:hover{
+    background-color: rgb(219, 219, 219);
+    cursor: pointer;
+}
+
+.displayPrice{
+    font-size: 20px;
+    font-weight: bold;
+    padding: 6px;
+    background-color: white;
+    border: 3px solid white;
+    border-radius: 1rem;
+}
+
+.addToCart:enabled:hover{
+    cursor: pointer;
+}
+
+.browseTags{
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 5px;
+}
+
+.tag{
+    background-color: azure;
+    border: 3px solid azure;
+    border-radius: 1rem;
+    padding: 5px;
+}
+
+.tagHighlight{
+    background-color: azure;
+    border: 3px solid azure;
+    border-radius: 1rem;
+    padding: 5px;
+    box-shadow: 10px 10px .5rem black;
 }

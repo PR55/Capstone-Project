@@ -12,12 +12,12 @@
     margin-left: 0;
     height: 100%;
     width:50%;
-    /* border: 2px solid; */
+    border: 2px solid;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    background-color: blue;
+    background-color: rgb(81, 81, 255);
 }
 
 .splashRight{
@@ -25,12 +25,12 @@
     margin-right: 0;
     height: 100%;
     width:50%;
-    /* border: 2px solid; */
+    border: 2px solid;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    background-color: blueviolet;
+    background-color: rgb(74, 74, 192);
 }
 
 .electronicButton{

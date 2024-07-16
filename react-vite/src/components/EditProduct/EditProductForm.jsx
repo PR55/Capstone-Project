@@ -4,6 +4,8 @@ import { useParams } from "react-router-dom";
 import { useNavigate } from 'react-router-dom'
 import { electronic_tags, traditional_tags } from "../tags";
 import { thunkProductLoadOne, thunkUpdateProduct } from "../../redux/product";
+import '../ProductForm/ProductForm.css'
+
 function EditProductForm() {
 
     const { productId } = useParams()
@@ -96,8 +98,10 @@ function EditProductForm() {
             newErrors.tags = "Please select at least 1 tag"
         }
 
-        if(deleteAll && !image){
+        if(deleteAll && !addImage){
             newErrors.image = 'Must add an image if deleting all'
+        }else if(addImage && !image){
+            newErrors.image = 'Please select an image file'
         }
 
         setTagArr(type ? traditional_tags.map(tag => tags.includes(tag)) : electronic_tags.map(tag => tags.includes(tag)))
@@ -159,28 +163,28 @@ function EditProductForm() {
     return (
         <div className='productFormDiv'
         >
-            <h1>Product Form</h1>
+            <h1>Product Update Form</h1>
             <form
                 onSubmit={e => onSubmit(e)}
                 encType="multipart/form-data"
                 className="productForm"
             >
-                <div className="inputHolders">
+                <div className="inputHoldersPostProd">
                     <label htmlFor="productName">Product Name:</label>
                     <input type="text" id='productName' value={name} onChange={e => setName(e.target.value)} />
                 </div>
                 {errors?.name ? <p className="errors">{errors.name}</p> : null}
-                <div className="inputHolders">
+                <div className="inputHoldersPostProd">
                     <label htmlFor="prouctBody">Description:</label>
-                    <textarea name="productBody" id="prouctBody" value={body} onChange={e => setBody(e.target.value)} />
+                    <textarea className="postProdDescript" name="productBody" id="prouctBody" value={body} onChange={e => setBody(e.target.value)} />
                 </div>
                 {errors?.description ? <p className="errors">{errors.description}</p> : null}
-                <div className="inputHolders">
+                <div className="inputHoldersPostProd">
                     <label htmlFor="productPrice">Product Price:</label>
                     <input type="number" step="0.01" min={.10} id='productPrice' value={price} onChange={e => setPrice(e.target.value)} />
                 </div>
                 {errors?.price ? <p className="errors">{errors.price}</p> : null}
-                <div className="inputHolders">
+                <div className="inputHoldersPostProd">
                     <p>Tags:</p>
                     <div className='tagDisplay'>
                         {
@@ -210,7 +214,7 @@ function EditProductForm() {
                     </div>
                 </div>
                 {errors?.tags ? <p className="errors">{errors.tags}</p> : null}
-                <div className="inputHolders">
+                <div className="inputHoldersPostProdCheck">
                     <label htmlFor="productType">Is Traditional?</label>
                     <input type="checkbox" id='productType' value={type} onChange={() => setType(!type)} />
                 </div>
@@ -220,7 +224,7 @@ function EditProductForm() {
                 </div>
                 {
                     product?.images.length < 3 || (product?.images.length == 3 && deleteAll) ?
-                        <div className="inputHolders">
+                        <div className="inputHoldersPostProdCheck">
                             <label htmlFor="productType">Add Image?</label>
                             <input type="checkbox" id='productType' value={addImage} onChange={() => setAddImage(!addImage)} />
                         </div>
@@ -229,7 +233,7 @@ function EditProductForm() {
                 {
                     addImage
                         ?
-                        <div className="inputHolders">
+                        <div className="inputHoldersPostProd">
                             <label htmlFor="productType">Image:</label>
                             <input type="file" id='productType'
                                 accept="image/*"

@@ -4,8 +4,12 @@ import { thunkCurrentUserArticles } from "../../redux/article";
 import { thunkCurrentUserProducts } from "../../redux/product";
 import './ManagementPage.css'
 import { useNavigate } from "react-router-dom";
+import ProductDisplayManager from "./helperItems/ProductDisplayManager";
+import ArticleDisplayManager from "./helperItems/ArticleDisplayManager";
 
 function ManagementPage() {
+
+    const user = useSelector(store => store.session.user)
 
     const products = useSelector(Store => Store.products)
     const articles = useSelector(Store => Store.articles)
@@ -28,6 +32,12 @@ function ManagementPage() {
     }, [electronic, article])
 
     const navigate = useNavigate()
+
+    useEffect(()=>{
+        if(!user){
+            navigate('/')
+        }
+    }, [])
 
     return (
         <div className="manageHolder">
@@ -55,78 +65,9 @@ function ManagementPage() {
                     {
                         !article
                             ?
-                            Object.values(products).map(product => {
-                                if (electronic && product.isTraditional == false) {
-                                    return (
-                                        <div key={product.id} className='productBlockManage'>
-                                            <div className='imageHolder'>
-                                                <img src={product.images[0].imageUrl} alt={'gameImg'} />
-                                            </div>
-                                            <div className='manageDescription'>
-                                                <p className='title' onClick={() => navigate(`/products/${product.id}`)}>{product.name}</p>
-                                                <p className="priceManage">${product.price.toFixed(2)}</p>
-                                                <p className='body'>{product.description.length > 250 ? product.description.slice(0, 250) + "..." : product.description}</p>
-                                                <div className="manageTags">
-                                                    {product.tags.map(tag => (
-                                                        <p>{tag.tag}</p>
-                                                    ))}
-                                                </div>
-                                            </div>
-                                            <div className='Purchase'>
-                                                <p className="toUpdateButton" onClick={() => navigate(`/products/${product.id}/edit`)}>Update</p>
-                                                <button>Delete</button>
-                                            </div>
-                                        </div>
-                                    )
-                                } else if (!electronic && product.isTraditional == true) {
-                                    return (
-                                        <div key={product.id} className='productBlockManage'>
-                                            <div className='imageHolder'>
-                                                <img src={product.images[0].imageUrl} alt={'gameImg'} />
-                                            </div>
-                                            <div className='manageDescription'>
-                                                <p className='title' onClick={() => navigate(`/products/${product.id}`)}>{product.name}</p>
-                                                <p className="priceManage">${product.price.toFixed(2)}</p>
-                                                <p className='body'>{product.description.length > 250 ? product.description.slice(0, 250) + "..." : product.description}</p>
-                                                <div className="manageTags">
-                                                    {product.tags.map(tag => (
-                                                        <p>{tag.tag}</p>
-                                                    ))}
-                                                </div>
-
-                                            </div>
-                                            <div className='Purchase'>
-                                                <p className="toUpdateButton" onClick={() => navigate(`/products/${product.id}/edit`)}>Update</p>
-                                                <button>Delete</button> {/*Make into a modal*/}
-                                            </div>
-                                        </div>
-                                    )
-                                }
-                            })
+                            <ProductDisplayManager products={products} electronic={electronic}/>
                             :
-                            Object.values(articles).map(article => {
-                                return (
-                                    <div key={article.id} className='productBlockManage'>
-                                        <div className='imageHolder'>
-                                            <img src={article.imageUrl} alt={'gameImg'} />
-                                        </div>
-                                        <div className='manageDescription'>
-                                            <p className='title' onClick={() => navigate(`/articles/${article.id}`)}>{article.title}</p>
-                                            <p className='creator'>{article.owner?.username}</p>
-                                            <p className='body'>{article.body.length > 250 ? article.body.slice(0, 250) + "..." : article.body}</p>
-                                            <div className="manageTags">
-                                                    {article.tags.map(tag => (
-                                                        <p>{tag.tag}</p>
-                                                    ))}
-                                                </div>
-                                        </div>
-                                        <div className='Purchase'>
-                                            <p className="toUpdateButton" onClick={() => navigate(`/articles/${article.id}/edit`)}>Update</p>
-                                            <button>Delete</button>
-                                        </div>
-                                    </div>
-                                )
-                            })
+                            <ArticleDisplayManager articles={articles}/>
                     }
 
             </div>

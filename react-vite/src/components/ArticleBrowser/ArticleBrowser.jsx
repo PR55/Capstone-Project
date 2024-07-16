@@ -3,6 +3,7 @@ import './ArticleBrowser.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { thunkLoadArticles } from '../../redux/article'
+import { IoIosSearch } from "react-icons/io";
 
 function ArticleBrowser() {
     const dispatch = useDispatch()
@@ -41,8 +42,9 @@ function ArticleBrowser() {
     return (
         <div className='displayHolder'>
             <div className='productsDisplay'>
-                <div>
-                    <input type="search" value={searchName} onChange={e => setSearch(e.target.value)} />
+                <div className='searchBarVisualArticle'>
+                    <IoIosSearch/>
+                    <input className='searchBarArticle' type="search" value={searchName} onChange={e => setSearch(e.target.value)} />
                 </div>
                 {
                     productsArr.length
@@ -59,6 +61,7 @@ function ArticleBrowser() {
                                             <div className='description'>
                                                 <p className='title' onClick={() => navigate(`/articles/${product.id}`)}>{product.title}</p>
                                                 <p className='creator'>{product.owner?.username}</p>
+                                                <p>{product.timeUpdated}</p>
                                                 <p className='body'>{product.body.length > 250 ? product.body.slice(0, 250) + "..." : product.body}</p>
                                             </div>
                                         </div>

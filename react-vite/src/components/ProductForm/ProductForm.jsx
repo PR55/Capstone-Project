@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { thunkNewProduct } from "../../redux/product";
 import './ProductForm.css'
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from 'react-router-dom'
 import { electronic_tags, traditional_tags } from "../tags";
 function ProductForm() {
+
+    const user = useSelector(store => store.session.user)
 
     // const history = useHistory()
     const [name, setName] = useState('')
@@ -84,6 +86,12 @@ function ProductForm() {
 
     const navigate = useNavigate()
 
+    useEffect(()=>{
+        if(!user){
+            navigate('/')
+        }
+    },[])
+
     const manageTags = (e) => {
         // console.log(`I have been clicked! my value is ${e.target.value}`)
         let arr = tags
@@ -141,22 +149,22 @@ function ProductForm() {
             <form
                 encType="multipart/form-data"
                 onSubmit={e => onSubmit(e)} className="productForm">
-                <div className="inputHolders">
+                <div className="inputHoldersPostProd">
                     <label htmlFor="productName">Product Name:</label>
                     <input type="text" id='productName' value={name} onChange={e => setName(e.target.value)} />
                 </div>
                 {errors?.name ? <p className="errors">{errors.name}</p> : null}
-                <div className="inputHolders">
+                <div className="inputHoldersPostProd">
                     <label htmlFor="productBody">Description:</label>
-                    <textarea name="productBody" id="prouctBody" value={body} onChange={e => setBody(e.target.value)} />
+                    <textarea className="postProdDescript" name="productBody" id="prouctBody" value={body} onChange={e => setBody(e.target.value)} />
                 </div>
                 {errors?.description ? <p className="errors">{errors.description}</p> : null}
-                <div className="inputHolders">
+                <div className="inputHoldersPostProd">
                     <label htmlFor="productPrice">Product Price:</label>
                     <input type="number" step="0.01" min={.10} id='productPrice' value={price} onChange={e => setPrice(e.target.value)} />
                 </div>
                 {errors?.price ? <p className="errors">{errors.price}</p> : null}
-                <div className="inputHolders">
+                <div className="inputHoldersPostProd">
                     <p>Tags:</p>
                     <div className='tagDisplay'>
                         {
@@ -186,11 +194,11 @@ function ProductForm() {
                     </div>
                 </div>
                 {errors?.tags ? <p className="errors">{errors.tags}</p> : null}
-                <div className="inputHolders">
+                <div className="inputHoldersPostProdCheck">
                     <label htmlFor="productType">Is Traditional?</label>
                     <input type="checkbox" id='productType' value={type} onChange={() => setType(!type)} />
                 </div>
-                <div className="inputHolders">
+                <div className="inputHoldersPostProd">
                     <label htmlFor="productType">Image:</label>
                     <input type="file" id='productType'
                         accept="image/*"

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { thunkLogin } from "../../redux/session";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate, useNavigate } from "react-router-dom";
@@ -31,13 +31,52 @@ function LoginFormPage() {
     }
   };
 
+  const loginDemo = async (e) =>{
+    e.preventDefault();
+
+    const serverResponse = await dispatch(
+      thunkLogin({
+        email:'demo@aa.io',
+        password:'password',
+      })
+    );
+
+    if (serverResponse) {
+      setErrors(serverResponse);
+    } else {
+      navigate("/");
+    }
+  }
+
+  useEffect(()=> {
+
+    const errObj = {}
+
+    if(!email.toLowerCase().match(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-]/)){
+      errObj.email = 'Not a valid email'
+    }
+
+    let splitPass = password.split('')
+
+    if(splitPass.includes(' ')){
+      errObj.password = 'Passwords contain no spaces'
+    }
+    else if(splitPass.length < 6){
+      errObj.password = 'Passwords must be at least 6 characters long'
+    }
+
+    setErrors(errObj)
+
+  }, [email, password])
+
+
   return (
-    <>
+    <div className="loginFormHolder">
       <h1>Log In</h1>
       {errors.length > 0 &&
         errors.map((message) => <p key={message}>{message}</p>)}
-      <form onSubmit={handleSubmit}>
-        <label>
+      <form onSubmit={handleSubmit} className="loginForm">
+        <label className="labelHolder">
           Email
           <input
             type="text"
@@ -46,8 +85,8 @@ function LoginFormPage() {
             required
           />
         </label>
-        {errors.email && <p>{errors.email}</p>}
-        <label>
+        {errors.email && <p className="errors">{errors.email}</p>}
+        <label className="labelHolder">
           Password
           <input
             type="password"
@@ -56,10 +95,11 @@ function LoginFormPage() {
             required
           />
         </label>
-        {errors.password && <p>{errors.password}</p>}
-        <button type="submit">Log In</button>
+        {errors.password && <p className="errors">{errors.password}</p>}
+        <button className="loginButton" type="submit" disabled={Object.values(errors).length}>Log In</button>
       </form>
-    </>
+      <button onClick={(e) => loginDemo(e)} className="loginButtonDemo">Log In demo user</button>
+    </div>
   );
 }
 

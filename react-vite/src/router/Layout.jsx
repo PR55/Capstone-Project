@@ -5,10 +5,16 @@ import { ModalProvider, Modal } from "../context/Modal";
 import { thunkAuthenticate } from "../redux/session";
 import Navigation from "../components/Navigation/Navigation";
 import Footer from "../components/Footer";
+import { initializeCart } from "../components/cart";
 
 export default function Layout() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(()=>{
+    initializeCart()
+  }, [])
+
   useEffect(() => {
     dispatch(thunkAuthenticate()).then(() => setIsLoaded(true));
   }, [dispatch]);

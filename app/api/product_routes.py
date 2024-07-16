@@ -196,4 +196,37 @@ def update_product(id):
     if form.errors:
         return {'message':'Bad Request', 'errors':form.errors}, 400
 
-    pass
+
+@product_routes.route('/<int:id>', methods=['DELETE'])
+@login_required
+def delete_product(id):
+    user = current_user
+
+    product = Product.query.get(id)
+
+    if not product:
+        return {'message':'Product not found'}, 404
+
+    if product.ownerId != user.id:
+        return {'message':'Not the owner of the product post.'}, 403
+
+    images = ProductImage.query.filter_by(productId = id).all()
+
+    for image in images:
+        res = True
+        if image.image_url not in product_images:
+            res = remove_file_from_s3(image.image_url)
+        if res == True:
+            db.session.delete(image)
+        else:
+            return {'message':'An AWS error occured', 'errors':res['errors']}, 500
+
+    tags = ProductTag.query.filter_by(productId = id).all()
+    _ = [db.session.delete(x) for x in tags]
+
+    db.session.commit()
+
+    db.session.delete(product)
+    db.session.commit()
+
+    return {'id':id}

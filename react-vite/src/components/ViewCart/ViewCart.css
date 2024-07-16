@@ -1,0 +1,144 @@
+.holderCart{
+    padding: 50px 0;
+}
+
+.emptyCart{
+    min-height: 600px;
+    /* width: 45%; */
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    /* justify-content: center; */
+    align-items: center;
+    cursor: default;
+}
+
+.navButtonsCart{
+    display: flex;
+    column-gap: 15%;
+}
+
+.navButtonsCart > button{
+    width: 100px;
+    height:50px;
+    overflow: hidden;
+    text-align: center;
+    border: 2px solid;
+    background-color: aliceblue;
+    border-radius: 1rem;
+}
+
+.navButtonsCart > button:hover{
+    cursor: pointer;
+    background-color: rgb(205, 215, 222);
+}
+
+.cartHolder{
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    justify-content: center;
+    align-items: center;
+    border: 20px solid;
+    border-radius: .75rem;
+    background-color: aliceblue;
+}
+
+.cartDisplay{
+    padding: 25px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    border: 10px solid;
+    border-radius: .25rem;
+    row-gap: 20px;
+}
+
+.cartBlock{
+    display: flex;
+    flex-direction: row;
+    height:150px;
+    background-color: lightgray;
+    border: 5px solid lightgray;
+    border-radius: 1rem;
+}
+
+.imageHolderCart{
+    margin-right: 1%;
+    padding: 0%;
+    max-height: 100%;
+    width: 150px;
+    border: 5px solid gray;
+    border-radius: 1rem;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    background-color: beige;
+}
+
+.descriptionCart{
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+}
+
+.interactCart{
+    display: flex;
+    /* border: 2px solid; */
+    height: 50px;
+    align-self: center;
+}
+
+.interactCart > button{
+    /* display: flex; */
+    border: 2px solid;
+    height: 25px;
+    width: 75px;
+    border-radius: 2rem;
+    background-color: azure;
+}
+
+.interactCart > button:hover{
+    cursor: pointer;
+    background-color: rgb(213, 225, 225);
+}
+
+.cartInfo{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 100px;
+    /* padding: 0 -50px; */
+    width: 100%;
+    background-color: rgb(203, 211, 218);
+}
+
+.manageCartButtons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 50px;
+    margin-left: 10px;
+}
+
+.manageCartButtons > button{
+    height: 50px;
+    background-color: azure;
+    border-radius: 2rem;
+    width: 150px;
+}
+
+.confirmCart:hover{
+    background-color: rgb(213, 225, 225);
+    cursor: pointer;
+}
+
+.danger:hover{
+    background-color: red;
+    color: azure;
+    cursor: pointer;
+}

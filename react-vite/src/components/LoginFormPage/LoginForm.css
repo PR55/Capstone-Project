@@ -1,0 +1,46 @@
+.loginFormHolder{
+    display: flex;
+    min-height: 600px;
+    flex-direction: column;
+    width: 500px;
+    margin: 10px auto;
+    /* justify-content: center; */
+    align-items: center;
+    row-gap: 10px;
+}
+
+.loginForm{
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+    row-gap: 10px;
+}
+
+.labelHolder{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.loginButton{
+    background-color: white;
+    border: 2px solid;
+    font-size: 16px;
+}
+
+.loginButton:enabled:hover{
+    background-color: rgb(207, 207, 207);
+    cursor: pointer;
+}
+
+.loginButtonDemo{
+    background-color: white;
+    border: 2px solid;
+    font-size: 16px;
+    width:250px;
+}
+
+.loginButtonDemo:enabled:hover{
+    background-color: rgb(207, 207, 207);
+    cursor: pointer;
+}

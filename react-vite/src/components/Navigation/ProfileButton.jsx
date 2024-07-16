@@ -51,8 +51,8 @@ function ProfileButton() {
 
   return (
     <>
-      <button onClick={toggleMenu}>
-        <FaUserCircle />
+      <button onClick={toggleMenu} className="userIcoButton">
+        <FaUserCircle className="userIcon"/>
       </button>
       {showMenu && (
         <ul className={"profile-dropdown"} ref={ulRef}>

@@ -7,6 +7,7 @@ import './ProductDetail.css'
 import OpenModalImageItem from "./OpenModalImageItem";
 import OpenAddPhoto from "./openModalIonItems/OpenAddPhoto";
 import AddImage from "./modalComponent/AddImage";
+import { addToCart, isInCart } from "../cart";
 
 function ProductDetail() {
 
@@ -18,6 +19,7 @@ function ProductDetail() {
     const product = useSelector(store => store.products[productId])
 
     const [curPhoto, setCurPhoto] = useState(0)
+    const [updateButton, setUpdate] = useState(false)
 
     useEffect(() => {
         if (productId)
@@ -25,11 +27,15 @@ function ProductDetail() {
     }, [productId])
 
 
-    useEffect(()=>{
-        if(product && !product.images[curPhoto]){
-            setCurPhoto(curPhoto-1)
+    useEffect(() => {
+        if (product && !product.images[curPhoto]) {
+            setCurPhoto(curPhoto - 1)
         }
     }, [product, curPhoto])
+
+    useEffect(() => {
+        //Force cart reload update
+    }, [updateButton])
 
     const navigate = useNavigate()
 
@@ -52,8 +58,8 @@ function ProductDetail() {
                                         console.log(index)
                                         return (
                                             <div
-                                            key={index}
-                                                className={curPhoto == index ? "selected previewImageNot":"previewImage"}
+                                                key={index}
+                                                className={curPhoto == index ? "selected previewImageNot" : "previewImage"}
                                             >
                                                 <img
                                                     src={image.imageUrl}
@@ -68,21 +74,21 @@ function ProductDetail() {
                                     })
                                 }
                                 {product.images.length < 3 && user
-                                ?
-                                <OpenAddPhoto
-                                        modalComponent={<AddImage obj={product}/>}
+                                    ?
+                                    <OpenAddPhoto
+                                        modalComponent={<AddImage obj={product} />}
                                     />
-                                :null}
+                                    : null}
                             </div>
                             <div
-                            className="topImage"
+                                className="topImage"
 
                             >
                                 <OpenModalImageItem
                                     itemText={'Current active photo'}
-                                    modalComponent={<ProductImageModal imgsLength = {product?.images.length} imageUrl = {product?.images[curPhoto]} ownerId={product.owner.id}/>}
+                                    modalComponent={<ProductImageModal imgsLength={product?.images.length} imageUrl={product?.images[curPhoto]} ownerId={product.owner.id} />}
                                     imageObj={product?.images[curPhoto]}
-                                 />
+                                />
                             </div>
                             <div className="topDescrip">
                                 <p>{product.name}</p>
@@ -96,9 +102,24 @@ function ProductDetail() {
                                 </div>
                             </div>
                             <div className="topButtons">
-                                <p>${product.price.toFixed(2)}</p>
-                                <button>Buy Now</button>
-                                <button>Add to cart</button>
+                                <p className="priceDetail">${product.price.toFixed(2)}</p>
+                                {/* <button>Buy Now</button> */}
+                                {
+                                    (user && product.owner.id == user.id) ?
+                                            <button
+                                            onClick={()=> navigate('edit')}
+                                            className="cartButtonDetail">Update Product</button>
+                                        :
+                                        <button
+                                            className="cartButtonDetail"
+                                            disabled={isInCart(product.id)}
+                                            onClick={() => {
+                                                addToCart(product.id)
+                                                setUpdate(!updateButton)
+                                            }}
+                                        >Add to cart</button>
+                                }
+
                             </div>
                         </div>
                         <div className='bottomInfo'>

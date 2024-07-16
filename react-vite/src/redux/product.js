@@ -1,5 +1,6 @@
 const GET_PRODUCTS = 'products/all'
 const GET_PRODUCT = 'products/one'
+const DELETE_PRODUCT = 'products/delete/one'
 
 const loadProducts = (products) => ({
     type:GET_PRODUCTS,
@@ -11,6 +12,10 @@ const loadProduct = (product) => ({
     payload:product
 })
 
+const deleteProduct = (id) =>({
+    type:DELETE_PRODUCT,
+    payload:id
+})
 
 export const thunkProductsLoad = () => async (dispatch) => {
     const response = await fetch("/api/products/")
@@ -101,6 +106,18 @@ export const thunkDeleteOneImage = (id) => async (dispatch) => {
     }
 }
 
+export const thunkDeleteOneProduct = (id) => async (dispatch) => {
+    const response = await fetch(`/api/products/${id}`, {
+        method:'DELETE'
+    })
+
+    if(response.ok){
+        const {id} = await response.json()
+        await dispatch(deleteProduct(id))
+        return id
+    }
+}
+
 const initialState = {};
 
 function productReducer(state = initialState, action) {
@@ -116,6 +133,18 @@ function productReducer(state = initialState, action) {
         let newState = {...state}
         newState[action.payload.id] = action.payload
         return newState
+    }
+    case DELETE_PRODUCT:{
+        let oldState = Object.values(state)
+        let newState = {}
+
+        for(let product of oldState){
+            if(product.id != action.payload){
+                newState[product.id] = product
+            }
+        }
+
+        return newState;
     }
     default:
         return state;

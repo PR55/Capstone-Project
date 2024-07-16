@@ -3,6 +3,7 @@ import { makeOneArticle } from "../../redux/article";
 import { allTags } from "../tags";
 import { useDispatch } from "react-redux";
 import { useNavigate } from 'react-router-dom'
+import './PostArticle.css'
 
 function PostArticle() {
 
@@ -115,22 +116,24 @@ function PostArticle() {
     }
 
     return (
-        <div>
+        <div className="articleFormHolder">
+            <h1>Article Form</h1>
             <form
                 encType="multipart/form-data"
                 onSubmit={e => onSubmit(e)}
+                className="articleForm"
             >
-                <div>
+                <div className="inputHolderPostArticle">
                     <label>Title:</label>
                     <input type='text' value={title} onChange={e => setTitle(e.target.value)} />
                 </div>
-                {errors?.title ? <p>{errors.title}</p> : null}
-                <div>
+                {errors?.title ? <p className="errors">{errors.title}</p> : null}
+                <div className="inputHolderPostArticle">
                     <label>Body:</label>
-                    <textarea value={body} onChange={e => setBody(e.target.value)} />
+                    <textarea className="postArticleDescript" value={body} onChange={e => setBody(e.target.value)} />
                 </div>
-                {errors?.body ? <p>{errors.body}</p> : null}
-                <div className='tagDisplay'>
+                {errors?.body ? <p className="errors">{errors.body}</p> : null}
+                <div className='tagDisplayArticle'>
                     {
                         allTags.map((tagName, index) => (
                             <div key={index} className="tagSelect">
@@ -144,12 +147,12 @@ function PostArticle() {
                         ))
                     }
                 </div>
-                {errors?.tags ? <p>{errors.tags}</p> : null}
-                <div>
+                {errors?.tags ? <p className="errors">{errors.tags}</p> : null}
+                <div className="inputHolderPostArticle">
                     <label>Image:</label>
                     <input type='file' onChange={e => setImage(e.target.files[0])} />
                 </div>
-                {errors?.image ? <p>{errors.image}</p> : null}
+                {errors?.image ? <p className="errors">{errors.image}</p> : null}
                 {isPosting ? <h3>Posting your article...</h3> : null}
                 <button disabled={isPosting || Object.values(errors).length}>Submit</button>
             </form>

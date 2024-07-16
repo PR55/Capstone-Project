@@ -2,7 +2,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import ProfileButton from "./ProfileButton";
 import "./Navigation.css";
 import { useSelector } from "react-redux";
-import { useEffect } from "react";
+import { FaCartShopping } from "react-icons/fa6";
 
 function Navigation() {
   const user = useSelector(store => store.session.user)
@@ -24,7 +24,8 @@ function Navigation() {
         !user
           ?
           <div className="loginButtons">
-            <button onClick={(e) => {
+            <button
+            onClick={(e) => {
               e.preventDefault();
               navigate('/login')
             }}>Login</button>
@@ -35,6 +36,7 @@ function Navigation() {
           </div>
           :
           <div className="loggedInButtons">
+            <FaCartShopping className="cart" onClick={()=> navigate('/cart')}/>
             <ProfileButton />
           </div>
       }

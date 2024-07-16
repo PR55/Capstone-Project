@@ -12,6 +12,7 @@ import ArticleDetail from '../components/ArticleDetail';
 import PostArticle from '../components/PostArticle';
 import ManagementPage from '../components/ManagementPage';
 import EditArticle from '../components/EditArticle/EditArticle';
+import ViewCart from '../components/ViewCart/ViewCart';
 
 export const router = createBrowserRouter([
   {
@@ -68,6 +69,10 @@ export const router = createBrowserRouter([
       {
         path:'/manage',
         element:<ManagementPage/>
+      },
+      {
+        path:'/cart',
+        element:<ViewCart/>
       }
     ],
   },

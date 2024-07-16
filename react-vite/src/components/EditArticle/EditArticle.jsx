@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import { makeOneArticle, thunkLoadOneArticle } from "../../redux/article";
+import {thunkLoadOneArticle, updateOneArticle } from "../../redux/article";
 import { allTags } from "../tags";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from 'react-router-dom';
 
-function EditArticle(){
+function EditArticle() {
 
-    const {articleId} = useParams()
+    const { articleId } = useParams()
 
     const article = useSelector(store => store.articles[articleId])
 
@@ -14,8 +14,9 @@ function EditArticle(){
     const [body, setBody] = useState('');
     const [image, setImage] = useState(null);
     const [tags, setTags] = useState([])
+    const [replaceImage, setReplace] = useState(false)
 
-    const [tracker, setTracker] = useState(allTags.map(tag => false))
+    const [tracker, setTracker] = useState(allTags.map(() => false))
 
     const [tagChangeBool, setTagChangeBool] = useState(false)
 
@@ -26,12 +27,12 @@ function EditArticle(){
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
-    useEffect(()=>{
+    useEffect(() => {
         dispatch(thunkLoadOneArticle(articleId))
     }, [articleId])
 
-    useEffect(()=>{
-        if(article){
+    useEffect(() => {
+        if (article) {
             setTitle(article.title)
             setBody(article.body)
             setTags(article.tags.map(tag => tag.tag))
@@ -44,11 +45,7 @@ function EditArticle(){
 
         let splitTitle = title.split('')
 
-        // console.log(splitTitle)
-
         let filtered = splitTitle.filter(char => char !== ' ' && char != '')
-
-        // console.log(filtered)
 
         if (!filtered.length) {
             errObj.title = 'Cannot submit an empty string'
@@ -69,13 +66,13 @@ function EditArticle(){
             errObj.body = 'Body cannot contain more than 5000 characters'
         }
 
-        if(!tags.length){
+        if (!tags.length) {
             errObj.tags = 'Please select at least one tag'
-        }else if(tags.length > 7){
+        } else if (tags.length > 7) {
             errObj.tags = 'Please only select up to 7 tags'
         }
 
-        if (!image) {
+        if (replaceImage && !image) {
             errObj.image = 'Please select an image for the article'
         }
 
@@ -84,7 +81,7 @@ function EditArticle(){
         setErrors(errObj)
 
 
-    }, [title, body, image, tagChangeBool])
+    }, [title, body, image, tagChangeBool, replaceImage])
 
     const manageTags = (e) => {
         // console.log(`I have been clicked! my value is ${e.target.value}`)
@@ -115,10 +112,13 @@ function EditArticle(){
         for (let tag of tags) {
             formData.append("tags", tag)
         }
-        formData.append("image", image);
+        formData.append('changeImage',replaceImage)
+        if(replaceImage){
+            formData.append("image", image);
+        }
 
         setPosting(true);
-        let d = await dispatch(makeOneArticle(formData));
+        let d = await dispatch(updateOneArticle(formData, articleId));
         // console.log(d?.errors)
         if (d?.errors) {
             setErrors(d.errors)
@@ -133,22 +133,24 @@ function EditArticle(){
     }
 
     return (
-        <div>
+        <div className="articleFormHolder">
+            <h1>Article Form</h1>
             <form
                 encType="multipart/form-data"
                 onSubmit={e => onSubmit(e)}
+                className="articleForm"
             >
-                <div>
+                <div className="inputHolderPostArticle">
                     <label>Title:</label>
                     <input type='text' value={title} onChange={e => setTitle(e.target.value)} />
                 </div>
-                {errors?.title ? <p>{errors.title}</p> : null}
-                <div>
+                {errors?.title ? <p className="errors">{errors.title}</p> : null}
+                <div className="inputHolderPostArticle">
                     <label>Body:</label>
-                    <textarea value={body} onChange={e => setBody(e.target.value)} />
+                    <textarea className="postArticleDescript" value={body} onChange={e => setBody(e.target.value)} />
                 </div>
-                {errors?.body ? <p>{errors.body}</p> : null}
-                <div className='tagDisplay'>
+                {errors?.body ? <p className="errors">{errors.body}</p> : null}
+                <div className='tagDisplayArticle'>
                     {
                         allTags.map((tagName, index) => (
                             <div key={index} className="tagSelect">
@@ -162,12 +164,21 @@ function EditArticle(){
                         ))
                     }
                 </div>
-                {errors?.tags ? <p>{errors.tags}</p> : null}
+                {errors?.tags ? <p className="errors">{errors.tags}</p> : null}
                 <div>
-                    <label>Image:</label>
-                    <input type='file' onChange={e => setImage(e.target.files[0])} />
+                <label>Change Image?</label>
+                <input type='checkbox' onChange={() => setReplace(!replaceImage)} />
                 </div>
-                {errors?.image ? <p>{errors.image}</p> : null}
+                {
+                    replaceImage
+                        ?
+                        <div className="inputHolderPostArticle">
+                            <label>Image:</label>
+                            <input type='file' onChange={e => setImage(e.target.files[0])} />
+                        </div>
+                        : null
+                }
+                {errors?.image ? <p className="errors">{errors.image}</p> : null}
                 {isPosting ? <h3>Posting your article...</h3> : null}
                 <button disabled={isPosting || Object.values(errors).length}>Submit</button>
             </form>
