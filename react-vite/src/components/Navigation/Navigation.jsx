@@ -12,7 +12,7 @@ function Navigation() {
   return (
     <div className="navBar">
       <div className="navLinks">
-        <img className='navLogo'src="https://elot-bucket.s3.us-east-2.amazonaws.com/ELot+Logo.png" alt="E-Lot Logo. Click to return home" onClick={() => navigate('/')}/>
+        <img className='navLogo'src="https://elot-bucket.s3.us-east-2.amazonaws.com/ELot-Logo.png" alt="E-Lot Logo. Click to return home" onClick={() => navigate('/')}/>
       {/* <NavLink className='navL' to="/">Home</NavLink> */}
       <NavLink className='navL' to="/traditional/products">Traditional Products</NavLink>
       <NavLink className='navL' to="/electronic/products">Electronic Products</NavLink>
