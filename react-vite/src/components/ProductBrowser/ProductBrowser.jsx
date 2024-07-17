@@ -196,10 +196,10 @@ function ProductBrowser() {
                                 </div>
 
                                 :
-                                loading?
-                                <LiaSpinnerSolid className='spinner'/>
-                                :
+                                !loading?
                                 <h1>No Products matching that name</h1>
+                                :
+                                <LiaSpinnerSolid className='spinner'/>
 
                         }
                     </div>

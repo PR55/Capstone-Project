@@ -85,11 +85,11 @@ function ArticleBrowser() {
                                         }
                                     </div>
 
-                                    : loading
+                                    : !loading
                                     ?
-                                    <LiaSpinnerSolid className='spinner'/>
-                                    :
                                     <h1>No Products matching that name</h1>
+                                    :
+                                    <LiaSpinnerSolid className='spinner'/>
 
                         }
                     </div>
