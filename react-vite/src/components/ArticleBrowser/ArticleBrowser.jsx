@@ -13,16 +13,15 @@ function ArticleBrowser() {
 
     const [searchName, setSearch] = useState('')
 
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(true)
 
     async function loadArticles(){
-        setLoading(true)
         await dispatch(thunkLoadArticles())
     }
 
     useEffect(() => {
         loadArticles()
-    }, [window.location.pathname])
+    }, [])
 
     useEffect(() => {
         if (products) {
