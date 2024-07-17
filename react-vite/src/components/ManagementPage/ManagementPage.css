@@ -111,3 +111,21 @@
 .priceManage{
     margin:0;
 }
+
+.spinner{
+    color: black;
+    font-size: 4rem;
+    animation-name: spinner;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-out;
+}
+
+@keyframes spinner{
+    0%{
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(720deg);
+    }
+}

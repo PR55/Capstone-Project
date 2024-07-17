@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import ProductDisplayManager from "./helperItems/ProductDisplayManager";
 import ArticleDisplayManager from "./helperItems/ArticleDisplayManager";
 import { thunkCurrentUserProducts,thunkCurrentUserArticles } from "../../redux/userContent";
+import { LiaSpinnerSolid } from "react-icons/lia";
 
 function ManagementPage() {
 
@@ -15,14 +16,18 @@ function ManagementPage() {
     const [electronic, setElectronic] = useState(true)
     const [article, setArticle] = useState(false)
 
+    const [isLoading, setLoading] = useState(false)
+
     const dispatch = useDispatch()
 
     const thunkCall = async () => {
+        setLoading(true)
         if (electronic || !article) {
             await dispatch(thunkCurrentUserProducts())
         } else {
             await dispatch(thunkCurrentUserArticles())
         }
+        setLoading(false)
     }
 
     useEffect(() => {
@@ -61,6 +66,9 @@ function ManagementPage() {
             </div>
             <div className="manageDisplay">
                     {
+                        isLoading?
+                        <LiaSpinnerSolid className="spinner"/>
+                        :
                         !article
                             ?
                             <ProductDisplayManager products={iterable} electronic={electronic}/>
