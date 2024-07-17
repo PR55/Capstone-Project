@@ -6,6 +6,7 @@ import OpenModalMenuItem from "./OpenModalMenuItem";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
 import { useNavigate } from "react-router-dom";
+import { clearThunk } from "../../redux/userContent";
 
 function ProfileButton() {
   const dispatch = useDispatch();
@@ -45,6 +46,7 @@ function ProfileButton() {
   const logout = (e) => {
     e.preventDefault();
     dispatch(thunkLogout());
+    dispatch(clearThunk())
     closeMenu();
     navigate('/')
   };
@@ -61,10 +63,10 @@ function ProfileButton() {
               <li>{user.username}</li>
               <li>{user.email}</li>
               <li>
-                <button onClick={toManage}>Manage</button>
+                <button className='menuButton' onClick={toManage}>Manage</button>
               </li>
               <li>
-                <button onClick={logout}>Log Out</button>
+                <button className='menuButton' onClick={logout}>Log Out</button>
               </li>
             </>
           ) : (

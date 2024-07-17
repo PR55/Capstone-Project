@@ -26,15 +26,6 @@ export const thunkProductsLoad = () => async (dispatch) => {
     }
 }
 
-export const thunkCurrentUserProducts = () => async (dispatch) => {
-    const response = await fetch('/api/users/products')
-
-    if(response.ok){
-        const {products} = await response.json()
-        await dispatch(loadProducts(products))
-    }
-}
-
 export const thunkProductLoadOne = (id) => async (dispatch) => {
     const response = await fetch(`/api/products/${id}`)
     if(response.ok){

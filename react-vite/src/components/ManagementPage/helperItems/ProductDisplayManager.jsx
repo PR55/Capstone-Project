@@ -18,12 +18,12 @@ function ProductDisplayManager({products, electronic}){
         arr.length ?
         arr.map(product => {
             return (
-                <div key={product.id} className='productBlockManage'>
+                <div key={product.id} className='productBlockManage'  onClick={() => navigate(`/products/${product.id}`)}>
                     <div className='imageHolder'>
                         <img src={product.images[0].imageUrl} alt={'gameImg'} />
                     </div>
                     <div className='manageDescription'>
-                        <p className='title' onClick={() => navigate(`/products/${product.id}`)}>{product.name}</p>
+                        <p className='title'>{product?.name && product.name.length > 50 ? product.name.slice(0,50) + '...':product.name}</p>
                         <p className="priceManage">${product.price.toFixed(2)}</p>
                         <p className='body'>{product.description.length > 250 ? product.description.slice(0, 250) + "..." : product.description}</p>
                         <div className="manageTags">
@@ -34,7 +34,10 @@ function ProductDisplayManager({products, electronic}){
 
                     </div>
                     <div className='Purchase'>
-                        <p className="toUpdateButton" onClick={() => navigate(`/products/${product.id}/edit`)}>Update</p>
+                        <p className="toUpdateButton" onClick={(e) => {
+                            e.stopPropagation()
+                            navigate(`/products/${product.id}/edit`)
+                            }}>Update</p>
                         <OpenModalDelete
                         modalComponent={<ConfirmTrashProduct obj={product}/>}
                         />

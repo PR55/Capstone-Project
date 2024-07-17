@@ -8,16 +8,16 @@ function ArticleDisplayManager({articles}){
         {
             Object.values(articles).length?Object.values(articles).map(article => {
                 return (
-                    <div key={article.id} className='productBlockManage'>
+                    <div key={article.id} className='productBlockManage' onClick={() => navigate(`/articles/${article.id}`)}>
                         <div className='imageHolder'>
                             <img src={article.imageUrl} alt={'gameImg'} />
                         </div>
                         <div className='manageDescription'>
-                            <p className='title' onClick={() => navigate(`/articles/${article.id}`)}>{article.title}</p>
+                            <p className='title'>{article?.title && article.title.length > 50 ?article.title.slice(0,50) + '...' :article.title}</p>
                             <p className='creator'>{article.owner?.username}</p>
-                            <p className='body'>{article.body.length > 250 ? article.body.slice(0, 250) + "..." : article.body}</p>
+                            <p className='body'>{article?.body && article.body.length > 250 ? article.body.slice(0, 250) + "..." : article?.body}</p>
                             <div className="manageTags">
-                                    {article.tags.map(tag => (
+                                    {article?.tags.map(tag => (
                                         <p>{tag.tag}</p>
                                     ))}
                                 </div>

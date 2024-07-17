@@ -86,13 +86,15 @@
 .topDescrip{
     display: flex;
     flex-direction: column;
+    width:300px;
     margin: 0 50px;
+    word-break: break-all;
 }
 
 .topTags{
     /* border: 2px solid; */
     display: flex;
-    width: 200px;
+    width: 100%;
     height: 100px;
     column-gap: 10px;
     flex-direction: row;
@@ -147,7 +149,7 @@
     font-size: larger;
     box-shadow: 5px 5px .5rem;
     text-wrap: wrap;
-    word-break: normal;
+    word-break: break-all;
     background-color:aliceblue
 }
 

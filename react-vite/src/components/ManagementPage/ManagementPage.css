@@ -80,6 +80,7 @@
     row-gap: 20px;
     margin: 0 auto;
     min-height: 600px;
+    align-items: center;
 }
 
 .productBlockManage{
@@ -93,6 +94,11 @@
     justify-content: center;
     background-color: darkgray;
     border-radius: 3rem;
+}
+
+.productBlockManage:hover{
+    cursor: pointer;
+    box-shadow: 5px 5px 1rem;
 }
 
 .manageDescription{

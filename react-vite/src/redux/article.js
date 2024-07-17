@@ -28,16 +28,6 @@ export const thunkLoadArticles =() => async (dispatch) =>{
     }
 }
 
-export const thunkCurrentUserArticles =() => async (dispatch) =>{
-    const response = await fetch('/api/users/articles')
-
-    if(response.ok){
-        const {articles} = await response.json()
-        await dispatch(loadArticles(articles))
-        return articles
-    }
-}
-
 export const thunkLoadOneArticle = (id) => async (dispatch)=> {
     const response = await fetch(`/api/articles/${id}`)
 

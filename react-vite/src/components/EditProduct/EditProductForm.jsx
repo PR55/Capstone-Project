@@ -244,7 +244,7 @@ function EditProductForm() {
 
                 {errors?.image ? <p className="errors">{errors.image}</p> : null}
                 {isPosting ? <h3>Posting your product...</h3> : null}
-                <button disabled={isPosting || Object.values(errors).length}>Submit</button>
+                <button className='submitButton' disabled={isPosting || Object.values(errors).length}>Submit</button>
             </form>
         </div>
     )

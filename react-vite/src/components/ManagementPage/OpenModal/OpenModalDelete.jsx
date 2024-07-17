@@ -7,7 +7,8 @@ function OpenModalDelete({
 }) {
   const { setModalContent, setOnModalClose } = useModal();
 
-  const onClick = () => {
+  const onClick = (e) => {
+    e.stopPropagation();
     if (onModalClose) setOnModalClose(onModalClose);
     setModalContent(modalComponent);
     if (typeof onItemClick === "function") onItemClick();

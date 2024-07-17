@@ -150,7 +150,10 @@ function EditArticle() {
                     <textarea className="postArticleDescript" value={body} onChange={e => setBody(e.target.value)} />
                 </div>
                 {errors?.body ? <p className="errors">{errors.body}</p> : null}
+                <div className="inputHolderPostArticle">
+                <p>Tags:</p>
                 <div className='tagDisplayArticle'>
+
                     {
                         allTags.map((tagName, index) => (
                             <div key={index} className="tagSelect">
@@ -163,6 +166,7 @@ function EditArticle() {
                             </div>
                         ))
                     }
+                </div>
                 </div>
                 {errors?.tags ? <p className="errors">{errors.tags}</p> : null}
                 <div>
@@ -180,7 +184,7 @@ function EditArticle() {
                 }
                 {errors?.image ? <p className="errors">{errors.image}</p> : null}
                 {isPosting ? <h3>Posting your article...</h3> : null}
-                <button disabled={isPosting || Object.values(errors).length}>Submit</button>
+                <button className='submitButton' disabled={isPosting || Object.values(errors).length}>Submit</button>
             </form>
         </div>
     )
