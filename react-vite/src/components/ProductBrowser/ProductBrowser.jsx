@@ -29,10 +29,11 @@ function ProductBrowser() {
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        console.log('adding to cart!')
-    }, [processCart])
+        // console.log('adding to cart!')
+    }, [processCart, loading])
 
     async function LoadProduct(){
+        setLoading(true)
         await dispatch(thunkProductsLoad())
     }
 

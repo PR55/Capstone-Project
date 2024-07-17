@@ -24,6 +24,10 @@ function ArticleBrowser() {
     }, [])
 
     useEffect(() => {
+        // console.log('adding to cart!')
+    }, [loading])
+
+    useEffect(() => {
         if (products) {
             setLoading(true)
             let disArr = []
