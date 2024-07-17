@@ -1,5 +1,16 @@
 /* TODO: Add sitewide styles */
+@import url('https://fonts.googleapis.com/css2?family=Wittgenstein:ital,wght@0,400..900;1,400..900&display=swap');
+
+/* .wittgenstein-<uniquifier> {
+    font-family: "Wittgenstein", serif;
+    font-optical-sizing: auto;
+    font-weight: <weight>;
+    font-style: normal;
+} */
+
 body{
+    font-family: "Wittgenstein", serif;
+    font-style: normal;
     background-color: azure;
     color: black;
     width: 100%;
