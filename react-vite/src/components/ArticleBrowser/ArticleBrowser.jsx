@@ -16,6 +16,7 @@ function ArticleBrowser() {
     const [loading, setLoading] = useState(true)
 
     async function loadArticles(){
+        setLoading(true)
         await dispatch(thunkLoadArticles())
     }
 
