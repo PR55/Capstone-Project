@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import { electronic_tags, traditional_tags } from '../tags'
 import { addToCart, isInCart } from '../cart'
 import { IoIosSearch } from "react-icons/io";
+import { LiaSpinnerSolid } from "react-icons/lia";
 
 function ProductBrowser() {
 
@@ -25,16 +26,24 @@ function ProductBrowser() {
 
     const [processCart, setProcess] = useState(false)
 
-    useEffect(() => {
-        console.log('adding to cart!')
-    })
+    const [loading, setLoading] = useState(false)
 
     useEffect(() => {
-        dispatch(thunkProductsLoad())
+        console.log('adding to cart!')
+    }, [processCart])
+
+    async function LoadProduct(){
+        setLoading(true)
+        await dispatch(thunkProductsLoad())
+    }
+
+    useEffect(() => {
+        LoadProduct()
     }, [window.location.pathname])
 
     useEffect(() => {
         if (products) {
+            setLoading(true)
             let disArr = []
 
             console.log()
@@ -65,6 +74,7 @@ function ProductBrowser() {
             }
 
             setProducts(disArr)
+            setLoading(false)
         }
     }, [products, searchName, searchTags.length])
 
@@ -133,6 +143,10 @@ function ProductBrowser() {
                 <div className='displayAndFilter'>
                     <div>
                         {
+                            loading
+                            ?
+                            <LiaSpinnerSolid className="spinner"/>
+                            :
                             productsArr.length
                                 ?
                                 <div className='blockHolder'>

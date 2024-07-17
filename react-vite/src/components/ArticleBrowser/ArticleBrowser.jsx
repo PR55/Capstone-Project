@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { thunkLoadArticles } from '../../redux/article'
 import { IoIosSearch } from "react-icons/io";
+import { LiaSpinnerSolid } from "react-icons/lia";
 
 function ArticleBrowser() {
     const dispatch = useDispatch()
@@ -12,16 +13,23 @@ function ArticleBrowser() {
 
     const [searchName, setSearch] = useState('')
 
+    const [loading, setLoading] = useState(false)
+
+    async function loadArticles(){
+        setLoading(true)
+        await dispatch(thunkLoadArticles())
+    }
+
     useEffect(() => {
-        dispatch(thunkLoadArticles())
+        loadArticles()
     }, [window.location.pathname])
 
     useEffect(() => {
         if (products) {
+            setLoading(true)
             let disArr = []
 
             console.log()
-
             for (let product of Object.values(products)) {
                 console.log(product)
                     if (searchName && product.title.toLowerCase().includes(searchName.toLowerCase())) {
@@ -32,6 +40,7 @@ function ArticleBrowser() {
             }
 
             setProducts(disArr)
+            setLoading(false)
         }
     }, [products, searchName])
 
@@ -47,6 +56,9 @@ function ArticleBrowser() {
                     <input className='searchBarArticle' type="search" value={searchName} onChange={e => setSearch(e.target.value)} />
                 </div>
                 {
+                    loading?
+                    <LiaSpinnerSolid className="spinner"/>
+                    :
                     productsArr.length
                         ?
                         <div className='blockHolder'>
