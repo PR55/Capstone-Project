@@ -143,10 +143,6 @@ function ProductBrowser() {
                 <div className='displayAndFilter'>
                     <div>
                         {
-                            loading
-                            ?
-                            <LiaSpinnerSolid className="spinner"/>
-                            :
                             productsArr.length
                                 ?
                                 <div className='blockHolder'>
@@ -199,6 +195,9 @@ function ProductBrowser() {
                                     }
                                 </div>
 
+                                :
+                                loading?
+                                <LiaSpinnerSolid className='spinner'/>
                                 :
                                 <h1>No Products matching that name</h1>
 

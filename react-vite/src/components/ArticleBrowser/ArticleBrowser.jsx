@@ -15,7 +15,7 @@ function ArticleBrowser() {
 
     const [loading, setLoading] = useState(true)
 
-    async function loadArticles(){
+    async function loadArticles() {
         setLoading(true)
         await dispatch(thunkLoadArticles())
     }
@@ -36,11 +36,11 @@ function ArticleBrowser() {
             console.log()
             for (let product of Object.values(products)) {
                 console.log(product)
-                    if (searchName && product.title.toLowerCase().includes(searchName.toLowerCase())) {
-                        disArr.push(product)
-                    } else if (!searchName) {
-                        disArr.push(product)
-                    }
+                if (searchName && product.title.toLowerCase().includes(searchName.toLowerCase())) {
+                    disArr.push(product)
+                } else if (!searchName) {
+                    disArr.push(product)
+                }
             }
 
             setProducts(disArr)
@@ -56,40 +56,44 @@ function ArticleBrowser() {
         <div className='displayHolder'>
             <div className='productsDisplay'>
                 <div className='searchBarVisualArticle'>
-                    <IoIosSearch/>
+                    <IoIosSearch />
                     <input className='searchBarArticle' type="search" value={searchName} onChange={e => setSearch(e.target.value)} />
                 </div>
-                {
-                    loading?
-                    <LiaSpinnerSolid className="spinner"/>
-                    :
-                    productsArr.length
-                        ?
-                        <div className='blockHolder'>
+                <div className='displayAndFilter'>
+                    <div>
+                        {
+                                productsArr.length
+                                    ?
+                                    <div className='blockHolder'>
 
-                            {
-                                productsArr.map(product => {
-                                    return (
-                                        <div key={product.id} className='productBlockArticle' onClick={() => navigate(`/articles/${product.id}`)}>
-                                            <div className='imageHolder'>
-                                                <img src={product.imageUrl} alt={'gameImg'} />
-                                            </div>
-                                            <div className='description'>
-                                                <p className='title'>{product.title.length > 50 ?product.title.slice(0,50) + '...' :product.title}</p>
-                                                <p className='creator'>{product.owner?.username}</p>
-                                                <p>{product.timeUpdated}</p>
-                                                <p className='body'>{product.body.length > 250 ? product.body.slice(0, 250) + "..." : product.body}</p>
-                                            </div>
-                                        </div>
-                                    )
-                                })
-                            }
-                        </div>
+                                        {
+                                            productsArr.map(product => {
+                                                return (
+                                                    <div key={product.id} className='productBlockArticle' onClick={() => navigate(`/articles/${product.id}`)}>
+                                                        <div className='imageHolder'>
+                                                            <img src={product.imageUrl} alt={'gameImg'} />
+                                                        </div>
+                                                        <div className='description'>
+                                                            <p className='title'>{product.title.length > 50 ? product.title.slice(0, 50) + '...' : product.title}</p>
+                                                            <p className='creator'>{product.owner?.username}</p>
+                                                            <p>{product.timeUpdated}</p>
+                                                            <p className='body'>{product.body.length > 250 ? product.body.slice(0, 250) + "..." : product.body}</p>
+                                                        </div>
+                                                    </div>
+                                                )
+                                            })
+                                        }
+                                    </div>
 
-                        :
-                        <h1>No Products matching that name</h1>
+                                    : loading
+                                    ?
+                                    <LiaSpinnerSolid className='spinner'/>
+                                    :
+                                    <h1>No Products matching that name</h1>
 
-                }
+                        }
+                    </div>
+                </div>
             </div>
         </div>
     )
