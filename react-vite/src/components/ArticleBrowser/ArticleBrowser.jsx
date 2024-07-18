@@ -14,7 +14,7 @@ function ArticleBrowser() {
 
     const [searchName, setSearch] = useState('')
 
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(true)
 
     async function loadArticles() {
         setLoading(true)
@@ -29,23 +29,33 @@ function ArticleBrowser() {
         // console.log('adding to cart!')
     }, [loading])
 
+    async function sortArr(){
+        let disArr = []
+        for (let product of Object.values(products)) {
+            // console.log(product)
+            if (searchName && product.title.toLowerCase().includes(searchName.toLowerCase())) {
+                await disArr.push(product)
+            } else if (!searchName) {
+                await disArr.push(product)
+            }
+        }
+
+        await setProducts(disArr)
+    }
+
+    async function processUpdate(){
+        setLoading(true)
+        const longLoad = setTimeout(async() => {
+            sortArr()
+            setLoading(false)
+            return 'Complete!'
+        }, 400)
+        // await longLoad
+    }
+
     useEffect(() => {
         if (products) {
-            setLoading(true)
-            let disArr = []
-
-            console.log()
-            for (let product of Object.values(products)) {
-                console.log(product)
-                if (searchName && product.title.toLowerCase().includes(searchName.toLowerCase())) {
-                    disArr.push(product)
-                } else if (!searchName) {
-                    disArr.push(product)
-                }
-            }
-
-            setProducts(disArr)
-            setLoading(false)
+            processUpdate()
         }
     }, [products, searchName])
 

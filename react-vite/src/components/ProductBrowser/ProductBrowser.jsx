@@ -22,17 +22,16 @@ function ProductBrowser() {
 
     const [searchTags, setTagSearch] = useState([])
 
-    const [tagChangeBool, setTagChangeBool] = useState(false)
+    const [tagChangeBool, setTagChangeBool] = useState(true)
 
 
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         // console.log('adding to cart!')
     }, [loading])
 
     async function LoadProduct(){
-            setLoading(true)
             await dispatch(thunkProductsLoad())
     }
 
@@ -40,44 +39,49 @@ function ProductBrowser() {
         LoadProduct()
     },[])
 
-    useEffect(() => {
-        LoadProduct()
-    }, [window.location.pathname])
-
-    useEffect(() => {
-        if (products) {
-            setLoading(true)
-            let disArr = []
-
-            console.log()
-
-            for (let product of Object.values(products)) {
-                let allTags = product.tags.map(tag => tag.tag)
-                if (searchTags.length) {
-                    for (let tag of searchTags) {
-                        if ((!product.isTraditional && window.location.pathname === '/electronic/products') ||
-                            (product.isTraditional && window.location.pathname === '/traditional/products')
-                        ) {
-                            if ((searchName && product.name.toLowerCase().includes(searchName.toLowerCase())
-                                || !searchName) && allTags.includes(tag) && !disArr.includes(product)) {
-                                disArr.push(product)
-                            }
-                        }
-                    }
-                } else if (!searchTags.length) {
+    function sortArr(){
+        let disArr = []
+        for (let product of Object.values(products)) {
+            let allTags = product.tags.map(tag => tag.tag)
+            if (searchTags.length) {
+                for (let tag of searchTags) {
                     if ((!product.isTraditional && window.location.pathname === '/electronic/products') ||
                         (product.isTraditional && window.location.pathname === '/traditional/products')
                     ) {
                         if ((searchName && product.name.toLowerCase().includes(searchName.toLowerCase())
-                            || !searchName)) {
+                            || !searchName) && allTags.includes(tag) && !disArr.includes(product)) {
                             disArr.push(product)
                         }
                     }
                 }
+            } else if (!searchTags.length) {
+                if ((!product.isTraditional && window.location.pathname === '/electronic/products') ||
+                    (product.isTraditional && window.location.pathname === '/traditional/products')
+                ) {
+                    if ((searchName && product.name.toLowerCase().includes(searchName.toLowerCase())
+                        || !searchName)) {
+                        disArr.push(product)
+                    }
+                }
             }
+        }
 
-            setProducts(disArr)
+        setProducts(disArr)
+    }
+
+    function processArr(){
+        setLoading(true)
+        // console.log()
+        const longLoad = setTimeout(() => {
+            sortArr()
             setLoading(false)
+            return 'Sort complete!'
+        }, 400)
+    }
+
+    useEffect(() => {
+        if (products) {
+            processArr()
         }
     }, [products, searchName, searchTags.length])
 
@@ -88,6 +92,7 @@ function ProductBrowser() {
     useEffect(() => {
         setTagSearch([])
         setTagArr(!(window.location.pathname === '/electronic/products') ? traditional_tags.map(tag => searchTags.includes(tag)) : electronic_tags.map(tag => searchTags.includes(tag)))
+        LoadProduct()
     }, [window.location.pathname])
 
     const manageTags = (e) => {
