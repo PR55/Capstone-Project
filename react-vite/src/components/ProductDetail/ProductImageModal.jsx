@@ -17,7 +17,7 @@ function ProductImageModal({ imageUrl, ownerId, imgsLength}) {
 
     return (
         <div className="modalImageContained">
-            <IoClose className='exit' onClick={e => closeModal()} />
+            <IoClose className='exit' onClick={() => closeModal()} />
             {
                 user && ownerId && user.id == ownerId && imgsLength && imgsLength > 1?
                     <OpenModalTrashItem

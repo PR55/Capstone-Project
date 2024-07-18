@@ -25,16 +25,20 @@ function ProductBrowser() {
     const [tagChangeBool, setTagChangeBool] = useState(false)
 
 
-    const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState(false)
 
     useEffect(() => {
         // console.log('adding to cart!')
     }, [loading])
 
     async function LoadProduct(){
-        setLoading(true)
-        await dispatch(thunkProductsLoad())
+            setLoading(true)
+            await dispatch(thunkProductsLoad())
     }
+
+    useEffect(()=>{
+        LoadProduct()
+    },[])
 
     useEffect(() => {
         LoadProduct()

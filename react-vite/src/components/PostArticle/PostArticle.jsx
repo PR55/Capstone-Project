@@ -12,7 +12,7 @@ function PostArticle() {
     const [image, setImage] = useState(null);
     const [tags, setTags] = useState([])
 
-    const [tracker, setTracker] = useState(allTags.map(tag => false))
+    const [tracker, setTracker] = useState(allTags.map(() => false))
 
     const [tagChangeBool, setTagChangeBool] = useState(false)
 

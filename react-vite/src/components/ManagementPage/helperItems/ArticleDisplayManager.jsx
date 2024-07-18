@@ -18,7 +18,7 @@ function ArticleDisplayManager({articles}){
                             <p className='body'>{article?.body && article.body.length > 250 ? article.body.slice(0, 250) + "..." : article?.body}</p>
                             <div className="manageTags">
                                     {article?.tags.map(tag => (
-                                        <p>{tag.tag}</p>
+                                        <p key={tag.id}>{tag.tag}</p>
                                     ))}
                                 </div>
                         </div>

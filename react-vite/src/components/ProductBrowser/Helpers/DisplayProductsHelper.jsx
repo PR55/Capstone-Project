@@ -27,6 +27,7 @@ function DisplayProductsHelper({products, searchTags, user, navigate}){
                                 {
                                     product.tags.map(tag => (
                                         <p
+                                            key = {tag.id}
                                             className={searchTags.includes(tag.tag) ? 'tagHighlight' : 'tag'}
                                         >{tag.tag}</p>
                                     ))

@@ -28,7 +28,7 @@ function ProductDisplayManager({products, electronic}){
                         <p className='body'>{product.description.length > 250 ? product.description.slice(0, 250) + "..." : product.description}</p>
                         <div className="manageTags">
                             {product.tags.map(tag => (
-                                <p>{tag.tag}</p>
+                                <p key={tag.id}>{tag.tag}</p>
                             ))}
                         </div>
 

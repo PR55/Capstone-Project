@@ -59,7 +59,7 @@ function LoginFormPage() {
     let splitPass = password.split('')
 
     if(splitPass.includes(' ')){
-      errObj.password = 'Passwords contain no spaces'
+      errObj.password = 'Passwords must contain no spaces'
     }
     else if(splitPass.length < 6){
       errObj.password = 'Passwords must be at least 6 characters long'
