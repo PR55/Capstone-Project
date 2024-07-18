@@ -86,7 +86,7 @@ function ProductBrowser() {
         if (products) {
             processArr()
         }
-    }, [products, searchName, searchTags])
+    }, [products, searchName, searchTags.length])
 
     useEffect(() => {
         setTagArr(!(window.location.pathname === '/electronic/products') ? traditional_tags.map(tag => searchTags.includes(tag)) : electronic_tags.map(tag => searchTags.includes(tag)))
