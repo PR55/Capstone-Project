@@ -36,6 +36,7 @@ function ProductBrowser() {
     }
 
     function sortArr(){
+        setLoading(true)
         let disArr = []
         for (let product of Object.values(products)) {
             let allTags = product.tags.map(tag => tag.tag)
@@ -66,13 +67,19 @@ function ProductBrowser() {
     }
 
     function processArr(){
-        setLoading(true)
         // console.log()
-        const longLoad = setTimeout(() => {
-            sortArr()
-            setLoading(false)
-            return 'Sort complete!'
-        }, 1000)
+        var longLoad = null
+
+        if(longLoad != null && !loading){
+            window.clearTimeout(longLoad)
+            longLoad = null
+        }else{
+            longLoad = setTimeout(() => {
+                sortArr()
+                setLoading(false)
+                return 'Sort complete!'
+            }, 1000)
+        }
     }
 
     useEffect(() => {
