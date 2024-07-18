@@ -35,10 +35,6 @@ function ProductBrowser() {
             await dispatch(thunkProductsLoad())
     }
 
-    useEffect(()=>{
-        LoadProduct()
-    },[])
-
     function sortArr(){
         let disArr = []
         for (let product of Object.values(products)) {
@@ -91,7 +87,7 @@ function ProductBrowser() {
 
     useEffect(() => {
         setTagSearch([])
-        setTagArr(!(window.location.pathname === '/electronic/products') ? traditional_tags.map(tag => searchTags.includes(tag)) : electronic_tags.map(tag => searchTags.includes(tag)))
+        setTagChangeBool(!tagChangeBool)
         LoadProduct()
     }, [window.location.pathname])
 
