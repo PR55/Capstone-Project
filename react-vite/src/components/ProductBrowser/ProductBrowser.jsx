@@ -36,7 +36,6 @@ function ProductBrowser() {
     }
 
     function sortArr(){
-        setLoading(true)
         let disArr = []
         for (let product of Object.values(products)) {
             let allTags = product.tags.map(tag => tag.tag)
@@ -74,6 +73,7 @@ function ProductBrowser() {
             window.clearTimeout(longLoad)
             longLoad = null
         }else{
+            setLoading(true)
             longLoad = setTimeout(() => {
                 sortArr()
                 setLoading(false)
@@ -86,7 +86,7 @@ function ProductBrowser() {
         if (products) {
             processArr()
         }
-    }, [products, searchName, tagArr])
+    }, [products, searchName])
 
     useEffect(() => {
         setTagArr(!(window.location.pathname === '/electronic/products') ? traditional_tags.map(tag => searchTags.includes(tag)) : electronic_tags.map(tag => searchTags.includes(tag)))
