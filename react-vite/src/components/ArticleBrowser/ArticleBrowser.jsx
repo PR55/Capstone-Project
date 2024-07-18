@@ -63,12 +63,11 @@ function ArticleBrowser() {
                 <div className='displayAndFilter'>
                     <div className='blockHolder'>
                         {
-                                !loading
+                                loading
                                     ?
-                                    <DisplayArticlesHelper articles={productsArr} navigate={navigate}/>
-                                    :
                                     <LiaSpinnerSolid className='spinner'/>
-
+                                    :
+                                    <DisplayArticlesHelper articles={productsArr} navigate={navigate}/>
                         }
                     </div>
                 </div>

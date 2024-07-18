@@ -146,11 +146,11 @@ function ProductBrowser() {
                 <div className='displayAndFilter'>
                     <div className='blockHolder'>
                         {
-                            !loading
+                            loading
                                 ?
-                                <DisplayProductsHelper products={productsArr} searchTags={searchTags} user={user} navigate={navigate}/>
-                                :
                                 <LiaSpinnerSolid className='spinner'/>
+                                :
+                                <DisplayProductsHelper products={productsArr} searchTags={searchTags} user={user} navigate={navigate}/>
 
                         }
                     </div>
