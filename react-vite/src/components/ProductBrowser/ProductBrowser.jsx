@@ -72,14 +72,14 @@ function ProductBrowser() {
             sortArr()
             setLoading(false)
             return 'Sort complete!'
-        }, 400)
+        }, 1000)
     }
 
     useEffect(() => {
         if (products) {
             processArr()
         }
-    }, [products, searchName, searchTags.length])
+    }, [products, searchName, tagArr])
 
     useEffect(() => {
         setTagArr(!(window.location.pathname === '/electronic/products') ? traditional_tags.map(tag => searchTags.includes(tag)) : electronic_tags.map(tag => searchTags.includes(tag)))
