@@ -9,6 +9,13 @@ article_routes = Blueprint('articles', __name__)
 
 @article_routes.route('/')
 def all_articles():
+    '''
+        Get all articles in the database,
+        and attach their tags and owners
+        to the dictionaries manually
+        for the front end.
+    '''
+
     articles = [x.to_dict() for x in Article.query.all()]
     for article in articles:
         article['tags'] = [x.to_dict() for x in ArticleTag.query.filter_by(articleId = article['id']).all()]
@@ -18,6 +25,13 @@ def all_articles():
 
 @article_routes.route('/<int:id>')
 def one_article(id):
+    '''
+        Get a specific article by id,
+        packaging the tags and owner
+        to its dictionary if the article
+        exists for the front end.
+    '''
+
     article = Article.query.get(id)
     if not article:
         return {'message':'Article not found'}, 404
@@ -33,6 +47,18 @@ def one_article(id):
 @article_routes.route('/', methods=['POST'])
 @login_required
 def new_article():
+
+    '''
+        Create a new article, first sends
+        an upload request to aws after
+        making a unique name. Then makes
+        the article entry, and finally
+        makes all tags for the article
+        in the data base.
+
+        Once this is done, package everything
+        like the GET routes, for the sake of uniformity
+    '''
 
     form = ArticleForm()
     form['csrf_token'].data = request.cookies['csrf_token']
@@ -87,6 +113,20 @@ def new_article():
 @article_routes.route('/<int:id>', methods=['PUT'])
 @login_required
 def update_article(id):
+    '''
+        Update an article entry, applies
+        a new title and body, checks
+        if the user wants to change
+        the image and deletes the old one,
+        makes an upload and assigns it
+        to the article entry. Proceeds
+        to delete all old tags and reapply them
+        even if there are no changes as new entries.
+
+        Then requeries everything to repack
+        the article for the front end, sending
+        the updated object to the store.
+    '''
     article = Article.query.get(id)
     if not article:
         return {'message':'Article not found'},404
@@ -154,6 +194,15 @@ def update_article(id):
 @article_routes.route('/<int:id>', methods=['DELETE'])
 @login_required
 def delete_article(id):
+    '''
+        Delete an article by the id
+        after verifying it exists
+        and the user is the owner.
+
+        Deletes the image from aws,
+        then deletes all objects related
+        to the article before deleting itself.
+    '''
     user = current_user
 
     article = Article.query.get(id)
