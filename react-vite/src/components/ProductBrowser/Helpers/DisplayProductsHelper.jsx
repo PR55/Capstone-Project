@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
-import { addToCart, isInCart } from '../../cart'
 import '../ProductBrowser.css'
+import AddToCart from './AddToCart'
 
 function DisplayProductsHelper({products, searchTags, user, navigate}){
     const [processCart, setProcess] = useState(false)
@@ -38,21 +38,9 @@ function DisplayProductsHelper({products, searchTags, user, navigate}){
                             <p className='displayPrice'>${product.price.toFixed(2)}</p>
                             {/* <button>Buy Now</button> */}
                             {
-                                (user && product.owner.id == user.id) ?
-                                    <button
-                                        onClick={(e) => {
-                                            e.stopPropagation()
-                                            navigate(`/products/${product.id}/edit`)
-                                        }}
-                                        className="addToCart">Update Product</button>
-                                    :
-                                    <button
-                                        className='addToCart'
-                                        disabled={isInCart(product.id)} onClick={(e) => {
-                                            e.stopPropagation()
-                                            addToCart(product.id)
-                                            setProcess(!processCart)
-                                        }}>Add to Cart</button>
+                                user ?
+                                <AddToCart user={user} product={product} setProcess={setProcess} navigate={navigate} processCart={processCart}/>
+                                :null
                             }
                         </div>
                     </div>

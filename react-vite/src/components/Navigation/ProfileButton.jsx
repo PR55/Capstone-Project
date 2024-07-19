@@ -7,6 +7,7 @@ import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
 import { useNavigate } from "react-router-dom";
 import { clearThunk } from "../../redux/userContent";
+import { clearCart } from "../cart";
 
 function ProfileButton() {
   const dispatch = useDispatch();
@@ -46,7 +47,8 @@ function ProfileButton() {
   const logout = (e) => {
     e.preventDefault();
     dispatch(thunkLogout());
-    dispatch(clearThunk())
+    dispatch(clearThunk());
+    clearCart();
     closeMenu();
     navigate('/')
   };

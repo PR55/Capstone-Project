@@ -112,7 +112,7 @@ function ProductDetail() {
                                         :
                                         <button
                                             className="cartButtonDetail"
-                                            disabled={isInCart(product.id)}
+                                            disabled={ !user || isInCart(product.id)}
                                             onClick={() => {
                                                 addToCart(product.id)
                                                 setUpdate(!updateButton)

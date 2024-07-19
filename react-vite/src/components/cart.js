@@ -73,5 +73,5 @@ export function removeFromCart(id){
 }
 
 export function clearCart(){
-    localStorage.setItem('Cart', '')
+    localStorage.removeItem('Cart')
 }
