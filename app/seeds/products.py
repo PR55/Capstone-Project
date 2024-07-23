@@ -217,7 +217,8 @@ def seed_helper(name, description, price, isTraditional ,ownerId, tags=[], baseI
         description = description,
         price = price,
         isTraditional = isTraditional,
-        ownerId = ownerId
+        ownerId = ownerId,
+        isPurchased = False
     )
     db.session.add(testProduct)
     db.session.commit()

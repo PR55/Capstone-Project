@@ -5,6 +5,7 @@ import { thunkProductsLoad } from "../../redux/product"
 
 import './ViewCart.css'
 import { useNavigate } from "react-router-dom"
+import { thunkTransactionCreate } from "../../redux/transaction"
 
 function ViewCart() {
 
@@ -21,10 +22,43 @@ function ViewCart() {
 
     const [canDisplay, setDisplay] = useState([])
 
+    const [completeTransac , setComplete] = useState(false)
+
     useEffect(() => {
         dispatch(thunkProductsLoad())
     }, [])
 
+    const submitCart = async (e) => {
+        e.preventDefault()
+
+
+        let idArr = await allInCart()
+
+        let sendArr = []
+
+        for(let id of idArr){
+            // console.log(id)
+            sendArr.push({'id':id})
+        }
+
+        const payload = {
+            'products':[...idArr]
+        }
+
+        // console.log(formData.getAll('products'))
+
+        let d = await dispatch(thunkTransactionCreate(payload))
+
+
+        if(d?.errors){
+            console.log(d.errors)
+            return;
+        }else{
+            clearCart();
+            setComplete(true);
+            setReload(!reloadCart);
+        }
+    }
 
     useEffect(() => {
         if (Object.values(products).length) {
@@ -54,7 +88,12 @@ function ViewCart() {
                 !canDisplay.length
                     ?
                     <div className="emptyCart">
+                        {
+                            completeTransac?
+                        <h1>Thanks for your purchase! Go find some more product(s) to purchase!</h1>
+                        :
                         <h1>Nothing to show. Go find some product(s) to purchase!</h1>
+                        }
                         <div className="navButtonsCart">
                             <button onClick={() => navigate('/traditional/products')}>Traditional Products</button>
                             <button onClick={() => navigate('/electronic/products')}>Electronic Products</button>
@@ -93,11 +132,9 @@ function ViewCart() {
                         </div>
                         <div className="cartInfo">
                             <div className="manageCartButtons">
-                                <button onClick={()=>{
-                                    clearCart();
-                                    setReload(!reloadCart)
-                                }} className="confirmCart">Complete Purchase</button>
-                                <button onClick={()=>{
+                                <button onClick={submitCart} className="confirmCart">Complete Purchase</button>
+                                <button onClick={(e) => {
+                                    e.preventDefault()
                                     clearCart();
                                     setReload(!reloadCart)
                                 }} className="danger">Dicard Cart</button>

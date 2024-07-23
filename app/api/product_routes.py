@@ -91,7 +91,8 @@ def new_product():
             description = data['description'],
             price = data['price'],
             isTraditional = state,
-            ownerId = current_user.id
+            ownerId = current_user.id,
+            isPurchased = False
         )
 
         db.session.add(product_new)

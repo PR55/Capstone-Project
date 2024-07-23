@@ -13,6 +13,7 @@ class Product(db.Model):
     price = db.Column(db.Float, nullable = False)
     isTraditional = db.Column(db.Boolean, nullable=False)
     ownerId = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
+    isPurchased = db.Column(db.Boolean, nullable=False)
     time_created = db.Column(db.DateTime(timezone=True), server_default=db.func.now())
     time_updated = db.Column(db.DateTime(timezone=True), server_default=db.func.now(), onupdate=db.func.now())
 
@@ -26,6 +27,7 @@ class Product(db.Model):
             'price':self.price,
             'owner' : self.ownerId,
             'isTraditional':self.isTraditional,
+            'purchased':self.isPurchased,
             'timeCreated': self.time_created,
             'timeUpdated': self.time_updated,
         }
