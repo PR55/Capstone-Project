@@ -1,0 +1,63 @@
+.orders-Page{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.Orders-Display{
+    display: flex;
+    flex-wrap: wrap;
+    gap:50px;
+    align-items: center;
+    justify-content: center;
+    padding: 50px;
+}
+
+.order-Block{
+    width:300px;
+    display: flex;
+    flex-direction: column;
+}
+
+.transac-header{
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+}
+
+.transac-img-display{
+    display: flex;
+    border: 2px solid;
+    height: 300px;
+    width: 100%;
+    flex-wrap: wrap;
+    gap:50px;
+    padding: 10px;
+    border-radius: .5rem;
+}
+
+.transac-img{
+    height: 120px;
+    width:120px;
+    border: 3px solid;
+    border-radius: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background-color: lightgray;
+}
+
+.transac-img > img{
+    max-height: 100%;
+}
+
+.transac-img > p{
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

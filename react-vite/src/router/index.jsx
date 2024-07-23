@@ -13,6 +13,8 @@ import PostArticle from '../components/PostArticle';
 import ManagementPage from '../components/ManagementPage';
 import EditArticle from '../components/EditArticle/EditArticle';
 import ViewCart from '../components/ViewCart/ViewCart';
+import TransactionHistory from '../components/TransactionHistory';
+import TransactionDetail from '../components/TransactionDetail';
 
 export const router = createBrowserRouter([
   {
@@ -73,6 +75,14 @@ export const router = createBrowserRouter([
       {
         path:'/cart',
         element:<ViewCart/>
+      },
+      {
+        path:'/my-transactions',
+        element:<TransactionHistory/>
+      },
+      {
+        path:'/transaction/:transactionId',
+        element:<TransactionDetail/>
       }
     ],
   },

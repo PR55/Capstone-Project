@@ -78,7 +78,7 @@ function ProductBrowser() {
                 sortArr()
                 setLoading(false)
                 return 'Sort complete!'
-            }, 1000)
+            }, 1500)
         }
     }
 
