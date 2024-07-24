@@ -5,7 +5,7 @@
     justify-content: center;
     align-items: center;
     background-color: #c6cac6;
-    height: 75px;
+    min-height: 15vh;
     border: 10px solid #c6cac6;
 }
 
@@ -13,6 +13,9 @@
     height: 1px;
     color: black;
     font-size:xx-large;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .externalLink:hover{

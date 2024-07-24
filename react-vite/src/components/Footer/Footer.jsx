@@ -6,11 +6,13 @@ function Footer(){
             <a
             href='https://github.com/PR55'
             target='_blank'
-            className='externalLink'><FaGithubSquare/></a>
+            className='externalLink'
+            rel="noreferrer"><FaGithubSquare/></a>
             <a
             href='https://www.linkedin.com/in/kyle-joel-flores/'
             target='_blank'
-            className='externalLink'><FaLinkedin/></a>
+            className='externalLink'
+            rel="noreferrer"><FaLinkedin/></a>
         </div>
     )
 }
