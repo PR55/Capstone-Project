@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { thunkTransactionsGet } from "../../redux/transaction";
 import './TransactionHistory.css'
 import { useNavigate } from "react-router-dom";
+import { FaThumbtack } from "react-icons/fa";
 
 function TransactionHistory() {
 
@@ -12,6 +13,14 @@ function TransactionHistory() {
     const transactions = useSelector(store => store.transactions)
 
     const [sorted, setSorted] = useState([])
+
+    const randomColors = [
+        '#f44244',
+        '#161ef0',
+        '#289b12',
+        '#f0c637',
+        'gray'
+    ]
 
     useEffect(() => {
         dispatch(thunkTransactionsGet())
@@ -47,6 +56,7 @@ function TransactionHistory() {
                         return (
                             <div className="order-Block">
                                 <div className="transac-header">
+                                    <FaThumbtack className="transaceDecorator" color={randomColors[Math.floor(((randomColors.length) - 0) * Math.random())]}/>
                                     <p>Transaction #{index + 1}</p>
                                     <p>{transaction.status}</p>
                                 </div>

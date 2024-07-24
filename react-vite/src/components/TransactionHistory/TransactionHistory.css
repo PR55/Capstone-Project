@@ -3,6 +3,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding: 1%;
 }
 
 .Orders-Display{
@@ -12,12 +13,21 @@
     align-items: center;
     justify-content: center;
     padding: 50px;
+    border: 2px solid;
+    border-radius: 1rem;
+    margin: 0 1%;
+    background-color: bisque;
 }
 
 .order-Block{
-    width:300px;
+    width:400px;
     display: flex;
     flex-direction: column;
+    border: 2px solid;
+    justify-content: center;
+    align-items: center;
+    background-color: aliceblue;
+    border-radius: .5rem;
 }
 
 .transac-header{
@@ -26,15 +36,26 @@
     justify-content: space-evenly;
 }
 
+.transaceDecorator{
+    position: absolute;
+    font-size: 32px;
+    transform: translateY(-70%) translateX(65%) rotate(35deg);
+    stroke: black;
+    stroke-width: 20px;
+    filter: drop-shadow(1px -1px .5px black);
+}
+
 .transac-img-display{
     display: flex;
     border: 2px solid;
     height: 300px;
-    width: 100%;
+    width: 80%;
     flex-wrap: wrap;
     gap:50px;
     padding: 10px;
     border-radius: .5rem;
+    justify-content: center;
+    background-color: white;
 }
 
 .transac-img{
@@ -60,4 +81,18 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.transac-options > button{
+    margin: 20px;
+    height: 25px;
+    width: 100px;
+    background-color: rgb(255, 255, 255);
+    border: 2px solid black;
+    border-radius: .5rem;
+}
+
+.transac-options > button:hover{
+    cursor: pointer;
+    background-color: rgb(222, 222, 222);
 }

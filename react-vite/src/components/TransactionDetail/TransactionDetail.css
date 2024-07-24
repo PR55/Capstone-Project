@@ -1,8 +1,8 @@
-.holderCart{
+.holderDetail{
     padding: 50px 0;
 }
 
-.emptyCart{
+.emptyDetail{
     min-height: 600px;
     /* width: 45%; */
     display: flex;
@@ -13,12 +13,12 @@
     cursor: default;
 }
 
-.navButtonsCart{
+.navButtonsDetail{
     display: flex;
     column-gap: 15%;
 }
 
-.navButtonsCart > button{
+.navButtonsDetail > button{
     width: 100px;
     height:50px;
     overflow: hidden;
@@ -28,12 +28,12 @@
     border-radius: 1rem;
 }
 
-.navButtonsCart > button:hover{
+.navButtonsDetail > button:hover{
     cursor: pointer;
     background-color: rgb(205, 215, 222);
 }
 
-.cartHolder{
+.detailHolder{
     width: 45%;
     display: flex;
     flex-direction: column;
@@ -43,10 +43,11 @@
     border: 20px solid;
     border-radius: .75rem;
     background-color: aliceblue;
+    min-height: 550px;
 }
 
-.cartDisplay{
-    padding: 10% 0;
+.detailDisplay{
+    padding: 12% 0;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -56,7 +57,7 @@
     row-gap: 20px;
 }
 
-.cartBlock{
+.detailBlock{
     display: flex;
     flex-direction: row;
     height:150px;
@@ -66,7 +67,7 @@
     width: 80%;
 }
 
-.imageHolderCart{
+.imageHolderDetail{
     margin-right: 1%;
     padding: 0%;
     max-height: 100%;
@@ -79,21 +80,22 @@
     background-color: beige;
 }
 
-.descriptionCart{
-    width: 50%;
+.descriptionDetail{
+    width: 80%;
     display: flex;
     flex-direction: column;
     gap:10px;
 }
 
-.interactCart{
+.interactDetail{
     display: flex;
     /* border: 2px solid; */
     height: 50px;
+    width: 10%;
     align-self: center;
 }
 
-.interactCart > button{
+.interactDetail > button{
     /* display: flex; */
     border: 2px solid;
     height: 25px;
@@ -102,23 +104,23 @@
     background-color: azure;
 }
 
-.interactCart > button:hover{
+.interactDetail > button:hover{
     cursor: pointer;
     background-color: rgb(213, 225, 225);
 }
 
-.cartInfo{
+.detailInfo{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    height: 100px;
+    min-height: 100px;
     /* padding: 0 -50px; */
     width: 100%;
     background-color: rgb(203, 211, 218);
 }
 
-.manageCartButtons{
+.manageDetailButtons{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -126,20 +128,24 @@
     margin-left: 10px;
 }
 
-.manageCartButtons > button{
+.manageDetailButtons > button{
     height: 50px;
     background-color: azure;
     border-radius: 2rem;
     width: 150px;
 }
 
-.confirmCart:hover{
+.confirmDetail:hover{
     background-color: rgb(213, 225, 225);
     cursor: pointer;
 }
 
-.danger:hover{
+.transac-danger:enabled:hover{
     background-color: red;
     color: azure;
     cursor: pointer;
+}
+
+.hide-transac{
+    display: none;
 }

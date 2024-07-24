@@ -1,7 +1,6 @@
 from app.models import db, packageStatus,Transaction, TransactionDetail, Product, ProductImage, User
 from flask import Blueprint, jsonify,request
 from flask_login import login_required, current_user
-from app.forms import TransactionForm
 from datetime import datetime, timezone, timedelta
 
 transaction_routes = Blueprint('transactions', __name__)
@@ -87,9 +86,9 @@ def update_transaction(id):
 
     safeArr = []
 
-    for id in data:
+    for id2 in data['products']:
         for detail in details:
-            if(detail.productId == id):
+            if(detail.productId == id2):
                 safeArr.append(detail)
                 break
 
@@ -102,14 +101,16 @@ def update_transaction(id):
 
     idArr = [x.productId for x in safeArr]
 
-    for id in data:
-        if id not in idArr:
+    print(data)
+
+    for id2 in data['products']:
+        if id2 not in idArr:
             new_detail = TransactionDetail(
-                productId = id,
+                productId = id2,
                 transactionId = transaction.id
             )
             db.session.add(new_detail)
-            product = Product.query.get(id)
+            product = Product.query.get(id2)
             product.isPurchased = True
             db.session.commit()
             idArr.append(id)
@@ -119,11 +120,14 @@ def update_transaction(id):
 
     for id in idArr:
         product = Product.query.get(id)
-        productsArr.append(product)
+        safe_product = product.to_dict()
+        safe_product['image'] = ProductImage.query.filter_by(productId = product.id).first().to_dict()
+        safe_product['owner'] = User.query.get(product.ownerId).to_dict()
+        productsArr.append(safe_product)
 
     safe_transaction = transaction.to_dict()
 
-    safe_transaction['products'] = [x.to_dict for x in productsArr]
+    safe_transaction['products'] = [x for x in productsArr]
 
     return{'transaction':safe_transaction}
 
@@ -143,6 +147,7 @@ def delete_transaction(id):
         db.session.commit()
 
     db.session.delete(transaction)
+    db.session.commit()
 
     return {'id':id}
 

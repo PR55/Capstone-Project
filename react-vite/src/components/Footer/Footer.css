@@ -7,5 +7,14 @@
     background-color: #c6cac6;
     height: 75px;
     border: 10px solid #c6cac6;
+}
+
+.externalLink{
+    height: 1px;
     color: black;
+    font-size:xx-large;
+}
+
+.externalLink:hover{
+    cursor: pointer;
 }

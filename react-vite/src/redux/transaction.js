@@ -58,6 +58,40 @@ export const thunkTransactionCreate = (payload) => async (dispatch) =>{
     }
 }
 
+export const thunkTransactionUpdate = (payload, id) => async (dispatch) =>{
+    const response = await fetch(`/api/transactions/${id}`, {
+        method:'PUT',
+        headers:{
+            'Content-Type': 'application/json'
+        },
+        body:JSON.stringify(payload)
+    })
+
+    if(response.ok){
+        const {transaction} = await response.json()
+        await dispatch(loadTransaction(transaction))
+        return transaction
+    }else{
+        const data = await response.json()
+        return data
+    }
+}
+
+export const thunkTransactionDelete = (id) => async (dispatch) => {
+    const response = await fetch(`/api/transactions/${id}`, {
+        method:"DELETE"
+    })
+
+    if(response.ok){
+        const {id} = await response.json()
+        await dispatch(removeTransaction(id))
+        return id
+    }else{
+        const data = await response.json()
+        return data
+    }
+}
+
 const initialState = {}
 
 function transactionReducer(state = initialState, action){
@@ -73,6 +107,16 @@ function transactionReducer(state = initialState, action){
             const newState = {...state}
             newState[action.payload.id] = action.payload
             return newState
+        }
+        case DELETE_TRANSACTION:{
+            let oldState = Object.values(state)
+            let newState = {}
+            for(let transac of oldState){
+                if(transac.id !== action.payload){
+                    newState[transac.id] = transac
+                }
+            }
+            return newState;
         }
         default:
             return state
