@@ -30,7 +30,7 @@ export const thunkCurrentUserArticles =() => async (dispatch) =>{
     }
 }
 
-export const clearThunk = () => async (dispatch)=> {
+export const clearThunkUserContent = () => async (dispatch)=> {
     await dispatch(clearContent())
 }
 

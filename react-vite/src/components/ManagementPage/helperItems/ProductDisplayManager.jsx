@@ -34,11 +34,15 @@ function ProductDisplayManager({products, electronic}){
 
                     </div>
                     <div className='Purchase'>
-                        <p className="toUpdateButton" onClick={(e) => {
+                        <p className={product.purchased ? "toUpdateButton disabled":"toUpdateButton"} onClick={(e) => {
                             e.stopPropagation()
-                            navigate(`/products/${product.id}/edit`)
-                            }}>Update</p>
+                            if(!product.purchased){
+                                navigate(`/products/${product.id}/edit`)
+                            }
+                            }}
+                            >Update</p>
                         <OpenModalDelete
+                        product={product}
                         modalComponent={<ConfirmTrashProduct obj={product}/>}
                         />
                     </div>

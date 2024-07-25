@@ -45,7 +45,7 @@ function HomePage() {
                 navigate('/traditional/products')
             }}>Browse Traditional</button>
             <div className={elecHover ? 'splashRightExtend' : tradHover ? 'splashRightShrink' : "splashRight"}>
-                <h1 className={elecHover ? 'tradHeaderExtend' : 'tradHeader'}>Electronic Products</h1>
+                <h1 className={elecHover ? 'elecHeaderExtend' : 'elecHeader'}>Electronic Products</h1>
                 <img className={elecHover ? 'splashImageExtend' : 'splashImage'} src='https://elot-bucket.s3.us-east-2.amazonaws.com/elextronic.jpg' />
             </div>
             <button className='electronicButton' onClick={e => {

@@ -6,8 +6,9 @@ import OpenModalMenuItem from "./OpenModalMenuItem";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
 import { useNavigate } from "react-router-dom";
-import { clearThunk } from "../../redux/userContent";
+import { clearThunkUserContent } from "../../redux/userContent";
 import { clearCart } from "../cart";
+import { clearThunkTransactions } from "../../redux/transaction";
 
 function ProfileButton() {
   const dispatch = useDispatch();
@@ -52,7 +53,8 @@ function ProfileButton() {
   const logout = (e) => {
     e.preventDefault();
     dispatch(thunkLogout());
-    dispatch(clearThunk());
+    dispatch(clearThunkUserContent());
+    dispatch(clearThunkTransactions());
     clearCart();
     closeMenu();
     navigate('/')

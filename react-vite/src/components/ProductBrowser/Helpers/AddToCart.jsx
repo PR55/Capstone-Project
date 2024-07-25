@@ -11,11 +11,12 @@ function AddToCart({user, product, navigate, setProcess, processCart}) {
                     e.stopPropagation()
                     navigate(`/products/${product.id}/edit`)
                 }}
+                disabled={product.purchased}
                 className="addToCart">Update Product</button>
             :
             <button
                 className='addToCart'
-                disabled={isInCart(product.id)} onClick={(e) => {
+                disabled={isInCart(product.id) || product.purchased} onClick={(e) => {
                     e.stopPropagation()
                     addToCart(product.id)
                     setProcess(!processCart)

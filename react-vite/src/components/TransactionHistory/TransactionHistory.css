@@ -1,9 +1,9 @@
 .orders-Page{
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     padding: 1%;
+    min-height: 600px;
 }
 
 .Orders-Display{

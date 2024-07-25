@@ -1,6 +1,7 @@
 const MY_TRANSACTIONS = 'transactions/mine'
 const NEW_TRANSACTION = 'transaction/new'
 const DELETE_TRANSACTION = 'transaction/remove'
+const CLEAR_TRANSACTION = 'transaction/clear'
 
 
 const loadTransactions = (transactions) => ({
@@ -16,6 +17,10 @@ const loadTransaction = (transaction) => ({
 const removeTransaction = (id) => ({
     type:DELETE_TRANSACTION,
     payload:id
+})
+
+const clearThunk = () => ({
+    type:CLEAR_TRANSACTION
 })
 
 export const thunkTransactionsGet = (payload) => async (dispatch) =>{
@@ -92,6 +97,10 @@ export const thunkTransactionDelete = (id) => async (dispatch) => {
     }
 }
 
+export const clearThunkTransactions = () => async (dispatch) => {
+    await dispatch(clearThunk())
+}
+
 const initialState = {}
 
 function transactionReducer(state = initialState, action){
@@ -117,6 +126,9 @@ function transactionReducer(state = initialState, action){
                 }
             }
             return newState;
+        }
+        case CLEAR_TRANSACTION:{
+            return {}
         }
         default:
             return state

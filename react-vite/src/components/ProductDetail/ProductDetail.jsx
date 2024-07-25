@@ -40,7 +40,7 @@ function ProductDetail() {
     const navigate = useNavigate()
 
     return (
-        <div className="detailHolder">
+        <div className="detailHolderSingle">
             {
                 product
                     ?
@@ -108,11 +108,12 @@ function ProductDetail() {
                                     (user && product.owner.id == user.id) ?
                                             <button
                                             onClick={()=> navigate('edit')}
-                                            className="cartButtonDetail">Update Product</button>
+                                            className="cartButtonDetail"
+                                            disabled={product.purchased}>Update Product</button>
                                         :
                                         <button
                                             className="cartButtonDetail"
-                                            disabled={ !user || isInCart(product.id)}
+                                            disabled={ !user || isInCart(product.id) || product.purchased}
                                             onClick={() => {
                                                 addToCart(product.id)
                                                 setUpdate(!updateButton)
