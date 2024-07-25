@@ -78,7 +78,7 @@ def upgrade():
     sa.PrimaryKeyConstraint('id')
     )
     if environment == "production":
-        op.execute(f"ALTER TABLE 'product_images SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE product_images SET SCHEMA {SCHEMA};")
     op.create_table('product_tags',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('tag', sa.Enum('nintendo', 'nsixfour', 'switch', 'game_boy', 'game_boy_color', 'game_boy_advanced', 'pokemon', 'nintendo_ds', 'gamecube', 'xbox', 'xbox_360', 'xbox_one', 'xbox_series_x', 'playstation', 'playstation_2', 'playstation_3', 'playstation_4', 'playstation_5', 'retro', 'coop', 'multiplayer', 'pvp', 'pve', 'singleplayer', 'hasbro', 'fantasy', 'medieval', 'ww1', 'video_game_theme', 'tcg', 'modern_warfare', 'classic', 'civilization', 'acw', 'bluffing', 'medical', 'rage', 'economy', 'party', 'noire', 'mafia', 'rp', 'racing', 'travel', 'pirates', 'military', 'book', 'farming', name='tags'), nullable=False),
