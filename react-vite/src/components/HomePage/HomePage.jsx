@@ -1,14 +1,12 @@
 import { useNavigate } from 'react-router-dom';
 import './HomePage.css'
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 function HomePage() {
     const navigate = useNavigate()
 
     const [tradHover, setTradhover] = useState(false)
     const [elecHover, setElechover] = useState(false)
-
-    const ulRef = useRef();
 
     useEffect(() => {
 
@@ -54,8 +52,7 @@ function HomePage() {
             }}>Browse Electronic</button>
             <div className={'hidden'}>
                 {/* Hidden div, made to purely hold the buttons still, since animation causes a shift if not last in the  container*/}
-            <h1 className={elecHover?'elecHeaderExtend':'elecHeader'}>Electronic Products</h1>
-                <img className={elecHover?'splashImageExtend':'splashImage'} src='https://elot-bucket.s3.us-east-2.amazonaws.com/elextronic.jpg'/>
+            <h1 className={elecHover?'elecHeaderExtend':'elecHeader'}></h1>
             </div>
 
         </div>
