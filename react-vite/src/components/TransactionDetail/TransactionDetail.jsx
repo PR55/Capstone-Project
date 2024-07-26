@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { thunkTransactionDelete, thunkTransactionsGet, thunkTransactionUpdate } from "../../redux/transaction";
+import { thunkTransactionDelete, thunkTransactionsGet, thunkTransactionUpdate, thunkTransactionOne } from "../../redux/transaction";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -9,6 +9,8 @@ function TransactionDetail() {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const { transactionId } = useParams()
+
+    const user = useSelector(store => store.session.user)
     const transactions = useSelector(store => store.transactions)
 
     const [transaction, setTransaction] = useState({})
@@ -21,8 +23,12 @@ function TransactionDetail() {
 
     const [productChangeBool, setProductChangeBool] = useState(false)
 
+    if(!user){
+        navigate('/')
+    }
+
     useEffect(() => {
-        dispatch(thunkTransactionsGet())
+        dispatch(thunkTransactionOne(transactionId))
     }, [])
 
     useEffect(() => {
@@ -53,6 +59,7 @@ function TransactionDetail() {
     }, [productChangeBool])
 
     function manageProducts(e){
+        e.stopPropagation()
         let arr = sendArr
 
         let value = parseInt(e.target.value)
@@ -104,29 +111,22 @@ function TransactionDetail() {
     return (
         <div className="holderDetail">
             {
-                !Object.values(transaction).length
-                    ?
-                    <div className="emptyDetail">
-                        <h1>Nothing to show. Go find some product(s) to purchase!</h1>
-
-                        <div className="navButtonsDetail">
-                            <button onClick={() => navigate('/traditional/products')}>Traditional Products</button>
-                            <button onClick={() => navigate('/electronic/products')}>Electronic Products</button>
-                        </div>
-                    </div>
-                    :
-                    <div className="detailHolder">
+                Object.values(transaction).length ?
+                <div className="detailHolder">
                         <h1>Your Order:</h1>
                         <div className="detailDisplay">
                             {
                                 transaction.products.map((product, index) => {
                                     return (
-                                        <div className="detailBlock" key={product.id}>
+                                        <div className="detailBlock" key={product.id}  onClick={(e) => {
+                                            e.stopPropagation()
+                                            navigate(`/products/${product.id}`)
+                                        }}>
                                             <div className='imageHolderDetail'>
                                                 <img src={product.image.imageUrl} alt={'gameImg'} />
                                             </div>
                                             <div className='descriptionDetail'>
-                                                <p className='title' onClick={() => navigate(`/products/${product.id}`)}>{product.name.length > 40 ?product.name.slice(0,40) + '...' :product.name}</p>
+                                                <p className='title'>{product.name.length > 40 ?product.name.slice(0,40) + '...' :product.name}</p>
                                                 <p className='creator'>Seller: {product.owner?.username}</p>
                                                 <p>${product.price}</p>
                                             </div>
@@ -151,6 +151,7 @@ function TransactionDetail() {
                             <p>Total: ${total.toFixed(2)}</p>
                         </div>
                     </div>
+                    :<h1>Transaction does not exist</h1>
             }
         </div>
     )

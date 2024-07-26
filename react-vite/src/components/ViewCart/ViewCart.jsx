@@ -107,17 +107,21 @@ function ViewCart() {
                                 canDisplay.map(product => {
                                     if (cart.length && cart.includes(product.id)) {
                                         return (
-                                            <div className="cartBlock" key={product.id}>
+                                            <div className="cartBlock" key={product.id}  onClick={(e) => {
+                                                e.stopPropagation()
+                                                navigate(`/products/${product.id}`)
+                                            }}>
                                                 <div className='imageHolderCart'>
                                                     <img src={product.images[0].imageUrl} alt={'gameImg'} />
                                                 </div>
                                                 <div className='descriptionCart'>
-                                                    <p className='title' onClick={() => navigate(`/products/${product.id}`)}>{product.name}</p>
+                                                    <p className='title'>{product.name}</p>
                                                     <p className='creator'>Seller: {product.owner?.username}</p>
                                                     <p>${product.price}</p>
                                                 </div>
                                                 <div className="interactCart">
                                                     <button onClick={(e) => {
+                                                        e.stopPropagation()
                                                         e.preventDefault()
                                                         removeFromCart(product.id);
                                                         setReload(!reloadCart)

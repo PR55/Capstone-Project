@@ -61,6 +61,20 @@ def upgrade():
     )
     if environment == "production":
         op.execute(f"ALTER TABLE transactions SET SCHEMA {SCHEMA};")
+    op.create_table('reviews',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('review', sa.String(length=1000), nullable=False),
+    sa.Column('rating', sa.Integer(), nullable=False),
+    sa.Column('ownerId', sa.Integer(), nullable=False),
+    sa.Column('productId', sa.Integer(), nullable=False),
+    sa.Column('time_created', sa.DateTime(timezone=True), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=True),
+    sa.Column('time_updated', sa.DateTime(timezone=True), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=True),
+    sa.ForeignKeyConstraint(['ownerId'], ['users.id'], ),
+    sa.ForeignKeyConstraint(['productId'], ['products.id'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
+    if environment == "production":
+        op.execute(f"ALTER TABLE reviews SET SCHEMA {SCHEMA};")
     op.create_table('article_tags',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('tag', sa.Enum('nintendo', 'nsixfour', 'switch', 'game_boy', 'game_boy_color', 'game_boy_advanced', 'pokemon', 'nintendo_ds', 'gamecube', 'xbox', 'xbox_360', 'xbox_one', 'xbox_series_x', 'playstation', 'playstation_2', 'playstation_3', 'playstation_4', 'playstation_5', 'retro', 'coop', 'multiplayer', 'pvp', 'pve', 'singleplayer', 'hasbro', 'fantasy', 'medieval', 'ww1', 'video_game_theme', 'tcg', 'modern_warfare', 'classic', 'civilization', 'acw', 'bluffing', 'medical', 'rage', 'economy', 'party', 'noire', 'mafia', 'rp', 'racing', 'travel', 'pirates', 'military', 'book', 'farming', name='tags'), nullable=False),

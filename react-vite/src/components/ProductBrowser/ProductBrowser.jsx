@@ -44,19 +44,34 @@ function ProductBrowser() {
                     if ((!product.isTraditional && window.location.pathname === '/electronic/products') ||
                         (product.isTraditional && window.location.pathname === '/traditional/products')
                     ) {
-                        if ((searchName && product.name.toLowerCase().includes(searchName.toLowerCase())
-                            || !searchName) && allTags.includes(tag) && !disArr.includes(product)) {
-                            disArr.push(product)
+                        if(product?.purchased){
+                            if ((searchName && product.name.toLowerCase().includes(searchName.toLowerCase())
+                                || !searchName) && allTags.includes(tag) && !disArr.includes(product) && !product.purchased) {
+                                disArr.push(product)
+                            }
+                        }else{
+                            if ((searchName && product.name.toLowerCase().includes(searchName.toLowerCase())
+                                || !searchName) && allTags.includes(tag) && !disArr.includes(product)) {
+                                disArr.push(product)
+                            }
                         }
+
                     }
                 }
             } else if (!searchTags.length) {
                 if ((!product.isTraditional && window.location.pathname === '/electronic/products') ||
                     (product.isTraditional && window.location.pathname === '/traditional/products')
                 ) {
-                    if ((searchName && product.name.toLowerCase().includes(searchName.toLowerCase())
-                        || !searchName)) {
-                        disArr.push(product)
+                    if(product?.purchased){
+                        if ((searchName && product.name.toLowerCase().includes(searchName.toLowerCase())
+                            || !searchName) && !product.purchased) {
+                            disArr.push(product)
+                        }
+                    }else{
+                        if ((searchName && product.name.toLowerCase().includes(searchName.toLowerCase())
+                            || !searchName)) {
+                            disArr.push(product)
+                        }
                     }
                 }
             }

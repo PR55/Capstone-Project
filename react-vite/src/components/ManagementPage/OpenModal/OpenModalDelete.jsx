@@ -10,15 +10,21 @@ function OpenModalDelete({
 
   const onClick = (e) => {
     e.stopPropagation();
-    if(!product.purchased){
-    if (onModalClose) setOnModalClose(onModalClose);
-    setModalContent(modalComponent);
-    if (typeof onItemClick === "function") onItemClick();
+    if (product?.purchased) {
+      if (!product.purchased) {
+        if (onModalClose) setOnModalClose(onModalClose);
+        setModalContent(modalComponent);
+        if (typeof onItemClick === "function") onItemClick();
+      }
+    } else {
+      if (onModalClose) setOnModalClose(onModalClose);
+      setModalContent(modalComponent);
+      if (typeof onItemClick === "function") onItemClick();
     }
   };
 
   return (
-    <p onClick={onClick} className={product.purchased?"toDeleteButton disabled":"toDeleteButton"}>Delete</p>
+    <p onClick={onClick} className={product?.purchased && product.purchased ? "toDeleteButton disabled" : "toDeleteButton"}>Delete</p>
   );
 }
 

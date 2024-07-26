@@ -28,6 +28,16 @@
     align-items: center;
     background-color: aliceblue;
     border-radius: .5rem;
+    box-shadow: 7px 7px .5rem black;
+}
+
+.order-Block:hover{
+    cursor: pointer;
+    box-shadow: 3px 3px .5rem black;
+    .transaceDecorator{
+        font-size: 30px;
+        transform: translateY(-65%) translateX(60%) rotate(35deg);
+    }
 }
 
 .transac-header{
@@ -56,6 +66,7 @@
     border-radius: .5rem;
     justify-content: center;
     background-color: white;
+    margin: 20px 0;
 }
 
 .transac-img{

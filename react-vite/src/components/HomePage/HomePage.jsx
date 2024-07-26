@@ -38,7 +38,7 @@ function HomePage() {
                 <h1 className={tradHover ? 'tradHeaderExtend' : 'tradHeader'}>Traditional Products</h1>
                 <img className={tradHover ? 'splashImageExtend' : 'splashImage'} src='https://elot-bucket.s3.us-east-2.amazonaws.com/traditional.png' />
             </div>
-            <button className='traditionalButton' onClick={e => {
+            <button className={elecHover?'traditionalButtonLower': 'traditionalButton'} onClick={e => {
                 e.preventDefault()
                 navigate('/traditional/products')
             }}>Browse Traditional</button>
@@ -46,7 +46,7 @@ function HomePage() {
                 <h1 className={elecHover ? 'elecHeaderExtend' : 'elecHeader'}>Electronic Products</h1>
                 <img className={elecHover ? 'splashImageExtend' : 'splashImage'} src='https://elot-bucket.s3.us-east-2.amazonaws.com/elextronic.jpg' />
             </div>
-            <button className='electronicButton' onClick={e => {
+            <button className={tradHover ? 'electronicButtonLower':'electronicButton'} onClick={e => {
                 e.preventDefault()
                 navigate('/electronic/products')
             }}>Browse Electronic</button>

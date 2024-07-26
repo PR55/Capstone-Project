@@ -54,7 +54,10 @@ function TransactionHistory() {
                 sorted.length
                     ? sorted.map((transaction, index) => {
                         return (
-                            <div className="order-Block">
+                            <div className="order-Block" onClick={(e) => {
+                                e.preventDefault()
+                                navigate(`/transaction/${transaction.id}`)
+                            }}>
                                 <div className="transac-header">
                                     <FaThumbtack className="transaceDecorator" color={randomColors[Math.floor(((randomColors.length) - 0) * Math.random())]}/>
                                     <p>Transaction #{index + 1}</p>
@@ -83,12 +86,6 @@ function TransactionHistory() {
                                         }
 
                                     </div>
-                                <div className="transac-options">
-                                    <button onClick={(e) => {
-                                        e.preventDefault()
-                                        navigate(`/transaction/${transaction.id}`)
-                                    }}>View Order</button>
-                                </div>
                             </div>
                         )
                     })

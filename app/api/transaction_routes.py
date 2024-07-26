@@ -10,16 +10,34 @@ transaction_routes = Blueprint('transactions', __name__)
 def my_transactions():
     transactions = [x.to_dict() for x in Transaction.query.filter_by(ownerId=current_user.id).all()]
     for transact in transactions:
-        detail = [x for x in TransactionDetail.query.filter_by(transactionId = transact['id']).all()]
+        details = [x for x in TransactionDetail.query.filter_by(transactionId = transact['id']).all()]
         arr = []
-        for deta in detail:
-            product = Product.query.get(deta.productId)
+        for detail in details:
+            product = Product.query.get(detail.productId)
             safe_product = product.to_dict()
             safe_product['image'] = ProductImage.query.filter_by(productId = product.id).first().to_dict()
             safe_product['owner'] = User.query.get(product.ownerId).to_dict()
             arr.append(safe_product)
         transact['products'] = [x for x in arr]
     return {'transactions':transactions}
+
+@transaction_routes.route('/<int:id>')
+@login_required
+def one_transaction(id):
+    transaction = Transaction.query.get(id)
+    if not transaction:
+        return {'message':'Transaction not found'}, 404
+    details = TransactionDetail.query.filter_by(transactionId = transaction.id).all()
+    arr = []
+    safe_transaction = transaction.to_dict()
+    for detail in details:
+        product = Product.query.get(detail.productId)
+        safe_product = product.to_dict()
+        safe_product['image'] = ProductImage.query.filter_by(productId = product.id).first().to_dict()
+        safe_product['owner'] = User.query.get(product.ownerId).to_dict()
+        arr.append(safe_product)
+    safe_transaction['products'] = arr
+    return {'transaction':safe_transaction}
 
 @transaction_routes.route('/', methods=['POST'])
 @login_required

@@ -7,6 +7,18 @@
     flex-direction: row;
 }
 
+.electronicButtonLower{
+    position: absolute;
+    height: 50px;
+    width: 150px;
+    margin-bottom: 0%;
+    border-radius: 2rem;
+    background-color: rgb(227, 227, 227);
+    right: 20%;
+    bottom: 20%;
+    z-index: 2;
+}
+
 .electronicButton{
     position: absolute;
     height: 50px;
@@ -41,6 +53,18 @@
 
 .electronicButton:active{
     background-color: rgb(227, 227, 227);
+}
+
+.traditionalButtonLower{
+    position: absolute;
+    height: 50px;
+    width: 150px;
+    margin-bottom: 0%;
+    border-radius: 2rem;
+    background-color: rgb(227, 227, 227);
+    left: 20%;
+    bottom: 20%;
+    z-index: 2;
 }
 
 .traditionalButton{

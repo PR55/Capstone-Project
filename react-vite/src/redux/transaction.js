@@ -41,6 +41,19 @@ export const thunkTransactionsGet = (payload) => async (dispatch) =>{
     }
 }
 
+export const thunkTransactionOne = (id) => async (dispatch) =>{
+    const response = await fetch(`/api/transactions/${id}`)
+
+    if(response.ok){
+        const {transaction} = await response.json()
+        await dispatch(loadTransaction(transaction))
+        return transaction
+    }else{
+        const data = await response.json()
+        console.log(data)
+    }
+}
+
 export const thunkTransactionCreate = (payload) => async (dispatch) =>{
     const response = await fetch('/api/transactions/', {
         method:'POST',

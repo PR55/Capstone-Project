@@ -66,6 +66,11 @@
     width: 80%;
 }
 
+.cartBlock:hover{
+    cursor: pointer;
+    box-shadow: 5px 5px .5rem black;
+}
+
 .imageHolderCart{
     margin-right: 1%;
     padding: 0%;

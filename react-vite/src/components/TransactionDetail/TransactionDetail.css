@@ -67,6 +67,11 @@
     width: 80%;
 }
 
+.detailBlock:hover{
+    cursor: pointer;
+    box-shadow: 5px 5px .5rem black;
+}
+
 .imageHolderDetail{
     margin-right: 1%;
     padding: 0%;
@@ -148,4 +153,9 @@
 
 .hide-transac{
     display: none;
+}
+
+.transac-update:enabled:hover{
+    background-color: rgb(213, 225, 225);
+    cursor: pointer;
 }
