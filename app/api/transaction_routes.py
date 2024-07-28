@@ -1,4 +1,4 @@
-from app.models import db, packageStatus,Transaction, TransactionDetail, Product, ProductImage, User
+from app.models import db, packageStatus,Transaction, TransactionDetail, Product, ProductImage, User, ProductReview
 from flask import Blueprint, jsonify,request
 from flask_login import login_required, current_user
 from datetime import datetime, timezone, timedelta
@@ -17,6 +17,11 @@ def my_transactions():
             safe_product = product.to_dict()
             safe_product['image'] = ProductImage.query.filter_by(productId = product.id).first().to_dict()
             safe_product['owner'] = User.query.get(product.ownerId).to_dict()
+            review = ProductReview.query.filter_by(productId = product.id, ownerId=current_user.id).first()
+            if not review:
+                safe_product['review'] = None
+            else:
+                safe_product['review'] = review.to_dict()
             arr.append(safe_product)
         transact['products'] = [x for x in arr]
     return {'transactions':transactions}
@@ -35,6 +40,11 @@ def one_transaction(id):
         safe_product = product.to_dict()
         safe_product['image'] = ProductImage.query.filter_by(productId = product.id).first().to_dict()
         safe_product['owner'] = User.query.get(product.ownerId).to_dict()
+        review = ProductReview.query.filter_by(productId = product.id, ownerId=current_user.id).first()
+        if not review:
+            safe_product['review'] = None
+        else:
+            safe_product['review'] = review.to_dict()
         arr.append(safe_product)
     safe_transaction['products'] = arr
     return {'transaction':safe_transaction}
@@ -177,11 +187,11 @@ def update_status():
     current = current.replace(tzinfo=None)
     for transact in transacts:
         tim = transact.time_created
-        if(current - tim > timedelta(minutes=10) and current - tim < timedelta(minutes=30) and transact.status != packageStatus.processing):
+        if(current - tim > timedelta(minutes=10) and current - tim < timedelta(minutes=13) and transact.status != packageStatus.processing):
             transact.status = packageStatus.processing
-        elif(current - tim > timedelta(minutes=30) and current - tim < timedelta(minutes=40) and transact.status != packageStatus.delivery):
+        elif(current - tim > timedelta(minutes=13) and current - tim < timedelta(minutes=14) and transact.status != packageStatus.delivery):
             transact.status = packageStatus.delivery
-        elif(current - tim > timedelta(minutes=40) and transact.status != packageStatus.delivered):
+        elif(current - tim > timedelta(minutes=14) and transact.status != packageStatus.delivered):
             transact.status = packageStatus.delivered
         db.session.commit()
 

@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { thunkTransactionDelete, thunkTransactionsGet, thunkTransactionUpdate, thunkTransactionOne } from "../../redux/transaction";
+import { thunkTransactionDelete, thunkTransactionUpdate, thunkTransactionOne } from "../../redux/transaction";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -137,6 +137,12 @@ function TransactionDetail() {
                                                 checked={productArr[index]}
                                                 onClick={manageProducts}
                                                 />
+                                            </div>
+                                            <div className={transaction.status != 'Delivered' || (product?.review && product.review != null)? 'hide-transac': "interactDetailTransac"}>
+                                                <button onClick={e => {
+                                                    e.stopPropagation()
+                                                    navigate(`/reviews/${product.id}/new`)
+                                                }}>Leave review</button>
                                             </div>
                                         </div>
                                     )

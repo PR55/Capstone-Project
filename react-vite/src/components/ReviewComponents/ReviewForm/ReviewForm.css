@@ -1,0 +1,88 @@
+.reviewForm{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 5px 20%;
+    min-height: 600px;
+    justify-content: center;
+}
+
+.itemPreview{
+    display: flex;
+}
+
+.imgHolder{
+    height: 256px
+}
+
+.imgHolder > img{
+    max-height: 100%;
+}
+
+.formReview{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.fillTest{
+    color: transparent;
+    font-size: 64px;
+    position: relative;
+}
+
+.fillTestActive{
+    color: gold;
+    font-size: 64px;
+    position: relative;
+}
+
+.fillTest2{
+    font-size: 64px;
+    position: absolute;
+}
+
+.fillTest2:hover{
+    cursor: pointer;
+}
+
+.ratingInput{
+    display: flex;
+}
+
+.oneInput{
+    display: flex;
+    align-items: center;
+}
+
+.Form{
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.inputHolderReview{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.inputHolderReview > textarea{
+    resize: none;
+    width: 250%;
+    height: 200px;
+    overflow-y: scroll;
+    font-size: 18px;
+}
+
+.error{
+    color: red;
+    font-weight: bolder;
+    font-size: 24px;
+}

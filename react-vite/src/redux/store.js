@@ -10,13 +10,15 @@ import productReducer from "./product";
 import articleReducer from "./article";
 import userContentReducer from "./userContent";
 import transactionReducer from "./transaction";
+import reviewReducer from "./review";
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   products: productReducer,
   articles:articleReducer,
   userContent:userContentReducer,
-  transactions:transactionReducer
+  transactions:transactionReducer,
+  reviews:reviewReducer
 });
 
 let enhancer;

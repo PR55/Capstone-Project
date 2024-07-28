@@ -38,7 +38,7 @@ function TransactionHistory() {
                 } else if (date1 < date2) {
                     return -1
                 } else {
-
+                    return 0;
                 }
             })
 
@@ -54,7 +54,7 @@ function TransactionHistory() {
                 sorted.length
                     ? sorted.map((transaction, index) => {
                         return (
-                            <div className="order-Block" onClick={(e) => {
+                            <div key={transaction.id} className="order-Block" onClick={(e) => {
                                 e.preventDefault()
                                 navigate(`/transaction/${transaction.id}`)
                             }}>
@@ -68,7 +68,7 @@ function TransactionHistory() {
                                             transaction.products.map((product, index) => {
                                                 if (index < 3) {
                                                     return (
-                                                        <div className="transac-img">
+                                                        <div key={product.id} className="transac-img">
                                                             <img src={product.image.imageUrl} />
                                                         </div>
                                                     )

@@ -15,6 +15,7 @@ import EditArticle from '../components/EditArticle/EditArticle';
 import ViewCart from '../components/ViewCart/ViewCart';
 import TransactionHistory from '../components/TransactionHistory';
 import TransactionDetail from '../components/TransactionDetail';
+import ReviewForm from '../components/ReviewComponents';
 
 export const router = createBrowserRouter([
   {
@@ -83,6 +84,10 @@ export const router = createBrowserRouter([
       {
         path:'/transaction/:transactionId',
         element:<TransactionDetail/>
+      },
+      {
+        path:'/reviews/:productId/new',
+        element:<ReviewForm/>
       }
     ],
   },

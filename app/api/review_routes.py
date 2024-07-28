@@ -38,14 +38,22 @@ def one_review(id):
 def user_reviews(id):
     '''
         All reviews related to
-        a user by the productIds
+        a user by the productIds.
+
+        Used to calculate the
+        average rating for a viewed user.
     '''
+
     products = Product.query.filter_by(ownerId = id).all()
     reviews = []
     for product in products:
-        review = ProductReview.query.filter_by(productId = product.id).first()
-        if review:
-            reviews.append(review.to_dict())
+        reviewArr = ProductReview.query.filter_by(productId = product.id).all()
+        if len(reviewArr) > 0:
+            for review in reviewArr:
+                safe_review = review.to_dict()
+                safe_review['product'] = product.to_dict()
+                safe_review['owner'] = User.query.get(id).to_dict()
+                reviews.append(review.to_dict())
     return {'reviews':reviews}
 
 @review_routes.route('/products/<int:id>', methods=['POST'])
@@ -92,7 +100,39 @@ def update_review(id):
     '''
         Update a specific review
     '''
-    pass
+
+    review = ProductReview.query.get(id)
+
+    if not review:
+        return {'message':'Review does not exist'}, 404
+
+    if review.ownerId != current_user.id:
+        return {'message':'Not the owner of this review'}, 401
+
+    form = ReviewForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    if form.validate_on_submit():
+        data = form.data
+
+        review.review = data['review']
+        review.rating = data['rating']
+
+        db.session.commit()
+
+        product = Product.query.get(review.productId)
+        safe_review = new_review.to_dict()
+        safe_review['owner'] = current_user.to_dict()
+        safe_product = product.to_dict()
+        safe_product['owner'] = User.query.get(product.ownerId).to_dict()
+        safe_product['image'] = ProductImage.query.filter_by(productId = id).first().to_dict()
+
+        safe_review['product'] = safe_product
+
+        return {'review':safe_review}, 201
+
+    if form.errors:
+        return {'message':'Bad Request', 'errors':form.errors}, 400
 
 @review_routes.route('/<int:id>', methods=['Delete'])
 @login_required

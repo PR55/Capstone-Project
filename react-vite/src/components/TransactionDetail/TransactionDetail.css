@@ -92,24 +92,24 @@
     gap:10px;
 }
 
-.interactDetail{
+.interactDetailTransac{
     display: flex;
     /* border: 2px solid; */
     height: 50px;
-    width: 10%;
+    width: 20%;
     align-self: center;
 }
 
-.interactDetail > button{
+.interactDetailTransac > button{
     /* display: flex; */
     border: 2px solid;
     height: 25px;
-    width: 75px;
+    width: 100px;
     border-radius: 2rem;
     background-color: azure;
 }
 
-.interactDetail > button:hover{
+.interactDetailTransac > button:hover{
     cursor: pointer;
     background-color: rgb(213, 225, 225);
 }

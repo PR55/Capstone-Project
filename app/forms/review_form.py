@@ -4,4 +4,4 @@ from wtforms.validators import DataRequired
 
 class ReviewForm(FlaskForm):
     review = StringField('Review', validators=[DataRequired()])
-    rating = IntegerField('Rating', validators=[DataRequired()], min=1, max=5)
+    rating = IntegerField('Rating', validators=[DataRequired()])
