@@ -9,6 +9,12 @@ review_routes = Blueprint('reviews', __name__)
 @login_required
 def my_reviews():
     reviews = [x.to_dict() for x in ProductReview.query.filter_by(ownerId = current_user.id).all()]
+    for review in reviews:
+        review['owner'] = current_user.to_dict()
+        product = Product.query.get(review['product'])
+        safe_product = product.to_dict()
+        safe_product['image'] = ProductImage.query.filter_by(productId = product.id).first().to_dict()
+        review['product'] = safe_product
 
     return {'reviews':reviews}
 @review_routes.route('/<int:id>')
@@ -44,7 +50,7 @@ def user_reviews(id):
         average rating for a viewed user.
     '''
 
-    products = Product.query.filter_by(ownerId = id).all()
+    products = Product.query.filter_by(ownerId = id, isPurchased = True).all()
     reviews = []
     for product in products:
         reviewArr = ProductReview.query.filter_by(productId = product.id).all()

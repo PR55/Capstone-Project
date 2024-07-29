@@ -18,3 +18,9 @@ body{
     margin: 0;
     padding: 0;
 }
+
+.Error{
+    color: red;
+    font-weight: bolder;
+    font-size: 150%;
+}

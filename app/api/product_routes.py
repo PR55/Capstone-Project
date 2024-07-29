@@ -1,4 +1,4 @@
-from app.models import db, Tags, Product, ProductImage, ProductTag, User
+from app.models import db, Tags, Product, ProductImage, ProductTag, User, ProductReview
 from flask import Blueprint, jsonify,request
 from flask_login import login_required, current_user
 from app.forms import ProductForm, ProductFormUpdate
@@ -21,7 +21,19 @@ def all_products():
         tags = [x.to_dict() for x in ProductTag.query.filter_by(productId = product['id']).all()]
         product['tags'] = tags
         user = User.query.get(product['owner'])
-        product['owner'] = user.to_dict()
+        userProducts = Product.query.filter_by(isPurchased = True, ownerId = user.id).all()
+        reviews = []
+        for productUser in userProducts:
+            review = ProductReview.query.filter_by(productId = productUser.id).first()
+            if review:
+                safe_review = review.to_dict()
+                safe_review['product'] = productUser.to_dict()
+                userReviewer = User.query.get(review.ownerId)
+                safe_review['owner'] = userReviewer.to_dict()
+                reviews.append(safe_review)
+        safe_user = user.to_dict()
+        safe_user['reviews'] = reviews
+        product['owner'] = safe_user
     return {'products':products}
 
 @product_routes.route('/<int:id>')
@@ -41,7 +53,19 @@ def one_product(id):
     tags = [x.to_dict() for x in ProductTag.query.filter_by(productId = product.id).all()]
     safe_product['tags'] = tags
     user = User.query.get(product.ownerId)
-    safe_product['owner'] = user.to_dict()
+    userProducts = Product.query.filter_by(isPurchased = True, ownerId = user.id).all()
+    reviews = []
+    for productUser in userProducts:
+        review = ProductReview.query.filter_by(productId = productUser.id).first()
+        if review:
+            safe_review = review.to_dict()
+            safe_review['product'] = productUser.to_dict()
+            userReviewer = User.query.get(review.ownerId)
+            safe_review['owner'] = userReviewer.to_dict()
+            reviews.append(safe_review)
+    safe_user = user.to_dict()
+    safe_user['reviews'] = reviews
+    safe_product['owner'] = safe_user
     return {'product': safe_product}
 
 

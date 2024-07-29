@@ -1,0 +1,95 @@
+.profileHolder{
+    display: flex;
+    width: 70%;
+    margin: 0 auto;
+    column-gap: 10%;
+    min-height: 600px;
+}
+
+.navHolderLeft{
+    margin: 0;
+    padding: 0;
+    min-width: 200px;
+    display: flex;
+    flex-direction: column;
+}
+
+.navTop{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* border: 2px solid; */
+}
+
+.navTop > *{
+    padding: 0%;
+    margin: 5% 0%;
+}
+
+.profilePlaceholder{
+    width: 100%;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid black;
+    background-color: magenta;
+    color: aliceblue;
+    font-size: 50px;
+}
+
+.ratingHolder{
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 7.5%;
+}
+.accountRating{
+    display: flex;
+}
+
+.oddStarActive{
+    /* position: absolute; */
+    margin: 0%;
+    padding: 0%;
+    color: gold;
+    transform: rotateY(180deg);
+}
+
+.evenStarActive{
+    position: relative;
+    margin: 0%;
+    padding: 0%;
+    color: gold;
+    /* transform: rotateY(180deg); */
+}
+
+.navBottom{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 24px;
+}
+
+.activeNav{
+    text-decoration: underline;
+    color: purple;
+}
+
+.activeNav:hover{
+    cursor:default;
+}
+
+.inactiveNav{
+    color: gray;
+}
+
+.inactiveNav:hover{
+    cursor: pointer;
+    color: purple;
+}
+
+.displayHolderRight{
+}

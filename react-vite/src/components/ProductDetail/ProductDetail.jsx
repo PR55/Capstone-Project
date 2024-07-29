@@ -8,6 +8,7 @@ import OpenModalImageItem from "./OpenModalImageItem";
 import OpenAddPhoto from "./openModalIonItems/OpenAddPhoto";
 import AddImage from "./modalComponent/AddImage";
 import { addToCart, isInCart } from "../cart";
+import { FaStar, FaRegStar } from "react-icons/fa";
 
 function ProductDetail() {
 
@@ -21,6 +22,8 @@ function ProductDetail() {
     const [curPhoto, setCurPhoto] = useState(0)
     const [updateButton, setUpdate] = useState(false)
 
+    const [ownerRating, setRating] = useState(5)
+
     useEffect(() => {
         if (productId)
             dispatch(thunkProductLoadOne(productId))
@@ -30,6 +33,20 @@ function ProductDetail() {
     useEffect(() => {
         if (product && !product.images[curPhoto]) {
             setCurPhoto(curPhoto - 1)
+        }
+        if (product?.owner && product.owner?.reviews) {
+            let total = 0
+
+            for (let review of product.owner.reviews) {
+                total += review.rating
+            }
+            total /= product.owner.reviews.length
+
+            if (total > 0) {
+                setRating(total)
+            } else {
+                setRating(5)
+            }
         }
     }, [product, curPhoto])
 
@@ -92,7 +109,14 @@ function ProductDetail() {
                             </div>
                             <div className="topDescrip">
                                 <p>{product.name}</p>
-                                <p>{product.owner.username}</p>
+                                <div className="ownerDisplay">
+                                    <p className="ownerDisplayName" onClick={e => {
+                                        e.stopPropagation()
+                                        e.preventDefault()
+                                        navigate(`/user/${product.owner.id}`)
+                                    }}>{product.owner.username}</p>
+                                    <p className="ratingDisplay"><FaStar className="star" /> <FaRegStar className="starAbs" />{ownerRating}</p>
+                                </div>
                                 <div className="topTags">
                                     {
                                         product.tags.map(tag => (
@@ -106,21 +130,21 @@ function ProductDetail() {
                                 {/* <button>Buy Now</button> */}
                                 {
                                     (user && product.owner.id == user.id) ?
-                                            <button
-                                            onClick={()=> navigate('edit')}
+                                        <button
+                                            onClick={() => navigate('edit')}
                                             className="cartButtonDetail"
                                             disabled={product.purchased}>Update Product</button>
                                         :
                                         <button
                                             className="cartButtonDetail"
-                                            disabled={ !user || isInCart(product.id) || product.purchased}
+                                            disabled={!user || isInCart(product.id) || product.purchased}
                                             onClick={() => {
                                                 addToCart(product.id)
                                                 setUpdate(!updateButton)
                                             }}
                                         >Add to cart</button>
                                 }
-
+                                {product.purchased ? <p className="Error">SOLD</p> : null}
                             </div>
                         </div>
                         <div className='bottomInfo'>

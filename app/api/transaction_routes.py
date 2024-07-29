@@ -187,11 +187,11 @@ def update_status():
     current = current.replace(tzinfo=None)
     for transact in transacts:
         tim = transact.time_created
-        if(current - tim > timedelta(minutes=10) and current - tim < timedelta(minutes=13) and transact.status != packageStatus.processing):
+        if(current - tim > timedelta(minutes=1) and current - tim < timedelta(minutes=3) and transact.status != packageStatus.processing):
             transact.status = packageStatus.processing
-        elif(current - tim > timedelta(minutes=13) and current - tim < timedelta(minutes=14) and transact.status != packageStatus.delivery):
+        elif(current - tim > timedelta(minutes=3) and current - tim < timedelta(minutes=4) and transact.status != packageStatus.delivery):
             transact.status = packageStatus.delivery
-        elif(current - tim > timedelta(minutes=14) and transact.status != packageStatus.delivered):
+        elif(current - tim > timedelta(minutes=4) and transact.status != packageStatus.delivered):
             transact.status = packageStatus.delivered
         db.session.commit()
 

@@ -11,6 +11,7 @@ import articleReducer from "./article";
 import userContentReducer from "./userContent";
 import transactionReducer from "./transaction";
 import reviewReducer from "./review";
+import UserReducer from "./user";
 
 const rootReducer = combineReducers({
   session: sessionReducer,
@@ -18,7 +19,8 @@ const rootReducer = combineReducers({
   articles:articleReducer,
   userContent:userContentReducer,
   transactions:transactionReducer,
-  reviews:reviewReducer
+  reviews:reviewReducer,
+  users:UserReducer
 });
 
 let enhancer;

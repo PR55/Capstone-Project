@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify
 from flask_login import login_required,current_user
-from app.models import User, ProductTag,ProductImage,Product, Article,ArticleTag
+from app.models import User, ProductReview,ProductTag,ProductImage,Product, Article,ArticleTag
 
 user_routes = Blueprint('users', __name__)
 
@@ -22,7 +22,42 @@ def user(id):
     Query for a user by id and returns that user in a dictionary
     """
     user = User.query.get(id)
-    return user.to_dict()
+
+    if not user:
+        return {'message':'User does not exist'}, 404
+
+    products= Product.query.filter_by(ownerId = id).all()
+    safe_electronics = []
+    safe_traditional = []
+
+    for product in products:
+        safe_product = product.to_dict()
+        safe_product['tags'] = [x.to_dict() for x in ProductTag.query.filter_by(productId = product.id).all()]
+        safe_product['image'] = ProductImage.query.filter_by(productId = product.id).first().to_dict()
+
+        if product.isTraditional:
+            safe_traditional.append(safe_product)
+        else:
+            safe_electronics.append(safe_product)
+
+    safe_user = user.to_dict()
+    safe_user['products'] = {
+        'electronic':safe_electronics,
+        'traditional':safe_traditional
+    }
+
+    safe_reviews = []
+
+    for product in products:
+        review = ProductReview.query.filter_by(productId = product.id).first()
+        if not not review:
+            safe_review = review.to_dict()
+            safe_review['product'] = product.to_dict()
+            safe_review['owner'] = User.query.get(review.ownerId).to_dict()
+            safe_reviews.append(safe_review)
+
+    safe_user['reviews'] = safe_reviews
+    return safe_user
 
 @user_routes.route('/products')
 @login_required
