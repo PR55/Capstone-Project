@@ -3,19 +3,18 @@ import { useDispatch, useSelector } from "react-redux"
 import { useNavigate, useParams } from "react-router-dom"
 import { thunkProductLoadOne } from "../../../redux/product";
 import { FaRegStar, FaStar } from "react-icons/fa";
-import './ReviewForm.css'
-import { thunkNewReview } from "../../../redux/review";
+import { thunkNewReview, thunkOneReview, thunkUpdateReview } from "../../../redux/review";
 
-export function ReviewForm() {
+export function ReviewEdit() {
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
-    const { productId } = useParams();
+    const { reviewId } = useParams();
 
-    const products = useSelector(store => store.products)
+    const products = useSelector(store => store.reviews)
 
-    const [product, setProduct] = useState(null)
+    const [productR, setProductR] = useState(null)
 
     const [rating, setRating] = useState(0)
     const [hoverRating, setHoverRating] = useState(0)
@@ -25,14 +24,21 @@ export function ReviewForm() {
     const [errors, setErrors] = useState({})
 
     useEffect(() => {
-        dispatch(thunkProductLoadOne(productId))
-    }, [productId])
+        dispatch(thunkOneReview(reviewId))
+    }, [reviewId])
 
     useEffect(() => {
         if (Object.values(products).length) {
-            setProduct(products[productId])
+            setProductR(products[reviewId])
         }
     }, [products])
+
+    useEffect(() => {
+        if(productR?.review){
+            setReview(productR.review)
+            setRating(productR.rating)
+        }
+    }, [productR])
 
     useEffect(() => {
         let errObj = {}
@@ -65,7 +71,7 @@ export function ReviewForm() {
         formData.append('rating', rating)
         formData.append('review', review)
 
-        let d = await dispatch(thunkNewReview(formData, product.id));
+        let d = await dispatch(thunkUpdateReview(formData, productR?.id));
 
         if(d?.errors || !d?.id){
             console.log(d)
@@ -81,14 +87,14 @@ export function ReviewForm() {
 
     return (
         <div className="reviewForm">
-            <h1>Leave a review for &quot;{product && product.name}&quot;:</h1>
+            <h1>Leave a review for &quot;{productR && productR?.product.name}&quot;:</h1>
             <div className="itemPreview">
                 <div className="imgHolder">
-                    <img src={product && product.images[0].imageUrl} />
+                    <img src={productR && productR?.product.image.imageUrl} />
                 </div>
                 <div>
-                    <p>${product && product.price}</p>
-                    <p>{product && product.description}</p>
+                    <p>${productR && productR?.product.price}</p>
+                    <p>{productR && productR?.product.description}</p>
                 </div>
             </div>
             <div className="formReview">

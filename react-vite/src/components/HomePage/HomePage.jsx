@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import './HomePage.css'
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 function HomePage() {
     const navigate = useNavigate()
@@ -8,32 +8,10 @@ function HomePage() {
     const [tradHover, setTradhover] = useState(false)
     const [elecHover, setElechover] = useState(false)
 
-    useEffect(() => {
-
-        const hover = (e) => {
-            if (e.target.classList.contains('electronicButton')) {
-                setElechover(true)
-                setTradhover(false);
-            } else if (e.target.classList.contains('traditionalButton')) {
-                setElechover(false)
-                setTradhover(true)
-            } else {
-                setElechover(false)
-                setTradhover(false)
-            }
-
-        }
-
-        document.addEventListener('mouseover', hover)
-
-        return () => {
-            document.removeEventListener('mouseover', hover)
-        }
-
-    }, [tradHover, elecHover])
-
     return (
-        <div className="splashPage">
+        <div className="splashPage" onTouchMove={e => {
+            e.stopPropagation()
+        }}>
             <div className={tradHover ? "splashLeftExtend" : elecHover ? "splashLeftShrink" : "splashLeft"}>
                 <h1 className={tradHover ? 'tradHeaderExtend' : 'tradHeader'}>Traditional Products</h1>
                 <img className={tradHover ? 'splashImageExtend' : 'splashImage'} src='https://elot-bucket.s3.us-east-2.amazonaws.com/traditional.png' />
@@ -41,7 +19,19 @@ function HomePage() {
             <button className={elecHover?'traditionalButtonLower': 'traditionalButton'} onClick={e => {
                 e.preventDefault()
                 navigate('/traditional/products')
-            }}>Browse Traditional</button>
+            }}
+            onMouseEnter={e => {
+                e.stopPropagation()
+                setTradhover(true)
+            }}
+            onMouseLeave={e => {
+                e.stopPropagation()
+                setTradhover(false)
+            }}
+            onTouchStart={e => {
+                setTradhover(false)
+            }}
+            >Browse Traditional</button>
             <div className={elecHover ? 'splashRightExtend' : tradHover ? 'splashRightShrink' : "splashRight"}>
                 <h1 className={elecHover ? 'elecHeaderExtend' : 'elecHeader'}>Electronic Products</h1>
                 <img className={elecHover ? 'splashImageExtend' : 'splashImage'} src='https://elot-bucket.s3.us-east-2.amazonaws.com/elextronic.jpg' />
@@ -49,7 +39,19 @@ function HomePage() {
             <button className={tradHover ? 'electronicButtonLower':'electronicButton'} onClick={e => {
                 e.preventDefault()
                 navigate('/electronic/products')
-            }}>Browse Electronic</button>
+            }}
+            onMouseEnter={e => {
+                e.stopPropagation()
+                setElechover(true)
+            }}
+            onMouseLeave={e => {
+                e.stopPropagation()
+                setElechover(false)
+            }}
+            onTouchStart={e => {
+                setElechover(false)
+            }}
+            >Browse Electronic</button>
             <div className={'hidden'}>
                 {/* Hidden div, made to purely hold the buttons still, since animation causes a shift if not last in the  container*/}
             <h1 className={elecHover?'elecHeaderExtend':'elecHeader'}></h1>

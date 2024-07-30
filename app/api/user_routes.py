@@ -34,7 +34,7 @@ def user(id):
         safe_product = product.to_dict()
         safe_product['tags'] = [x.to_dict() for x in ProductTag.query.filter_by(productId = product.id).all()]
         safe_product['image'] = ProductImage.query.filter_by(productId = product.id).first().to_dict()
-
+        safe_product['owner'] = User.query.get(product.ownerId).to_dict()
         if product.isTraditional:
             safe_traditional.append(safe_product)
         else:
@@ -53,10 +53,35 @@ def user(id):
         if not not review:
             safe_review = review.to_dict()
             safe_review['product'] = product.to_dict()
-            safe_review['owner'] = User.query.get(review.ownerId).to_dict()
+            safe_review['owner'] = user.to_dict()
             safe_reviews.append(safe_review)
-
     safe_user['reviews'] = safe_reviews
+
+    articles = [x for x in Article.query.filter_by(ownerId = id).all()]
+    safe_articles = []
+
+    for article in articles:
+        safe_article = article.to_dict()
+        safe_article['owner'] = user.to_dict()
+        safe_articles.append(safe_article)
+
+    safe_user['articles'] = safe_articles
+
+    reviewsMade = ProductReview.query.filter_by(ownerId = id).all()
+
+    safe_reviews_made = []
+
+    for review in reviewsMade:
+        safe_review = review.to_dict()
+        safe_review['owner'] = user.to_dict()
+        product = Product.query.get(review.productId)
+        safe_product = product.to_dict()
+        safe_product['image'] = ProductImage.query.filter_by(productId = review.productId).first().to_dict()
+        safe_review['product'] = safe_product
+        safe_reviews_made.append(safe_review)
+
+    safe_user['madeReviews'] = safe_reviews_made
+
     return safe_user
 
 @user_routes.route('/products')

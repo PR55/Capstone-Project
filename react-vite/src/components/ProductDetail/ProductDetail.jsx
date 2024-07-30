@@ -45,7 +45,7 @@ function ProductDetail() {
             if (total > 0) {
                 setRating(total)
             } else {
-                setRating(5)
+                setRating(3)
             }
         }
     }, [product, curPhoto])
@@ -108,7 +108,7 @@ function ProductDetail() {
                                 />
                             </div>
                             <div className="topDescrip">
-                                <p>{product.name}</p>
+                                <p className="title">{product.name}</p>
                                 <div className="ownerDisplay">
                                     <p className="ownerDisplayName" onClick={e => {
                                         e.stopPropagation()

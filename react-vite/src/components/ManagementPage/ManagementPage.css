@@ -141,3 +141,66 @@
         transform: rotate(720deg);
     }
 }
+
+.reviewBlockManage{
+    display: flex;
+    margin: 0 auto;
+    flex-direction: row;
+    border: 5px solid darkgray;
+    height: 250px;
+    width: 950px;
+    padding: 25px;
+    background-color: darkgray;
+    border-radius: 3rem;
+    gap: 50px;
+}
+
+.reviewBlockManage:hover{
+    cursor: pointer;
+    box-shadow: 5px 5px 1rem;
+}
+
+.reviewBlockMLeft{
+    width:25%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.reviewBImageHolder{
+    height: 75%;
+    width: 100%;
+    border: 7px solid gray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background-color: lightgray;
+    border-radius: 1rem;
+}
+
+.reviewBImageHolder > img{
+    max-height: 100%;
+}
+
+.reviewBInfo{
+    width: 50%;
+    height: 100%;
+}
+
+.reviewIDescript{
+    background-color: white;
+    height: 80%;
+    width: 100%;
+    word-break: break-all;
+    text-wrap: wrap;
+    padding: 10px;
+    border: 5px solid;
+    border-radius: 1rem;
+}
+
+.manageRating{
+    display: flex;
+    align-items: center;
+}

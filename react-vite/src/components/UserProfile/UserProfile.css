@@ -92,4 +92,187 @@
 }
 
 .displayHolderRight{
+    display: flex;
+    flex-direction: column;
+    row-gap: 30px;
+    width: 100%;
+    padding: 20px 10px;
+    align-items: center;
+}
+
+.profileProductBlock{
+    display: flex;
+    width: 100%;
+    height: 200px;
+    column-gap: 50px;
+    padding: 10px 50px;
+    border: 5px solid darkgray;
+    border-radius: 1rem;
+    background-color: darkgray;
+}
+
+.profileProductBlock:hover{
+    cursor: pointer;
+    box-shadow: 5px 5px 1rem black;
+}
+
+.profileProductImgHolder{
+    width: 20%;
+    border: 5px solid;
+    padding: 5px;
+    background-color: lightgray;
+    border-radius: 1rem;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.profileProductImgHolder > img{
+    height: 100%;
+}
+
+.blockDescriptionProfile{
+    display: flex;
+    width: 40%;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+}
+
+.blockDescriptionProfile > *{
+    margin: 0;
+    padding: 0;
+}
+
+.profileTagHolder{
+    display: flex;
+    flex-wrap: wrap;
+    gap:10px;
+}
+
+.profileTagHolder > p{
+    background-color: lightgray;
+    border: 7px solid lightgray;
+    border-radius: 2rem;
+}
+
+.buttonsProfile{
+    display: flex;
+    justify-content: center;
+    width: 20%;
+    align-items: center;
+    column-gap: 10px;
+}
+
+.reviewBlock{
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    border: 7px solid darkgray;
+    background-color: darkgray;
+    width: 100%;
+    justify-content: center;
+    padding: 10px;
+    border-radius: 1rem;
+}
+
+.reviewBlock:hover{
+    box-shadow: 5px 5px .5rem black;
+    cursor: pointer;
+}
+
+.reviewBlockLeft{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 150px;
+}
+
+.imgHolderReviewProfile{
+    height: 150px;
+    border: 7px solid;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding: 10px;
+    background-color: lightgray;
+    border-radius: 1rem;
+}
+
+.imgHolderReviewProfile > img{
+    max-height: 100%;
+}
+
+.reviewProfileRating{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.reviewBodyDescript{
+    word-break: break-all;
+    text-wrap: wrap;
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+.reviewBody{
+    word-break: break-all;
+    background-color: aliceblue;
+    height: 100px;
+    border: 2px solid;
+    width: 90%;
+    padding: 15px;
+}
+
+.updateButton{
+    background-color: white;
+    padding: 5px 8px;
+    border: 2px solid black;
+}
+
+.updateButton:hover{
+    background-color: rgb(239, 239, 239);
+    cursor: pointer;
+}
+
+.articleBlockProfile{
+    display: flex;
+    width: 100%;
+    height: 200px;
+    column-gap: 50px;
+    padding: 10px 50px;
+    border: 5px solid darkgray;
+    border-radius: 1rem;
+    background-color: darkgray;
+
+}
+
+.articlePBImgHolder{
+    height: 100%;
+    overflow: hidden;
+    border: 2px solid;
+    width: 25%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.articlePBImgHolder > img{
+    max-height: 100%;
+}
+
+.articlePBDescript{
+    width: 50%;
+    word-break: break-all;
+    text-wrap: wrap;
+}
+
+.articlePBInteract{
+    display: flex;
+    width: 10%;
+    justify-content: center;
+    align-items: center;
 }

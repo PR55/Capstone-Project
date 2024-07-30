@@ -31,6 +31,14 @@ export const thunkMyReviewsLoad = () => async (dispatch) => {
     }
 }
 
+export const thunkOneReview = (id) => async (dispatch) => {
+    const response = await fetch(`/api/reviews/${id}`)
+    if(response.ok){
+        const {review} = await response.json()
+        await dispatch(loadReview(review))
+    }
+}
+
 export const thunkNewReview = (payload, id) => async (dispatch) => {
     const response = await fetch(`/api/reviews/products/${id}`, {
         method:'POST',
@@ -44,6 +52,32 @@ export const thunkNewReview = (payload, id) => async (dispatch) => {
         const data = await response.json()
         console.log(response)
         if(data?.errors) return data;
+    }
+}
+
+export const thunkUpdateReview = (payload, id) => async (dispatch) => {
+    const response = await fetch(`/api/reviews/${id}`, {
+        method:'PUT',
+        body:payload
+    })
+    if(response.ok){
+        const {review} = await response.json()
+        await dispatch(loadReview(review))
+        return review;
+    }else{
+        const data = await response.json()
+        console.log(response)
+        if(data?.errors) return data;
+    }
+}
+
+export const thunkDeleteReview = (id) => async (dispatch) => {
+    const response = await fetch(`/api/reviews/${id}`, {
+        method:'DELETE'
+    })
+    if ( response.ok){
+        const {id} = await response.json()
+        await dispatch(deleteReview(id))
     }
 }
 
@@ -62,6 +96,17 @@ function reviewReducer(state = initialState, action){
             const newState = {...state};
             newState[action.payload.id] = action.payload;
             return newState;
+        }
+        case LOAD_DELETE_REVIEW:{
+            const newState = {}
+
+            for(let review of Object.values(state)){
+                if(review.id != action.payload){
+                    newState[review.id] = review
+                }
+            }
+
+            return newState
         }
         default:
             return state

@@ -1,7 +1,8 @@
 .splashPage{
+    position: relative;
     margin: 0;
     padding: 0;
-    height: 600px;
+    min-height: 100%;
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -204,9 +205,9 @@
     border: 2px solid;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
-    transform: scale(2.0,1.0) translateX(-25%);
+    transform: scale(2.0,1.0);
     background-color: rgb(81, 81, 255);
     animation-name: extendRight;
     animation-duration: 1s;
@@ -243,7 +244,7 @@
 @keyframes extendLeft {
 
     0%{
-        transform: scale(1.0,1.0)  translateX(0%);
+        transform: scale(1.0,1.0);
 
     }
 
@@ -254,12 +255,9 @@
 }
 
 @keyframes extendRight {
-
     0%{
         transform: scale(1.0,1.0);
-
     }
-
     100%{
         transform: scale(2.0,1.0)  translateX(-25%);
     }
@@ -360,7 +358,7 @@
     }
 
     100%{
-        transform: scale(.5,1.0);
+        transform: scale(1,1.0);
 
     }
 
@@ -369,4 +367,78 @@
 .hidden{
     width: .1px;
     height: .1px;
+    display: none;
+}
+
+@media screen and (max-width:960px){
+    .splashPage{
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        min-height: 75vh;
+        position: relative
+    }
+
+    .splashLeft{
+        width: 100%;
+    }
+    .splashRight{
+        width: 100%;
+    }
+
+    .traditionalButton{
+        position: absolute;
+        height: 100px;
+        width: 350px;
+        font-size: 30px;
+        margin-bottom: 0%;
+        border-radius: 2rem;
+        background-color: rgb(227, 227, 227);
+        left: 30.5%;
+        bottom: 70%;
+        z-index: 3000;
+    }
+}
+
+@media screen and (max-width:500px){
+    .splashPage{
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        min-height: 100%;
+        position: relative
+    }
+
+    .splashLeft{
+        width: 100%;
+    }
+    .splashRight{
+        width: 100%;
+    }
+
+    .traditionalButton{
+        position: absolute;
+        height: 5%;
+        width: 150px;
+        font-size: 10px;
+        margin-bottom: 0%;
+        border-radius: 2rem;
+        background-color: rgb(227, 227, 227);
+        left: 30%;
+        bottom: 60%;
+        z-index: 3000;
+    }
+
+    .electronicButton{
+        position: absolute;
+        height: 5%;
+        width: 150px;
+        font-size: 10px;
+        margin-bottom: 0%;
+        border-radius: 2rem;
+        background-color: rgb(227, 227, 227);
+        left: 30%;
+        bottom: 10%;
+        z-index: 3000;
+    }
 }

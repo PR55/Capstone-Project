@@ -216,7 +216,7 @@ function EditProductForm() {
                 {errors?.tags ? <p className="errors">{errors.tags}</p> : null}
                 <div className="inputHoldersPostProdCheck">
                     <label htmlFor="productType">Is Traditional?</label>
-                    <input type="checkbox" id='productType' value={type} onChange={() => setType(!type)} />
+                    <input type="checkbox" id='productType' checked={type} value={type} onChange={() => setType(!type)} />
                 </div>
                 <div className="inputHolders">
                     <label htmlFor="productType">Delete all images?</label>

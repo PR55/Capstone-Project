@@ -3,8 +3,6 @@ export function initializeCart(){
     if(!localStorage.getItem('Cart')){localStorage.setItem('Cart', '')}
 }
 
-
-
 export function addToCart(id){
     let cart = localStorage.getItem('Cart')
 
@@ -69,7 +67,6 @@ export function removeFromCart(id){
     cart = cart.filter(num => num != id)
 
     localStorage.setItem('Cart', cart.join('+='))
-
 }
 
 export function clearCart(){

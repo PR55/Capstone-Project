@@ -127,11 +127,11 @@ def update_review(id):
         db.session.commit()
 
         product = Product.query.get(review.productId)
-        safe_review = new_review.to_dict()
+        safe_review = review.to_dict()
         safe_review['owner'] = current_user.to_dict()
         safe_product = product.to_dict()
         safe_product['owner'] = User.query.get(product.ownerId).to_dict()
-        safe_product['image'] = ProductImage.query.filter_by(productId = id).first().to_dict()
+        safe_product['image'] = ProductImage.query.filter_by(productId = product.id).first().to_dict()
 
         safe_review['product'] = safe_product
 

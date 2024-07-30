@@ -4,7 +4,7 @@ function OpenModalDelete({
   modalComponent, // component to render inside the modal
   onItemClick, // optional: callback function that will be called once the button that opens the modal is clicked
   onModalClose, // optional: callback function that will be called once the modal is closed
-  product //see if hover and click needs to be disabled
+  product, //see if hover and click needs to be disabled
 }) {
   const { setModalContent, setOnModalClose } = useModal();
 

@@ -1,3 +1,4 @@
+import AddToCart from "./Helpers/AddToCart";
 import ProductBrowser from "./ProductBrowser";
 
-export default ProductBrowser
+export {ProductBrowser, AddToCart};

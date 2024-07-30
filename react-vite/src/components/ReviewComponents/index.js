@@ -1,4 +1,5 @@
+import { ReviewEdit } from "./ReviewEdit/ReviewEdit";
 import { ReviewForm } from "./ReviewForm/ReviewForm";
 
 
-export default ReviewForm;
+export {ReviewForm, ReviewEdit};

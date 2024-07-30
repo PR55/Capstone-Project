@@ -55,7 +55,6 @@ function ProductBrowser() {
                                 disArr.push(product)
                             }
                         }
-
                     }
                 }
             } else if (!searchTags.length) {

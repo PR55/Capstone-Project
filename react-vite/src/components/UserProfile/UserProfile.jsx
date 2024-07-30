@@ -1,21 +1,32 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getOneUser } from "../../redux/user";
 import { FaRegStar, FaStar } from "react-icons/fa";
+import { LiaSpinnerSolid } from "react-icons/lia";
 import './UserProfile.css'
+import ProductDisplay from "./helperViews/ProductDisplay";
+import ReviewDisplay from "./helperViews/ReviewDisplay";
+import ArticleDisplay from "./helperViews/ArticleDisplay";
 
 function UserProfile() {
 
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     const { userId } = useParams()
+
+    const loggedUser = useSelector(store => store.session.user)
 
     const user = useSelector(store => store.users[userId])
 
     const [rating, setRating] = useState(0)
 
     const [active, setActive] = useState([true, false, false, false])
+
+    const [processCart, setProcess] = useState(false)
+
+    const [loading, setLoading] = useState(false)
 
     useEffect(() => {
         dispatch(getOneUser(userId))
@@ -25,6 +36,7 @@ function UserProfile() {
         if (user && user?.username) {
             let total = 0
             for (let review of user.reviews) {
+                //Reviews for a user's products from the backend
                 total += review.rating
             }
 
@@ -33,10 +45,15 @@ function UserProfile() {
             if (total) {
                 setRating(total)
             } else {
-                setRating(5)
+                setRating(3)
             }
         }
     }, [user])
+
+
+    useEffect(()=>{
+
+    }, [active[0],active[1],active[2],active[3]])
 
     return (
         <div className="profileHolder">
@@ -108,7 +125,29 @@ function UserProfile() {
                 </div>
             </div>
             <div className="displayHolderRight">
-                <h1>Display</h1>
+                {
+                    loading
+                    ?
+                    <LiaSpinnerSolid className='spinner'/>
+                    :
+                    active[0] || active[1]
+                    ?
+                    <ProductDisplay
+                    traditional={active[0]}
+                    productsArr={active[0] ? user?.products.electronic: user?.products.traditional} user={loggedUser}
+                    navigate={navigate} processCart={processCart} setProcess={setProcess}
+                    />
+                    :
+                    active[2]
+                    ?
+                    <ArticleDisplay articles={user.articles} user={loggedUser}/>
+                    :
+                    active[3]
+                    ?
+                    <ReviewDisplay reviews={user?.madeReviews} user={loggedUser}/>
+                    :
+                    null
+                }
             </div>
         </div>
     )

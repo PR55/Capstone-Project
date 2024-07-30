@@ -9,6 +9,7 @@
 } */
 
 body{
+    overflow-x: hidden;
     font-family: "Wittgenstein", serif;
     font-style: normal;
     background-color: azure;

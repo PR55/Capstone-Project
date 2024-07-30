@@ -2,7 +2,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import LoginFormPage from '../components/LoginFormPage';
 import SignupFormPage from '../components/SignupFormPage';
 import Layout from './Layout';
-import ProductBrowser from '../components/ProductBrowser';
+import {ProductBrowser} from '../components/ProductBrowser';
 import ProductForm from '../components/ProductForm';
 import ProductDetail from '../components/ProductDetail';
 import HomePage from '../components/HomePage';
@@ -15,7 +15,7 @@ import EditArticle from '../components/EditArticle/EditArticle';
 import ViewCart from '../components/ViewCart/ViewCart';
 import TransactionHistory from '../components/TransactionHistory';
 import TransactionDetail from '../components/TransactionDetail';
-import ReviewForm from '../components/ReviewComponents';
+import {ReviewEdit, ReviewForm} from '../components/ReviewComponents';
 import UserProfile from '../components/UserProfile';
 
 export const router = createBrowserRouter([
@@ -93,6 +93,14 @@ export const router = createBrowserRouter([
       {
         path:'/user/:userId',
         element:<UserProfile/>
+      },
+      {
+        path:'/review/:reviewId/edit',
+        element:<ReviewEdit/>
+      },
+      {
+        path:'*',
+        element:<h1>404 page not found</h1>
       }
     ],
   },

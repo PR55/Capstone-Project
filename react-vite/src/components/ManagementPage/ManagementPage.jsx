@@ -6,6 +6,8 @@ import ProductDisplayManager from "./helperItems/ProductDisplayManager";
 import ArticleDisplayManager from "./helperItems/ArticleDisplayManager";
 import { thunkCurrentUserProducts,thunkCurrentUserArticles } from "../../redux/userContent";
 import { LiaSpinnerSolid } from "react-icons/lia";
+import { thunkMyReviewsLoad } from "../../redux/review";
+import ReviewDisplay from "./helperItems/ReviewDisplay";
 
 function ManagementPage() {
 
@@ -13,8 +15,11 @@ function ManagementPage() {
 
     const iterable = useSelector(Store => Store.userContent)
 
+    const reviews = useSelector(Store => Store.reviews)
+
     const [electronic, setElectronic] = useState(true)
     const [article, setArticle] = useState(false)
+    const [review, setReview] = useState(false)
 
     const [isLoading, setLoading] = useState(false)
 
@@ -22,10 +27,12 @@ function ManagementPage() {
 
     const thunkCall = async () => {
         setLoading(true)
-        if (electronic || !article) {
+        if (electronic || (!article && !review)) {
             await dispatch(thunkCurrentUserProducts())
-        } else {
+        } else if(article){
             await dispatch(thunkCurrentUserArticles())
+        } else{
+            await dispatch(thunkMyReviewsLoad())
         }
         setLoading(false)
     }
@@ -42,27 +49,38 @@ function ManagementPage() {
         }
     }, [])
 
+
     return (
         <div className="manageHolder">
             <div className="manageInfo">
                 <p
-                    className={electronic && !article ? 'activeHeader' : 'inactiveHeader'}
+                    className={electronic && !article && !review ? 'activeHeader' : 'inactiveHeader'}
                     onClick={() => {
                         setElectronic(true)
                         setArticle(false)
+                        setReview(false)
                     }}>Electronic</p>
                 <p
-                    className={!electronic && !article ? 'activeHeader' : 'inactiveHeader'}
+                    className={!electronic && !article && !review ? 'activeHeader' : 'inactiveHeader'}
                     onClick={() => {
                         setElectronic(false)
                         setArticle(false)
+                        setReview(false)
                     }}>Traditional</p>
                 <p
-                    className={article && !electronic ? 'activeHeader' : 'inactiveHeader'}
+                    className={article && !electronic && !review ? 'activeHeader' : 'inactiveHeader'}
                     onClick={() => {
                         setElectronic(false)
                         setArticle(true)
+                        setReview(false)
                     }}>Articles</p>
+                <p
+                    className={review && !electronic && !article ? 'activeHeader' : 'inactiveHeader'}
+                    onClick={() => {
+                        setElectronic(false)
+                        setArticle(false)
+                        setReview(true)
+                    }}>Reviews</p>
             </div>
             <div className="manageDisplay">
                     {
@@ -71,7 +89,10 @@ function ManagementPage() {
                         :
                         !article
                             ?
+                            !review ?
                             <ProductDisplayManager products={iterable} electronic={electronic}/>
+                            :
+                            <ReviewDisplay reviews={reviews}/>
                             :
                             <ArticleDisplayManager articles={iterable}/>
                     }
