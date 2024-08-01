@@ -59,7 +59,7 @@ function ReviewDisplay({ reviews, user }) {
                         </div>
                     ))
                     :
-                    <p>None</p>
+                    <h2>No reviews have been made by this user</h2>
             }
         </>
     )

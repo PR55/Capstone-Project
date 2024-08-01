@@ -50,7 +50,7 @@ function ProductDisplay({
                             </div>
                         </div>
                     ))
-                    : null
+                    : <h2>No {traditional ? 'Electronic':'Traditional'} products have been made by this user</h2>
             }
         </>
     )
