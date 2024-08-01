@@ -38,6 +38,7 @@ function ReviewDisplay({ reviews }) {
                     ?
                     sortedArr.map(review => (
                         <div className="reviewBlockManage" onClick={e => {
+                            e.stopPropagation()
                             navigate(`/products/${review.product.id}`)
                         }}>
                             <div className="reviewBlockMLeft">

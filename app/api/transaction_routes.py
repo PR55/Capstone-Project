@@ -187,6 +187,9 @@ def update_status():
     current = current.replace(tzinfo=None)
     for transact in transacts:
         tim = transact.time_created
+        print('-' * 20)
+        print(tim)
+        print('-' * 20)
         if(current - tim >= timedelta(seconds=60) and current - tim < timedelta(seconds=80) and transact.status != packageStatus.processing):
             transact.status = packageStatus.processing
         elif(current - tim >= timedelta(seconds=80) and current - tim < timedelta(seconds=90) and transact.status != packageStatus.delivery):

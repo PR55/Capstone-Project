@@ -29,7 +29,10 @@ function ArticleDisplayManager({articles}){
                                 </div>
                         </div>
                         <div className='Purchase'>
-                            <p className="toUpdateButton" onClick={() => navigate(`/articles/${article.id}/edit`)}>Update</p>
+                            <p className="toUpdateButton" onClick={(e) => {
+                                e.stopPropagation()
+                                navigate(`/articles/${article.id}/edit`)
+                                }}>Update</p>
                             <OpenModalDelete
                                 modalComponent={<ConfirmTrashArticle obj={article} deleted={deleted} setDeleted={setDeleted}/>}/>
                         </div>
