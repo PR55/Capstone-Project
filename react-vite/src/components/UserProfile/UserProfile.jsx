@@ -111,7 +111,7 @@ function UserProfile() {
                             })
                         }
                     </div>
-                    <p className="numericRating">{!isFirstLoad ?rating:null}</p>
+                    <p className="numericRating">{!isFirstLoad ?rating.toFixed(1):null}</p>
                     </div>
                 </div>
                 <div className="navBottom">

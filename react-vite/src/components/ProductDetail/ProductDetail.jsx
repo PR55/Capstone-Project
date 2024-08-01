@@ -143,7 +143,7 @@ function ProductDetail() {
                                         e.preventDefault()
                                         navigate(`/user/${product.owner.id}`)
                                     }}>{product.owner.username}</p>
-                                    <p className="ratingDisplay"><FaStar className="star" /> <FaRegStar className="starAbs" />{ownerRating}</p>
+                                    <p className="ratingDisplay"><FaStar className="star" /> <FaRegStar className="starAbs" />{ownerRating.toFixed(1)}</p>
                                 </div>
                                 <div className="topTags">
                                     {
