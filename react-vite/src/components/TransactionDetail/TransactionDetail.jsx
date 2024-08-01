@@ -42,7 +42,6 @@ function TransactionDetail() {
             longUserLoad = setTimeout(async () => {
                 await dispatch(thunkTransactionOne(transactionId))
                 setLoading(false)
-                setFirstLoading(false)
                 return 'Grab Complete'
             }, 1000)
         }

@@ -183,19 +183,18 @@ def delete_transaction(id):
 @login_required
 def update_status():
     transacts = Transaction.query.filter_by(ownerId = current_user.id).all()
-    # current = datetime.now(timezone.utc)
-    # current = current.replace(tzinfo=None)
+    current = datetime.now()
     for transact in transacts:
         tim = transact.time_created
         print('-' * 20)
         print(tim)
         print('-' * 20)
-        # if(current - tim >= timedelta(seconds=60) and current - tim < timedelta(seconds=80) and transact.status != packageStatus.processing):
-        #     transact.status = packageStatus.processing
-        # elif(current - tim >= timedelta(seconds=80) and current - tim < timedelta(seconds=90) and transact.status != packageStatus.delivery):
-        #     transact.status = packageStatus.delivery
-        # elif(current - tim >= timedelta(seconds=90) and transact.status != packageStatus.delivered):
-        #     transact.status = packageStatus.delivered
-        # db.session.commit()
+        if(current - tim >= timedelta(seconds=60) and current - tim < timedelta(seconds=80) and transact.status != packageStatus.processing):
+            transact.status = packageStatus.processing
+        elif(current - tim >= timedelta(seconds=80) and current - tim < timedelta(seconds=90) and transact.status != packageStatus.delivery):
+            transact.status = packageStatus.delivery
+        elif(current - tim >= timedelta(seconds=90) and transact.status != packageStatus.delivered):
+            transact.status = packageStatus.delivered
+        db.session.commit()
 
     return {'verify':'a'}
