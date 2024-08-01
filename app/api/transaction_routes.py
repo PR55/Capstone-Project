@@ -189,12 +189,14 @@ def update_status():
         print('-' * 20)
         print(tim)
         print('-' * 20)
-        if(current - tim >= timedelta(seconds=60) and current - tim < timedelta(seconds=80) and transact.status != packageStatus.processing):
-            transact.status = packageStatus.processing
-        elif(current - tim >= timedelta(seconds=80) and current - tim < timedelta(seconds=90) and transact.status != packageStatus.delivery):
-            transact.status = packageStatus.delivery
-        elif(current - tim >= timedelta(seconds=90) and transact.status != packageStatus.delivered):
-            transact.status = packageStatus.delivered
-        db.session.commit()
+        print(current)
+        print('-' * 20)
+        # if(current - tim >= timedelta(seconds=60) and current - tim < timedelta(seconds=80) and transact.status != packageStatus.processing):
+        #     transact.status = packageStatus.processing
+        # elif(current - tim >= timedelta(seconds=80) and current - tim < timedelta(seconds=90) and transact.status != packageStatus.delivery):
+        #     transact.status = packageStatus.delivery
+        # elif(current - tim >= timedelta(seconds=90) and transact.status != packageStatus.delivered):
+        #     transact.status = packageStatus.delivered
+        # db.session.commit()
 
     return {'verify':'a'}
