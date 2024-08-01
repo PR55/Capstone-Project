@@ -37,8 +37,26 @@ function ManagementPage() {
         setLoading(false)
     }
 
+    async function delayThunkCall() {
+
+        var longManageLoad = null
+
+        if(longManageLoad != null && !isLoading){
+            window.clearTimeout(longManageLoad)
+            longManageLoad = null
+        }else if(!longManageLoad){
+            setLoading(true)
+            longManageLoad = setTimeout(async () => {
+                await thunkCall()
+                setLoading(false)
+                return 'Grab Complete'
+            }, 1000)
+        }
+
+    }
+
     useEffect(() => {
-        thunkCall()
+        delayThunkCall()
     }, [electronic, article])
 
     const navigate = useNavigate()

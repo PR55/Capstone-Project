@@ -1,10 +1,13 @@
 import OpenModalDelete from "../OpenModal/OpenModalDelete";
 import ConfirmTrashProduct from "../ModalItem/ModalDeleteProduct";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function ProductDisplayManager({products, electronic}){
 
     const navigate = useNavigate()
+
+    const [deleted, setDeleted] = useState(false)
 
     let arr = Object.values(products).filter(product => {
         if(electronic && product.isTraditional == false){
@@ -13,6 +16,8 @@ function ProductDisplayManager({products, electronic}){
             return product
         }
     })
+
+    useEffect(() => {}, [deleted])
 
     return (
         arr.length ?
@@ -43,7 +48,7 @@ function ProductDisplayManager({products, electronic}){
                             >Update</p>
                         <OpenModalDelete
                         product={product}
-                        modalComponent={<ConfirmTrashProduct obj={product}/>}
+                        modalComponent={<ConfirmTrashProduct obj={product} deleted={deleted} setDeleted={setDeleted}/>}
                         />
                     </div>
                 </div>

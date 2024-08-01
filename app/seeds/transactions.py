@@ -12,9 +12,11 @@ from sqlalchemy.sql import text
 # it will reset the primary keys for you as well.
 def undo_transactions():
     if environment == "production":
+        db.session.execute(f"TRUNCATE table {SCHEMA}.reviews RESTART IDENTITY CASCADE;")
         db.session.execute(f"TRUNCATE table {SCHEMA}.transaction_details RESTART IDENTITY CASCADE;")
         db.session.execute(f"TRUNCATE table {SCHEMA}.transactions RESTART IDENTITY CASCADE;")
     else:
+        db.session.execute(text("DELETE FROM reviews"))
         db.session.execute(text("DELETE FROM transaction_details"))
         db.session.execute(text("DELETE FROM transactions"))
 

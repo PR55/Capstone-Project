@@ -17,6 +17,7 @@
     border-radius: 1rem;
     margin: 0 1%;
     background-color: bisque;
+    min-width: 80%;
 }
 
 .order-Block{

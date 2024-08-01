@@ -1,5 +1,20 @@
 .holderDetail{
     padding: 50px 0;
+    display: flex;
+    min-height: 650px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.detailHolder > h1{
+    margin: 0%;
+    padding: 10px 0;
+}
+
+.detailHolder > h2{
+    margin: 0%;
+    padding: 10px 0;
 }
 
 .emptyDetail{

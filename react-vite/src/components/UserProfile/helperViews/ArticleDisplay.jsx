@@ -16,7 +16,7 @@ function ArticleDisplay({articles, user}){
                         </div>
                         <div className="articlePBInteract">
                             {
-                                user &&user?.id
+                                user &&user?.id === article.owner.id
                                 ?
                                 <p className="updateButton">Update</p>
                                 : null

@@ -1,8 +1,14 @@
 import OpenModalDelete from "../OpenModal/OpenModalDelete";
 import ConfirmTrashArticle from "../ModalItem/ModalDeleteArticle";
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 function ArticleDisplayManager({articles}){
     const navigate = useNavigate()
+
+    const [deleted, setDeleted] = useState(false)
+
+    useEffect(() => {}, [deleted])
+
     return(
         <>
         {
@@ -25,7 +31,7 @@ function ArticleDisplayManager({articles}){
                         <div className='Purchase'>
                             <p className="toUpdateButton" onClick={() => navigate(`/articles/${article.id}/edit`)}>Update</p>
                             <OpenModalDelete
-                                modalComponent={<ConfirmTrashArticle obj={article}/>}/>
+                                modalComponent={<ConfirmTrashArticle obj={article} deleted={deleted} setDeleted={setDeleted}/>}/>
                         </div>
                     </div>
                 )

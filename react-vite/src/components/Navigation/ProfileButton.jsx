@@ -50,6 +50,12 @@ function ProfileButton() {
     navigate('/my-transactions')
   }
 
+  const toProfile = (e) => {
+    e.preventDefault()
+    closeMenu();
+    navigate(`/user/${user.id}`)
+  }
+
   const logout = (e) => {
     e.preventDefault();
     dispatch(thunkLogout());
@@ -71,6 +77,9 @@ function ProfileButton() {
             <>
               <li>{user.username}</li>
               <li>{user.email}</li>
+              <li>
+                <button className='menuButton' onClick={toProfile}>View Profile</button>
+              </li>
               <li>
                 <button className='menuButton' onClick={toManage}>Manage</button>
               </li>

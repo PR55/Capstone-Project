@@ -3,6 +3,7 @@ import { thunkTransactionDelete, thunkTransactionUpdate, thunkTransactionOne } f
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { LiaSpinnerSolid } from "react-icons/lia";
 import './TransactionDetail.css'
 
 function TransactionDetail() {
@@ -27,15 +28,37 @@ function TransactionDetail() {
         navigate('/')
     }
 
+    const [isLoading, setLoading] = useState(false)
+
+    async function delayThunkCall() {
+
+        var longUserLoad = null
+
+        if(longUserLoad!= null && !isLoading){
+            window.clearTimeout(longUserLoad)
+            longUserLoad = null
+        }else{
+            setLoading(true)
+            longUserLoad = setTimeout(async () => {
+                await dispatch(thunkTransactionOne(transactionId))
+                setLoading(false)
+                setFirstLoading(false)
+                return 'Grab Complete'
+            }, 1000)
+        }
+
+    }
+
     useEffect(() => {
-        dispatch(thunkTransactionOne(transactionId))
-    }, [])
+        if(transactionId)
+            delayThunkCall()
+    }, [transactionId])
 
     useEffect(() => {
         if (transactionId && Object.values(transactions).length) {
             setTransaction(transactions[transactionId])
         }
-    }, [transactions, transactionId])
+    }, [transactions])
 
     useEffect(()=>{
         if(transaction?.products){
@@ -111,9 +134,17 @@ function TransactionDetail() {
     return (
         <div className="holderDetail">
             {
+                isLoading
+                ?
+                <>
+                <h1>Loading order...</h1>
+                <LiaSpinnerSolid className='spinner'/>
+                </>
+                :
                 Object.values(transaction).length ?
                 <div className="detailHolder">
                         <h1>Your Order:</h1>
+                        <h2>Status: {transaction?.status}</h2>
                         <div className="detailDisplay">
                             {
                                 transaction.products.map((product, index) => {
@@ -130,7 +161,7 @@ function TransactionDetail() {
                                                 <p className='creator'>Seller: {product.owner?.username}</p>
                                                 <p>${product.price}</p>
                                             </div>
-                                            <div className={transaction.status != 'Pending'? 'hide-transac': "interactDetail"}>
+                                            <div className={transaction.status != 'Pending'? 'hide-transac': "interactDetailTransac"}>
                                                 <input
                                                 type="checkbox"
                                                 value={product.id}

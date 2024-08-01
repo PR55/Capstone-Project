@@ -42,6 +42,10 @@ export const thunkTransactionsGet = (payload) => async (dispatch) =>{
 }
 
 export const thunkTransactionOne = (id) => async (dispatch) =>{
+    await fetch('/api/transactions/update_status',{
+        method:'PATCH'
+    })
+
     const response = await fetch(`/api/transactions/${id}`)
 
     if(response.ok){

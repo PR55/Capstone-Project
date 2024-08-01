@@ -1,9 +1,15 @@
 const LOAD_MY_CONTENT = 'myContent/loadContent'
+const DELETE_MY_CONTENT = 'myContent/deleteContent'
 const EMPTY_MY_CONTENT = 'myContent/clearContent'
 
 const loadContent = (content) =>({
     type:LOAD_MY_CONTENT,
     payload:content
+})
+
+const deleteOneItem = (id) =>({
+    type:DELETE_MY_CONTENT,
+    payload:id
 })
 
 const clearContent = () =>({
@@ -30,6 +36,30 @@ export const thunkCurrentUserArticles =() => async (dispatch) =>{
     }
 }
 
+export const thunkDeleteContentProduct = (id) => async (dispatch) => {
+    const response = await fetch(`/api/products/${id}`, {
+        method:'DELETE'
+    })
+
+    if(response.ok){
+        const {id} = await response.json()
+        await dispatch(deleteOneItem(id))
+        return id
+    }
+}
+
+export const thunkDeleteContentArticle = (id) => async (dispatch) => {
+    const response = await fetch(`/api/articles/${id}`, {
+        method:'DELETE'
+    })
+
+    if(response.ok){
+        const {id} = await response.json()
+        await dispatch(deleteOneItem(id))
+        return id
+    }
+}
+
 export const clearThunkUserContent = () => async (dispatch)=> {
     await dispatch(clearContent())
 }
@@ -44,6 +74,17 @@ function userContentReducer(state = initialState, action){
             for(let item of action.payload){
                 newState[item.id] = item
             }
+            return newState
+        }
+        case DELETE_MY_CONTENT:{
+            const newState = {}
+
+            for(let item of Object.values(state)){
+                if(item.id != action.payload){
+                    newState[item.id] = item
+                }
+            }
+
             return newState
         }
         case EMPTY_MY_CONTENT:{

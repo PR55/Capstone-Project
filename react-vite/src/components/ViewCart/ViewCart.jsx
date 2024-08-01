@@ -57,6 +57,7 @@ function ViewCart() {
             clearCart();
             setComplete(true);
             setReload(!reloadCart);
+            navigate('/my-transactions')
         }
     }
 

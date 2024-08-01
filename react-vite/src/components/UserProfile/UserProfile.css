@@ -147,10 +147,12 @@
 .profileTagHolder{
     display: flex;
     flex-wrap: wrap;
-    gap:10px;
+    column-gap: 10px;
+    row-gap: 10px;
 }
 
 .profileTagHolder > p{
+    margin: 0;
     background-color: lightgray;
     border: 7px solid lightgray;
     border-radius: 2rem;

@@ -1,9 +1,9 @@
 import { useModal } from "../../../context/Modal";
-import {thunkDeleteOneProduct } from "../../../redux/product";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { thunkDeleteContentProduct } from "../../../redux/userContent";
 
-function ConfirmTrashProduct({obj}){
+function ConfirmTrashProduct({obj, deleted, setDeleted}){
 
     const [deleting, setDeleting] = useState(false)
 
@@ -13,7 +13,8 @@ function ConfirmTrashProduct({obj}){
 
     const onDelete = async() => {
         setDeleting(true)
-        await dispatch(thunkDeleteOneProduct(obj.id))
+        await dispatch(thunkDeleteContentProduct(obj.id))
+        setDeleted(!deleted)
         closeModal()
     }
 

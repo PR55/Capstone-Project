@@ -3,12 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { thunkProductLoadOne } from "../../redux/product";
 import ProductImageModal from "./ProductImageModal";
-import './ProductDetail.css'
 import OpenModalImageItem from "./OpenModalImageItem";
 import OpenAddPhoto from "./openModalIonItems/OpenAddPhoto";
 import AddImage from "./modalComponent/AddImage";
 import { addToCart, isInCart } from "../cart";
 import { FaStar, FaRegStar } from "react-icons/fa";
+import { LiaSpinnerSolid } from "react-icons/lia";
+import './ProductDetail.css'
 
 function ProductDetail() {
 
@@ -24,9 +25,29 @@ function ProductDetail() {
 
     const [ownerRating, setRating] = useState(5)
 
+    const [isLoading, setLoading] = useState(false)
+
+    async function delayThunkCall() {
+
+        var longManageLoad = null
+
+        if(longManageLoad != null && !isLoading){
+            window.clearTimeout(longManageLoad)
+            longManageLoad = null
+        }else if(!longManageLoad){
+            setLoading(true)
+            longManageLoad = setTimeout(async () => {
+                await dispatch(thunkProductLoadOne(productId))
+                setLoading(false)
+                return 'Grab Complete'
+            }, 1000)
+        }
+
+    }
+
     useEffect(() => {
         if (productId)
-            dispatch(thunkProductLoadOne(productId))
+            delayThunkCall()
     }, [productId])
 
 
@@ -59,6 +80,13 @@ function ProductDetail() {
     return (
         <div className="detailHolderSingle">
             {
+                isLoading
+                ?
+                <>
+                <h2>Loading product...</h2>
+                <LiaSpinnerSolid className="spinner"/>
+                </>
+                :
                 product
                     ?
                     <div>

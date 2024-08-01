@@ -4,6 +4,7 @@ import { thunkTransactionsGet } from "../../redux/transaction";
 import './TransactionHistory.css'
 import { useNavigate } from "react-router-dom";
 import { FaThumbtack } from "react-icons/fa";
+import { LiaSpinnerSolid } from "react-icons/lia";
 
 function TransactionHistory() {
 
@@ -14,6 +15,26 @@ function TransactionHistory() {
 
     const [sorted, setSorted] = useState([])
 
+    const [isLoading, setLoading] = useState(false)
+
+    async function delayThunkCall() {
+
+        var longTransacLoad = null
+
+        if(longTransacLoad!= null && !isLoading){
+            window.clearTimeout(longTransacLoad)
+            longTransacLoad = null
+        }else{
+            setLoading(true)
+            longTransacLoad = setTimeout(async () => {
+                await dispatch(thunkTransactionsGet())
+                setLoading(false)
+                return 'Grab Complete'
+            }, 1000)
+        }
+
+    }
+
     const randomColors = [
         '#f44244',
         '#161ef0',
@@ -23,7 +44,7 @@ function TransactionHistory() {
     ]
 
     useEffect(() => {
-        dispatch(thunkTransactionsGet())
+        delayThunkCall()
     }, [])
 
     useEffect(() => {
@@ -51,6 +72,9 @@ function TransactionHistory() {
             <h1>Your Orders:</h1>
             <div className="Orders-Display">
             {
+                isLoading ?
+                <LiaSpinnerSolid className="spinner"/>
+                :
                 sorted.length
                     ? sorted.map((transaction, index) => {
                         return (

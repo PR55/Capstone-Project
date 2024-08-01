@@ -4,10 +4,10 @@ import { useNavigate, useParams } from "react-router-dom";
 import { getOneUser } from "../../redux/user";
 import { FaRegStar, FaStar } from "react-icons/fa";
 import { LiaSpinnerSolid } from "react-icons/lia";
-import './UserProfile.css'
 import ProductDisplay from "./helperViews/ProductDisplay";
 import ReviewDisplay from "./helperViews/ReviewDisplay";
 import ArticleDisplay from "./helperViews/ArticleDisplay";
+import './UserProfile.css'
 
 function UserProfile() {
 
@@ -26,10 +26,39 @@ function UserProfile() {
 
     const [processCart, setProcess] = useState(false)
 
-    const [loading, setLoading] = useState(false)
+    const [isloading, setLoading] = useState(false)
+    const [isFirstLoad, setFirstLoading] = useState(false)
+
+    async function delayThunkCall() {
+
+        var longUserLoad = null
+
+        if(longUserLoad!= null && !isloading){
+            window.clearTimeout(longUserLoad)
+            longUserLoad = null
+        }else{
+            setLoading(true)
+            longUserLoad = setTimeout(async () => {
+                await dispatch(getOneUser(userId))
+                setLoading(false)
+                setFirstLoading(false)
+                return 'Grab Complete'
+            }, 1000)
+        }
+
+    }
+
+    function asyncCall(){
+        setFirstLoading(true)
+        delayThunkCall()
+    }
+
+    function secondAsyncCall(){
+        delayThunkCall()
+    }
 
     useEffect(() => {
-        dispatch(getOneUser(userId))
+        asyncCall()
     }, [userId])
 
     useEffect(() => {
@@ -52,15 +81,15 @@ function UserProfile() {
 
 
     useEffect(()=>{
-
+        secondAsyncCall()
     }, [active[0],active[1],active[2],active[3]])
 
     return (
         <div className="profileHolder">
             <div className="navHolderLeft">
                 <div className="navTop">
-                    <p className="profilePlaceholder">{user?.username && user?.username.toUpperCase()[0]}</p>
-                    <p className="username">{user?.username && user.username}</p>
+                    <p className="profilePlaceholder">{user?.username && !isFirstLoad ? user?.username.toUpperCase()[0]: <LiaSpinnerSolid className='spinner'/>}</p>
+                    <p className="username">{user?.username && !isFirstLoad ? user.username : null}</p>
                     <div className="ratingHolder">
                     <div className="accountRating">
                         {
@@ -82,7 +111,7 @@ function UserProfile() {
                             })
                         }
                     </div>
-                    <p className="numericRating">{rating}</p>
+                    <p className="numericRating">{!isFirstLoad ?rating:null}</p>
                     </div>
                 </div>
                 <div className="navBottom">
@@ -126,7 +155,7 @@ function UserProfile() {
             </div>
             <div className="displayHolderRight">
                 {
-                    loading
+                    isloading
                     ?
                     <LiaSpinnerSolid className='spinner'/>
                     :
