@@ -49,7 +49,7 @@ function SignupFormPage() {
 
     let splitUser = username.split('')
 
-    if(splitUser.includes('')){
+    if(splitUser.includes(' ')){
       errObj.username = 'Usernames contain no spaces'
     }else if(splitUser.length < 4){
       errObj.username = 'Usernames must be at least 4 characters long'
