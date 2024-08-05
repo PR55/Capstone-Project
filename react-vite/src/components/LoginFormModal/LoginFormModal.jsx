@@ -29,9 +29,89 @@ function LoginFormModal() {
   };
 
   return (
-    <>
+    <div className="loginModal">
       <h1>Log In</h1>
       <form onSubmit={handleSubmit}>
+      <label>
+          Email
+          <input
+            type="text"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+        </label>
+        {errors.email && <p>{errors.email}</p>}
+        <label>
+          Password
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+        </label>
+        {errors.password && <p>{errors.password}</p>}
+        <label>
+          Email
+          <input
+            type="text"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+        </label>
+        {errors.email && <p>{errors.email}</p>}
+        <label>
+          Password
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+        </label>
+        {errors.password && <p>{errors.password}</p>}
+        <label>
+          Email
+          <input
+            type="text"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+        </label>
+        {errors.email && <p>{errors.email}</p>}
+        <label>
+          Password
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+        </label>
+        {errors.password && <p>{errors.password}</p>}
+        <label>
+          Email
+          <input
+            type="text"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+        </label>
+        {errors.email && <p>{errors.email}</p>}
+        <label>
+          Password
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+        </label>
+        {errors.password && <p>{errors.password}</p>}
         <label>
           Email
           <input
@@ -54,7 +134,7 @@ function LoginFormModal() {
         {errors.password && <p>{errors.password}</p>}
         <button type="submit">Log In</button>
       </form>
-    </>
+    </div>
   );
 }
 

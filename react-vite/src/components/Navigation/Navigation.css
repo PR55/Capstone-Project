@@ -126,3 +126,124 @@
   cursor: pointer;
   background-color: rgb(224, 224, 224);
 }
+
+.HamburgerMenu{
+  display: none;
+}
+
+.hamburgerMenu{
+  position: absolute;
+  z-index: 3000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 125vh;
+  background-color: azure;
+}
+
+.menuInterior{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  /* row-gap: 20px; */
+  background-color: antiquewhite;
+}
+
+.hamburgerButton{
+  background-color: antiquewhite;
+  margin: 0;
+  margin-top: 10px;
+  padding: 20px 0;
+  display: flex;
+  justify-content: center ;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  font-size: 40px;
+  box-shadow: 0px 5px 0 rgba(0, 0, 0, 1);
+  cursor: pointer;
+}
+
+.hidden{
+  display: none;
+}
+
+.closeHamburger{
+  position: absolute;
+  font-size: larger;
+  right: 0%;
+  top: 0%;
+  padding: 20px;
+  border: 2px solid;
+  background-color: azure;
+}
+
+@media screen and (max-width:960px){
+  .navL{
+    display: none;
+  }
+  .HamburgerMenu{
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    margin: 0%;
+    padding: 0%;
+    background-color: lightgray;
+    top: 15%;
+    right: 0%;
+    z-index: 1;
+    font-size: 50px;
+    padding: 15px;
+    border: 2px solid;
+    border-radius: 2rem 0rem 0rem 2rem;
+  }
+  .HamburgerMenu:hover{
+    background-color: rgb(185, 185, 185);
+  }
+}
+
+@media screen and (max-width:550px){
+  .loginButtons{
+    display: none;
+  }
+  .loggedInButtons{
+    display: none;
+  }
+  .navBar{
+    box-shadow: none;
+    display: block;
+    width: 100%;
+  }
+  .navLogo{
+    width: 100%;
+  }
+  .navLinks{
+    width:100%;
+    margin: 0%;
+    padding: 0%;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    height: 100px;
+  }
+  .HamburgerMenu{
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    margin: 0%;
+    padding: 0%;
+    background-color: lightgray;
+    top: 17%;
+    right: 0%;
+    font-size: 30px;
+    padding: 15px;
+    border: 2px solid;
+    border-radius: 2rem 0rem 0rem 2rem;
+  }
+  .hamburgerMenu{
+    min-height: 115vh;
+  }
+  .hamburgerButton{
+    font-size: 24px;
+  }
+}

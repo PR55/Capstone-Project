@@ -16,6 +16,8 @@ function ProductBrowser() {
     const products = useSelector(store => store.products)
     const [productsArr, setProducts] = useState([])
 
+    const [allProducts, setProductsAll] = useState([])
+
     const [searchName, setSearch] = useState('')
 
     const [tagArr, setTagArr] = useState(!(window.location.pathname === '/electronic/products') ? electronic_tags.map(() => false) : traditional_tags.map(() => false))
@@ -24,32 +26,39 @@ function ProductBrowser() {
 
     const [tagChangeBool, setTagChangeBool] = useState(true)
 
+    const [pageNumbers, setPageNumbers] = useState([])
 
     const [loading, setLoading] = useState(true)
+
+    const [currentPage, setCurrentPage] = useState([1])
+
+    const numProductsForPage = 5
+
+    const parseNum = 3
 
     useEffect(() => {
         // console.log('adding to cart!')
     }, [loading])
 
-    async function LoadProduct(){
-            await dispatch(thunkProductsLoad())
+    async function LoadProduct() {
+        await dispatch(thunkProductsLoad())
     }
 
-    function sortArr(){
+    function sortArr() {
         let disArr = []
-        for (let product of Object.values(products)) {
+        for (let product of allProducts) {
             let allTags = product.tags.map(tag => tag.tag)
             if (searchTags.length) {
                 for (let tag of searchTags) {
                     if ((!product.isTraditional && window.location.pathname === '/electronic/products') ||
                         (product.isTraditional && window.location.pathname === '/traditional/products')
                     ) {
-                        if(product?.purchased){
+                        if (product?.purchased) {
                             if ((searchName && product.name.toLowerCase().includes(searchName.toLowerCase())
                                 || !searchName) && allTags.includes(tag) && !disArr.includes(product) && !product.purchased) {
                                 disArr.push(product)
                             }
-                        }else{
+                        } else {
                             if ((searchName && product.name.toLowerCase().includes(searchName.toLowerCase())
                                 || !searchName) && allTags.includes(tag) && !disArr.includes(product)) {
                                 disArr.push(product)
@@ -61,12 +70,12 @@ function ProductBrowser() {
                 if ((!product.isTraditional && window.location.pathname === '/electronic/products') ||
                     (product.isTraditional && window.location.pathname === '/traditional/products')
                 ) {
-                    if(product?.purchased){
+                    if (product?.purchased) {
                         if ((searchName && product.name.toLowerCase().includes(searchName.toLowerCase())
                             || !searchName) && !product.purchased) {
                             disArr.push(product)
                         }
-                    }else{
+                    } else {
                         if ((searchName && product.name.toLowerCase().includes(searchName.toLowerCase())
                             || !searchName)) {
                             disArr.push(product)
@@ -76,17 +85,42 @@ function ProductBrowser() {
             }
         }
 
-        setProducts(disArr)
+        setPages(disArr, currentPage)
+
+        // setProducts(disArr)
     }
 
-    function processArr(){
+    function setPages(arr, page = 1) {
+
+        if (arr.length < 2) {
+            setProducts(arr)
+            setPageNumbers([1])
+            return
+        }
+
+        let val = arr.length / numProductsForPage;
+
+        let arr2 = arr.slice((numProductsForPage * (page - 1)), numProductsForPage * page)
+        setProducts(arr2)
+
+        let pageArr = []
+
+        for (let i = 0; i < val; i++) {
+            pageArr.push(i + 1)
+        }
+
+        setPageNumbers(pageArr)
+
+    }
+
+    function processArr() {
         // console.log()
         var longLoad = null
 
-        if(longLoad != null && !loading){
+        if (longLoad != null && !loading) {
             window.clearTimeout(longLoad)
             longLoad = null
-        }else{
+        } else {
             setLoading(true)
             longLoad = setTimeout(() => {
                 sortArr()
@@ -98,9 +132,10 @@ function ProductBrowser() {
 
     useEffect(() => {
         if (products) {
+            setProductsAll(Object.values(products))
             processArr()
         }
-    }, [products, searchName, searchTags.length])
+    }, [products, searchName, searchTags.length, currentPage])
 
     useEffect(() => {
         setTagArr(!(window.location.pathname === '/electronic/products') ? traditional_tags.map(tag => searchTags.includes(tag)) : electronic_tags.map(tag => searchTags.includes(tag)))
@@ -170,13 +205,83 @@ function ProductBrowser() {
                         {
                             loading
                                 ?
-                                <LiaSpinnerSolid className='spinner'/>
+                                <LiaSpinnerSolid className='spinner' />
                                 :
-                                <DisplayProductsHelper products={productsArr} searchTags={searchTags} user={user} navigate={navigate}/>
+                                <DisplayProductsHelper products={productsArr} searchTags={searchTags} user={user} navigate={navigate} />
 
                         }
                     </div>
                 </div>
+
+            </div>
+            <div className='paginationNav'>
+            {
+                    currentPage !== 1
+                    ?
+                    <p
+                    onClick={e => {
+                        e.preventDefault()
+                        e.stopPropagation()
+                        setCurrentPage(1)
+                    }}
+                    >{'<<'}</p>
+                    :
+                    null
+                }
+                {
+                    currentPage > 1
+                    ?
+                    <p
+                    onClick={e => {
+                        e.preventDefault()
+                        e.stopPropagation()
+                        setCurrentPage(currentPage-1)
+                    }}
+                    >{'<'}</p>
+                    :
+                    null
+                }
+                {
+                    pageNumbers.map((number, index) => {
+                        if (number >= currentPage -(parseNum - 1) && number < currentPage + parseNum) {
+                            return (
+                                <p
+                                    onClick={e => {
+                                        e.preventDefault()
+                                        e.stopPropagation()
+                                        setCurrentPage(number)
+                                    }}
+                                >{number}</p>
+                            )
+                        }
+                    })
+                }
+                {
+                    currentPage < pageNumbers[pageNumbers.length-1]
+                    ?
+                    <p
+                    onClick={e => {
+                        e.preventDefault()
+                        e.stopPropagation()
+                        setCurrentPage(currentPage+1)
+                    }}
+                    >{'>'}</p>
+                    :
+                    null
+                }
+                {
+                    currentPage !== pageNumbers[pageNumbers.length-1]
+                    ?
+                    <p
+                    onClick={e => {
+                        e.preventDefault()
+                        e.stopPropagation()
+                        setCurrentPage(pageNumbers[pageNumbers.length-1])
+                    }}
+                    >{'>>'}</p>
+                    :
+                    null
+                }
 
             </div>
         </div>

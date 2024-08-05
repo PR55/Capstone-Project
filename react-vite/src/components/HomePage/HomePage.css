@@ -17,7 +17,8 @@
     background-color: rgb(227, 227, 227);
     right: 20%;
     bottom: 20%;
-    z-index: 2;
+    z-index: -1;
+    box-shadow: 7px 7px .15rem rgba(0, 0, 0, 0.489);
 }
 
 .electronicButton{
@@ -29,7 +30,7 @@
     background-color: rgb(227, 227, 227);
     right: 20%;
     bottom: 20%;
-    z-index: 3000;
+    box-shadow: 7px 7px .15rem rgba(0, 0, 0, 0.489);
 }
 
 .electronicButton:hover{
@@ -41,6 +42,8 @@
     animation-timing-function: ease-in;
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
+    box-shadow: 5px 5px .15rem rgba(0, 0, 0, 0.489);
+    z-index: 6;
 }
 
 .electronicButton:not(:hover){
@@ -65,7 +68,8 @@
     background-color: rgb(227, 227, 227);
     left: 20%;
     bottom: 20%;
-    z-index: 2;
+    z-index: -1;
+    box-shadow: 7px 7px .15rem rgba(0, 0, 0, 0.489);
 }
 
 .traditionalButton{
@@ -77,7 +81,7 @@
     background-color: rgb(227, 227, 227);
     left: 20%;
     bottom: 20%;
-    z-index: 3000;
+    box-shadow: 7px 7px .15rem rgba(0, 0, 0, 0.489);
 }
 
 .traditionalButton:hover{
@@ -89,6 +93,8 @@
     animation-timing-function: ease-in;
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
+    box-shadow: 5px 5px .15rem rgba(0, 0, 0, 0.489);
+    z-index: 6;
 }
 
 .traditionalButton:not(:hover){
@@ -133,7 +139,6 @@
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    z-index: 1;
     background-color: rgb(81, 81, 255);
     transform: scale(1.0,1.0);
     overflow: hidden;
@@ -193,7 +198,6 @@
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    z-index: 1;
     background-color: rgb(74, 74, 192);
     overflow: hidden;
 }
@@ -295,7 +299,6 @@
 .tradHeader{
     position: absolute;
     opacity: 100%;
-    z-index: 5;
     top: 25%;
     color: rgb(255, 255, 255);
     background-color: rgba(0, 0, 0, 0.548);
@@ -325,7 +328,6 @@
 .elecHeader{
     position: absolute;
     opacity: 100%;
-    z-index: 5;
     top:25%;
     color: rgb(255, 255, 255);
     background-color: rgba(0, 0, 0, 0.548);
@@ -394,9 +396,19 @@
         margin-bottom: 0%;
         border-radius: 2rem;
         background-color: rgb(227, 227, 227);
-        left: 30.5%;
+        left: 27.5%;
         bottom: 70%;
-        z-index: 3000;
+    }
+    .electronicButton{
+        position: absolute;
+        height: 100px;
+        width: 350px;
+        font-size: 30px;
+        margin-bottom: 0%;
+        border-radius: 2rem;
+        background-color: rgb(227, 227, 227);
+        left: 27.5%;
+        bottom: 20%;
     }
 }
 
@@ -426,7 +438,6 @@
         background-color: rgb(227, 227, 227);
         left: 30%;
         bottom: 60%;
-        z-index: 3000;
     }
 
     .electronicButton{
@@ -439,6 +450,5 @@
         background-color: rgb(227, 227, 227);
         left: 30%;
         bottom: 10%;
-        z-index: 3000;
     }
 }

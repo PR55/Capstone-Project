@@ -32,8 +32,8 @@
     flex-direction: column;
     row-gap: 20px;
     margin: 10px auto;
-    justify-content: center;
     align-items: center;
+    min-height: 500px;
 }
 .productBlock{
     display: flex;
@@ -195,4 +195,16 @@
     border-radius: 1rem;
     padding: 5px;
     box-shadow: 10px 10px .5rem black;
+}
+
+.paginationNav{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 10px;
+}
+
+.paginationNav > p:hover{
+    cursor: pointer;
+    text-decoration: underline;
 }
