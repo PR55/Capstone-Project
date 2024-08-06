@@ -30,11 +30,26 @@ function ProductBrowser() {
 
     const [loading, setLoading] = useState(true)
 
-    const [currentPage, setCurrentPage] = useState([1])
+    const [currentPage, setCurrentPage] = useState(1)
 
-    const numProductsForPage = 5
+    const [drop, setDrop] = useState(false)
+
+    const numProductsForPage = 4
 
     const parseNum = 3
+
+    useEffect(() => {
+        const dropDownListener = document.addEventListener('click', (e) => {
+            if(!Object.values(e.target.classList).includes('tagsMobile') &&
+               !Object.values(e.target.classList).includes('filterCheck')){
+                setDrop(false)
+            }
+        })
+
+        return () => {
+            document.removeEventListener('click',dropDownListener)
+        }
+    }, [])
 
     useEffect(() => {
         // console.log('adding to cart!')
@@ -121,6 +136,8 @@ function ProductBrowser() {
             window.clearTimeout(longLoad)
             longLoad = null
         } else {
+            setPageNumbers([])
+            window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
             setLoading(true)
             longLoad = setTimeout(() => {
                 sortArr()
@@ -149,6 +166,9 @@ function ProductBrowser() {
 
     const manageTags = (e) => {
         // console.log(`I have been clicked! my value is ${e.target.value}`)
+        e.preventDefault()
+        e.stopPropagation()
+        setCurrentPage(1)
         let arr = searchTags
         if (e.target.checked) {
             arr.push(e.target.value)
@@ -171,9 +191,38 @@ function ProductBrowser() {
     return (
         <div className='displayHolder'>
             <div className='productsDisplay'>
-                <div className='searchBarVisual'>
-                    <IoIosSearch />
-                    <input className='searchBar' type="search" value={searchName} onChange={e => setSearch(e.target.value)} />
+                <div className='searchHolder'>
+                    <div className='searchBarVisual'>
+                        <IoIosSearch />
+                        <input className='searchBar' type="search" value={searchName} onChange={e => setSearch(e.target.value)} />
+                    </div>
+                    <div className='buttonHolderFilter'>
+                    <button
+                    onClick={e => {
+                        e.preventDefault()
+                        e.stopPropagation()
+                        setDrop(!drop)
+                    }} className='tagsMobile'>Tag Filters</button>
+                    <div className={drop? 'mobileFilters':'hidden'}>
+                        {
+                            window.location.pathname === '/electronic/products'
+                            ?
+                            electronic_tags.map((tag, index) => (
+                                <div key={index} className='tagVisualFilter'>
+                                    <input className='filterCheck'type='checkbox' checked={tagArr[index]} value={tag} onChange={e => manageTags(e)} />
+                                    <p>{tag}</p>
+                                </div>
+                            ))
+                            :
+                            traditional_tags.map((tag, index) => (
+                                <div key={index} className='tagVisualFilter'>
+                                    <input type='checkbox' checked={tagArr[index]} value={tag} onChange={e => manageTags(e)} />
+                                    <p>{tag}</p>
+                                </div>
+                            ))
+                        }
+                    </div>
+                    </div>
                 </div>
                 <div className='tagFilter'>
                     <div>
@@ -215,72 +264,77 @@ function ProductBrowser() {
 
             </div>
             <div className='paginationNav'>
-            {
-                    currentPage !== 1
-                    ?
-                    <p
-                    onClick={e => {
-                        e.preventDefault()
-                        e.stopPropagation()
-                        setCurrentPage(1)
-                    }}
-                    >{'<<'}</p>
-                    :
-                    null
+                {
+                    pageNumbers.length && currentPage !== 1
+                        ?
+                        <p
+                            onClick={e => {
+                                e.preventDefault()
+                                e.stopPropagation()
+                                setCurrentPage(1)
+                            }}
+                            className='decoratorPageNums'
+                        >{'<<'}</p>
+                        :
+                        null
                 }
                 {
-                    currentPage > 1
-                    ?
-                    <p
-                    onClick={e => {
-                        e.preventDefault()
-                        e.stopPropagation()
-                        setCurrentPage(currentPage-1)
-                    }}
-                    >{'<'}</p>
-                    :
-                    null
+                    pageNumbers.length && currentPage > 1
+                        ?
+                        <p
+                            onClick={e => {
+                                e.preventDefault()
+                                e.stopPropagation()
+                                setCurrentPage(currentPage - 1)
+                            }}
+                            className='decoratorPageNums'
+                        >{'<'}</p>
+                        :
+                        null
                 }
                 {
                     pageNumbers.map((number, index) => {
-                        if (number >= currentPage -(parseNum - 1) && number < currentPage + parseNum) {
+                        if (number >= currentPage - (parseNum - 1) && number < currentPage + parseNum) {
                             return (
-                                <p
+                                <p key={index}
                                     onClick={e => {
                                         e.preventDefault()
                                         e.stopPropagation()
                                         setCurrentPage(number)
                                     }}
+                                    className={number === currentPage ? 'Active' : 'inActive'}
                                 >{number}</p>
                             )
                         }
                     })
                 }
                 {
-                    currentPage < pageNumbers[pageNumbers.length-1]
-                    ?
-                    <p
-                    onClick={e => {
-                        e.preventDefault()
-                        e.stopPropagation()
-                        setCurrentPage(currentPage+1)
-                    }}
-                    >{'>'}</p>
-                    :
-                    null
+                    pageNumbers.length && currentPage < pageNumbers[pageNumbers.length - 1]
+                        ?
+                        <p
+                            onClick={e => {
+                                e.preventDefault()
+                                e.stopPropagation()
+                                setCurrentPage(currentPage + 1)
+                            }}
+                            className='decoratorPageNums'
+                        >{'>'}</p>
+                        :
+                        null
                 }
                 {
-                    currentPage !== pageNumbers[pageNumbers.length-1]
-                    ?
-                    <p
-                    onClick={e => {
-                        e.preventDefault()
-                        e.stopPropagation()
-                        setCurrentPage(pageNumbers[pageNumbers.length-1])
-                    }}
-                    >{'>>'}</p>
-                    :
-                    null
+                    pageNumbers.length && currentPage !== pageNumbers[pageNumbers.length - 1]
+                        ?
+                        <p
+                            onClick={e => {
+                                e.preventDefault()
+                                e.stopPropagation()
+                                setCurrentPage(pageNumbers[pageNumbers.length - 1])
+                            }}
+                            className='decoratorPageNums'
+                        >{'>>'}</p>
+                        :
+                        null
                 }
 
             </div>

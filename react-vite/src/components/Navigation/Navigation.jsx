@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { FaCartShopping } from "react-icons/fa6";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { ImCross } from "react-icons/im";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { thunkLogout } from "../../redux/session";
 import { clearThunkUserContent } from "../../redux/userContent";
 import { clearThunkTransactions } from "../../redux/transaction";
@@ -29,6 +29,12 @@ function Navigation() {
     setShowHamburger(false);
     navigate('/')
   };
+
+  useEffect(() => {
+    if(window.innerWidth > 960 && showHamburger){
+      setShowHamburger(false)
+    }
+  }, [window.innerWidth])
 
   return (
     <>
@@ -130,6 +136,14 @@ function Navigation() {
               </>
               :
               <>
+              <h1
+                  className="hamburgerButton"
+                  onClick={e => {
+                    e.stopPropagation()
+                    setShowHamburger(false)
+                    navigate(`/cart`)
+                  }}
+                >View Cart</h1>
                 <h1
                   className="hamburgerButton"
                   onClick={e => {

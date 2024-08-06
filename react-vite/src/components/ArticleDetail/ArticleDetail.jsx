@@ -33,6 +33,29 @@ function ArticleDetail() {
 
     }
 
+    function localDate(date){
+        let str = ``
+        let transDate = new Date(date)
+        str += `${transDate.getMonth()+1}/${transDate.getDate()}/${transDate.getFullYear()} - `
+
+        let endTiem = 'AM'
+
+        if(transDate.getHours() > 12){
+            str += `${transDate.getHours()-12}`
+            endTiem = 'PM'
+        }
+        else
+            str += `${transDate.getHours()}`
+
+        if(transDate.getMinutes() <10){
+            str += `:0${transDate.getMinutes()} `
+        }else{
+            str += `:${transDate.getMinutes()} `
+        }
+
+        return str + endTiem
+    }
+
     useEffect(() => {
         if (articleId)
             delayThunkCall()
@@ -58,8 +81,14 @@ function ArticleDetail() {
                                 <h1 className="articleTitle">{article.title}</h1>
                                 <div className="articleInfo">
                                     <h3>{article.owner.username}</h3>
-                                    <p>{article.timeCreated}</p>
-                                    <p>{article.timeCreated !== article.timeUpdated ? <p>{article.timeUpdated}</p> : null}</p>
+                                    <div className="date">
+                                    <h4>Last Updated:</h4>
+                                    <p>{article.timeCreated !== article.timeUpdated ? <p>{localDate(article.timeUpdated)}</p> : null}</p>
+                                    </div>
+                                    <div className="date">
+                                        <h4>Posted:</h4>
+                                    <p>{localDate(article.timeCreated)}</p>
+                                    </div>
                                 </div>
 
                             </div>

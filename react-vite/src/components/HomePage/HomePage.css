@@ -1,4 +1,4 @@
-.splashPage{
+.splashPage {
     position: relative;
     margin: 0;
     padding: 0;
@@ -8,7 +8,7 @@
     flex-direction: row;
 }
 
-.electronicButtonLower{
+.electronicButtonLower {
     position: absolute;
     height: 50px;
     width: 150px;
@@ -21,7 +21,7 @@
     box-shadow: 7px 7px .15rem rgba(0, 0, 0, 0.489);
 }
 
-.electronicButton{
+.electronicButton {
     position: absolute;
     height: 50px;
     width: 150px;
@@ -33,7 +33,7 @@
     box-shadow: 7px 7px .15rem rgba(0, 0, 0, 0.489);
 }
 
-.electronicButton:hover{
+.electronicButton:hover {
     cursor: pointer;
     /* animation: fillBottom 1s .1s ease-out; */
     /* animation: name duration timing-function delay iteration-count direction fill-mode; */
@@ -46,7 +46,7 @@
     z-index: 6;
 }
 
-.electronicButton:not(:hover){
+.electronicButton:not(:hover) {
     animation-name: exitHover;
     animation-duration: .175s;
     animation-timing-function: ease-in;
@@ -55,11 +55,11 @@
 }
 
 
-.electronicButton:active{
+.electronicButton:active {
     background-color: rgb(227, 227, 227);
 }
 
-.traditionalButtonLower{
+.traditionalButtonLower {
     position: absolute;
     height: 50px;
     width: 150px;
@@ -72,7 +72,7 @@
     box-shadow: 7px 7px .15rem rgba(0, 0, 0, 0.489);
 }
 
-.traditionalButton{
+.traditionalButton {
     position: absolute;
     height: 50px;
     width: 150px;
@@ -84,7 +84,7 @@
     box-shadow: 7px 7px .15rem rgba(0, 0, 0, 0.489);
 }
 
-.traditionalButton:hover{
+.traditionalButton:hover {
     cursor: pointer;
     /* animation: fillBottom 1s .1s ease-out; */
     /* animation: name duration timing-function delay iteration-count direction fill-mode; */
@@ -97,7 +97,7 @@
     z-index: 6;
 }
 
-.traditionalButton:not(:hover){
+.traditionalButton:not(:hover) {
     animation-name: exitHover;
     animation-duration: .175s;
     animation-timing-function: ease-in;
@@ -105,46 +105,47 @@
     animation-fill-mode: forwards;
 }
 
-.traditionalButton:active{
+.traditionalButton:active {
     background-color: rgb(227, 227, 227);
 }
 
-@keyframes exitHover{
+@keyframes exitHover {
     to {
         background-color: rgb(227, 227, 227);
     }
 
-    from{
+    from {
         background-color: rgb(153, 153, 153);
     }
 }
 
-@keyframes fillBottom{
+@keyframes fillBottom {
     from {
         background-color: rgb(227, 227, 227);
     }
 
-    to{
+    to {
         background-color: rgb(153, 153, 153);
     }
 }
-.splashLeft{
+
+.splashLeft {
     position: relative;
     margin: 0;
     margin-left: 0;
     height: 100%;
-    width:50%;
+    width: 50%;
     border: 2px solid;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
     background-color: rgb(81, 81, 255);
-    transform: scale(1.0,1.0);
+    transform: scale(1.0, 1.0);
     overflow: hidden;
 }
 
-.splashLeftExtend{
+.splashLeftExtend {
     position: relative;
     margin: 0;
     margin-left: 0;
@@ -162,11 +163,11 @@
     animation-timing-function: ease-in-out;
     animation-fill-mode: forwards;
     z-index: 3;
-    transform: scale(2.0,1.0) translateX(25%);
+    transform: scale(2.0, 1.0) translateX(25%);
     overflow: hidden;
 }
 
-.splashLeftShrink{
+.splashLeftShrink {
     position: relative;
     margin: 0;
     margin-left: 0;
@@ -187,12 +188,12 @@
     overflow: hidden;
 }
 
-.splashRight{
+.splashRight {
     position: relative;
     margin: 0;
     margin-left: 0;
     height: 100%;
-    width:50%;
+    width: 50%;
     border: 2px solid;
     display: flex;
     flex-direction: column;
@@ -202,7 +203,7 @@
     overflow: hidden;
 }
 
-.splashRightExtend{
+.splashRightExtend {
     position: relative;
     height: 100%;
     width: 50%;
@@ -211,7 +212,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    transform: scale(2.0,1.0);
+    transform: scale(2.0, 1.0);
     background-color: rgb(81, 81, 255);
     animation-name: extendRight;
     animation-duration: 1s;
@@ -224,7 +225,7 @@
     overflow: hidden;
 }
 
-.splashRightShrink{
+.splashRightShrink {
     position: relative;
     margin: 0;
     margin-left: 0;
@@ -241,40 +242,40 @@
     animation-iteration-count: 1;
     animation-timing-function: ease-in-out;
     animation-fill-mode: forwards;
-    z-index: 1;
     overflow: hidden;
 }
 
 @keyframes extendLeft {
 
-    0%{
-        transform: scale(1.0,1.0);
+    0% {
+        transform: scale(1.0, 1.0);
 
     }
 
-    100%{
-        transform: scale(2.0,1.0)  translateX(25%);
+    100% {
+        transform: scale(2.0, 1.0) translateX(25%);
     }
 
 }
 
 @keyframes extendRight {
-    0%{
-        transform: scale(1.0,1.0);
+    0% {
+        transform: scale(1.0, 1.0);
     }
-    100%{
-        transform: scale(2.0,1.0)  translateX(-25%);
+
+    100% {
+        transform: scale(2.0, 1.0) translateX(-25%);
     }
 
 }
 
-.splashImage{
+.splashImage {
     height: 100%;
     width: 100%;
     opacity: 50%;
 }
 
-.splashImageExtend{
+.splashImageExtend {
     animation-name: extendImg;
     animation-duration: 1s;
     animation-iteration-count: 1;
@@ -285,30 +286,31 @@
 
 @keyframes extendImg {
 
-    0%{
+    0% {
         opacity: 50%;
     }
 
-    100%{
+    100% {
         opacity: 100%;
 
     }
 
 }
 
-.tradHeader{
+.tradHeader {
     position: absolute;
     opacity: 100%;
     top: 25%;
     color: rgb(255, 255, 255);
     background-color: rgba(0, 0, 0, 0.548);
     box-shadow: 5px 5px .5rem rgba(0, 0, 0, 0.489);
-    transform: scale(1.0,1.0);
+    transform: scale(1.0, 1.0);
     font-size: 28px;
     padding: 10px;
+    z-index: 2;
 }
 
-.tradHeaderExtend{
+.tradHeaderExtend {
     position: absolute;
     opacity: 100%;
     z-index: 5;
@@ -316,7 +318,7 @@
     color: rgb(255, 255, 255);
     background-color: rgba(0, 0, 0, 0.548);
     box-shadow: 5px 5px .5rem rgba(0, 0, 0, 0.489);
-    transform: scale(.5,1.0);
+    transform: scale(.5, 1.0);
     animation-name: extendH1;
     animation-duration: 1s;
     animation-iteration-count: 1;
@@ -325,18 +327,19 @@
     padding: 10px;
 }
 
-.elecHeader{
+.elecHeader {
     position: absolute;
     opacity: 100%;
-    top:25%;
+    top: 25%;
     color: rgb(255, 255, 255);
     background-color: rgba(0, 0, 0, 0.548);
     box-shadow: 5px 5px .5rem rgba(0, 0, 0, 0.489);
     font-size: 28px;
     padding: 10px;
+    z-index: 2;
 }
 
-.elecHeaderExtend{
+.elecHeaderExtend {
     position: absolute;
     opacity: 100%;
     z-index: 5;
@@ -344,7 +347,7 @@
     color: rgb(255, 255, 255);
     background-color: rgba(0, 0, 0, 0.548);
     box-shadow: 5px 5px .5rem rgba(0, 0, 0, 0.489);
-    transform: scale(.5,1.0);
+    transform: scale(.5, 1.0);
     animation-name: extend;
     animation-duration: 1s;
     animation-iteration-count: 1;
@@ -355,25 +358,25 @@
 
 @keyframes extendH1R {
 
-    0%{
-        transform: scale(1.0,1.0);
+    0% {
+        transform: scale(1.0, 1.0);
     }
 
-    100%{
-        transform: scale(1,1.0);
+    100% {
+        transform: scale(1, 1.0);
 
     }
 
 }
 
-.hidden{
+.hidden {
     width: .1px;
     height: .1px;
     display: none;
 }
 
-@media screen and (max-width:960px){
-    .splashPage{
+@media screen and (max-width:960px) {
+    .splashPage {
         flex-direction: column;
         align-items: center;
         width: 100%;
@@ -381,14 +384,15 @@
         position: relative
     }
 
-    .splashLeft{
-        width: 100%;
-    }
-    .splashRight{
+    .splashLeft {
         width: 100%;
     }
 
-    .traditionalButton{
+    .splashRight {
+        width: 100%;
+    }
+
+    .traditionalButton {
         position: absolute;
         height: 100px;
         width: 350px;
@@ -399,7 +403,8 @@
         left: 27.5%;
         bottom: 70%;
     }
-    .electronicButton{
+
+    .electronicButton {
         position: absolute;
         height: 100px;
         width: 350px;
@@ -412,8 +417,8 @@
     }
 }
 
-@media screen and (max-width:500px){
-    .splashPage{
+@media screen and (max-width:750px) {
+    .splashPage {
         flex-direction: column;
         align-items: center;
         width: 100%;
@@ -421,14 +426,15 @@
         position: relative
     }
 
-    .splashLeft{
-        width: 100%;
-    }
-    .splashRight{
+    .splashLeft {
         width: 100%;
     }
 
-    .traditionalButton{
+    .splashRight {
+        width: 100%;
+    }
+
+    .traditionalButton {
         position: absolute;
         height: 5%;
         width: 150px;
@@ -436,11 +442,11 @@
         margin-bottom: 0%;
         border-radius: 2rem;
         background-color: rgb(227, 227, 227);
-        left: 30%;
+        left: 35%;
         bottom: 60%;
     }
 
-    .electronicButton{
+    .electronicButton {
         position: absolute;
         height: 5%;
         width: 150px;
@@ -448,7 +454,7 @@
         margin-bottom: 0%;
         border-radius: 2rem;
         background-color: rgb(227, 227, 227);
-        left: 30%;
+        left: 35%;
         bottom: 10%;
     }
 }

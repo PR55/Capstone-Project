@@ -34,3 +34,9 @@
     text-wrap: wrap;
     /* background-color: lightgray; */
 }
+
+.date{
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+}

@@ -1,5 +1,8 @@
+.searchHolder{
+    display: flex;
+    justify-content: space-evenly;
+}
 .searchBarVisual{
-    margin-left: 25%;
     display: flex;
     padding: 0;
     align-items: center;
@@ -109,7 +112,6 @@
 
 .displayAndFilter{
     display: flex;
-    margin: 0 auto;
     justify-content: center;
     /* border: 2px solid; */
 }
@@ -202,9 +204,103 @@
     justify-content: center;
     align-items: center;
     column-gap: 10px;
+    font-size: 24px;
 }
 
-.paginationNav > p:hover{
+.inActive{
+    color: gray;
+}
+
+.inActive:hover{
     cursor: pointer;
     text-decoration: underline;
+}
+
+.Active{
+    color: blueviolet;
+    text-decoration: underline;
+    cursor: default;
+}
+
+.decoratorPageNums:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.mobileFilters{
+    position: absolute;
+    background-color: white;
+    height: 200px;
+    overflow: hidden;
+    overflow-y: scroll;
+    padding: 5px;
+    border: 2px solid;
+    border-radius: .5rem;
+    display: none;
+}
+
+.buttonHolderFilter{
+    display: none;
+}
+
+@media screen and (max-width:960px){
+    .displayHolder{
+        width: 400px;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto;
+    }
+    .tagFilter{
+        display: none;
+    }
+    .productBlock{
+        height: 200px;
+        width: 85%;
+    }
+    .imageHolder{
+        width:256px;
+    }
+
+    .paginationNav{
+        font-size: 22px;
+    }
+    .mobileFilters{
+        display: block;
+    }
+    .buttonHolderFilter{
+        display: block;
+    }
+}
+
+@media screen and (max-width:750px){
+    .blockHolder{
+        min-height: 100px;
+    }
+    .productBlock{
+        height: 125px;
+        width: 50%;
+    }
+    .description > {
+        padding: 0;
+        margin: 0%;
+    }
+    .browseTags > p{
+        margin: 0;
+    }
+    .browseTags{
+        gap:15px;
+        display: none;
+    }
+    .imageHolder{
+        height: 100px;
+        width: 100%;
+    }
+
+    .paginationNav{
+        font-size: 20px;
+    }
+
+    .mobileFilters{
+        display: block;
+    }
 }

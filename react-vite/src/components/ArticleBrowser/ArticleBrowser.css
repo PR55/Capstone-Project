@@ -48,7 +48,7 @@
 
 
 
-.imageHolder{
+/* .imageHolder{
     margin-right: 1%;
     padding: 0%;
     max-height: 100%;
@@ -63,7 +63,7 @@
 
 .imageHolder > img{
     height: 100%;
-}
+} */
 
 .description{
     width: 500px;

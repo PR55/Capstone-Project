@@ -16,6 +16,14 @@ function ArticleBrowser() {
 
     const [loading, setLoading] = useState(true)
 
+    const [pageNumbers, setPageNumbers] = useState([])
+
+    const [currentPage, setCurrentPage] = useState(1)
+
+    const numProductsForPage = 4
+
+    const parseNum = 3
+
     async function loadArticles() {
         setLoading(true)
         await dispatch(thunkLoadArticles())
@@ -40,11 +48,35 @@ function ArticleBrowser() {
             }
         }
 
-        await setProducts(disArr)
+        setPages(disArr, currentPage)
+    }
+    function setPages(arr, page = 1) {
+
+        if (arr.length < 2) {
+            setProducts(arr)
+            setPageNumbers([1])
+            return
+        }
+
+        let val = arr.length / numProductsForPage;
+
+        let arr2 = arr.slice((numProductsForPage * (page - 1)), numProductsForPage * page)
+        setProducts(arr2)
+
+        let pageArr = []
+
+        for (let i = 0; i < val; i++) {
+            pageArr.push(i + 1)
+        }
+
+        setPageNumbers(pageArr)
+
     }
 
     async function processUpdate(){
         setLoading(true)
+        setPageNumbers([])
+        window.scrollTo({top:0, left:0, behavior:'instant'})
         const longLoad = setTimeout(async() => {
             sortArr()
             setLoading(false)
@@ -57,7 +89,7 @@ function ArticleBrowser() {
         if (products) {
             processUpdate()
         }
-    }, [products, searchName])
+    }, [products, searchName, currentPage])
 
     useEffect
 
@@ -81,6 +113,81 @@ function ArticleBrowser() {
                         }
                     </div>
                 </div>
+            </div>
+            <div className='paginationNav'>
+            {
+                    pageNumbers.length && currentPage !== 1
+                    ?
+                    <p
+                    onClick={e => {
+                        e.preventDefault()
+                        e.stopPropagation()
+                        setCurrentPage(1)
+                    }}
+                    className='decoratorPageNums'
+                    >{'<<'}</p>
+                    :
+                    null
+                }
+                {
+                    pageNumbers.length && currentPage > 1
+                    ?
+                    <p
+                    onClick={e => {
+                        e.preventDefault()
+                        e.stopPropagation()
+                        setCurrentPage(currentPage-1)
+                    }}
+                    className='decoratorPageNums'
+                    >{'<'}</p>
+                    :
+                    null
+                }
+                {
+                    pageNumbers.map((number, index) => {
+                        if (number >= currentPage -(parseNum-1) && number < currentPage + parseNum) {
+                            return (
+                                <p key={index}
+                                    onClick={e => {
+                                        e.preventDefault()
+                                        e.stopPropagation()
+                                        setCurrentPage(number)
+                                    }}
+                                    className={number === currentPage ? 'Active':'inActive'}
+                                >{number}</p>
+                            )
+                        }
+                    })
+                }
+                {
+                    pageNumbers.length && currentPage < pageNumbers[pageNumbers.length-1]
+                    ?
+                    <p
+                    onClick={e => {
+                        e.preventDefault()
+                        e.stopPropagation()
+                        setCurrentPage(currentPage+1)
+                    }}
+                    className='decoratorPageNums'
+                    >{'>'}</p>
+                    :
+                    null
+                }
+                {
+                    pageNumbers.length && currentPage !== pageNumbers[pageNumbers.length-1]
+                    ?
+                    <p
+                    onClick={e => {
+                        e.preventDefault()
+                        e.stopPropagation()
+                        setCurrentPage(pageNumbers[pageNumbers.length-1])
+                    }}
+                    className='decoratorPageNums'
+                    >{'>>'}</p>
+                    :
+                    null
+                }
+
             </div>
         </div>
     )
