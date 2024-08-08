@@ -19,6 +19,16 @@ product_images = [
     'https://elot-bucket.s3.us-east-2.amazonaws.com/firewatch.jpg',
     'https://elot-bucket.s3.us-east-2.amazonaws.com/Hey_You%2C_Pikachu!_Coverart.png',
     'https://elot-bucket.s3.us-east-2.amazonaws.com/Battletoads.jpg',
+    'https://elot-bucket.s3.us-east-2.amazonaws.com/mariokart-wii.jpg',
+    'https://elot-bucket.s3.us-east-2.amazonaws.com/Pokemon+Black+Version+2.jpg',
+    'https://elot-bucket.s3.us-east-2.amazonaws.com/Pokemon+Emerald.jpg',
+    'https://elot-bucket.s3.us-east-2.amazonaws.com/pokemon+moon.jpg',
+    'https://elot-bucket.s3.us-east-2.amazonaws.com/Pokemon+Ultra+Sun.jpg',
+    'https://elot-bucket.s3.us-east-2.amazonaws.com/Pokemon+White+Version.jpg',
+    'https://elot-bucket.s3.us-east-2.amazonaws.com/splatoon2.jpg',
+    'https://elot-bucket.s3.us-east-2.amazonaws.com/Super_Mario_64_box_cover.jpg',
+    'https://elot-bucket.s3.us-east-2.amazonaws.com/SuperMarioGalaxy.jpg',
+    'https://elot-bucket.s3.us-east-2.amazonaws.com/diamond.jpg',
 ]
 
 article_images=[

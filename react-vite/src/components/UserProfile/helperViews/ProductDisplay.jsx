@@ -21,9 +21,9 @@ function ProductDisplay({
                                 <img src={product.image.imageUrl} alt="" />
                             </div>
                             <div className="blockDescriptionProfile">
-                                <p className="title">{product.name}</p>
+                                <p className="title">{product.name.length > 50&& window.innerWidth > 960  ? product.name.slice(0,50) + '...': product.name.length > 30 && window.innerWidth <= 960 ? product.name.slice(0,30)+'...':product.name}</p>
                                 <p>${product.price.toFixed(2)}</p>
-                                <p>{product.description.length > 75 ? product.description.slice(0, 76) + '...' : product.description}</p>
+                                <p>{product.description.length > 75 && window.innerWidth > 960 ? product.description.slice(0, 75) + "..." :window.innerWidth <= 960  && window.innerWidth > 750? product.description.slice(0, 100) + '...': window.innerWidth <= 750 ? null:product.description}</p>
                                 <div className="profileTagHolder">
                                     {
                                         product.tags.map((tag,index) => (

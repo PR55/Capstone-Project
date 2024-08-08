@@ -208,6 +208,109 @@ electroArr = [
         'tags':[ Tags.nintendo, Tags.retro],
         'image':'https://elot-bucket.s3.us-east-2.amazonaws.com/Battletoads.jpg'
 
+    },
+    {
+        'name':"Pokemon Emerald",
+        'description':"Immerse yourself in the world of Pokémon with the Pokemon Emerald Version. This classic game offers an exciting adventure in the Hoenn region, where you'll encounter new Pokémon, challenges, and mysteries. Train and battle with your Pokémon to become a Pokémon Champion. The Emerald Version introduces new features, enhancing your gaming experience. Whether you're a Pokémon fan or a gamer looking for a captivating RPG, Pokemon Emerald Version for your gaming console is a fantastic choice.",
+        'price':109.56,
+        'isTraditional': False,
+        'ownerId':3,
+        'tags':[ Tags.nintendo, Tags.retro, Tags.pokemon, Tags.game_boy_advanced],
+        'image':'https://elot-bucket.s3.us-east-2.amazonaws.com/Pokemon+Emerald.jpg'
+
+    },
+    {
+        'name':"Pokemon Moon",
+        'description':"Embark on a new adventure as a Pokemon Trainer and catch, battle, and trade all-new Pokemon on the tropical islands of a new Region and become a Pokemon Champion!",
+        'price':79.56,
+        'isTraditional': False,
+        'ownerId':2,
+        'tags':[ Tags.nintendo, Tags.retro, Tags.pokemon],
+        'image':'https://elot-bucket.s3.us-east-2.amazonaws.com/pokemon+moon.jpg'
+
+    },
+    {
+        'name':"Pokemon Black Version 2",
+        'description':"Pokemon Black Version 2 for Nintendo DS continues the Unova region adventure with new characters, areas to explore, and Pok√mon to catch.",
+        'price':129.56,
+        'isTraditional': False,
+        'ownerId':3,
+        'tags':[ Tags.nintendo, Tags.retro, Tags.pokemon, Tags.nintendo_ds],
+        'image':'https://elot-bucket.s3.us-east-2.amazonaws.com/Pokemon+Black+Version+2.jpg'
+
+    },
+    {
+        'name':"Pokemon Ultra Sun",
+        'description':"Pokemon Ultra Sun for the Nintendo 3DS allows you to embark on an epic adventure with new Pokemon forms, powers, and stories in the tropical Alola region.",
+        'price':39.56,
+        'isTraditional': False,
+        'ownerId':2,
+        'tags':[ Tags.nintendo, Tags.retro, Tags.pokemon],
+        'image':'https://elot-bucket.s3.us-east-2.amazonaws.com/Pokemon+Ultra+Sun.jpg'
+
+    },
+    {
+        'name':"Pokemon White Version",
+        'description':"Pokemon White Version is a role-playing video game for the Nintendo DS where players collect Pokemon creatures and train them to battle other Pokemon. It takes place in the new Unova region.",
+        'price':159.56,
+        'isTraditional': False,
+        'ownerId':3,
+        'tags':[ Tags.nintendo, Tags.retro, Tags.pokemon, Tags.nintendo_ds],
+        'image':'https://elot-bucket.s3.us-east-2.amazonaws.com/Pokemon+White+Version.jpg'
+
+    },
+    {
+        'name':"Super Mario Galaxy",
+        'description':'''The ultimate Nintendo hero is taking the ultimate step... out into space. Join Mario as he ushers in a new era of video games, defying gravity across all the planets in the galaxy. When some creature escapes into space with Princess Peach, Mario gives chase, exploring bizarre planets all across the galaxy. Players run, jump and battle enemies as they explore the many planets. For Mario to succeed, gamers will press buttons, swing the Wii Remote and Nunchuk controllers and even use the Wii Remote to point at and drag things on-screen.''',
+        'price':19.56,
+        'isTraditional': False,
+        'ownerId':2,
+        'tags':[ Tags.nintendo, Tags.retro],
+        'image':'https://elot-bucket.s3.us-east-2.amazonaws.com/SuperMarioGalaxy.jpg'
+
+    },
+    {
+        'name':"MarioKart",
+        'description':"Original case and manual included. MarioKart for the Nintendo Wii, playable on the Wii U.",
+        'price':89.56,
+        'isTraditional': False,
+        'ownerId':1,
+        'tags':[ Tags.nintendo, Tags.retro, Tags.multiplayer],
+        'image':'https://elot-bucket.s3.us-east-2.amazonaws.com/mariokart-wii.jpg'
+
+    },
+    {
+        'name':"Super Mario 64",
+        'description':'''The game that launched the Nintendo 64 system stands the test of time as one of the first and best exploratory action/adventure games. Guide the legendary plumber through an incredibly vast magical world with never-before-seen movement and camera-angle freedom. Mario's got the moves with graduated speeds of running and walking, jumps, super jumps, bounce attacks, swimming, and more. The more you play, the more moves you'll discover.
+This industry milestone game lets gamers play at their own pace, encouraging them to explore new nooks and crannies of its many levels with a Zen-like approach where the journey is as important as the goal. Other N64 games such as Zelda, Banjo-Kazooie, and Donkey Kong 64 all owe much of their inspiration to this gem of a game. A showcase for the system's graphics and processing speed capabilities, Super Mario 64 is a must-have for any N64 owner. --Jeff Young''',
+        'price':49.56,
+        'isTraditional': False,
+        'ownerId':3,
+        'tags':[ Tags.nintendo, Tags.retro, Tags.nsixfour],
+        'image':'https://elot-bucket.s3.us-east-2.amazonaws.com/Super_Mario_64_box_cover.jpg'
+
+    },
+    {
+        'name':"Pokemon Diamond Version",
+        'description':"The Pokemon Diamond Version Nintendo DS game takes you to the Sinnoh region to catch, train, and battle Pokemon while uncovering the mystery of the Legendary Pokemon Dialga.",
+        'price':79.56,
+        'isTraditional': False,
+        'ownerId':2,
+        'tags':[ Tags.nintendo, Tags.retro, Tags.nintendo_ds, Tags.pokemon],
+        'image':'https://elot-bucket.s3.us-east-2.amazonaws.com/diamond.jpg'
+
+    },
+    {
+        'name':"Splatoon 2",
+        'description':'''
+        The squid kids called Inklings are back to splat more ink and claim more turf in this colorful and chaotic 4-on-4 action shooter. For the first time, take Turf War battles on-the-go with the Nintendo Switch™ system, and use any of the console’s portable play styles for intense local multiplayer* action. Even team up for new 4-player co-op fun in Salmon Run!
+        Expect a fresh wave of fashion, not to mention new weapons and gear. Dual wield the new Splat Dualies or stick to mainstays like chargers and rollers, which have been remixed with new strategic possibilities. As always, Turf War is the favored sport among Inklings, but they also dig ranked battles, taking down Octarians in a robust single-player campaign, and battling enemy Salmonids in one dangerous part-time job! No matter which way you play, splat at home or on-the-go with Nintendo Switch. Staying fresh never felt so good.''',
+        'price':109.56,
+        'isTraditional': False,
+        'ownerId':1,
+        'tags':[ Tags.nintendo, Tags.switch],
+        'image':'https://elot-bucket.s3.us-east-2.amazonaws.com/splatoon2.jpg'
+
     }
 ]
 

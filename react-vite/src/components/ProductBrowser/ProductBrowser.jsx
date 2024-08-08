@@ -70,12 +70,14 @@ function ProductBrowser() {
                     ) {
                         if (product?.purchased) {
                             if ((searchName && product.name.toLowerCase().includes(searchName.toLowerCase())
-                                || !searchName) && allTags.includes(tag) && !disArr.includes(product) && !product.purchased) {
+                                || !searchName) && allTags.includes(tag) && !disArr.includes(product) && !product.purchased
+                                && user?.id !== product.owner?.id) {
                                 disArr.push(product)
                             }
                         } else {
                             if ((searchName && product.name.toLowerCase().includes(searchName.toLowerCase())
-                                || !searchName) && allTags.includes(tag) && !disArr.includes(product)) {
+                                || !searchName) && allTags.includes(tag) && !disArr.includes(product)
+                                && user?.id !== product.owner?.id) {
                                 disArr.push(product)
                             }
                         }
@@ -87,12 +89,12 @@ function ProductBrowser() {
                 ) {
                     if (product?.purchased) {
                         if ((searchName && product.name.toLowerCase().includes(searchName.toLowerCase())
-                            || !searchName) && !product.purchased) {
+                            || !searchName) && !product.purchased && user?.id !== product.owner?.id) {
                             disArr.push(product)
                         }
                     } else {
                         if ((searchName && product.name.toLowerCase().includes(searchName.toLowerCase())
-                            || !searchName)) {
+                            || !searchName) && user?.id !== product.owner?.id) {
                             disArr.push(product)
                         }
                     }

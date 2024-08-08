@@ -29,6 +29,8 @@ function UserProfile() {
     const [isloading, setLoading] = useState(false)
     const [isFirstLoad, setFirstLoading] = useState(false)
 
+    const [isTablet, setTablet] = useState(window.innerWidth <= 960 && window.innerWidth > 750)
+
     async function delayThunkCall() {
 
         var longUserLoad = null
@@ -56,6 +58,14 @@ function UserProfile() {
     function secondAsyncCall(){
         delayThunkCall()
     }
+
+    useEffect(()=>{
+        const handleResize = () => setTablet(window.innerWidth <= 960 && window.innerWidth > 750)
+        window.addEventListener("resize", handleResize)
+        return () => window.removeEventListener("resize", handleResize)
+    },[])
+
+    useEffect(() => {}, [isTablet])
 
     useEffect(() => {
         asyncCall()

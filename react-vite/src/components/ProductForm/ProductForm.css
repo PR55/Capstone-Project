@@ -60,6 +60,8 @@
     background-color: white;
     border: 2px solid black;
     border-radius: .5rem;
+    padding: 10px;
+    font-size: 18px;
 }
 
 .submitButton:enabled:hover{

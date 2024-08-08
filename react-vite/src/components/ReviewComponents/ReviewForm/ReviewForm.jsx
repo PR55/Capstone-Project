@@ -174,7 +174,7 @@ export function ReviewForm() {
                         }} />
                     </div>
                     {errors?.review && <p className="error">{errors.review}</p>}
-                    <button disabled={errors?.review || errors?.rating}>Submit Review</button>
+                    <button className='submitButton' disabled={errors?.review || errors?.rating}>Submit Review</button>
                 </form>
             </div>
         </div>

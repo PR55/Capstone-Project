@@ -8,6 +8,7 @@ function ProductDisplayManager({products, electronic}){
     const navigate = useNavigate()
 
     const [deleted, setDeleted] = useState(false)
+    const [isTablet, setTablet] = useState(window.innerWidth <= 960 && window.innerWidth > 750)
 
     let arr = Object.values(products).filter(product => {
         if(electronic && product.isTraditional == false){
@@ -17,7 +18,13 @@ function ProductDisplayManager({products, electronic}){
         }
     })
 
-    useEffect(() => {}, [deleted])
+    useEffect(()=>{
+        const handleResize = () => setTablet(window.innerWidth <= 960 && window.innerWidth > 750)
+        window.addEventListener("resize", handleResize)
+        return () => window.removeEventListener("resize", handleResize)
+    },[])
+
+    useEffect(() => {}, [deleted, isTablet])
 
     return (
         arr.length ?
@@ -28,9 +35,9 @@ function ProductDisplayManager({products, electronic}){
                         <img src={product.images[0].imageUrl} alt={'gameImg'} />
                     </div>
                     <div className='manageDescription'>
-                        <p className='title'>{product?.name && product.name.length > 50 ? product.name.slice(0,50) + '...':product.name}</p>
+                        <p className='title'>{product.name.length > 50&& window.innerWidth > 960  ? product.name.slice(0,50) + '...': product.name.length > 30 && window.innerWidth <= 960 ? product.name.slice(0,30)+'...':product.name}</p>
                         <p className="priceManage">${product.price.toFixed(2)}</p>
-                        <p className='body'>{product.description.length > 250 ? product.description.slice(0, 250) + "..." : product.description}</p>
+                        <p className='body'>{product.description.length > 250 && window.innerWidth > 960 ? product.description.slice(0, 250) + "..." :window.innerWidth <= 960  && window.innerWidth > 750? product.description.slice(0, 100) + '...': window.innerWidth <= 750 ? null:product.description}</p>
                         <div className="manageTags">
                             {product.tags.map(tag => (
                                 <p key={tag.id}>{tag.tag}</p>

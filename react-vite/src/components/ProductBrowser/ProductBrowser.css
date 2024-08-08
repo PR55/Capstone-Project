@@ -1,6 +1,7 @@
 .searchHolder{
     display: flex;
-    justify-content: space-evenly;
+    gap: 50px;
+    justify-content: center;
 }
 .searchBarVisual{
     display: flex;
@@ -243,9 +244,24 @@
     display: none;
 }
 
-@media screen and (max-width:960px){
+@media screen and (max-width:1200px){
+    .tagFilter{
+        display: none;
+    }
+    .paginationNav{
+        font-size: 22px;
+    }
+    .mobileFilters{
+        display: block;
+    }
+    .buttonHolderFilter{
+        display: block;
+    }
+}
+
+@media screen and (max-width:1050px){
     .displayHolder{
-        width: 400px;
+        width: 40%;
         justify-content: center;
         align-items: center;
         margin: 0 auto;
@@ -255,7 +271,7 @@
     }
     .productBlock{
         height: 200px;
-        width: 85%;
+        width: 80%;
     }
     .imageHolder{
         width:256px;
@@ -277,8 +293,9 @@
         min-height: 100px;
     }
     .productBlock{
-        height: 125px;
-        width: 50%;
+        height: 160px;
+        width: 55%;
+        align-items: center;
     }
     .description > {
         padding: 0;
@@ -288,12 +305,11 @@
         margin: 0;
     }
     .browseTags{
-        gap:15px;
         display: none;
     }
     .imageHolder{
-        height: 100px;
-        width: 100%;
+        height: 85%;
+        width: 60%;
     }
 
     .paginationNav{

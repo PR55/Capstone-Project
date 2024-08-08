@@ -278,3 +278,80 @@
     justify-content: center;
     align-items: center;
 }
+
+@media screen and (max-width:1350px){
+    .profileHolder{
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto;
+        flex-direction: column;
+    }
+    .profilePlaceholder{
+        width: 256px;
+        height: 256px;
+    }
+    .navBottom{
+        flex-direction: row;
+        column-gap: 20px;
+    }
+    .profileProductBlock{
+        height: 200px;
+        width: 80%;
+    }
+    .articleBlockProfile{
+        height: 200px;
+        width: 80%;
+    }
+    .imageHolder{
+        width:256px;
+    }
+    .profileTagHolder > p{
+        margin: 0;
+    }
+    .profileTagHolder{
+        display: none;
+    }
+    .paginationNav{
+        font-size: 22px;
+    }
+    .manageInfo{
+        justify-content: center;
+    column-gap: 50px;
+    }
+}
+
+@media screen and (max-width:750px){
+    .blockHolder{
+        min-height: 100px;
+    }
+    .manageInfo{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .profileProductBlock{
+        height: 160px;
+        width: 75%;
+    }
+    .navBottom{
+        flex-direction: column;
+        column-gap: 20px;
+    }
+    .manageDescription > {
+        padding: 0;
+        margin: 0%;
+    }
+    .imageHolder{
+        height: 85%;
+        width: 60%;
+    }
+
+    .paginationNav{
+        font-size: 20px;
+    }
+
+    .mobileFilters{
+        display: block;
+    }
+}

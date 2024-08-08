@@ -204,3 +204,76 @@
     display: flex;
     align-items: center;
 }
+
+@media screen and (max-width:1050px){
+    .manageHolder{
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto;
+    }
+    .productBlockManage{
+        height: 200px;
+        width: 80%;
+    }
+    .reviewBlockManage{
+        height: 200px;
+        width: 80%;
+    }
+    .reviewIDescript{
+        height: 65%;
+    }
+    .imageHolder{
+        width:256px;
+    }
+    .manageTags > p{
+        margin: 0;
+    }
+    .manageTags{
+        display: none;
+    }
+    .paginationNav{
+        font-size: 22px;
+    }
+    .manageInfo{
+        justify-content: center;
+    column-gap: 50px;
+    }
+}
+
+@media screen and (max-width:750px){
+    .blockHolder{
+        min-height: 100px;
+    }
+    .manageInfo{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .productBlockManage{
+        height: 160px;
+    }
+    .reviewBlockManage{
+        height: 160px;
+    }
+    .reviewIDescript{
+        height: 40%;
+        overflow-y: scroll;
+    }
+    .manageDescription > {
+        padding: 0;
+        margin: 0%;
+    }
+    .imageHolder{
+        height: 85%;
+        width: 60%;
+    }
+
+    .paginationNav{
+        font-size: 20px;
+    }
+
+    .mobileFilters{
+        display: block;
+    }
+}
