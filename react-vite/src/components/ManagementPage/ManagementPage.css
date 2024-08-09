@@ -260,7 +260,7 @@
         height: 40%;
         overflow-y: scroll;
     }
-    .manageDescription > {
+    .manageDescription > p{
         padding: 0;
         margin: 0%;
     }

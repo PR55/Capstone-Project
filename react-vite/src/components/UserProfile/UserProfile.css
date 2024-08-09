@@ -338,7 +338,7 @@
         flex-direction: column;
         column-gap: 20px;
     }
-    .manageDescription > {
+    .manageDescription > p{
         padding: 0;
         margin: 0%;
     }
