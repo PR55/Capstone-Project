@@ -185,6 +185,25 @@
   background-color: azure;
 }
 
+.closeHamburger:hover{
+  cursor: pointer;
+  background-color: rgb(206, 219, 219);
+}
+
+.hamburgerButtonUser{
+  background-color: antiquewhite;
+  margin: 0;
+  margin-top: 5px;
+  padding: 20px 0;
+  display: none;
+  justify-content: center ;
+  align-items: center;
+  width: 100%;
+  font-size: 40px;
+  box-shadow: 0px 5px 0 rgba(0, 0, 0, 1);
+  cursor: pointer;
+  flex-flow: column;
+}
 
 
 @media screen and (max-width:1050px){
@@ -262,6 +281,10 @@
     cursor: pointer;
   }
   .hamburgerButton{
+    font-size: 24px;
+  }
+  .hamburgerButtonUser{
+    display: flex;
     font-size: 24px;
   }
 }

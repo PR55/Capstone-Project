@@ -19,10 +19,10 @@ function ArticleDetail() {
 
         var longManageLoad = null
 
-        if(longManageLoad != null && !isLoading){
+        if (longManageLoad != null && !isLoading) {
             window.clearTimeout(longManageLoad)
             longManageLoad = null
-        }else if(!longManageLoad){
+        } else if (!longManageLoad) {
             setLoading(true)
             longManageLoad = setTimeout(async () => {
                 await dispatch(thunkLoadOneArticle(articleId))
@@ -33,23 +33,23 @@ function ArticleDetail() {
 
     }
 
-    function localDate(date){
+    function localDate(date) {
         let str = ``
         let transDate = new Date(date)
-        str += `${transDate.getMonth()+1}/${transDate.getDate()}/${transDate.getFullYear()} - `
+        str += `${transDate.getMonth() + 1}/${transDate.getDate()}/${transDate.getFullYear()} - `
 
         let endTiem = 'AM'
 
-        if(transDate.getHours() > 12){
-            str += `${transDate.getHours()-12}`
+        if (transDate.getHours() > 12) {
+            str += `${transDate.getHours() - 12}`
             endTiem = 'PM'
         }
         else
             str += `${transDate.getHours()}`
 
-        if(transDate.getMinutes() <10){
+        if (transDate.getMinutes() < 10) {
             str += `:0${transDate.getMinutes()} `
-        }else{
+        } else {
             str += `:${transDate.getMinutes()} `
         }
 
@@ -65,39 +65,44 @@ function ArticleDetail() {
         <div className="articleDisplay">
             {
                 isLoading
-                ?
-                <>
-                <h2>Loading article...</h2>
-                <LiaSpinnerSolid className="spinner"/>
-                </>
-                :
-                article ?
+                    ?
                     <>
-                        <div className="articleImageHolder">
-                            <img src={article.imageUrl} alt="articleImage" className="articleImage" />
-                        </div>
-                        <div className="mainInfo">
-                            <div>
-                                <h1 className="articleTitle">{article.title}</h1>
-                                <div className="articleInfo">
-                                    <h3>{article.owner.username}</h3>
-                                    <div className="date">
-                                    <h4>Last Updated:</h4>
-                                    <p>{article.timeCreated !== article.timeUpdated ? <p>{localDate(article.timeUpdated)}</p> : null}</p>
-                                    </div>
-                                    <div className="date">
-                                        <h4>Posted:</h4>
-                                    <p>{localDate(article.timeCreated)}</p>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <p className="articleBody">
-                                {article.body}
-                            </p>
-                        </div>
+                        <h2>Loading article...</h2>
+                        <LiaSpinnerSolid className="spinner" />
                     </>
-                    : <h1>404 Article does not exist</h1>
+                    :
+                    article ?
+                        <>
+                            <div className="articleImageHolder">
+                                <img src={article.imageUrl} alt="articleImage" className="articleImage" />
+                            </div>
+                            <div className="mainInfo">
+                                <div>
+                                    <h1 className="articleTitle">{article.title}</h1>
+                                    <div className="articleInfo">
+                                        <h3>{article.owner.username}</h3>
+                                        {
+                                            article.timeCreated !== article.timeUpdated
+                                                ?
+                                                <div className="date">
+                                                    <h4>Last Updated:</h4>
+                                                    <p>{localDate(article.timeUpdated)}</p>
+                                                </div>
+                                                : null
+                                        }
+                                        <div className="date">
+                                            <h4>Posted:</h4>
+                                            <p>{localDate(article.timeCreated)}</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <p className="articleBody">
+                                    {article.body}
+                                </p>
+                            </div>
+                        </>
+                        : <h1>404 Article does not exist</h1>
             }
         </div>
     )

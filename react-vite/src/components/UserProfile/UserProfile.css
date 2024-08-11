@@ -252,14 +252,22 @@
 
 }
 
+.articleBlockProfile:hover{
+    cursor: pointer;
+    box-shadow: 5px 5px 1rem black;
+}
+
 .articlePBImgHolder{
-    height: 100%;
-    overflow: hidden;
-    border: 2px solid;
-    width: 25%;
+    height: 150px;
+    border: 7px solid;
+    width: 30%;
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
+    padding: 10px;
+    background-color: lightgray;
+    border-radius: 1rem;
 }
 
 .articlePBImgHolder > img{
@@ -277,6 +285,10 @@
     width: 10%;
     justify-content: center;
     align-items: center;
+}
+
+.titleProfile{
+    font-weight: bolder;
 }
 
 @media screen and (max-width:1350px){
@@ -299,9 +311,23 @@
         height: 200px;
         width: 80%;
     }
+    .profileProductImgHolder{
+        margin: 0%;
+        padding: 0%;
+        width: 256px;
+    }
     .articleBlockProfile{
         height: 200px;
-        width: 80%;
+        width: 60%;
+    }
+    .articlePBImgHolder{
+        margin: 0%;
+        padding: 0%;
+        width: 30%;
+    }
+    .bodyProfile{
+        height: 50%;
+        overflow: hidden;
     }
     .imageHolder{
         width:256px;
@@ -319,6 +345,21 @@
         justify-content: center;
     column-gap: 50px;
     }
+
+    .reviewBlock{
+        display: flex;
+        align-items: center;
+        gap: 50px;
+        border: 7px solid darkgray;
+        background-color: darkgray;
+        width: 60%;
+        justify-content: center;
+        padding: 10px;
+        border-radius: 1rem;
+    }
+    .reviewBody{
+        overflow: hidden;
+    }
 }
 
 @media screen and (max-width:750px){
@@ -333,6 +374,23 @@
     .profileProductBlock{
         height: 160px;
         width: 75%;
+    }
+    .profileProductImgHolder{
+        margin: 0%;
+        padding: 0%;
+        width: 512px;
+    }
+    .articleBlockProfile{
+        height: 160px;
+        width: 75%;
+    }
+    .articlePBImgHolder{
+        margin: 0%;
+        padding: 0%;
+        width: 256px;
+    }
+    .bodyProfile{
+        display: none;
     }
     .navBottom{
         flex-direction: column;
@@ -350,8 +408,17 @@
     .paginationNav{
         font-size: 20px;
     }
-
+    .titleProfile{
+        font-size: 16px;
+    }
     .mobileFilters{
         display: block;
+    }
+    .reviewBlock{
+        width: 80%;
+        padding: 0 30px;
+    }
+    .reviewBodyDescript{
+        /* display: none; */
     }
 }

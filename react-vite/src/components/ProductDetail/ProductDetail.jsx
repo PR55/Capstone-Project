@@ -89,7 +89,7 @@ function ProductDetail() {
                 :
                 product
                     ?
-                    <div>
+                    <div className="allInfo">
                         <div className="navBack">
                             <p
                                 className='placeholderNav'
@@ -135,6 +135,34 @@ function ProductDetail() {
                                     imageObj={product?.images[curPhoto]}
                                 />
                             </div>
+                            <div className="previewImageHolderMobile">
+                                {
+                                    product.images.map((image, index) => {
+                                        console.log(index)
+                                        return (
+                                            <div
+                                                key={index}
+                                                className={curPhoto == index ? "selected previewImageNot" : "previewImage"}
+                                            >
+                                                <img
+                                                    src={image.imageUrl}
+                                                    onClick={() => {
+                                                        if (curPhoto != index) {
+                                                            setCurPhoto(index)
+                                                        }
+                                                    }}
+                                                />
+                                            </div>
+                                        )
+                                    })
+                                }
+                                {product.images.length < 3 && (user && product.owner.id == user.id)
+                                    ?
+                                    <OpenAddPhoto
+                                        modalComponent={<AddImage obj={product} />}
+                                    />
+                                    : null}
+                            </div>
                             <div className="topDescrip">
                                 <p className="title">{product.name}</p>
                                 <div className="ownerDisplay">
@@ -173,6 +201,47 @@ function ProductDetail() {
                                         >Add to cart</button>
                                 }
                                 {product.purchased ? <p className="Error">SOLD</p> : null}
+                            </div>
+                            <div className="mobileDescrip">
+                            <div className="topDescripMobile">
+                                <p className="title">{product.name}</p>
+                                <div className="ownerDisplay">
+                                    <p className="ownerDisplayName" onClick={e => {
+                                        e.stopPropagation()
+                                        e.preventDefault()
+                                        navigate(`/user/${product.owner.id}`)
+                                    }}>{product.owner.username}</p>
+                                    <p className="ratingDisplay"><FaStar className="star" /> <FaRegStar className="starAbs" />{ownerRating.toFixed(1)}</p>
+                                </div>
+                                <div className="topTags">
+                                    {
+                                        product.tags.map(tag => (
+                                            <p key={tag.id}>{tag.tag}</p>
+                                        ))
+                                    }
+                                </div>
+                            </div>
+                            <div className="topButtonsMobile">
+                                <p className="priceDetail">${product.price.toFixed(2)}</p>
+                                {/* <button>Buy Now</button> */}
+                                {
+                                    (user && product.owner.id == user.id) ?
+                                        <button
+                                            onClick={() => navigate('edit')}
+                                            className="cartButtonDetail"
+                                            disabled={product.purchased}>Update Product</button>
+                                        :
+                                        <button
+                                            className="cartButtonDetail"
+                                            disabled={!user || isInCart(product.id) || product.purchased}
+                                            onClick={() => {
+                                                addToCart(product.id)
+                                                setUpdate(!updateButton)
+                                            }}
+                                        >Add to cart</button>
+                                }
+                                {product.purchased ? <p className="Error">SOLD</p> : null}
+                            </div>
                             </div>
                         </div>
                         <div className='bottomInfo'>

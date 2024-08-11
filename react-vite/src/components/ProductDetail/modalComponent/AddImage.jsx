@@ -62,7 +62,7 @@ function AddImage({ obj }) {
                         onChange={e => setImage(e.target.files[0])} />
                 </div>
                 {errors?.image ? <p className="errors">{errors.image}</p> : null}
-                <button disabled={deleting || Object.values(errors).length}>Submit Photo</button>
+                <button className='submitButton' disabled={deleting || Object.values(errors).length}>Submit Photo</button>
             </form>
 
         </div>

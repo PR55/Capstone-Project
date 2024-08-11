@@ -17,6 +17,42 @@ function TransactionHistory() {
 
     const [isLoading, setLoading] = useState(false)
 
+    const [pageNumbers, setPageNumbers] = useState([])
+    const [currentPage, setCurrentPage] = useState(1)
+    const numProductsForPage = 6
+
+    const parseNum = 3
+
+    function setPages(arr, page = 1) {
+
+        if (!arr?.length) {
+            return
+        }
+
+        if (arr.length < numProductsForPage) {
+            setSorted(arr)
+            setPageNumbers([1])
+            return
+        }
+
+        let val = arr.length / numProductsForPage;
+
+        let arr2 = arr.slice((numProductsForPage * (page - 1)), numProductsForPage * page)
+        setSorted(arr2)
+
+        let pageArr = []
+
+        for (let i = 0; i < val; i++) {
+            pageArr.push(i + 1)
+        }
+
+        setPageNumbers(pageArr)
+
+        if (page > pageArr[pageArr.length - 1]) {
+            setCurrentPage(pageArr[pageArr.length - 1])
+        }
+    }
+
     async function delayThunkCall() {
 
         var longTransacLoad = null
@@ -28,6 +64,24 @@ function TransactionHistory() {
             setLoading(true)
             longTransacLoad = setTimeout(async () => {
                 await dispatch(thunkTransactionsGet())
+                setLoading(false)
+                return 'Grab Complete'
+            }, 1000)
+        }
+
+    }
+
+    async function delayThunkCall2(arr) {
+
+        var longTransacLoad = null
+
+        if(longTransacLoad!= null && !isLoading){
+            window.clearTimeout(longTransacLoad)
+            longTransacLoad = null
+        }else{
+            setLoading(true)
+            longTransacLoad = setTimeout(async () => {
+                await setPages(arr, currentPage)
                 setLoading(false)
                 return 'Grab Complete'
             }, 1000)
@@ -63,9 +117,10 @@ function TransactionHistory() {
                 }
             })
 
-            setSorted(arr)
+            delayThunkCall2(arr)
+
         }
-    }, [transactions])
+    }, [transactions, currentPage])
 
     return (
         <div className='orders-Page'>
@@ -116,6 +171,91 @@ function TransactionHistory() {
                     : <h1>Go purchase some products, none have been made for this user!</h1>
             }
             </div>
+            <div className='paginationNav'>
+                            {
+                                pageNumbers.length && currentPage !== 1
+                                    ?
+                                    <p
+                                        onClick={e => {
+                                            e.preventDefault()
+                                            e.stopPropagation()
+                                            setPageNumbers([])
+                                            setCurrentPage(1)
+                                            window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
+                                        }}
+                                        className='decoratorPageNums'
+                                    >{'<<'}</p>
+                                    :
+                                    null
+                            }
+                            {
+                                pageNumbers.length && currentPage > 1
+                                    ?
+                                    <p
+                                        onClick={e => {
+                                            e.preventDefault()
+                                            e.stopPropagation()
+                                            setPageNumbers([])
+                                            setCurrentPage(currentPage - 1)
+                                            window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
+                                        }}
+                                        className='decoratorPageNums'
+                                    >{'<'}</p>
+                                    :
+                                    null
+                            }
+                            {
+                                pageNumbers.map((number, index) => {
+                                    if (number >= currentPage - (parseNum - 1) && number < currentPage + parseNum) {
+                                        return (
+                                            <p key={index}
+                                                onClick={e => {
+                                                    e.preventDefault()
+                                                    e.stopPropagation()
+                                                    setPageNumbers([])
+                                                    setCurrentPage(number)
+                                                    window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
+                                                }}
+                                                className={number === currentPage ? 'Active' : 'inActive'}
+                                            >{number}</p>
+                                        )
+                                    }
+                                })
+                            }
+                            {
+                                pageNumbers.length && currentPage < pageNumbers[pageNumbers.length - 1]
+                                    ?
+                                    <p
+                                        onClick={e => {
+                                            e.preventDefault()
+                                            e.stopPropagation()
+                                            setPageNumbers([])
+                                            setCurrentPage(currentPage + 1)
+                                            window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
+                                        }}
+                                        className='decoratorPageNums'
+                                    >{'>'}</p>
+                                    :
+                                    null
+                            }
+                            {
+                                pageNumbers.length && currentPage !== pageNumbers[pageNumbers.length - 1]
+                                    ?
+                                    <p
+                                        onClick={e => {
+                                            e.preventDefault()
+                                            e.stopPropagation()
+                                            setPageNumbers([])
+                                            setCurrentPage(pageNumbers[pageNumbers.length - 1])
+                                            window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
+                                        }}
+                                        className='decoratorPageNums'
+                                    >{'>>'}</p>
+                                    :
+                                    null
+                            }
+
+                        </div>
         </div>
     )
 }

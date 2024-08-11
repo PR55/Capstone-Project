@@ -81,7 +81,7 @@ function ArticleBrowser() {
             sortArr()
             setLoading(false)
             return 'Complete!'
-        }, 400)
+        }, 1000)
         // await longLoad
     }
 
@@ -98,9 +98,11 @@ function ArticleBrowser() {
     return (
         <div className='displayHolder'>
             <div className='productsDisplay'>
+                <div className='searchHolder'>
                 <div className='searchBarVisualArticle'>
                     <IoIosSearch />
                     <input className='searchBarArticle' type="search" value={searchName} onChange={e => setSearch(e.target.value)} />
+                </div>
                 </div>
                 <div className='displayAndFilter'>
                     <div className='blockHolder'>

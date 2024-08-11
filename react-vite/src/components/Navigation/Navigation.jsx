@@ -130,14 +130,14 @@ function Navigation() {
               ?
               <>
                 <h1
-                  className="hamburgerButton"
+                  className="hamburgerButtonUser"
                   onClick={(e) => {
                     e.preventDefault();
                     setShowHamburger(false)
                     navigate('/login')
                   }}>Login</h1>
                 <h1
-                  className="hamburgerButton" onClick={(e) => {
+                  className="hamburgerButtonUser" onClick={(e) => {
                     e.preventDefault();
                     setShowHamburger(false)
                     navigate('/signup')
@@ -146,7 +146,7 @@ function Navigation() {
               :
               <>
               <h1
-                  className="hamburgerButton"
+                  className="hamburgerButtonUser"
                   onClick={e => {
                     e.stopPropagation()
                     setShowHamburger(false)
@@ -154,7 +154,7 @@ function Navigation() {
                   }}
                 >View Cart</h1>
                 <h1
-                  className="hamburgerButton"
+                  className="hamburgerButtonUser"
                   onClick={e => {
                     e.stopPropagation()
                     setShowHamburger(false)
@@ -162,7 +162,7 @@ function Navigation() {
                   }}
                 >View Profile</h1>
                 <h1
-                  className="hamburgerButton"
+                  className="hamburgerButtonUser"
                   onClick={e => {
                     e.stopPropagation()
                     setShowHamburger(false)
@@ -170,7 +170,7 @@ function Navigation() {
                   }}
                 >Manage</h1>
                 <h1
-                  className="hamburgerButton"
+                  className="hamburgerButtonUser"
                   onClick={e => {
                     e.stopPropagation()
                     setShowHamburger(false)
@@ -178,7 +178,7 @@ function Navigation() {
                   }}
                 >Transactions</h1>
                 <h1
-                  className="hamburgerButton"
+                  className="hamburgerButtonUser"
                   onClick={logout}
                 >Log Out</h1>
               </>

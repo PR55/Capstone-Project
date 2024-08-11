@@ -148,3 +148,39 @@
     color: azure;
     cursor: pointer;
 }
+
+@media screen and (max-width:1200px){
+    .cartHolder{
+        width: 75%;
+        display: flex;
+        flex-direction: column;
+        margin: 0 auto;
+        justify-content: center;
+        align-items: center;
+        border: 20px solid;
+        border-radius: .75rem;
+        background-color: aliceblue;
+    }
+    .cartInfo{
+        padding-top: 20px;
+        flex-direction: column;
+    }
+}
+
+@media screen and (max-width:750px){
+    .cartHolder{
+        width: 75%;
+        display: flex;
+        flex-direction: column;
+        margin: 0 auto;
+        justify-content: center;
+        align-items: center;
+        border: 20px solid;
+        border-radius: .75rem;
+        background-color: aliceblue;
+    }
+    .cartInfo{
+        padding-top: 20px;
+        flex-direction: column;
+    }
+}

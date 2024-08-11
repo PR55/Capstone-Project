@@ -1,5 +1,4 @@
 .searchBarVisualArticle{
-    margin-left: 25%;
     display: flex;
     padding: 0;
     align-items: center;
@@ -72,6 +71,11 @@
     gap:10px;
 }
 
+.description > p{
+    margin: 0%;
+    padding: 0%;
+}
+
 .title{
     padding: 0;
     margin: 0;
@@ -98,4 +102,64 @@
     margin-top: 10px;
     text-wrap: wrap;
     word-break: break-all;
+}
+
+@media screen and (max-width:1050px){
+    .productBlockArticle{
+        height: 200px;
+        width: 80%;
+    }
+
+    .body {
+        width: 95%;
+    }
+    .imageHolder{
+        width:256px;
+    }
+
+    .paginationNav{
+        font-size: 22px;
+    }
+    .mobileFilters{
+        display: block;
+    }
+    .buttonHolderFilter{
+        display: block;
+    }
+}
+
+@media screen and (max-width:750px){
+    .blockHolder{
+        min-height: 100px;
+    }
+    .productBlockArticle{
+        height: 160px;
+        width: 55%;
+        align-items: center;
+    }
+    .description > p{
+        padding: 0;
+        margin: 0%;
+    }
+    .body {
+        display: none;
+    }
+    .browseTags > p{
+        margin: 0;
+    }
+    .browseTags{
+        display: none;
+    }
+    .imageHolder{
+        height: 85%;
+        width: 60%;
+    }
+
+    .paginationNav{
+        font-size: 20px;
+    }
+
+    .mobileFilters{
+        display: block;
+    }
 }

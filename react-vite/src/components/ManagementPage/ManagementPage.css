@@ -1,15 +1,15 @@
-.manageHolder{
+.manageHolder {
     min-height: 500px;
     padding-bottom: 50px;
 }
 
-.manageInfo{
+.manageInfo {
     display: flex;
     justify-content: space-evenly;
     font-size: 24px;
 }
 
-.toUpdateButton{
+.toUpdateButton {
     border: 1px solid;
     display: flex;
     justify-content: center;
@@ -19,16 +19,23 @@
     border-radius: .5rem;
 }
 
-.toUpdateButton:hover{
+.bodyManage {
+    word-break: break-all;
+    text-overflow: ellipsis;
+    overflow:hidden;
+    width: 100%;
+}
+
+.toUpdateButton:hover {
     background-color: rgb(217, 225, 232);
     cursor: pointer;
 }
 
-.toUpdateButton:hover{
+.toUpdateButton:hover {
     cursor: pointer;
 }
 
-.toDeleteButton{
+.toDeleteButton {
     border: 1px solid;
     display: flex;
     justify-content: center;
@@ -38,45 +45,45 @@
     border-radius: .5rem;
 }
 
-.toDeleteButton:hover{
+.toDeleteButton:hover {
     border-color: black;
     color: aliceblue;
     background-color: red;
     cursor: pointer;
 }
 
-.disabled{
+.disabled {
     opacity: 50%;
     cursor: default;
 }
 
-.disabled:hover{
+.disabled:hover {
     cursor: default;
     background-color: aliceblue;
     color: black;
 }
 
-.activeHeader{
+.activeHeader {
     text-decoration: underline;
     font-weight: bold;
     cursor: default;
 }
 
-.inactiveHeader{
+.inactiveHeader {
     color: gray;
 }
 
-.inactiveHeader:hover{
+.inactiveHeader:hover {
     cursor: pointer;
     text-decoration: underline;
 }
 
-.manageTags{
+.manageTags {
     display: flex;
     column-gap: 5px;
 }
 
-.manageTags > p{
+.manageTags>p {
     background-color: gray;
     border: 2px solid gray;
     color: azure;
@@ -84,8 +91,8 @@
     padding: 4px;
 }
 
-.manageDisplay{
-    display:flex;
+.manageDisplay {
+    display: flex;
     flex-direction: column;
     row-gap: 20px;
     margin: 0 auto;
@@ -93,7 +100,7 @@
     align-items: center;
 }
 
-.productBlockManage{
+.productBlockManage {
     display: flex;
     margin: 0 auto;
     flex-direction: row;
@@ -106,23 +113,23 @@
     border-radius: 3rem;
 }
 
-.productBlockManage:hover{
+.productBlockManage:hover {
     cursor: pointer;
     box-shadow: 5px 5px 1rem;
 }
 
-.manageDescription{
+.manageDescription {
     width: 500px;
     display: flex;
     flex-direction: column;
-    gap:10px;
+    gap: 10px;
 }
 
-.priceManage{
-    margin:0;
+.priceManage {
+    margin: 0;
 }
 
-.spinner{
+.spinner {
     color: black;
     font-size: 4rem;
     animation-name: spinner;
@@ -131,18 +138,19 @@
     animation-timing-function: ease-out;
 }
 
-@keyframes spinner{
-    0%{
-        scale:1.0;
+@keyframes spinner {
+    0% {
+        scale: 1.0;
         transform: rotate(0deg);
     }
-    100%{
-        scale:1.0;
+
+    100% {
+        scale: 1.0;
         transform: rotate(720deg);
     }
 }
 
-.reviewBlockManage{
+.reviewBlockManage {
     display: flex;
     margin: 0 auto;
     flex-direction: row;
@@ -155,20 +163,20 @@
     gap: 50px;
 }
 
-.reviewBlockManage:hover{
+.reviewBlockManage:hover {
     cursor: pointer;
     box-shadow: 5px 5px 1rem;
 }
 
-.reviewBlockMLeft{
-    width:25%;
+.reviewBlockMLeft {
+    width: 25%;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
 }
 
-.reviewBImageHolder{
+.reviewBImageHolder {
     height: 75%;
     width: 100%;
     border: 7px solid gray;
@@ -180,16 +188,16 @@
     border-radius: 1rem;
 }
 
-.reviewBImageHolder > img{
+.reviewBImageHolder>img {
     max-height: 100%;
 }
 
-.reviewBInfo{
+.reviewBInfo {
     width: 50%;
     height: 100%;
 }
 
-.reviewIDescript{
+.reviewIDescript {
     background-color: white;
     height: 80%;
     width: 100%;
@@ -200,80 +208,102 @@
     border-radius: 1rem;
 }
 
-.manageRating{
+.manageRating {
     display: flex;
     align-items: center;
 }
 
-@media screen and (max-width:1050px){
-    .manageHolder{
+@media screen and (max-width:1050px) {
+    .manageHolder {
         width: 100%;
         justify-content: center;
         align-items: center;
         margin: 0 auto;
     }
-    .productBlockManage{
+
+    .productBlockManage {
         height: 200px;
         width: 80%;
     }
-    .reviewBlockManage{
+
+    .reviewBlockManage {
         height: 200px;
         width: 80%;
     }
-    .reviewIDescript{
+
+    .bodyManage {
+        width: 95%;
+    }
+
+    .reviewIDescript {
         height: 65%;
     }
-    .imageHolder{
-        width:256px;
+
+    .imageHolder {
+        width: 256px;
     }
-    .manageTags > p{
+
+    .manageTags>p {
         margin: 0;
     }
-    .manageTags{
+
+    .manageTags {
         display: none;
     }
-    .paginationNav{
+
+    .paginationNav {
         font-size: 22px;
     }
-    .manageInfo{
+
+    .manageInfo {
         justify-content: center;
-    column-gap: 50px;
+        column-gap: 50px;
     }
 }
 
-@media screen and (max-width:750px){
-    .blockHolder{
+@media screen and (max-width:750px) {
+    .blockHolder {
         min-height: 100px;
     }
-    .manageInfo{
+
+    .manageInfo {
         flex-direction: column;
         justify-content: center;
         align-items: center;
     }
-    .productBlockManage{
+
+    .productBlockManage {
         height: 160px;
     }
-    .reviewBlockManage{
+
+    .reviewBlockManage {
         height: 160px;
     }
-    .reviewIDescript{
+
+    .bodyManage {
+        display: none;
+    }
+
+    .reviewIDescript {
         height: 40%;
         overflow-y: scroll;
     }
-    .manageDescription > p{
+
+    .manageDescription>p {
         padding: 0;
         margin: 0%;
     }
-    .imageHolder{
+
+    .imageHolder {
         height: 85%;
         width: 60%;
     }
 
-    .paginationNav{
+    .paginationNav {
         font-size: 20px;
     }
 
-    .mobileFilters{
+    .mobileFilters {
         display: block;
     }
 }
