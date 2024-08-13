@@ -56,6 +56,7 @@ function ProductBrowser() {
 
     async function LoadProduct() {
         await dispatch(thunkProductsLoad())
+        await processArr()
     }
 
     function sortArr() {
@@ -139,7 +140,8 @@ function ProductBrowser() {
             setPageNumbers([])
             window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
             setLoading(true)
-            longLoad = setTimeout(() => {
+            longLoad = setTimeout(async () => {
+                await LoadProduct()
                 sortArr()
                 setLoading(false)
                 return 'Sort complete!'

@@ -39,7 +39,6 @@ function Navigation() {
   useEffect(()=>{
     if(showHamburger){
       document.body.className = 'boiceHolder'
-      window.scrollTo({top:0, left:0, behavior:"instant"})
     }else{
       document.body.className = ''
     }
@@ -81,6 +80,7 @@ function Navigation() {
 
       <div className="HamburgerMenu" onClick={(e) => {
         e.stopPropagation()
+        window.scrollTo({top:0, left:0, behavior:"instant"})
         setShowHamburger(true)
       }}>
         <RxHamburgerMenu />
