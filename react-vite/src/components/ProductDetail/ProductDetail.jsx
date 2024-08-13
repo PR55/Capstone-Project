@@ -100,7 +100,6 @@ function ProductDetail() {
                             <div className="previewImageHolder">
                                 {
                                     product.images.map((image, index) => {
-                                        console.log(index)
                                         return (
                                             <div
                                                 key={index}
@@ -138,7 +137,6 @@ function ProductDetail() {
                             <div className="previewImageHolderMobile">
                                 {
                                     product.images.map((image, index) => {
-                                        console.log(index)
                                         return (
                                             <div
                                                 key={index}

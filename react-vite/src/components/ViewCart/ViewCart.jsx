@@ -37,7 +37,6 @@ function ViewCart() {
         let sendArr = []
 
         for(let id of idArr){
-            // console.log(id)
             sendArr.push({'id':id})
         }
 
@@ -45,13 +44,11 @@ function ViewCart() {
             'products':[...idArr]
         }
 
-        // console.log(formData.getAll('products'))
 
         let d = await dispatch(thunkTransactionCreate(payload))
 
 
         if(d?.errors){
-            console.log(d.errors)
             return;
         }else{
             clearCart();

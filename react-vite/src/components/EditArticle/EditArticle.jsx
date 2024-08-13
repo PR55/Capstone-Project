@@ -84,7 +84,6 @@ function EditArticle() {
     }, [title, body, image, tagChangeBool, replaceImage])
 
     const manageTags = (e) => {
-        // console.log(`I have been clicked! my value is ${e.target.value}`)
         let arr = tags
         if (e.target.checked) {
             arr.push(e.target.value)
@@ -119,10 +118,8 @@ function EditArticle() {
 
         setPosting(true);
         let d = await dispatch(updateOneArticle(formData, articleId));
-        // console.log(d?.errors)
         if (d?.errors) {
             setErrors(d.errors)
-            console.log(d.errors)
             setPosting(false)
             return
         }

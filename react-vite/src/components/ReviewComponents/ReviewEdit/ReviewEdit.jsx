@@ -74,7 +74,6 @@ export function ReviewEdit() {
         let d = await dispatch(thunkUpdateReview(formData, productR?.id));
 
         if(d?.errors || !d?.id){
-            console.log(d)
             if(d?.errors){
                 setErrors(d.errors)
             }

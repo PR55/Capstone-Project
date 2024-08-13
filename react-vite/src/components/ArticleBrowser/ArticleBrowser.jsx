@@ -34,13 +34,11 @@ function ArticleBrowser() {
     }, [])
 
     useEffect(() => {
-        // console.log('adding to cart!')
     }, [loading])
 
     async function sortArr(){
         let disArr = []
         for (let product of Object.values(products)) {
-            // console.log(product)
             if (searchName && product.title.toLowerCase().includes(searchName.toLowerCase())) {
                 await disArr.push(product)
             } else if (!searchName) {

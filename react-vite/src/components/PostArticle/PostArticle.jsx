@@ -26,11 +26,7 @@ function PostArticle() {
 
         let splitTitle = title.split('')
 
-        // console.log(splitTitle)
-
         let filtered = splitTitle.filter(char => char !== ' ' && char != '')
-
-        // console.log(filtered)
 
         if (!filtered.length) {
             errObj.title = 'Cannot submit an empty string'
@@ -69,7 +65,6 @@ function PostArticle() {
     }, [title, body, image, tagChangeBool])
 
     const manageTags = (e) => {
-        // console.log(`I have been clicked! my value is ${e.target.value}`)
         let arr = tags
         if (e.target.checked) {
             arr.push(e.target.value)
@@ -102,10 +97,8 @@ function PostArticle() {
 
         setPosting(true);
         let d = await dispatch(makeOneArticle(formData));
-        // console.log(d?.errors)
         if (d?.errors) {
             setErrors(d.errors)
-            console.log(d.errors)
             setPosting(false)
             return
         }

@@ -10,7 +10,6 @@ export function addToCart(id){
 
     cart += `+=${id}`
 
-    console.log(cart)
     localStorage.setItem('Cart', cart)
 }
 
@@ -19,7 +18,6 @@ export function isInCart(id){
 
     if(!cart) return false
 
-    console.log(cart)
 
     let cartArr = [...cart.split(`+=`).filter(num => num)]
 
@@ -33,7 +31,6 @@ export function allInCart(){
 
     if(!cart) return false
 
-    // console.log(cart)
 
     let cartArr = [...cart.split(`+=`).filter(num => num)]
 
@@ -46,8 +43,6 @@ export function calculateFunds(obj){
     let cart = localStorage.getItem('Cart')
 
     if(!cart) return false
-
-    // console.log(cart)
 
     let cartArr = [...cart.split(`+=`).filter(num => num)]
 

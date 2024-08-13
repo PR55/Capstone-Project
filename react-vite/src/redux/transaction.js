@@ -37,7 +37,6 @@ export const thunkTransactionsGet = (payload) => async (dispatch) =>{
         return transactions
     }else{
         const data = await response.json()
-        console.log(data)
     }
 }
 
@@ -54,7 +53,6 @@ export const thunkTransactionOne = (id) => async (dispatch) =>{
         return transaction
     }else{
         const data = await response.json()
-        console.log(data)
     }
 }
 
@@ -76,7 +74,6 @@ export const thunkTransactionCreate = (payload) => async (dispatch) =>{
         return transaction
     }else{
         const data = await response.json()
-        console.log(data)
     }
 }
 

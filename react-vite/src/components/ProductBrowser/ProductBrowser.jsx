@@ -52,7 +52,6 @@ function ProductBrowser() {
     }, [])
 
     useEffect(() => {
-        // console.log('adding to cart!')
     }, [loading])
 
     async function LoadProduct() {
@@ -131,7 +130,6 @@ function ProductBrowser() {
     }
 
     function processArr() {
-        // console.log()
         var longLoad = null
 
         if (longLoad != null && !loading) {
@@ -167,7 +165,6 @@ function ProductBrowser() {
     }, [window.location.pathname])
 
     const manageTags = (e) => {
-        // console.log(`I have been clicked! my value is ${e.target.value}`)
         e.preventDefault()
         e.stopPropagation()
         setCurrentPage(1)

@@ -93,7 +93,6 @@ function ProductForm() {
     },[])
 
     const manageTags = (e) => {
-        // console.log(`I have been clicked! my value is ${e.target.value}`)
         let arr = tags
         if (e.target.checked) {
             arr.push(e.target.value)
@@ -122,16 +121,13 @@ function ProductForm() {
         }
         formData.append("isTraditional", type);
         formData.append("image", image);
-        console.log(formData.entries().toArray());
         // return
         // aws uploads can be a bit slow—displaying
         // some sort of loading message is a good idea
         setPosting(true);
         let d = await dispatch(thunkNewProduct(formData));
-        // console.log(d?.errors)
         if (d?.errors) {
             setErrors(d.errors)
-            console.log(d.errors)
             setPosting(false)
             return
         }
@@ -139,8 +135,6 @@ function ProductForm() {
         navigate(`/products/${d.id}`)
         // history.push("/images");
     }
-
-    // console.log(type)
 
     return (
         <div className='productFormDiv'

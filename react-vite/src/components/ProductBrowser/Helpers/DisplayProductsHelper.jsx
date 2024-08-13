@@ -7,7 +7,6 @@ function DisplayProductsHelper({products, searchTags, user, navigate}){
 
 
     useEffect(() => {
-        // console.log('adding to cart!')
     }, [processCart])
 
     return(

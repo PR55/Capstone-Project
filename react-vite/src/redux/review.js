@@ -50,7 +50,6 @@ export const thunkNewReview = (payload, id) => async (dispatch) => {
         return review;
     }else{
         const data = await response.json()
-        console.log(response)
         if(data?.errors) return data;
     }
 }
@@ -66,7 +65,6 @@ export const thunkUpdateReview = (payload, id) => async (dispatch) => {
         return review;
     }else{
         const data = await response.json()
-        console.log(response)
         if(data?.errors) return data;
     }
 }

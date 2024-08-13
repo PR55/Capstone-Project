@@ -45,9 +45,7 @@ export const thunkNewProduct = (payload) => async (dispatch) => {
         await dispatch(loadProduct(product));
         return product
     } else {
-        console.log("There was an error making your post!")
         const data = await response.json()
-        console.log(data)
         return data
     }
 }
@@ -77,10 +75,7 @@ export const thunkUpdateProduct = (payload, id) => async (dispatch) => {
         await dispatch(loadProduct(product));
         return product
     } else {
-        console.log("There was an error making your post!")
-        console.log(response)
         const data = await response.json()
-        console.log(data)
         return data
     }
 }

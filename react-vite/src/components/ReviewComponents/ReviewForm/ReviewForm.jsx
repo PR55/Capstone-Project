@@ -68,7 +68,6 @@ export function ReviewForm() {
         let d = await dispatch(thunkNewReview(formData, product.id));
 
         if(d?.errors || !d?.id){
-            console.log(d)
             if(d?.errors){
                 setErrors(d.errors)
             }

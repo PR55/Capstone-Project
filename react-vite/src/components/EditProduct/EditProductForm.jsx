@@ -47,7 +47,6 @@ function EditProductForm() {
 
             setTags(tagArr)
             setTagChangeBool(!tagChangeBool)
-            console.log(product.isTraditional)
         }
     }, [product])
 
@@ -112,7 +111,6 @@ function EditProductForm() {
     const navigate = useNavigate()
 
     const manageTags = (e) => {
-        // console.log(`I have been clicked! my value is ${e.target.value}`)
         let arr = tags
         if (e.target.checked) {
             arr.push(e.target.value)
@@ -143,16 +141,13 @@ function EditProductForm() {
         formData.append("deleteImages",deleteAll)
         formData.append("addImage",addImage)
         formData.append("image", image);
-        console.log(formData.entries().toArray());
         // return
         // aws uploads can be a bit slow—displaying
         // some sort of loading message is a good idea
         setPosting(true);
         let d = await dispatch(thunkUpdateProduct(formData, productId));
-        // console.log(d?.errors)
         if (d?.errors) {
             setErrors(d.errors)
-            console.log(d.errors)
             return
         }
 
