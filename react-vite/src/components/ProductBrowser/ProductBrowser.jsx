@@ -56,7 +56,6 @@ function ProductBrowser() {
 
     async function LoadProduct() {
         await dispatch(thunkProductsLoad())
-        await processArr()
     }
 
     function sortArr() {
@@ -136,7 +135,7 @@ function ProductBrowser() {
         if (longLoad != null && !loading) {
             window.clearTimeout(longLoad)
             longLoad = null
-        } else {
+        } else if(longLoad === null){
             setPageNumbers([])
             window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
             setLoading(true)
@@ -150,7 +149,7 @@ function ProductBrowser() {
     }
 
     useEffect(() => {
-        if (products) {
+        if (Object.values(products).length) {
             setProductsAll(Object.values(products))
             processArr()
         }
