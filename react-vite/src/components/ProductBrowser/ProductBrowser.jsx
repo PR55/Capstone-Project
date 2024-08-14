@@ -150,6 +150,8 @@ function ProductBrowser() {
         if (Object.values(products).length) {
             setProductsAll(Object.values(products))
             processArr()
+        }else{
+            LoadProduct()
         }
     }, [products, searchName, searchTags.length,currentPage, dispatch])
 
