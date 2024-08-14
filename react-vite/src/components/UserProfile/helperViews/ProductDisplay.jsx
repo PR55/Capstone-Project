@@ -85,11 +85,17 @@ function ProductDisplay({
                                     </div>
                                 </div>
                                 <div className="buttonsProfile">
-                                    <AddToCart
-                                        user={user} product={product}
-                                        navigate={navigate} setProcess={setProcess}
-                                        processCart={processCart}
-                                    />
+                                    {
+                                        user
+                                            ?
+                                            <AddToCart
+                                                user={user} product={product}
+                                                navigate={navigate} setProcess={setProcess}
+                                                processCart={processCart}
+                                            />
+                                            : null
+                                    }
+
                                 </div>
                             </div>
                         ))}

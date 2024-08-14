@@ -1,6 +1,7 @@
 from app.models import ProductImage, Product,db, ProductTag, User
 from app.api.aws_helpers import get_unique_filename, upload_file_to_s3, remove_file_from_s3
 from flask import Blueprint, request
+from app.api.protected_urls import product_images
 from flask_login import login_required, current_user
 from app.forms import SinglePhotoForm
 
@@ -36,7 +37,7 @@ def add_photo(id):
             # if the dictionary doesn't have a url key
             # it means that there was an error when you tried to upload
             # so you send back that error message (and you printed it above)
-            return {'message':'Upload Failed', 'errors':[upload]}
+            return {'message':'Upload Failed', 'errors':[upload]}, 500
 
         url = upload['url']
 
@@ -75,6 +76,14 @@ def delete_one_photo(id):
 
     if product.ownerId != current_user.id:
         return {'message':'Must be the owner to perform this action'}, 403
+
+    res = True
+    if image.image_url not in product_images:
+        res = remove_file_from_s3(image.image_url)
+    if res == True:
+        db.session.delete(image)
+    else:
+        return {'message':'An AWS error occured', 'errors':res['errors']}, 500
 
     db.session.delete(image)
     db.session.commit()

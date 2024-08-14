@@ -53,8 +53,6 @@ function ProductBrowser() {
 
 
     async function LoadProduct() {
-        //window url cuasing infinite load
-        console.log('Calling')
         setLoading(true)
         await dispatch(thunkProductsLoad())
     }

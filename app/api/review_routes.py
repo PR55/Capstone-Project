@@ -18,7 +18,6 @@ def my_reviews():
 
     return {'reviews':reviews}
 @review_routes.route('/<int:id>')
-@login_required
 def one_review(id):
     review = ProductReview.query.get(id)
     if not review:
@@ -140,7 +139,7 @@ def update_review(id):
     if form.errors:
         return {'message':'Bad Request', 'errors':form.errors}, 400
 
-@review_routes.route('/<int:id>', methods=['Delete'])
+@review_routes.route('/<int:id>', methods=['DELETE'])
 @login_required
 def delete_review(id):
     '''

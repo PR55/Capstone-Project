@@ -75,7 +75,7 @@ def new_article():
             # if the dictionary doesn't have a url key
             # it means that there was an error when you tried to upload
             # so you send back that error message (and you printed it above)
-            return {'message':'Upload Failed', 'errors':[upload]}
+            return {'message':'Upload Failed', 'errors':[upload]},500
 
         url = upload['url']
 
@@ -108,7 +108,7 @@ def new_article():
 
 
     if form.errors:
-        return {'message':'Bad Requst', 'errors':form.errors}, 400
+        return {'message':'Bad Request', 'errors':form.errors}, 400
 
 @article_routes.route('/<int:id>', methods=['PUT'])
 @login_required
