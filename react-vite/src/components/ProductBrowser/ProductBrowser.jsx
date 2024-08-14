@@ -103,8 +103,6 @@ function ProductBrowser() {
         }
 
         setPages(disArr, currentPage)
-
-        // setProducts(disArr)
     }
 
     function setPages(arr, page = 1) {
@@ -153,7 +151,7 @@ function ProductBrowser() {
             setProductsAll(Object.values(products))
             processArr()
         }
-    }, [products, searchName, currentPage])
+    }, [products, searchName, searchTags.length,currentPage, dispatch])
 
     useEffect(() => {
         setTagArr(!(window.location.pathname === '/electronic/products') ? traditional_tags.map(tag => searchTags.includes(tag)) : electronic_tags.map(tag => searchTags.includes(tag)))
