@@ -51,10 +51,11 @@ function ProductBrowser() {
         }
     }, [])
 
-    useEffect(() => {
-    }, [loading])
 
     async function LoadProduct() {
+        //window url cuasing infinite load
+        console.log('Calling')
+        setLoading(true)
         await dispatch(thunkProductsLoad())
     }
 
@@ -140,7 +141,6 @@ function ProductBrowser() {
             window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
             setLoading(true)
             longLoad = setTimeout(async () => {
-                await LoadProduct()
                 sortArr()
                 setLoading(false)
                 return 'Sort complete!'
@@ -153,15 +153,13 @@ function ProductBrowser() {
             setProductsAll(Object.values(products))
             processArr()
         }
-    }, [products, searchName, searchTags.length, currentPage])
+    }, [products, searchName, currentPage])
 
     useEffect(() => {
         setTagArr(!(window.location.pathname === '/electronic/products') ? traditional_tags.map(tag => searchTags.includes(tag)) : electronic_tags.map(tag => searchTags.includes(tag)))
     }, [tagChangeBool])
 
     useEffect(() => {
-        setTagSearch([])
-        setTagChangeBool(!tagChangeBool)
         LoadProduct()
     }, [window.location.pathname])
 
