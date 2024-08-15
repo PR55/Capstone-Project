@@ -20,7 +20,7 @@ def add_photo(id):
     if not product:
         return {'message':'specified product could not be found'}, 404
     elif product.ownerId != current_user.id:
-        return {'message':'Must be owner of the product'}, 403
+        return {'message':'Must be owner of the product'}, 401
 
     form = SinglePhotoForm()
     form['csrf_token'].data = request.cookies['csrf_token']
@@ -75,7 +75,7 @@ def delete_one_photo(id):
     product = Product.query.get(image.productId)
 
     if product.ownerId != current_user.id:
-        return {'message':'Must be the owner to perform this action'}, 403
+        return {'message':'Must be the owner to perform this action'}, 401
 
     res = True
     if image.image_url not in product_images:

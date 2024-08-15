@@ -132,7 +132,7 @@ def update_article(id):
         return {'message':'Article not found'},404
 
     if article.ownerId != current_user.id:
-        return {'message':'Must be owner of the article'},403
+        return {'message':'Must be owner of the article'},401
 
     form = ArticleFormUpdate()
     form['csrf_token'].data = request.cookies['csrf_token']
@@ -211,7 +211,7 @@ def delete_article(id):
         return {'message':'Article could not be found'}, 404
 
     if article.ownerId != user.id:
-        return {'message':'Not owner of the article'}, 403
+        return {'message':'Not owner of the article'}, 401
 
     res = True
     if article.articleImage not in article_images:

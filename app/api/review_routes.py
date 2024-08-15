@@ -149,6 +149,8 @@ def delete_review(id):
 
     if not review:
         return {'message':'Review does not exist'}, 404
+    elif review.ownerId != current_user.id:
+        return {'message':'Not the owner of this review'}, 401
 
     db.session.delete(review)
     db.session.commit()

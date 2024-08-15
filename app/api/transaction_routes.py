@@ -109,6 +109,8 @@ def update_transaction(id):
 
     if not transaction:
         return {'message':'Transaction could not be found'}, 404
+    elif transaction.ownerId != current_user.id:
+        return {'message':'Not the owner of this transaction'}, 401
 
     details = [x for x in TransactionDetail.query.filter_by(transactionId = id).all()]
 
@@ -165,6 +167,8 @@ def delete_transaction(id):
     transaction = Transaction.query.get(id)
     if not transaction:
         return {'message':'Transaction not found'}, 404
+    elif transaction.ownerId != current_user.id:
+        return {'message':'Not the owner of this transaction'}, 401
 
     details = TransactionDetail.query.filter_by(transactionId = id).all()
 

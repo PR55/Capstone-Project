@@ -301,7 +301,7 @@ def delete_product(id):
         return {'message':'Product not found'}, 404
 
     if product.ownerId != user.id:
-        return {'message':'Not the owner of the product post.'}, 403
+        return {'message':'Not the owner of the product post.'}, 401
 
     images = ProductImage.query.filter_by(productId = id).all()
 

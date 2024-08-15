@@ -65,13 +65,6 @@ Response 200 OK:
 }
 ```
 
-Respone 403 Unauthorized:
-```json
-{
-    "message":"unauthorized"
-}
-```
-
 ### Endpoint `GET /:userId`
 Description: Queries for a specific user, getting all info needed to see their profile
 
@@ -154,14 +147,7 @@ Response 200 OK:
 }
 ```
 
-Respone 403 Unauthorized:
-```json
-{
-    "message":"unauthorized"
-}
-```
-
-Respone 404 Unauthorized:
+Respone 404 Not Found:
 ```json
 {
     "message":"User does not exist"
@@ -208,13 +194,6 @@ Response 200 OK:
 }
 ```
 
-Respone 403 Unauthorized:
-```js
-{
-    "message":"unauthorized"
-}
-```
-
 ### Endpoint `GET /articles`
 Description: Queries for all articles of the current logged in user
 
@@ -244,13 +223,6 @@ Response 200 OK:
             "timeUpdated":"TimeUpdated",
         }
     ]
-}
-```
-
-Respone 401 Unauthorized:
-```js
-{
-    "message":"unauthorized"
 }
 ```
 
@@ -300,9 +272,17 @@ Response 200 OK:
 ```
 
 Respone 401 Unauthorized:
-```js
+```json
 {
-    "message":'unauthorized'
+    "email":[
+        "Data Required",
+        "Email Provided not found"
+    ],
+    "password":[
+        "Data Required",
+        "No such user exists",
+        "Password was incorrect"
+    ],
 }
 ```
 
@@ -616,7 +596,7 @@ Response 400:
 }
 ```
 
-Response 403:
+Response 401 Unauthorized:
 ```json
 {
     "message":"Not the owner of the product post"
@@ -648,7 +628,7 @@ Response 404:
     }
 }
 ```
-Response 403:
+Response 401 Unauthorized:
 ```json
 {
     "message":"Not the owner of the product post"
@@ -736,7 +716,7 @@ Response 404:
     }
 }
 ```
-Response 403:
+Response 401 Unauthorized:
 ```json
 {
     "message":"Not the owner of the product post"
@@ -796,7 +776,7 @@ Response 404:
 }
 ```
 
-Response 403:
+Response 401 Unauthorized:
 ```json
 {
     "message":"Must be the owner to perform this action"
@@ -996,7 +976,7 @@ Response 404:
 }
 ```
 
-Response 403:
+Response 401 Unauthorized:
 ```json
 {
     "message":"Must be owner of the Article"
@@ -1026,7 +1006,7 @@ Response 404:
 }
 ```
 
-Response 403:
+Response 401 Unauthorized:
 ```json
 {
     "message":"Must be owner of the Article"
@@ -1227,6 +1207,13 @@ Reponse 404:
 }
 ```
 
+Response 401 Unauthorized:
+```json
+{
+    "message":"Not the owner of this transaction"
+}
+```
+
 ## Endpoint `DELETE /:transactionId`
 Description: Delete a specific transaction
 
@@ -1247,6 +1234,13 @@ Reponse 404:
 ```json
 {
     "message":"Transaction could not be found"
+}
+```
+
+Response 401 Unauthorized:
+```json
+{
+    "message":"Not the owner of this transaction"
 }
 ```
 
@@ -1441,7 +1435,7 @@ Response 404:
 }
 ```
 
-Response 401:
+Response 401 Unauthorized:
 ```json
 {
     "message":"Not the owner of this review"
@@ -1470,3 +1464,25 @@ Response 404:
     "message":"Review does not exist"
 }
 ```
+
+Response 401 Unauthorized:
+```json
+{
+    "message":"Not the owner of this review"
+}
+```
+
+## To Do
+
+### Products
+
+* Clean up detail page styling
+* Set a max price ($999,999.99?)
+
+## Articles
+
+* Properly record the spacing between lines
+* Add a comment feature, rating the writers of articles
+
+## Contact Info
+* [LinkedIn](https://www.linkedin.com/in/kyle-joel-flores/)
