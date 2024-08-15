@@ -1479,7 +1479,7 @@ Response 401 Unauthorized:
 * Clean up detail page styling
 * Set a max price ($999,999.99?)
 
-## Articles
+### Articles
 
 * Properly record the spacing between lines
 * Add a comment feature, rating the writers of articles
