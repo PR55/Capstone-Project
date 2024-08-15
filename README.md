@@ -22,15 +22,27 @@
 ![Static Badge](https://img.shields.io/badge/Render-black?style=for-the-badge&logo=Render&logoColor=white)
 ## Wiki Articles
 [Feature List]() | [Schema](/wiki) | [User Stories]()
-## Homepage
-## Product Browser
-## Homepage
-## Article Browser
-## Cart
-## Transaction History
-##
 
+## Screenshots
 
+### NavBar
+<img src='https://github.com/user-attachments/assets/cff8af3e-137f-414b-a5b3-949129d2b83f' width='75%'/>
+
+### Homepage
+<img src='https://github.com/user-attachments/assets/d2fa628a-bbb8-4695-b257-b72b68d39750' width='75%'/>
+
+### Product Browser
+<img src='https://github.com/user-attachments/assets/382021a9-3770-451b-b6cc-139cf8cd9ac6' width='75%'/>
+
+### Product Browser Pagination
+<img src='https://github.com/user-attachments/assets/0d2edab3-913b-41ee-b08b-a6fcf03c5749' width='75%'/>
+<img src='https://github.com/user-attachments/assets/14a4b99c-2412-495b-b813-8bd76bc5ad0b' width='75%'/>
+
+### Product Browser Filter and Add to Cart
+<img src='https://github.com/user-attachments/assets/0ff8bbb9-18a9-4132-8bf0-3533414abb33' width='75%'/>
+
+### Homepage
+<img src='https://github.com/user-attachments/assets/d070a160-02c7-49f6-989f-fc8e756a22cb' width='75%'/>
 
 # API Documentation
 ## User Routes `/api/users`
