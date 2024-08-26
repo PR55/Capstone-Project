@@ -21,7 +21,7 @@
 ### Hosting:
 ![Static Badge](https://img.shields.io/badge/Render-black?style=for-the-badge&logo=Render&logoColor=white)
 ## Wiki Articles
-[Feature List]() | [Schema](/wiki) | [User Stories]()
+[Feature List](https://github.com/PR55/Capstone-Project/wiki/MVP-Features) | [Schema](https://github.com/PR55/Capstone-Project/wiki) | [User Stories](https://github.com/PR55/Capstone-Project/wiki/User-Stories)
 
 ## Screenshots
 
@@ -1479,7 +1479,7 @@ Response 401 Unauthorized:
 * Clean up detail page styling
 * Set a max price ($999,999.99?)
 
-## Articles
+### Articles
 
 * Properly record the spacing between lines
 * Add a comment feature, rating the writers of articles
