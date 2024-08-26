@@ -66,7 +66,7 @@ function ProductDisplay({
                                 <div className="blockDescriptionProfile">
                                     <p className="titleProfile">{product.name.length > 30 ? product.name.slice(0, 31) + '...' : product.name}</p>
                                     <p>${product.price.toFixed(2)}</p>
-                                    <p className='body'>{product.description}</p>
+                                    <p className='body'>{product.description[0].length > 125 ? product.description[0].slice(0,125) + '...': product.descriptionp[0]}</p>
                                     <div className="profileTagHolder">
                                         {
                                             product.tags.map((tag, index) => (

@@ -18,7 +18,7 @@ export default function Layout() {
 
   useEffect(() => {
     window.scrollTo({top:0,left:0, behavior:'instant'})
-  }, [navigate])
+  }, [window.location.pathname])
 
   useEffect(() => {
     dispatch(thunkAuthenticate()).then(() => setIsLoaded(true));

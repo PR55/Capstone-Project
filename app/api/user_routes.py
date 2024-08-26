@@ -18,7 +18,8 @@ def users():
 @user_routes.route('/<int:id>')
 def user(id):
     """
-    Query for a user by id and returns that user in a dictionary
+    Query for a user by id and returns that user in a dictionary.
+    Also returns everything made by the user.
     """
     user = User.query.get(id)
 
@@ -34,6 +35,7 @@ def user(id):
         safe_product['tags'] = [x.to_dict() for x in ProductTag.query.filter_by(productId = product.id).all()]
         safe_product['image'] = ProductImage.query.filter_by(productId = product.id).first().to_dict()
         safe_product['owner'] = User.query.get(product.ownerId).to_dict()
+        safe_product['description'] = product.description.split('\n')
         if product.isTraditional:
             safe_traditional.append(safe_product)
         else:
@@ -62,6 +64,7 @@ def user(id):
     for article in articles:
         safe_article = article.to_dict()
         safe_article['owner'] = user.to_dict()
+        safe_article['body'] = article.body.split('\n')
         safe_articles.append(safe_article)
 
     safe_user['articles'] = safe_articles
@@ -97,6 +100,7 @@ def user_products():
         tags = [x.to_dict() for x in ProductTag.query.filter_by(productId = product['id']).all()]
         product['tags'] = tags
         product['owner'] = current_user.to_dict()
+        product['description'] = product['description'].split('\n')
 
     return {'products':products}
 
@@ -113,5 +117,6 @@ def user_articles():
         tags = [x.to_dict() for x in ArticleTag.query.filter_by(articleId = product['id']).all()]
         product['tags'] = tags
         product['owner'] = current_user.to_dict()
+        product['body'] = product['body'].split('\n')
 
     return {'articles':products}

@@ -54,7 +54,7 @@ function ArticleDisplay({articles, user}){
                         </div>
                         <div className="articlePBDescript">
                             <p className="titleProfile">{article.title}</p>
-                            <p className="bodyProfile">{article.body.length > 175 ?article.body.slice(0,176) + '...' :article.body}</p>
+                            <p className="bodyProfile">{article.body[0].length > 175 ?article.body[0].slice(0,176) + '...' :article.body[0]}</p>
                         </div>
                         <div className="articlePBInteract">
                             {

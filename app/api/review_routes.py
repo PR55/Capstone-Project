@@ -14,6 +14,7 @@ def my_reviews():
         product = Product.query.get(review['product'])
         safe_product = product.to_dict()
         safe_product['image'] = ProductImage.query.filter_by(productId = product.id).first().to_dict()
+        safe_product['description'] = product.description.split('\n')
         review['product'] = safe_product
 
     return {'reviews':reviews}
@@ -31,6 +32,7 @@ def one_review(id):
 
     safe_product['image'] = ProductImage.query.filter_by(productId = product.id).first().to_dict()
     safe_product['owner'] = User.query.get(product.ownerId).to_dict()
+    safe_product['description'] = product.description.split('\n')
 
     safe_review['product'] = safe_product
     safe_review['owner'] = User.query.get(review.ownerId).to_dict()
@@ -91,6 +93,7 @@ def new_review(id):
         safe_product = product.to_dict()
         safe_product['owner'] = User.query.get(product.ownerId).to_dict()
         safe_product['image'] = ProductImage.query.filter_by(productId = id).first().to_dict()
+        safe_product['description'] = product.description.split('\n')
 
         safe_review['product'] = safe_product
 
@@ -131,6 +134,7 @@ def update_review(id):
         safe_product = product.to_dict()
         safe_product['owner'] = User.query.get(product.ownerId).to_dict()
         safe_product['image'] = ProductImage.query.filter_by(productId = product.id).first().to_dict()
+        safe_product['description'] = product.description.split('\n')
 
         safe_review['product'] = safe_product
 

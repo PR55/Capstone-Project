@@ -36,7 +36,7 @@ function EditProductForm() {
     useEffect(() => {
         if (product) {
             setName(product.name)
-            setBody(product.description)
+            setBody(product.description.join('\n'))
             setPrice(product.price)
             setType(product.isTraditional)
             let tagArr = []

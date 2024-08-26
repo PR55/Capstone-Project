@@ -59,7 +59,7 @@ function ArticleDisplayManager({articles}){
                         <div className='manageDescription'>
                             <p className='title'>{article?.title && article.title.length > 50 ?article.title.slice(0,50) + '...' :article.title}</p>
                             <p className='creator'>{article.owner?.username}</p>
-                            <p className='body'>{article?.body}</p>
+                            <p className="body">{article.body[0].length > 175 ?article.body[0].slice(0,176) + '...' :article.body[0]}</p>
                             <div className="manageTags">
                                     {article?.tags.map(tag => (
                                         <p key={tag.id}>{tag.tag}</p>

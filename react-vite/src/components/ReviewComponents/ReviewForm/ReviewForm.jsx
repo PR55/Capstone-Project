@@ -87,7 +87,9 @@ export function ReviewForm() {
                 </div>
                 <div>
                     <p>${product && product.price}</p>
-                    <p>{product && product.description}</p>
+                    <div>{product && product.description.map(text => (
+                                <p>{text}</p>
+                            ))}</div>
                 </div>
             </div>
             <div className="formReview">
