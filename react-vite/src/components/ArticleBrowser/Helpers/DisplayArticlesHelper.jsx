@@ -1,22 +1,22 @@
 function DisplayArticlesHelper({ articles, navigate }) {
 
-    function localDate(date){
+    function localDate(date) {
         let str = ``
         let transDate = new Date(date)
-        str += `${transDate.getMonth()+1}/${transDate.getDate()}/${transDate.getFullYear()} - `
+        str += `${transDate.getMonth() + 1}/${transDate.getDate()}/${transDate.getFullYear()} - `
 
         let endTiem = 'AM'
 
-        if(transDate.getHours() > 12){
-            str += `${transDate.getHours()-12}`
+        if (transDate.getHours() > 12) {
+            str += `${transDate.getHours() - 12}`
             endTiem = 'PM'
         }
         else
             str += `${transDate.getHours()}`
 
-        if(transDate.getMinutes() <10){
+        if (transDate.getMinutes() < 10) {
             str += `:0${transDate.getMinutes()} `
-        }else{
+        } else {
             str += `:${transDate.getMinutes()} `
         }
 
@@ -39,7 +39,9 @@ function DisplayArticlesHelper({ articles, navigate }) {
                                             <p className='title'>{product.title.length > 50 ? product.title.slice(0, 50) + '...' : product.title}</p>
                                             <p className='creator'>{product.owner?.username}</p>
                                             <p>{localDate(product.timeUpdated)}</p>
-                                            <p className='body'>{product.body}</p>
+                                            <div className='body'>{product.body.map((text,index) => (
+                                                <p>{index <= 1 && text ?text:null}</p>
+                                            ))}</div>
                                         </div>
                                     </div>
                                 )

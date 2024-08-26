@@ -7,8 +7,7 @@ from sqlalchemy.sql import text
 articleArr = [
     {
         'title':'E3 2024 Highlights: Top 5 Must-Play Games Revealed',
-        'body':'''
-The Electronic Entertainment Expo (E3) 2024 has just concluded, leaving gamers buzzing with excitement over the new and upcoming titles showcased. This year’s event was packed with revelations, but five games have particularly stood out as must-plays for the year ahead.
+        'body':'''The Electronic Entertainment Expo (E3) 2024 has just concluded, leaving gamers buzzing with excitement over the new and upcoming titles showcased. This year’s event was packed with revelations, but five games have particularly stood out as must-plays for the year ahead.
 
 "Starfall Legends" emerged as a standout with its grand sci-fi narrative and expansive universe. Set in a richly detailed galaxy, the game invites players to explore alien worlds, engage in epic space battles, and make choices that impact the story’s outcome. The developer’s focus on storytelling and exploration promises a deep, immersive experience.
 

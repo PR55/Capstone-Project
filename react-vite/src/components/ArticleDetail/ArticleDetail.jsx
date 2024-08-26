@@ -97,9 +97,15 @@ function ArticleDetail() {
                                     </div>
 
                                 </div>
-                                <p className="articleBody">
-                                    {article.body}
-                                </p>
+                                <div className="articleBody">
+                                    {article.body.map(text => {
+                                        let code = text.slice(0,2)
+                                        //Apply this to product descriptions also for today's push
+                                        return (
+                                            <p className={code == '/c' ? 'selfCenter':''}>{code === '/c'? text.slice(2):text}</p>
+                                        )
+                                    })}
+                                </div>
                             </div>
                         </>
                         : <h1>404 Article does not exist</h1>

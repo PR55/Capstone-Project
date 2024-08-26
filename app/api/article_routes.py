@@ -20,6 +20,8 @@ def all_articles():
     for article in articles:
         article['tags'] = [x.to_dict() for x in ArticleTag.query.filter_by(articleId = article['id']).all()]
         owner = User.query.get(article['owner'])
+        text = article['body']
+        article['body'] = text.split('\n')
         article['owner'] = owner.to_dict()
     return {'articles':articles}
 
@@ -41,6 +43,7 @@ def one_article(id):
     safe_article['tags'] = [x.to_dict() for x in ArticleTag.query.filter_by(articleId = id).all()]
     owner = User.query.get(article.ownerId)
     safe_article['owner'] = owner.to_dict()
+    safe_article['body'] = article.body.split('\n')
 
     return{'article':safe_article}
 
@@ -102,7 +105,7 @@ def new_article():
         safe_article = newArticle.to_dict()
         safe_article['owner'] = current_user.to_dict()
         safe_article['tags'] = [x.to_dict() for x in ArticleTag.query.filter_by(articleId = newArticle.id).all()]
-
+        safe_article['body'] = newArticle.body.split('\n')
         return {'article':safe_article}
 
 
@@ -185,7 +188,7 @@ def update_article(id):
         safe_article = article.to_dict()
         safe_article['owner'] = current_user.to_dict()
         safe_article['tags'] = [x.to_dict() for x in ArticleTag.query.filter_by(articleId = id).all()]
-
+        safe_article['body'] = article.body.split('\n')
         return{'article':safe_article}
 
     if form.errors:

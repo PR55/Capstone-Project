@@ -244,7 +244,9 @@ function ProductDetail() {
                         </div>
                         <div className='bottomInfo'>
                             <h3>Description:</h3>
-                            <p>{product.description}</p>
+                            <div>{product.description.map(text => (
+                                <p>{text}</p>
+                            ))}</div>
                         </div>
                     </div>
                     : <h1>Product does not exist!</h1>

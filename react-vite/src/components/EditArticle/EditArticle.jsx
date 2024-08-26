@@ -34,7 +34,7 @@ function EditArticle() {
     useEffect(() => {
         if (article) {
             setTitle(article.title)
-            setBody(article.body)
+            setBody(article.body.join('\n'))
             setTags(article.tags.map(tag => tag.tag))
         }
     }, [article])

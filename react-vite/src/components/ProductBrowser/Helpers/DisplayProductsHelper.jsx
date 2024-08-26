@@ -22,7 +22,11 @@ function DisplayProductsHelper({products, searchTags, user, navigate}){
                         <div className='description '>
                             <p className='title'>{product.name.length > 50 ? product.name.slice(0,50) + '...':product.name}</p>
                             <p className='creator'>{product.owner?.username}</p>
-                            <p className='body'>{product.description}</p>
+                            <div className='body'>{product.description.map((text,index) => {
+                                return(
+                                    <p>{index <= 1 && text? text:null}</p>
+                                )
+                            })}</div>
                             <div className='browseTags'>
                                 {
                                     product.tags.map(tag => (
