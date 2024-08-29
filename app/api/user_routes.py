@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify
 from flask_login import login_required,current_user
-from app.models import User, ProductReview,ProductTag,ProductImage,Product, Article,ArticleTag
+from app.models import User, ProductReview,ProductTag,ProductImage,Product, Article,ArticleTag, Comment
 
 user_routes = Blueprint('users', __name__)
 
@@ -83,6 +83,32 @@ def user(id):
         safe_reviews_made.append(safe_review)
 
     safe_user['madeReviews'] = safe_reviews_made
+
+    safe_comments = []
+
+    for article in articles:
+        comments = Comment.query.filter_by(articleId = article.id).all()
+        for comment in comments:
+            safe_comment = comment.to_dict()
+            safe_comment['article'] = article.to_dict()
+            safe_comment['user'] = User.query.get(comment.ownerId)
+            safe_comments.append(safe_comment)
+
+    safe_user['comments'] = safe_comments
+
+    safe_comments_made = []
+
+    commentsMade = Comment.query.filter_by(ownerId = id).all()
+
+    for comment in commentsMade:
+        safe_comment = comment.to_dict()
+        safe_comment['owner'] = user.to_dict()
+        article = Article.query.get(comment.articleId)
+        safe_article = article.to_dict()
+        safe_comment['article'] = safe_article
+        safe_comments_made.append(safe_comment)
+
+    safe_user['madeComments'] = safe_comments_made
 
     return safe_user
 
