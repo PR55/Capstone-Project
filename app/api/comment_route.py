@@ -1,6 +1,7 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, request
 from flask_login import login_required,current_user
 from app.models import User, Article, Comment, db
+from app.forms import CommentForm
 
 
 comment_routes = Blueprint('comment', __name__)
@@ -77,10 +78,44 @@ def make_comment(id):
     if article.ownerId == current_user.id:
         return {"message":"Must not be owner of article to make a comment!"}, 401
 
-    pass
+    form = CommentForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    if form.validate_on_submit():
+
+        data = form.data
+
+        comment = Comment(
+            comment = data['comment'],
+            rating = data['rating'],
+            ownerId = current_user.id,
+            articleId = id
+        )
+
+        db.session.add(comment)
+        db.session.commit()
+
+        safe_article = article.to_dict()
+
+        comments = Comment.query.filter_by(articleId = id).all()
+
+        safe_comments = []
+
+        for comment in comments:
+            safe_comment = comment.to_dict()
+            safe_comment['owner'] = User.query.get(comment.ownerId).to_dict()
+            safe_comments.append(safe_comment)
+
+        safe_article['comments'] = safe_comments
+
+        return {"article": safe_article}
+
+
+    if form.errors:
+        return {"message":"Bad Request", "errors":form.errors}, 400
 
 @comment_routes.route('/<int:id>', methods=['POST'])
-def make_comment(id):
+def update_comment(id):
     '''
         Update a comment
     '''
@@ -92,10 +127,39 @@ def make_comment(id):
     if comment.ownerId != current_user.id:
         return {"message":"Must be owner of comment to edit!"}, 401
 
-    pass
+    form = CommentForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    if form.validate_on_submit():
+        data = form.data
+
+        comment.comment = data['comment']
+        comment.rating = data['rating']
+
+        db.session.commit()
+
+        article = Article.query.get(comment.articleId)
+
+        safe_article = article.to_dict()
+
+        comments = Comment.query.filter_by(articleId = id).all()
+
+        safe_comments = []
+
+        for comment in comments:
+            safe_comment = comment.to_dict()
+            safe_comment['owner'] = User.query.get(comment.ownerId).to_dict()
+            safe_comments.append(safe_comment)
+
+        safe_article['comments'] = safe_comments
+
+        return {"article": safe_article}
+
+    if form.errors:
+        return {"message":"Bad Request", "errors":form.errors}, 400
 
 @comment_routes.route('/<int:id>', methods=['DELETE'])
-def make_comment(id):
+def delete_comment(id):
     '''
         Delete a comment
     '''
