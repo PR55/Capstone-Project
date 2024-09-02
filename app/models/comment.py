@@ -21,5 +21,6 @@ class Comment(db.Model):
             'rating':self.rating,
             'owner':self.ownerId,
             'article':self.articleId,
+            'timeCreated':self.time_created,
             'timeUpdated': self.time_updated
         }

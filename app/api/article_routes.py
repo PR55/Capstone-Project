@@ -1,7 +1,7 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
 from app.api.aws_helpers import upload_file_to_s3, get_unique_filename,remove_file_from_s3
-from app.models import Article, ArticleTag, User, db, Tags
+from app.models import Article, ArticleTag, User, db, Tags, Comment
 from app.forms import ArticleForm, ArticleFormUpdate
 from app.api.protected_urls import article_images
 
@@ -23,6 +23,13 @@ def all_articles():
         text = article['body']
         article['body'] = text.split('\n')
         article['owner'] = owner.to_dict()
+        safe_comments = []
+        comments = Comment.query.filter_by(articleId = article['id']).all()
+        for comment in comments:
+            safe_comment = comment.to_dict()
+            safe_comment['owner'] = User.query.get(comment.ownerId)
+        article['comments'] = safe_comments
+
     return {'articles':articles}
 
 @article_routes.route('/<int:id>')
@@ -44,6 +51,16 @@ def one_article(id):
     owner = User.query.get(article.ownerId)
     safe_article['owner'] = owner.to_dict()
     safe_article['body'] = article.body.split('\n')
+
+    safe_comments = []
+
+    comments = Comment.query.filter_by(articleId = id).all()
+
+    for comment in comments:
+        safe_comment = comment.to_dict()
+        safe_comment['owner'] = User.query.get(comment.ownerId)
+
+    safe_article['comments'] = safe_comments
 
     return{'article':safe_article}
 
@@ -106,6 +123,7 @@ def new_article():
         safe_article['owner'] = current_user.to_dict()
         safe_article['tags'] = [x.to_dict() for x in ArticleTag.query.filter_by(articleId = newArticle.id).all()]
         safe_article['body'] = newArticle.body.split('\n')
+        safe_article['comments'] = []
         return {'article':safe_article}
 
 
@@ -189,6 +207,17 @@ def update_article(id):
         safe_article['owner'] = current_user.to_dict()
         safe_article['tags'] = [x.to_dict() for x in ArticleTag.query.filter_by(articleId = id).all()]
         safe_article['body'] = article.body.split('\n')
+
+        safe_comments = []
+
+        comments = Comment.query.filter_by(articleId = id).all()
+
+        for comment in comments:
+            safe_comment = comment.to_dict()
+            safe_comment['owner'] = User.query.get(comment.ownerId)
+
+        safe_article['comments'] = safe_comments
+
         return{'article':safe_article}
 
     if form.errors:
