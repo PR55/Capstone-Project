@@ -1,7 +1,14 @@
-import { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { useEffect, useState } from "react";
+import { FaRegStar, FaStar } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+import OpenModalDelete from "../OpenModal/OpenModalDelete";
+import ConfirmTrashComment from "../ModalItem/ModalDeleteComment";
 
-function ArticleDisplay({articles, user}){
+function CommentDisplay({ reviews }) {
+
+    const navigate = useNavigate()
+
+    const [deleted, setDeleted] = useState(false)
 
     const [pageNumbers, setPageNumbers] = useState([])
     const [currentPage, setCurrentPage] = useState(1)
@@ -10,8 +17,6 @@ function ArticleDisplay({articles, user}){
     const [sorted, setSorted] = useState([])
 
     const parseNum = 3
-
-    const navigate = useNavigate()
 
     function setPages(arr, page = 1) {
 
@@ -38,41 +43,81 @@ function ArticleDisplay({articles, user}){
             setCurrentPage(pageArr[pageArr.length-1])
         }
     }
+    useEffect(() => {
+        let arr = Object.values(reviews)
 
-    useEffect(()=>{
-        setPages(articles, currentPage)
-    }, [currentPage])
+        arr.sort((a, b) => {
+            let date1 = new Date(a.timeUpdated)
+            let date2 = new Date(b.timeUpdated)
 
-    return(
+            if (date1 > date2) {
+                return -1
+            } else if (date1 < date2) {
+                return 1
+            } else {
+                return 0
+            }
+        })
+
+        setPages(arr, currentPage)
+
+    }, [deleted, currentPage])
+
+    return (
         <>
             {
-                articles && sorted.length
-                ?
-                <>
-                {
-                sorted.map(article => (
-                    <div className="articleBlockProfile" onClick={e => {
-                        e.stopPropagation()
-                        navigate(`/articles/${article.id}`)
-                    }}>
-                        <div className="articlePBImgHolder">
-                            <img src={article.imageUrl}/>
+                reviews && Object.values(reviews).length
+                    ?
+                    <>
+                    {sorted.map(review => (
+                        <div className="reviewBlockManage" onClick={e => {
+                            e.stopPropagation()
+                            navigate(`/articles/${review.article.id}`)
+                        }}>
+                            <div className="reviewBlockMLeft">
+                                <div className="reviewBImageHolder">
+                                    <img src={review.article.imageUrl} alt="" />
+                                </div>
+                                <div className="manageRating">
+                                    {
+                                        [1,2,3,4,5].map((a, index) => {
+                                            let check = review.rating >= 1 * a;
+                                            return (
+                                                <>
+                                                    {
+                                                        check
+                                                            ?
+                                                            <FaStar className={index % 2 == 0 ? 'evenStarActive' : 'oddStarActive'} />
+                                                            :
+                                                            <FaRegStar className={index % 2 == 0 ? 'evenStar' : 'oddStar'} />
+                                                    }
+                                                </>
+                                            )
+                                        })
+                                    }
+                                    <p>
+                                        {review.rating}
+                                    </p>
+
+                                </div>
+                            </div>
+                            <div className="reviewBInfo">
+                                <p className="title">{review.article.title}</p>
+                                <p className="reviewIDescript">{review.comment.length > 400 ? review.comment.slice(0, 400) + '...' : review.comment}</p>
+                            </div>
+                            <div className='Purchase'>
+                                <p className="toUpdateButton" onClick={e => {
+                                    e.stopPropagation()
+                                    navigate(`/comments/${review.id}/edit`)
+                                }}>Update</p>
+                                <OpenModalDelete
+                                    product={review}
+                                    modalComponent={<ConfirmTrashComment obj ={review} deleted={deleted} setDeleted={setDeleted}/>}
+                                />
+                            </div>
                         </div>
-                        <div className="articlePBDescript">
-                            <p className="titleProfile">{article.title}</p>
-                            <p className="bodyProfile">{article.body[0].length > 175 ?article.body[0].slice(0,176) + '...' :article.body[0]}</p>
-                        </div>
-                        <div className="articlePBInteract">
-                            {
-                                user &&user?.id === article.owner.id
-                                ?
-                                <p className="updateButton">Update</p>
-                                : null
-                            }
-                        </div>
-                    </div>
-                ))}
-                <div className='paginationNav'>
+                    ))}
+                    <div className='paginationNav'>
                 {
                     pageNumbers.length && currentPage !== 1
                         ?
@@ -157,12 +202,13 @@ function ArticleDisplay({articles, user}){
                 }
 
             </div>
-                </>
-                :
-                null
+            </>
+                    :
+                    <h1>No Comments have been made!</h1>
             }
         </>
     )
 
 }
-export default ArticleDisplay;
+
+export default CommentDisplay;

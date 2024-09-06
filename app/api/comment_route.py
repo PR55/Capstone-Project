@@ -34,7 +34,7 @@ def one_comment(id):
 
     safe_comment = comment.to_dict()
 
-    safe_comment['article'] = Article.query.get(comment.articleId)
+    safe_comment['article'] = Article.query.get(comment.articleId).to_dict()
 
     return {"comment":safe_comment}
 
@@ -96,7 +96,6 @@ def make_comment(id):
         db.session.commit()
 
         safe_article = article.to_dict()
-
         comments = Comment.query.filter_by(articleId = id).all()
 
         safe_comments = []
@@ -106,7 +105,11 @@ def make_comment(id):
             safe_comment['owner'] = User.query.get(comment.ownerId).to_dict()
             safe_comments.append(safe_comment)
 
+        owner = User.query.get(article.ownerId)
+
         safe_article['comments'] = safe_comments
+        safe_article['owner'] = owner.to_dict()
+        safe_article['body'] = article.body.split('\n')
 
         return {"article": safe_article}
 
@@ -114,7 +117,7 @@ def make_comment(id):
     if form.errors:
         return {"message":"Bad Request", "errors":form.errors}, 400
 
-@comment_routes.route('/<int:id>', methods=['POST'])
+@comment_routes.route('/<int:id>', methods=['PUT'])
 def update_comment(id):
     '''
         Update a comment
@@ -142,18 +145,11 @@ def update_comment(id):
 
         safe_article = article.to_dict()
 
-        comments = Comment.query.filter_by(articleId = id).all()
+        safe_comment = comment.to_dict()
 
-        safe_comments = []
+        safe_comment['article'] = safe_article
 
-        for comment in comments:
-            safe_comment = comment.to_dict()
-            safe_comment['owner'] = User.query.get(comment.ownerId).to_dict()
-            safe_comments.append(safe_comment)
-
-        safe_article['comments'] = safe_comments
-
-        return {"article": safe_article}
+        return {"comment": safe_comment}
 
     if form.errors:
         return {"message":"Bad Request", "errors":form.errors}, 400

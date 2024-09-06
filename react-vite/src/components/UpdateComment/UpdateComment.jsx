@@ -2,16 +2,16 @@ import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate, useParams } from "react-router-dom"
 import { FaRegStar, FaStar } from "react-icons/fa";
-import {thunkOneReview, thunkUpdateReview } from "../../../redux/review";
+import { thunkOneComment, thunkUpdateComment } from "../../redux/comment";
 
-export function ReviewEdit() {
+function UpdateComment(){
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
-    const { reviewId } = useParams();
+    const { commentId } = useParams();
 
-    const products = useSelector(store => store.reviews)
+    const products = useSelector(store => store.comments)
 
     const [productR, setProductR] = useState(null)
 
@@ -23,18 +23,18 @@ export function ReviewEdit() {
     const [errors, setErrors] = useState({})
 
     useEffect(() => {
-        dispatch(thunkOneReview(reviewId))
-    }, [reviewId])
+        dispatch(thunkOneComment(commentId))
+    }, [commentId])
 
     useEffect(() => {
         if (Object.values(products).length) {
-            setProductR(products[reviewId])
+            setProductR(products[commentId])
         }
     }, [products])
 
     useEffect(() => {
-        if(productR?.review){
-            setReview(productR.review)
+        if(productR?.comment){
+            setReview(productR.comment)
             setRating(productR.rating)
         }
     }, [productR])
@@ -51,11 +51,11 @@ export function ReviewEdit() {
         let map = split.filter((val) => val && val != ' ')
 
         if (review.length && !map.length) {
-            errObj.review = 'Reviews cannot containg empty characters'
-        } else if (review.length < 30) {
-            errObj.review = 'Review Must be at least 30 characters'
-        } else if (review.length > 1000) {
-            errObj.review = 'Review cannot be longer than 1000 characters'
+            errObj.comment = 'Reviews cannot containg empty characters'
+        } else if (review.length < 20) {
+            errObj.comment = 'Review Must be at least 20 characters'
+        } else if (review.length > 500) {
+            errObj.comment = 'Review cannot be longer than 500 characters'
         }
 
         setErrors(errObj)
@@ -68,11 +68,11 @@ export function ReviewEdit() {
         let formData = new FormData()
 
         formData.append('rating', rating)
-        formData.append('review', review)
+        formData.append('comment', review)
 
-        let d = await dispatch(thunkUpdateReview(formData, productR?.id));
+        let d = await dispatch(thunkUpdateComment(formData, productR?.id));
 
-        if(d?.errors || !d?.id){
+        if(d?.errors){
             if(d?.errors){
                 setErrors(d.errors)
             }
@@ -83,18 +83,12 @@ export function ReviewEdit() {
 
     }
 
-    return (
+    return(
         <div className="reviewForm">
-            <h1>Leave a review for &quot;{productR && productR?.product.name}&quot;:</h1>
+            <h1>Update Comment for &quot;{productR && productR?.article.title}&quot;:</h1>
             <div className="itemPreview">
                 <div className="imgHolder">
-                    <img src={productR && productR?.product.image.imageUrl} />
-                </div>
-                <div>
-                    <p>${productR && productR?.product.price}</p>
-                    <div>{productR && productR.product.description.map(text => (
-                                <p>{text}</p>
-                            ))}</div>
+                    <img src={productR && productR?.article.imageUrl} />
                 </div>
             </div>
             <div className="formReview">
@@ -179,10 +173,13 @@ export function ReviewEdit() {
                             setReview(e.target.value)
                         }} />
                     </div>
-                    {errors?.review && <p className="error">{errors.review}</p>}
-                    <button className='submitButton' disabled={errors?.review || errors?.rating}>Submit Review</button>
+                    {errors?.comment && <p className="error">{errors.comment}</p>}
+                    <button className='submitButton' disabled={errors?.comment || errors?.rating}>Submit Review</button>
                 </form>
             </div>
         </div>
     )
+
 }
+
+export default UpdateComment;

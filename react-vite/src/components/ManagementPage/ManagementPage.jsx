@@ -8,6 +8,8 @@ import { thunkCurrentUserProducts,thunkCurrentUserArticles } from "../../redux/u
 import { LiaSpinnerSolid } from "react-icons/lia";
 import { thunkMyReviewsLoad } from "../../redux/review";
 import ReviewDisplay from "./helperItems/ReviewDisplay";
+import { thunkMyCommentsLoad } from "../../redux/comment";
+import CommentDisplay from "./helperItems/CommentDisplay";
 
 function ManagementPage() {
 
@@ -16,10 +18,12 @@ function ManagementPage() {
     const iterable = useSelector(Store => Store.userContent)
 
     const reviews = useSelector(Store => Store.reviews)
+    const comments = useSelector(Store => Store.comments)
 
     const [electronic, setElectronic] = useState(true)
     const [article, setArticle] = useState(false)
     const [review, setReview] = useState(false)
+    const [comment, setComment] = useState(false)
 
     const [isLoading, setLoading] = useState(false)
 
@@ -27,12 +31,14 @@ function ManagementPage() {
 
     const thunkCall = async () => {
         setLoading(true)
-        if (electronic || (!article && !review)) {
+        if (electronic || (!article && !review && !comment)) {
             await dispatch(thunkCurrentUserProducts())
         } else if(article){
             await dispatch(thunkCurrentUserArticles())
-        } else{
+        } else if(review){
             await dispatch(thunkMyReviewsLoad())
+        }else{
+            await dispatch(thunkMyCommentsLoad())
         }
         setLoading(false)
     }
@@ -72,33 +78,45 @@ function ManagementPage() {
         <div className="manageHolder">
             <div className="manageInfo">
                 <p
-                    className={electronic && !article && !review ? 'activeHeader' : 'inactiveHeader'}
+                    className={!comment && electronic && !article && !review ? 'activeHeader' : 'inactiveHeader'}
                     onClick={() => {
                         setElectronic(true)
                         setArticle(false)
                         setReview(false)
+                        setComment(false)
                     }}>Electronic</p>
                 <p
-                    className={!electronic && !article && !review ? 'activeHeader' : 'inactiveHeader'}
+                    className={!comment && !electronic && !article && !review ? 'activeHeader' : 'inactiveHeader'}
                     onClick={() => {
                         setElectronic(false)
                         setArticle(false)
                         setReview(false)
+                        setComment(false)
                     }}>Traditional</p>
                 <p
-                    className={article && !electronic && !review ? 'activeHeader' : 'inactiveHeader'}
+                    className={!comment && article && !electronic && !review ? 'activeHeader' : 'inactiveHeader'}
                     onClick={() => {
                         setElectronic(false)
                         setArticle(true)
                         setReview(false)
+                        setComment(false)
                     }}>Articles</p>
                 <p
-                    className={review && !electronic && !article ? 'activeHeader' : 'inactiveHeader'}
+                    className={!comment && review && !electronic && !article ? 'activeHeader' : 'inactiveHeader'}
                     onClick={() => {
                         setElectronic(false)
                         setArticle(false)
                         setReview(true)
+                        setComment(false)
                     }}>Reviews</p>
+                    <p
+                    className={comment && !review && !electronic && !article ? 'activeHeader' : 'inactiveHeader'}
+                    onClick={() => {
+                        setElectronic(false)
+                        setArticle(false)
+                        setReview(false)
+                        setComment(true)
+                    }}>Comments</p>
             </div>
             <div className="manageDisplay">
                     {
@@ -108,7 +126,10 @@ function ManagementPage() {
                         !article
                             ?
                             !review ?
+                            !comment?
                             <ProductDisplayManager products={iterable} electronic={electronic}/>
+                            :
+                            <CommentDisplay reviews={comments}/>
                             :
                             <ReviewDisplay reviews={reviews}/>
                             :

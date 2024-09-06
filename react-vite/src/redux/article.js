@@ -82,6 +82,21 @@ export const deleteOneArticle = (id) => async (dispatch) => {
     }
 }
 
+export const makeComment = (id, payload) => async (dispatch)=>{
+    const response = await fetch(`/api/comments/${id}`,{
+        method:'POST',
+        body:payload
+    })
+
+    console.log(response)
+
+    if(response.ok){
+        const {article} = await response.json()
+        await dispatch(loadArticle(article))
+        return article
+    }
+}
+
 const initialState = {}
 
 function articleReducer(state = initialState, action){

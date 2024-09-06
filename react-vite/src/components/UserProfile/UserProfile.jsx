@@ -8,6 +8,7 @@ import ProductDisplay from "./helperViews/ProductDisplay";
 import ReviewDisplay from "./helperViews/ReviewDisplay";
 import ArticleDisplay from "./helperViews/ArticleDisplay";
 import './UserProfile.css'
+import CommentDisplay from "./helperViews/CommentDisplay";
 
 function UserProfile() {
 
@@ -21,6 +22,8 @@ function UserProfile() {
     const user = useSelector(store => store.users[userId])
 
     const [rating, setRating] = useState(0)
+    const [productRating, setPRating] = useState(0)
+    const [articleRating, setARating] = useState(0)
 
     const [active, setActive] = useState([true, false, false, false])
 
@@ -56,6 +59,7 @@ function UserProfile() {
     }
 
     function secondAsyncCall(){
+        window.scrollTo({top:0, left:0, behavior:'instant'})
         delayThunkCall()
     }
 
@@ -84,15 +88,34 @@ function UserProfile() {
             if (total) {
                 setRating(total)
             } else {
-                setRating(3)
+                setPRating(3)
             }
+
+            let total2 = 0
+
+            for(let comment of user.comments){
+                total2 += comment.rating
+            }
+
+            total2 /= user.comments.length
+
+            if(total2){
+                setARating(total2)
+            }else{
+                setARating(3)
+            }
+
+            let total3 = total ? total2 ? (total + total2) / 2: (total + 3) / 2 : total2 ? (3 + total2)/2: 3
+
+            setRating(total3)
+
         }
     }, [user])
 
 
     useEffect(()=>{
         secondAsyncCall()
-    }, [active[0],active[1],active[2],active[3]])
+    }, [active[0],active[1],active[2],active[3],active[4]])
 
     return (
         <div className="profileHolder">
@@ -129,7 +152,7 @@ function UserProfile() {
                     onClick={e => {
                         e.stopPropagation()
                         e.preventDefault()
-                        let newArr = [1,2,3,4].map(() => false)
+                        let newArr = [1,2,3,4,5].map(() => false)
                         newArr[0] = true
                         setActive(newArr)
                     }}
@@ -138,7 +161,7 @@ function UserProfile() {
                     onClick={e => {
                         e.stopPropagation()
                         e.preventDefault()
-                        let newArr = [1,2,3,4].map(() => false)
+                        let newArr = [1,2,3,4,5].map(() => false)
                         newArr[1] = true
                         setActive(newArr)
                     }}
@@ -147,7 +170,7 @@ function UserProfile() {
                     onClick={e => {
                         e.stopPropagation()
                         e.preventDefault()
-                        let newArr = [1,2,3,4].map(() => false)
+                        let newArr = [1,2,3,4,5].map(() => false)
                         newArr[2] = true
                         setActive(newArr)
                     }}
@@ -156,11 +179,20 @@ function UserProfile() {
                     onClick={e => {
                         e.stopPropagation()
                         e.preventDefault()
-                        let newArr = [1,2,3,4].map(() => false)
+                        let newArr = [1,2,3,4,5].map(() => false)
                         newArr[3] = true
                         setActive(newArr)
                     }}
                     >Reviews</p>
+                    <p className={active[4] ? 'activeNav':'inactiveNav'}
+                    onClick={e => {
+                        e.stopPropagation()
+                        e.preventDefault()
+                        let newArr = [1,2,3,4,5].map(() => false)
+                        newArr[4] = true
+                        setActive(newArr)
+                    }}
+                    >Comments</p>
                 </div>
             </div>
             <div className="displayHolderRight">
@@ -184,6 +216,9 @@ function UserProfile() {
                     active[3]
                     ?
                     <ReviewDisplay reviews={user?.madeReviews} user={loggedUser}/>
+                    :
+                    active[4]?
+                    <CommentDisplay reviews={user?.madeComments} user = {loggedUser}/>
                     :
                     null
                 }

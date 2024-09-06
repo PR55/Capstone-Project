@@ -10,6 +10,7 @@ import DisplayArticlesHelper from './Helpers/DisplayArticlesHelper'
 function ArticleBrowser() {
     const dispatch = useDispatch()
     const products = useSelector(store => store.articles)
+    const user = useSelector(store => store.session.user)
     const [productsArr, setProducts] = useState([])
 
     const [searchName, setSearch] = useState('')
@@ -39,10 +40,12 @@ function ArticleBrowser() {
     async function sortArr(){
         let disArr = []
         for (let product of Object.values(products)) {
-            if (searchName && product.title.toLowerCase().includes(searchName.toLowerCase())) {
-                await disArr.push(product)
-            } else if (!searchName) {
-                await disArr.push(product)
+            if(product.owner.id !== user?.id){
+                if (searchName && product.title.toLowerCase().includes(searchName.toLowerCase())) {
+                    await disArr.push(product)
+                } else if (!searchName) {
+                    await disArr.push(product)
+                }
             }
         }
 

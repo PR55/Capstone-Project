@@ -2,7 +2,7 @@ import { FaRegStar, FaStar } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react"
 
-function ReviewDisplay({ reviews, user }) {
+function CommentDisplay({ reviews, user }) {
     const navigate = useNavigate()
 
     const [pageNumbers, setPageNumbers] = useState([])
@@ -55,11 +55,11 @@ function ReviewDisplay({ reviews, user }) {
                         {
                             sorted.map(review => (
                                 <div className="reviewBlock" onClick={() => {
-                                    navigate(`/products/${review.product.id}`)
+                                    navigate(`/articles/${review.article.id}`)
                                 }}>
                                     <div className="reviewBlockLeft">
                                         <div className="imgHolderReviewProfile">
-                                            <img src={review.product.image.imageUrl} />
+                                            <img src={review.article.imageUrl} />
                                         </div>
                                         <div className="reviewProfileRating">
                                             <div>
@@ -82,9 +82,9 @@ function ReviewDisplay({ reviews, user }) {
                                         </div>
                                     </div>
                                     <div className="reviewBodyDescript">
-                                        <p className="title">{review?.product?.name}</p>
+                                        <p className="title">{review?.article?.title}</p>
                                         <div className="reviewBody">
-                                            <p>{review.review.length > 100 ? review.review.slice(0, 101) + '...  ' : review.review}</p>
+                                            <p>{review.comment.length > 100 ? review.comment.slice(0, 101) + '...  ' : review.comment}</p>
                                         </div>
                                     </div>
                                     <div>
@@ -95,7 +95,7 @@ function ReviewDisplay({ reviews, user }) {
                                                     className="updateButton"
                                                     onClick={e => {
                                                         e.stopPropagation()
-                                                        navigate(`/reviews/${review.id}/edit`)
+                                                        navigate(`/comments/${review.id}/edit`)
                                                     }}
                                                 >Update</p>
                                                 :
@@ -191,10 +191,10 @@ function ReviewDisplay({ reviews, user }) {
                         </div>
                     </>
                     :
-                    <h2>No reviews have been made by this user</h2>
+                    <h2>No comments have been made by this user</h2>
             }
         </>
     )
 }
 
-export default ReviewDisplay;
+export default CommentDisplay;

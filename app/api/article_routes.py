@@ -27,7 +27,8 @@ def all_articles():
         comments = Comment.query.filter_by(articleId = article['id']).all()
         for comment in comments:
             safe_comment = comment.to_dict()
-            safe_comment['owner'] = User.query.get(comment.ownerId)
+            safe_comment['owner'] = User.query.get(comment.ownerId).to_dict()
+            safe_comments.append(safe_comment)
         article['comments'] = safe_comments
 
     return {'articles':articles}
@@ -58,7 +59,8 @@ def one_article(id):
 
     for comment in comments:
         safe_comment = comment.to_dict()
-        safe_comment['owner'] = User.query.get(comment.ownerId)
+        safe_comment['owner'] = User.query.get(comment.ownerId).to_dict()
+        safe_comments.append(safe_comment)
 
     safe_article['comments'] = safe_comments
 
@@ -214,7 +216,8 @@ def update_article(id):
 
         for comment in comments:
             safe_comment = comment.to_dict()
-            safe_comment['owner'] = User.query.get(comment.ownerId)
+            safe_comment['owner'] = User.query.get(comment.ownerId).to_dict()
+            safe_comments.append(safe_comment)
 
         safe_article['comments'] = safe_comments
 

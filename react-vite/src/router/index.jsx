@@ -17,6 +17,7 @@ import TransactionHistory from '../components/TransactionHistory';
 import TransactionDetail from '../components/TransactionDetail';
 import {ReviewEdit, ReviewForm} from '../components/ReviewComponents';
 import UserProfile from '../components/UserProfile';
+import UpdateComment from '../components/UpdateComment';
 
 export const router = createBrowserRouter([
   {
@@ -97,6 +98,10 @@ export const router = createBrowserRouter([
       {
         path:'/review/:reviewId/edit',
         element:<ReviewEdit/>
+      },
+      {
+        path:'/comments/:commentId/edit',
+        element:<UpdateComment/>
       },
       {
         path:'*',

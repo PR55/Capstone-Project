@@ -7,7 +7,7 @@ class Comment(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    comment = db.Column(db.String(1000), nullable = False)
+    comment = db.Column(db.String(500), nullable = False)
     rating = db.Column(db.Integer, nullable=False)
     ownerId = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
     articleId = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('articles.id')), nullable=False)
@@ -17,7 +17,7 @@ class Comment(db.Model):
     def to_dict(self):
         return{
             'id':self.id,
-            'review':self.comment,
+            'comment':self.comment,
             'rating':self.rating,
             'owner':self.ownerId,
             'article':self.articleId,

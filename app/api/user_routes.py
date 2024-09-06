@@ -91,7 +91,7 @@ def user(id):
         for comment in comments:
             safe_comment = comment.to_dict()
             safe_comment['article'] = article.to_dict()
-            safe_comment['user'] = User.query.get(comment.ownerId)
+            safe_comment['user'] = User.query.get(comment.ownerId).to_dict()
             safe_comments.append(safe_comment)
 
     safe_user['comments'] = safe_comments
@@ -144,5 +144,6 @@ def user_articles():
         product['tags'] = tags
         product['owner'] = current_user.to_dict()
         product['body'] = product['body'].split('\n')
+        product['comments'] = []
 
     return {'articles':products}
