@@ -142,6 +142,58 @@ Response 200 OK:
                     "product":4,
                     "timeUpdated":"Last Creation or Update Time"
                 }
+            ],
+            "reviews":[
+                {
+                    "id":1,
+                    "reviews":"Review Text",
+                    "rating":2,
+                    "owner":{
+                        "id":1,
+                        "username":"marnie",
+                        "email":"marnie@aa.io"
+                    },
+                    "product":1,
+                    "timeUpdated":"Last Creation or Update Time"
+                }
+            ],
+            "madeComments":[
+                {
+                    "id":1,
+                    "comment":"Comment Text",
+                    "rating":3,
+                    "owner":{
+                        "id":1,
+                        "username":"demo",
+                        "email":"demo@aa.io"
+                    },
+                    "article":{
+                        "id":4,
+                        "title":"title",
+                        "body":"line1\nline2",
+                        "imageUrl":"link"
+                    },
+                    "timeUpdated":"Last Creation or Update Time"
+                }
+            ],
+            "comments":[
+                {
+                    "id":2,
+                    "comment":"Comment Text",
+                    "rating":4,
+                    "owner":{
+                        "id":2,
+                        "username":"marnie",
+                        "email":"marnie@aa.io"
+                    },
+                    "article":{
+                        "id":1,
+                        "title":"title",
+                        "body":"line1\nline2",
+                        "imageUrl":"link"
+                    },
+                    "timeUpdated":"Last Creation or Update Time"
+                }
             ]
         }
 }
@@ -806,6 +858,19 @@ Response 200 OK:
                     "tag":"Nintendo"
                 }
             ],
+            "comments":[
+                {
+                    "id":1,
+                    "owner":{
+                        "":2,
+                        "username":"marnie",
+                        "email":"marnie@aa.io"
+                    },
+                    "comment":"comment",
+                    "rating":3,
+                    "timeUpdated":"last created/updated"
+                }
+            ],
             "imageUrl":"Article Image URL",
             "timeCreated":"TimeCreated",
             "timeUpdated":"TimeUpdated",
@@ -837,6 +902,19 @@ Response 200 OK:
             {
                 "id":1,
                 "tag":"Nintendo"
+            }
+        ],
+        "comments":[
+            {
+                "id":1,
+                "owner":{
+                    "id":2,
+                    "username":"marnie",
+                    "email":"marnie@aa.io"
+                },
+                "comment":"comment",
+                "rating":3,
+                "timeUpdated":"last created/updated"
             }
         ],
         "imageUrl":"Article Image URL",
@@ -887,6 +965,7 @@ Response 200 OK:
                 "tag":"Co-Op"
             }
         ],
+        "comments":[],
         "imageUrl":"NEW AWS URL",
         "timeCreated":"TimeCreated",
         "timeUpdated":"TimeUpdated",
@@ -946,6 +1025,19 @@ Response 200 OK:
             {
                 "id":1,
                 "tag":"Co-Op"
+            }
+        ],
+        "comments":[
+            {
+                "id":1,
+                "owner":{
+                    "id":2,
+                    "username":"marnie",
+                    "email":"marnie@aa.io"
+                },
+                "comment":"comment",
+                "rating":3,
+                "timeUpdated":"last created/updated"
             }
         ],
         "imageUrl":"NEW AWS URL",
@@ -1472,6 +1564,234 @@ Response 401 Unauthorized:
 }
 ```
 
+## Comment Routes `/api/comments`
+
+## EndPoint `GET /`
+Description: Get all of the current users comments
+
+Authentication: Login Required
+
+Response 200 OK:
+```json
+{
+    "comments":[
+        {
+            "id":1,
+            "rating":3,
+            "comment":"An alright article",
+            "article":{
+                "id":1,
+                "title":"E3 Highlights",
+                "body":"line1\nline2",
+                "imageUrl":"image link"
+            },
+            "owner":{
+                "id":1,
+                "user":"demo",
+                "user":"demo@aa.io",
+            }
+        }
+    ]
+}
+```
+
+## EndPoint `GET /:commentId`
+Description: Get a comment by the Id
+
+Parameters:
+
+* `:reviewId` id of the Review
+
+Response 200 OK:
+```json
+{
+    "comment":{
+        "id":1,
+        "rating":3,
+        "comment":"An alright article",
+        "article":{
+            "id":1,
+            "title":"E3 Highlights",
+            "body":"line1\nline2",
+            "imageUrl":"image link"
+        },
+        "owner":{
+            "id":1,
+            "user":"demo",
+            "user":"demo@aa.io",
+        }
+    }
+}
+```
+
+Response 404:
+```json
+{
+    "message":"Comment does not exist"
+}
+```
+
+## EndPoint `GET /user/:userId`
+Description: Get all of the comments beling to a userId
+
+Parameters:
+
+* `:userId` id of the User
+
+Response 200 OK:
+```json
+{
+    "comments":[
+        {
+            "id":1,
+            "rating":3,
+            "comment":"An alright article",
+            "article":{
+                "id":1,
+                "title":"E3 Highlights",
+                "body":"line1\nline2",
+                "imageUrl":"image link"
+            },
+            "owner":{
+                "id":1,
+                "user":"demo",
+                "user":"demo@aa.io",
+            }
+        }
+    ]
+}
+```
+
+## EndPoint `POST /:articleId`
+Description: Post a new comment related to a specific article
+
+Authentication: Login Required
+
+Parameters:
+
+* `:articleId` id of the Product
+
+Response 200 OK:
+```json
+{
+    "comment":{
+        "id":2,
+        "rating":3,
+        "comment":"An alright article",
+        "article":{
+            "id":1,
+            "title":"E3 Highlights",
+            "body":"line1\nline2",
+            "imageUrl":"image link"
+        },
+        "owner":{
+            "id":2,
+            "user":"marnie",
+            "user":"marnie@aa.io",
+        }
+    }
+}
+```
+
+Response 401:
+```json
+{
+    "message":"Bad Request",
+    "errors":{
+        "comment":"Data Required",
+        "rating":"Data Required",
+    }
+}
+```
+
+## EndPoint `PUT /:commentId`
+Description: Update a specific comment
+
+Authentication: Login Required
+
+Parameters:
+
+* `:reviewId` id of the Review
+
+Response 200 OK:
+```json
+{
+    "comment":{
+        "id":2,
+        "rating":5,
+        "comment":"A Fantastic article",
+        "article":{
+            "id":1,
+            "title":"E3 Highlights",
+            "body":"line1\nline2",
+            "imageUrl":"image link"
+        },
+        "owner":{
+            "id":2,
+            "user":"marnie",
+            "user":"marnie@aa.io",
+        }
+    }
+}
+```
+
+Response 401:
+```json
+{
+    "message":"Bad Request",
+    "errors":{
+        "comment":"Data Required",
+        "rating":"Data Required",
+    }
+}
+```
+
+Response 404:
+```json
+{
+    "message":"Comment does not exist"
+}
+```
+
+Response 401 Unauthorized:
+```json
+{
+    "message":"Not the owner of this comment"
+}
+```
+
+## EndPoint `DELETE /:commentId`
+Description: Delete a specific comment
+
+Authentication: Login Required
+
+Parameters:
+
+* `:reviewId` id of the Review
+
+Response 200 OK:
+```json
+{
+    "id":1
+}
+```
+
+Response 404:
+```json
+{
+    "message":"Comment does not exist"
+}
+```
+
+Response 401 Unauthorized:
+```json
+{
+    "message":"Not the owner of this comment"
+}
+```
+
+
+
 ## To Do
 
 ### Products
@@ -1481,8 +1801,8 @@ Response 401 Unauthorized:
 
 ### Articles
 
-* Properly record the spacing between lines
-* Add a comment feature, rating the writers of articles
+* Clean up comment styling
+* Fix comment bug, where you cannot see comments on your own article
 
 ## Contact Info
 * [LinkedIn](https://www.linkedin.com/in/kyle-joel-flores/)
