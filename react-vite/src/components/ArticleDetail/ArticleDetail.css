@@ -90,7 +90,7 @@
 
 .commentsView{
     margin: 0 auto;
-    /* width: 500px; */
+    max-width: 600px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -102,7 +102,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    /* width: 100%; */
+    max-width: 100%;
     column-gap: 15px;
 }
 

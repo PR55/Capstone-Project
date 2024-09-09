@@ -4,7 +4,7 @@ import './ManagementPage.css'
 import { useNavigate } from "react-router-dom";
 import ProductDisplayManager from "./helperItems/ProductDisplayManager";
 import ArticleDisplayManager from "./helperItems/ArticleDisplayManager";
-import { thunkCurrentUserProducts,thunkCurrentUserArticles } from "../../redux/userContent";
+import { thunkCurrentUserProducts, thunkCurrentUserArticles } from "../../redux/userContent";
 import { LiaSpinnerSolid } from "react-icons/lia";
 import { thunkMyReviewsLoad } from "../../redux/review";
 import ReviewDisplay from "./helperItems/ReviewDisplay";
@@ -33,11 +33,11 @@ function ManagementPage() {
         setLoading(true)
         if (electronic || (!article && !review && !comment)) {
             await dispatch(thunkCurrentUserProducts())
-        } else if(article){
+        } else if (article) {
             await dispatch(thunkCurrentUserArticles())
-        } else if(review){
+        } else if (review) {
             await dispatch(thunkMyReviewsLoad())
-        }else{
+        } else {
             await dispatch(thunkMyCommentsLoad())
         }
         setLoading(false)
@@ -47,10 +47,10 @@ function ManagementPage() {
 
         var longManageLoad = null
 
-        if(longManageLoad != null && !isLoading){
+        if (longManageLoad != null && !isLoading) {
             window.clearTimeout(longManageLoad)
             longManageLoad = null
-        }else if(!longManageLoad){
+        } else if (!longManageLoad) {
             setLoading(true)
             longManageLoad = setTimeout(async () => {
                 await thunkCall()
@@ -67,74 +67,94 @@ function ManagementPage() {
 
     const navigate = useNavigate()
 
-    useEffect(()=>{
-        if(!user){
+    useEffect(() => {
+        if (!user) {
             navigate('/')
         }
     }, [])
 
 
     return (
-        <div className="manageHolder">
+        <div className={isLoading ? "manageHolder spinCursor":"manageHolder"}>
             <div className="manageInfo">
                 <p
-                    className={!comment && electronic && !article && !review ? 'activeHeader' : 'inactiveHeader'}
+                    className={!comment && electronic && !article && !review ?
+                        isLoading ? 'activeHeader spinCursor':'activeHeader'
+                        : isLoading ? 'inactiveHeader spinCursor':'inactiveHeader'}
                     onClick={() => {
-                        setElectronic(true)
-                        setArticle(false)
-                        setReview(false)
-                        setComment(false)
+                        if (!isLoading) {
+                            setElectronic(true)
+                            setArticle(false)
+                            setReview(false)
+                            setComment(false)
+                        }
                     }}>Electronic</p>
                 <p
-                    className={!comment && !electronic && !article && !review ? 'activeHeader' : 'inactiveHeader'}
+                    className={!comment && !electronic && !article && !review ?
+                        isLoading ? 'activeHeader spinCursor':'activeHeader'
+                        : isLoading ? 'inactiveHeader spinCursor':'inactiveHeader'}
                     onClick={() => {
-                        setElectronic(false)
-                        setArticle(false)
-                        setReview(false)
-                        setComment(false)
+                        if (!isLoading) {
+                            setElectronic(false)
+                            setArticle(false)
+                            setReview(false)
+                            setComment(false)
+                        }
                     }}>Traditional</p>
                 <p
-                    className={!comment && article && !electronic && !review ? 'activeHeader' : 'inactiveHeader'}
+                    className={!comment && article && !electronic && !review ?
+                        isLoading ? 'activeHeader spinCursor':'activeHeader'
+                        : isLoading ? 'inactiveHeader spinCursor':'inactiveHeader'}
                     onClick={() => {
-                        setElectronic(false)
-                        setArticle(true)
-                        setReview(false)
-                        setComment(false)
+                        if (!isLoading) {
+                            setElectronic(false)
+                            setArticle(true)
+                            setReview(false)
+                            setComment(false)
+                        }
                     }}>Articles</p>
                 <p
-                    className={!comment && review && !electronic && !article ? 'activeHeader' : 'inactiveHeader'}
+                    className={!comment && review && !electronic && !article ?
+                        isLoading ? 'activeHeader spinCursor':'activeHeader'
+                        : isLoading ? 'inactiveHeader spinCursor':'inactiveHeader'}
                     onClick={() => {
-                        setElectronic(false)
-                        setArticle(false)
-                        setReview(true)
-                        setComment(false)
+                        if (!isLoading) {
+                            setElectronic(false)
+                            setArticle(false)
+                            setReview(true)
+                            setComment(false)
+                        }
                     }}>Reviews</p>
-                    <p
-                    className={comment && !review && !electronic && !article ? 'activeHeader' : 'inactiveHeader'}
+                <p
+                    className={comment && !review && !electronic && !article ?
+                        isLoading ? 'activeHeader spinCursor':'activeHeader'
+                        : isLoading ? 'inactiveHeader spinCursor':'inactiveHeader'}
                     onClick={() => {
-                        setElectronic(false)
-                        setArticle(false)
-                        setReview(false)
-                        setComment(true)
+                        if (!isLoading) {
+                            setElectronic(false)
+                            setArticle(false)
+                            setReview(false)
+                            setComment(true)
+                        }
                     }}>Comments</p>
             </div>
             <div className="manageDisplay">
-                    {
-                        isLoading?
-                        <LiaSpinnerSolid className="spinner"/>
+                {
+                    isLoading ?
+                        <LiaSpinnerSolid className="spinner" />
                         :
                         !article
                             ?
                             !review ?
-                            !comment?
-                            <ProductDisplayManager products={iterable} electronic={electronic}/>
+                                !comment ?
+                                    <ProductDisplayManager products={iterable} electronic={electronic} />
+                                    :
+                                    <CommentDisplay reviews={comments} />
+                                :
+                                <ReviewDisplay reviews={reviews} />
                             :
-                            <CommentDisplay reviews={comments}/>
-                            :
-                            <ReviewDisplay reviews={reviews}/>
-                            :
-                            <ArticleDisplayManager articles={iterable}/>
-                    }
+                            <ArticleDisplayManager articles={iterable} />
+                }
 
             </div>
 

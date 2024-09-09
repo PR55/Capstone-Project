@@ -106,28 +106,28 @@ function ArticleDetail() {
 
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         let errObj = {}
-        if(!rating){
+        if (!rating) {
             errObj.rating = "Please select a rating!"
         }
 
         let verify = comment.split('').filter(c => {
-            if(c != ' '){
+            if (c != ' ') {
                 return c
             }
         })
 
-        if(!verify.length){
+        if (!verify.length) {
             errObj.comment = "Please enter a valid comment!"
-        } else if(comment.length < 30){
+        } else if (comment.length < 30) {
             errObj.comment = "Comment must be at least 30 characters long!"
-        } else if(comment.length > 500){
+        } else if (comment.length > 500) {
             errObj.comment = "Comment must be at most 500 characters long!"
         }
 
         setErrors(errObj)
-    },[rating, comment])
+    }, [rating, comment])
 
     return (
         <div className="articleDisplay">
@@ -271,54 +271,42 @@ function ArticleDetail() {
                                                     </div>
                                                     : null
                                             }
-                                            <div className="commentsView">
-                                                <h3>Comments ({article?.comments.length})</h3>
-                                                {
-                                                    article?.comments.length
-                                                        ?
-                                                        article?.comments.map((comment, index) => {
-
-                                                            return (
-                                                                <div key={index} className="commentTile">
-                                                                    <div className="userImage" onClick={e => {
-                                                                        e.preventDefault()
-                                                                        e.stopPropagation()
-                                                                        navigate(`/user/${comment.owner.id}`)
-                                                                    }}>
-                                                                        <p>{comment.owner.username[0].toUpperCase()}</p>
-                                                                    </div>
-                                                                    <div className="commentDetails">
-                                                                        <p className="comment">{comment.comment}</p>
-                                                                        <div className="ratingDisplayComment">
-                                                                            {
-                                                                                [1, 2, 3, 4, 5].map((a, index) => {
-                                                                                    let check = comment.rating >= 1 * a;
-                                                                                    return (
-                                                                                        <div className="oneStar">
-                                                                                            {
-                                                                                                check
-                                                                                                    ?
-                                                                                                    <FaStar className={'commentStar'}/>
-                                                                                                    :
-                                                                                                    null
-                                                                                            }
-                                                                                            <FaRegStar className={'commentStarAbs'} />
-                                                                                        </div>
-                                                                                    )
-                                                                                })
-                                                                            }
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            )
-                                                        })
-                                                        :
-                                                        <p>No comments have been made!</p>
-                                                }
-                                            </div>
                                         </div>
                                         : null
                                 }
+                                <div className="commentsView">
+                                    <h3>Comments ({article?.comments.length})</h3>
+                                    {
+                                        article?.comments.length
+                                            ?
+                                            article?.comments.map((comment, index) => {
+
+                                                return (
+                                                    <div key={index} className="commentTile">
+                                                        <div className="userImage" onClick={e => {
+                                                            e.preventDefault()
+                                                            e.stopPropagation()
+                                                            navigate(`/user/${comment.owner.id}`)
+                                                        }}>
+                                                            <p>{comment.owner.username[0].toUpperCase()}</p>
+                                                        </div>
+                                                        <div className="commentDetails">
+                                                            <p className="comment">{comment.comment}</p>
+                                                            <div className="ratingDisplayComment">
+                                                                <p>{comment.rating}</p>
+                                                                <div className="oneStar">
+                                                                    <FaStar className={'commentStar'} />
+                                                                    <FaRegStar className={'commentStarAbs'} />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                )
+                                            })
+                                            :
+                                            <h2>No comments have been made!</h2>
+                                    }
+                                </div>
                             </div>
                         </>
                         : <h1>404 Article does not exist</h1>

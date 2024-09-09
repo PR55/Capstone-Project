@@ -213,6 +213,10 @@
     align-items: center;
 }
 
+.spinCursor:hover{
+    cursor: wait;
+}
+
 @media screen and (max-width:1050px) {
     .manageHolder {
         width: 100%;

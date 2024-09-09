@@ -1799,10 +1799,10 @@ Response 401 Unauthorized:
 * Clean up detail page styling
 * Set a max price ($999,999.99?)
 
-### Articles
+### Management and Browsing
 
-* Clean up comment styling
-* Fix comment bug, where you cannot see comments on your own article
+* Add a refresh button to retrieve more products from the backend and update searching on the same request
+* Possibly disable for 10 seconds by greying out and displaying number countdown on top of the icon using abolute inside of button or div.
 
 ## Contact Info
 * [LinkedIn](https://www.linkedin.com/in/kyle-joel-flores/)
