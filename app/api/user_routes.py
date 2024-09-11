@@ -34,7 +34,7 @@ def user(id):
         safe_product = product.to_dict()
         safe_product['tags'] = [x.to_dict() for x in ProductTag.query.filter_by(productId = product.id).all()]
         safe_product['image'] = ProductImage.query.filter_by(productId = product.id).first().to_dict()
-        safe_product['owner'] = User.query.get(product.ownerId).to_dict()
+        safe_product['owner'] = User.query.get(product.ownerId).no_email()
         safe_product['description'] = product.description.split('\n')
         if product.isTraditional:
             safe_traditional.append(safe_product)
@@ -54,7 +54,7 @@ def user(id):
         if not not review:
             safe_review = review.to_dict()
             safe_review['product'] = product.to_dict()
-            safe_review['owner'] = user.to_dict()
+            safe_review['owner'] = user.no_email()
             safe_reviews.append(safe_review)
     safe_user['reviews'] = safe_reviews
 
@@ -63,7 +63,7 @@ def user(id):
 
     for article in articles:
         safe_article = article.to_dict()
-        safe_article['owner'] = user.to_dict()
+        safe_article['owner'] = user.no_email()
         safe_article['body'] = article.body.split('\n')
         safe_articles.append(safe_article)
 
@@ -75,7 +75,7 @@ def user(id):
 
     for review in reviewsMade:
         safe_review = review.to_dict()
-        safe_review['owner'] = user.to_dict()
+        safe_review['owner'] = user.no_email()
         product = Product.query.get(review.productId)
         safe_product = product.to_dict()
         safe_product['image'] = ProductImage.query.filter_by(productId = review.productId).first().to_dict()
@@ -102,7 +102,7 @@ def user(id):
 
     for comment in commentsMade:
         safe_comment = comment.to_dict()
-        safe_comment['owner'] = user.to_dict()
+        safe_comment['owner'] = user.no_email()
         article = Article.query.get(comment.articleId)
         safe_article = article.to_dict()
         safe_comment['article'] = safe_article
@@ -125,7 +125,7 @@ def user_products():
         product['images'] = [x.to_dict() for x in ProductImage.query.filter_by(productId = product['id']).all()]
         tags = [x.to_dict() for x in ProductTag.query.filter_by(productId = product['id']).all()]
         product['tags'] = tags
-        product['owner'] = current_user.to_dict()
+        product['owner'] = current_user.no_email()
         product['description'] = product['description'].split('\n')
 
     return {'products':products}
@@ -142,7 +142,7 @@ def user_articles():
     for product in products:
         tags = [x.to_dict() for x in ArticleTag.query.filter_by(articleId = product['id']).all()]
         product['tags'] = tags
-        product['owner'] = current_user.to_dict()
+        product['owner'] = current_user.no_email()
         product['body'] = product['body'].split('\n')
         product['comments'] = []
 

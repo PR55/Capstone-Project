@@ -22,12 +22,12 @@ def all_articles():
         owner = User.query.get(article['owner'])
         text = article['body']
         article['body'] = text.split('\n')
-        article['owner'] = owner.to_dict()
+        article['owner'] = owner.no_email()
         safe_comments = []
         comments = Comment.query.filter_by(articleId = article['id']).all()
         for comment in comments:
             safe_comment = comment.to_dict()
-            safe_comment['owner'] = User.query.get(comment.ownerId).to_dict()
+            safe_comment['owner'] = User.query.get(comment.ownerId).no_email()
             safe_comments.append(safe_comment)
         article['comments'] = safe_comments
 
@@ -50,7 +50,7 @@ def one_article(id):
 
     safe_article['tags'] = [x.to_dict() for x in ArticleTag.query.filter_by(articleId = id).all()]
     owner = User.query.get(article.ownerId)
-    safe_article['owner'] = owner.to_dict()
+    safe_article['owner'] = owner.no_email()
     safe_article['body'] = article.body.split('\n')
 
     safe_comments = []
@@ -59,7 +59,7 @@ def one_article(id):
 
     for comment in comments:
         safe_comment = comment.to_dict()
-        safe_comment['owner'] = User.query.get(comment.ownerId).to_dict()
+        safe_comment['owner'] = User.query.get(comment.ownerId).no_email()
         safe_comments.append(safe_comment)
 
     safe_article['comments'] = safe_comments
@@ -122,7 +122,7 @@ def new_article():
         db.session.commit()
 
         safe_article = newArticle.to_dict()
-        safe_article['owner'] = current_user.to_dict()
+        safe_article['owner'] = current_user.no_email()
         safe_article['tags'] = [x.to_dict() for x in ArticleTag.query.filter_by(articleId = newArticle.id).all()]
         safe_article['body'] = newArticle.body.split('\n')
         safe_article['comments'] = []
@@ -206,7 +206,7 @@ def update_article(id):
         db.session.commit()
 
         safe_article = article.to_dict()
-        safe_article['owner'] = current_user.to_dict()
+        safe_article['owner'] = current_user.no_email()
         safe_article['tags'] = [x.to_dict() for x in ArticleTag.query.filter_by(articleId = id).all()]
         safe_article['body'] = article.body.split('\n')
 
@@ -216,7 +216,7 @@ def update_article(id):
 
         for comment in comments:
             safe_comment = comment.to_dict()
-            safe_comment['owner'] = User.query.get(comment.ownerId).to_dict()
+            safe_comment['owner'] = User.query.get(comment.ownerId).no_email()
             safe_comments.append(safe_comment)
 
         safe_article['comments'] = safe_comments

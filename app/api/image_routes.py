@@ -50,7 +50,7 @@ def add_photo(id):
 
         safe_product = product.to_dict()
         user = User.query.get(safe_product['owner'])
-        safe_product['owner'] = user.to_dict()
+        safe_product['owner'] = user.no_email()
         safe_product['images'] = [x.to_dict() for x in ProductImage.query.filter_by(productId = id).all()]
         safe_product['tags'] = [x.to_dict() for x in ProductTag.query.filter_by(productId = id).all()]
 
@@ -93,5 +93,5 @@ def delete_one_photo(id):
     tags = [x.to_dict() for x in ProductTag.query.filter_by(productId = product.id).all()]
     safe_product['tags'] = tags
     user = User.query.get(product.ownerId)
-    safe_product['owner'] = user.to_dict()
+    safe_product['owner'] = user.no_email()
     return {'product': safe_product}

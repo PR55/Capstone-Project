@@ -30,9 +30,9 @@ def all_products():
                 safe_review = review.to_dict()
                 safe_review['product'] = productUser.to_dict()
                 userReviewer = User.query.get(review.ownerId)
-                safe_review['owner'] = userReviewer.to_dict()
+                safe_review['owner'] = userReviewer.no_email()
                 reviews.append(safe_review)
-        safe_user = user.to_dict()
+        safe_user = user.no_email()
         safe_user['reviews'] = reviews
         product['owner'] = safe_user
     return {'products':products}
@@ -63,9 +63,9 @@ def one_product(id):
             safe_review = review.to_dict()
             safe_review['product'] = productUser.to_dict()
             userReviewer = User.query.get(review.ownerId)
-            safe_review['owner'] = userReviewer.to_dict()
+            safe_review['owner'] = userReviewer.no_email()
             reviews.append(safe_review)
-    safe_user = user.to_dict()
+    safe_user = user.no_email()
     safe_user['reviews'] = reviews
     safe_product['owner'] = safe_user
     return {'product': safe_product}
@@ -148,7 +148,7 @@ def new_product():
 
         safe_product['tags'] = tagList
 
-        safe_product['owner'] = current_user.to_dict()
+        safe_product['owner'] = current_user.no_email()
         safe_product['description'] = product_new.description.split('\n')
 
         print(form.data)
@@ -267,7 +267,7 @@ def update_product(id):
 
         safe_product = product.to_dict()
         safe_product['images'] = [x.to_dict() for x in ProductImage.query.filter_by(productId = id).all()]
-        safe_product['owner'] = current_user.to_dict()
+        safe_product['owner'] = current_user.no_email()
         safe_product['tags'] = [x.to_dict() for x in ProductTag.query.filter_by(productId = id).all()]
         safe_product['description'] = product.description.split('\n')
         return {'product':safe_product}

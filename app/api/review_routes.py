@@ -8,9 +8,12 @@ review_routes = Blueprint('reviews', __name__)
 @review_routes.route('/')
 @login_required
 def my_reviews():
+    '''
+        All reviews belonging to the logged in user
+    '''
     reviews = [x.to_dict() for x in ProductReview.query.filter_by(ownerId = current_user.id).all()]
     for review in reviews:
-        review['owner'] = current_user.to_dict()
+        review['owner'] = current_user.no_email()
         product = Product.query.get(review['product'])
         safe_product = product.to_dict()
         safe_product['image'] = ProductImage.query.filter_by(productId = product.id).first().to_dict()
@@ -20,6 +23,9 @@ def my_reviews():
     return {'reviews':reviews}
 @review_routes.route('/<int:id>')
 def one_review(id):
+    '''
+        Get one specific review by id
+    '''
     review = ProductReview.query.get(id)
     if not review:
         return {'message':'Review does not exist'},404
@@ -31,11 +37,11 @@ def one_review(id):
     safe_product = product.to_dict()
 
     safe_product['image'] = ProductImage.query.filter_by(productId = product.id).first().to_dict()
-    safe_product['owner'] = User.query.get(product.ownerId).to_dict()
+    safe_product['owner'] = User.query.get(product.ownerId).no_email()
     safe_product['description'] = product.description.split('\n')
 
     safe_review['product'] = safe_product
-    safe_review['owner'] = User.query.get(review.ownerId).to_dict()
+    safe_review['owner'] = User.query.get(review.ownerId).no_email()
 
     return {'review':safe_review}
 
@@ -59,7 +65,7 @@ def user_reviews(id):
             for review in reviewArr:
                 safe_review = review.to_dict()
                 safe_review['product'] = product.to_dict()
-                safe_review['owner'] = User.query.get(id).to_dict()
+                safe_review['owner'] = User.query.get(id).no_email()
                 reviews.append(review.to_dict())
     return {'reviews':reviews}
 
@@ -89,9 +95,9 @@ def new_review(id):
         db.session.commit()
 
         safe_review = new_review.to_dict()
-        safe_review['owner'] = current_user.to_dict()
+        safe_review['owner'] = current_user.no_email()
         safe_product = product.to_dict()
-        safe_product['owner'] = User.query.get(product.ownerId).to_dict()
+        safe_product['owner'] = User.query.get(product.ownerId).no_email()
         safe_product['image'] = ProductImage.query.filter_by(productId = id).first().to_dict()
         safe_product['description'] = product.description.split('\n')
 
@@ -130,9 +136,9 @@ def update_review(id):
 
         product = Product.query.get(review.productId)
         safe_review = review.to_dict()
-        safe_review['owner'] = current_user.to_dict()
+        safe_review['owner'] = current_user.no_email()
         safe_product = product.to_dict()
-        safe_product['owner'] = User.query.get(product.ownerId).to_dict()
+        safe_product['owner'] = User.query.get(product.ownerId).no_email()
         safe_product['image'] = ProductImage.query.filter_by(productId = product.id).first().to_dict()
         safe_product['description'] = product.description.split('\n')
 

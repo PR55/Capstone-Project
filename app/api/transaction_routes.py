@@ -16,7 +16,7 @@ def my_transactions():
             product = Product.query.get(detail.productId)
             safe_product = product.to_dict()
             safe_product['image'] = ProductImage.query.filter_by(productId = product.id).first().to_dict()
-            safe_product['owner'] = User.query.get(product.ownerId).to_dict()
+            safe_product['owner'] = User.query.get(product.ownerId).no_email()
             review = ProductReview.query.filter_by(productId = product.id, ownerId=current_user.id).first()
             if not review:
                 safe_product['review'] = None
@@ -39,7 +39,7 @@ def one_transaction(id):
         product = Product.query.get(detail.productId)
         safe_product = product.to_dict()
         safe_product['image'] = ProductImage.query.filter_by(productId = product.id).first().to_dict()
-        safe_product['owner'] = User.query.get(product.ownerId).to_dict()
+        safe_product['owner'] = User.query.get(product.ownerId).no_email()
         review = ProductReview.query.filter_by(productId = product.id, ownerId=current_user.id).first()
         if not review:
             safe_product['review'] = None
@@ -152,7 +152,7 @@ def update_transaction(id):
         product = Product.query.get(id)
         safe_product = product.to_dict()
         safe_product['image'] = ProductImage.query.filter_by(productId = product.id).first().to_dict()
-        safe_product['owner'] = User.query.get(product.ownerId).to_dict()
+        safe_product['owner'] = User.query.get(product.ownerId).no_email()
         productsArr.append(safe_product)
 
     safe_transaction = transaction.to_dict()

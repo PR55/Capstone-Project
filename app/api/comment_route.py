@@ -102,13 +102,13 @@ def make_comment(id):
 
         for comment in comments:
             safe_comment = comment.to_dict()
-            safe_comment['owner'] = User.query.get(comment.ownerId).to_dict()
+            safe_comment['owner'] = User.query.get(comment.ownerId).no_email()
             safe_comments.append(safe_comment)
 
         owner = User.query.get(article.ownerId)
 
         safe_article['comments'] = safe_comments
-        safe_article['owner'] = owner.to_dict()
+        safe_article['owner'] = owner.no_email()
         safe_article['body'] = article.body.split('\n')
 
         return {"article": safe_article}
