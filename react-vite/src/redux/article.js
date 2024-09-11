@@ -88,8 +88,6 @@ export const makeComment = (id, payload) => async (dispatch)=>{
         body:payload
     })
 
-    console.log(response)
-
     if(response.ok){
         const {article} = await response.json()
         await dispatch(loadArticle(article))

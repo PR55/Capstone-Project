@@ -57,6 +57,8 @@ function ProductForm() {
 
         if (price < 0.1) {
             newErrors.price = 'Price must be at least 10 cents'
+        } else if(price > 50000){
+            newErrors.price = 'Price cannot go above $50,000'
         }
 
         if (tags.length < 1) {
@@ -155,7 +157,7 @@ function ProductForm() {
                 {errors?.description ? <p className="errors">{errors.description}</p> : null}
                 <div className="inputHoldersPostProd">
                     <label htmlFor="productPrice">Product Price:</label>
-                    <input type="number" step="0.01" min={.10} id='productPrice' value={price} onChange={e => setPrice(e.target.value)} />
+                    <input type="number" step="0.01" min={.10} max={50000} id='productPrice' value={price} onChange={e => setPrice(e.target.value)} />
                 </div>
                 {errors?.price ? <p className="errors">{errors.price}</p> : null}
                 <div className="inputHoldersPostProd">

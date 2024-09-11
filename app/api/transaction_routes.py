@@ -54,7 +54,6 @@ def one_transaction(id):
 def new_transaction():
 
     data = request.get_json()
-    print('products' in data)
     # return request.data
 
     if 'products' not in data:
@@ -100,7 +99,6 @@ def new_transaction():
 @login_required
 def update_transaction(id):
     data = request.get_json()
-    print('products' in data)
     # return request.data
 
     if 'products' not in data:
@@ -130,8 +128,6 @@ def update_transaction(id):
             db.session.commit()
 
     idArr = [x.productId for x in safeArr]
-
-    print(data)
 
     for id2 in data['products']:
         if id2 not in idArr:
@@ -191,9 +187,6 @@ def update_status():
     current = current.replace(tzinfo=None)
     for transact in transacts:
         tim = transact.time_created.replace(tzinfo=None)
-        print('-' * 20)
-        print(tim)
-        print('-' * 20)
         if(current - tim >= timedelta(seconds=60) and current - tim < timedelta(seconds=80) and transact.status != packageStatus.processing):
             transact.status = packageStatus.processing
         elif(current - tim >= timedelta(seconds=80) and current - tim < timedelta(seconds=90) and transact.status != packageStatus.delivery):

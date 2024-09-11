@@ -97,7 +97,6 @@ def new_product():
         image = data['image']
         image.filename = get_unique_filename(image.filename)
         upload = upload_file_to_s3(image)
-        # print(upload)
 
         if "url" not in upload:
             # if the dictionary doesn't have a url key
@@ -150,9 +149,6 @@ def new_product():
 
         safe_product['owner'] = current_user.no_email()
         safe_product['description'] = product_new.description.split('\n')
-
-        print(form.data)
-
 
         return {'product':safe_product}
 
@@ -208,7 +204,6 @@ def update_product(id):
         product.isTraditional = state
         db.session.commit()
         images = ProductImage.query.filter_by(productId = id).all()
-        print(data)
         if data['deleteImages'] == 'true':
             # return {'message':'preventatinve test', 'errors':{'image':'test'}},400
             for index, image in enumerate(images):
@@ -233,7 +228,6 @@ def update_product(id):
             image = data['image']
             image.filename = get_unique_filename(image.filename)
             upload = upload_file_to_s3(image)
-        # print(upload)
 
             if "url" not in upload:
             # if the dictionary doesn't have a url key

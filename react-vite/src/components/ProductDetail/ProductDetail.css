@@ -124,17 +124,17 @@
 }
 
 .topButtons{
-    /* display: flex; */
-    /* flex-direction: column; */
+    display: flex;
+    flex-direction: column;
     margin: auto;
     width:100px;
 }
 
 .priceDetail{
+    /* display: inline; */
     font-size: 20px;
-    width:55px;
+    width:90%;
     padding: 5px 10px;
-    margin: 10px 0;
     border: 3px solid;
     background-color: white;
     border-radius: 1rem;
@@ -369,9 +369,6 @@
     align-items: center;
 }
 @media screen and (max-width:1200px){
-    .placeholderNav{
-
-    }
     .topInfo{
         flex-direction: column;
         align-items: center;
@@ -419,5 +416,13 @@
     }
     .navBack{
         width: 40%;
+    }
+    .mobileDescrip{
+        flex-direction: column;
+        align-items: center;
+    }
+    .mobileDescrip > *{
+        margin: 0;
+        padding: 0;
     }
 }

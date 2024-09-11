@@ -91,7 +91,7 @@ def new_article():
         image = data['image']
         image.filename = get_unique_filename(image.filename)
         upload = upload_file_to_s3(image)
-        # print(upload)
+        # (upload)
 
         if "url" not in upload:
             # if the dictionary doesn't have a url key
@@ -177,7 +177,6 @@ def update_article(id):
                 image = data['image']
                 image.filename = get_unique_filename(image.filename)
                 upload = upload_file_to_s3(image)
-                # print(upload)
 
                 if "url" not in upload:
                     # if the dictionary doesn't have a url key
