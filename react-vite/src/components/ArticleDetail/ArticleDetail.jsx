@@ -171,10 +171,10 @@ function ArticleDetail() {
 
                                 </div>
                                 <div className="articleBody">
-                                    {article.body.map(text => {
+                                    {article.body.map((text, index) => {
                                         let code = text.slice(0, 2)
                                         return (
-                                            <p className={code == '/c' ? 'selfCenter' : ''}>{code === '/c' ? text.slice(2) : text}</p>
+                                            <p key={index} className={code == '/c' ? 'selfCenter' : ''}>{code === '/c' ? text.slice(2) : text}</p>
                                         )
                                     })}
                                 </div>

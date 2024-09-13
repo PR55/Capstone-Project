@@ -87,8 +87,8 @@ export function ReviewForm() {
                 </div>
                 <div>
                     <p>${product && product.price}</p>
-                    <div>{product && product.description.map(text => (
-                                <p>{text}</p>
+                    <div>{product && product.description.map((text,index) => (
+                                <p key={index}>{text}</p>
                             ))}</div>
                 </div>
             </div>

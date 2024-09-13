@@ -24,7 +24,7 @@ function DisplayProductsHelper({products, searchTags, user, navigate}){
                             <p className='creator'>{product.owner?.username}</p>
                             <div className='body'>{product.description.map((text,index) => {
                                 return(
-                                    <p>{index <= 1 && text? text:null}</p>
+                                    <p key={index}>{index <= 1 && text? text:null}</p>
                                 )
                             })}</div>
                             <div className='browseTags'>

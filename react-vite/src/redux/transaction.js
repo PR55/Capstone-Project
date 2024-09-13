@@ -23,7 +23,7 @@ const clearThunk = () => ({
     type:CLEAR_TRANSACTION
 })
 
-export const thunkTransactionsGet = (payload) => async (dispatch) =>{
+export const thunkTransactionsGet = () => async (dispatch) =>{
     await fetch('/api/transactions/update_status',{
         method:'PATCH'
     })
@@ -35,8 +35,6 @@ export const thunkTransactionsGet = (payload) => async (dispatch) =>{
 
         await dispatch(loadTransactions(transactions))
         return transactions
-    }else{
-        const data = await response.json()
     }
 }
 
@@ -51,8 +49,6 @@ export const thunkTransactionOne = (id) => async (dispatch) =>{
         const {transaction} = await response.json()
         await dispatch(loadTransaction(transaction))
         return transaction
-    }else{
-        const data = await response.json()
     }
 }
 
@@ -74,6 +70,7 @@ export const thunkTransactionCreate = (payload) => async (dispatch) =>{
         return transaction
     }else{
         const data = await response.json()
+        return data
     }
 }
 

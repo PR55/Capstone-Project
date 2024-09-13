@@ -107,6 +107,7 @@ function TransactionDetail() {
         e.preventDefault()
         let d = await dispatch(thunkTransactionDelete(transaction.id))
         if(d?.errors){
+            return
         }else{
             navigate('/my-transactions')
         }
@@ -124,6 +125,7 @@ function TransactionDetail() {
             let d = await dispatch(thunkTransactionUpdate(payload, transaction.id))
 
             if(d?.errors){
+                return
             }
         }
     }

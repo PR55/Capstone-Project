@@ -40,7 +40,7 @@ function DisplayArticlesHelper({ articles, navigate }) {
                                             <p className='creator'>{product.owner?.username}</p>
                                             <p>{localDate(product.timeUpdated)}</p>
                                             <div className='body'>{product.body.map((text,index) => (
-                                                <p>{index <= 1 && text ?text:null}</p>
+                                                <p key={index}>{index <= 1 && text ?text:null}</p>
                                             ))}</div>
                                         </div>
                                     </div>

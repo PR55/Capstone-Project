@@ -51,7 +51,7 @@ function ArticleDisplay({articles, user}){
                 <>
                 {
                 sorted.map(article => (
-                    <div className="articleBlockProfile" onClick={e => {
+                    <div key = {article.id} className="articleBlockProfile" onClick={e => {
                         e.stopPropagation()
                         navigate(`/articles/${article.id}`)
                     }}>

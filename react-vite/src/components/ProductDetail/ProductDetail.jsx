@@ -244,8 +244,8 @@ function ProductDetail() {
                         </div>
                         <div className='bottomInfo'>
                             <h3>Description:</h3>
-                            <div>{product.description.map(text => (
-                                <p>{text}</p>
+                            <div>{product.description.map((text,index) => (
+                                <p key={index}>{text}</p>
                             ))}</div>
                         </div>
                     </div>

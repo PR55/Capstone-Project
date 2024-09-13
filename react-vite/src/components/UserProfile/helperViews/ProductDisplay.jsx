@@ -56,7 +56,7 @@ function ProductDisplay({
                 sorted.length ?
                     <>{
                         sorted.map(product => (
-                            <div className="profileProductBlock" onClick={e => {
+                            <div className="profileProductBlock" key={product.id} onClick={e => {
                                 e.stopPropagation()
                                 navigate(`/products/${product.id}`)
                             }}>
@@ -71,7 +71,7 @@ function ProductDisplay({
                                         {
                                             product.tags.map((tag, index) => (
                                                 index < 3 ?
-                                                    <p>{tag.tag}</p>
+                                                    <p key={tag.id}>{tag.tag}</p>
                                                     :
                                                     null
                                             ))

@@ -43,13 +43,15 @@ function SignupFormPage() {
   useEffect(()=>{
     const errObj = {}
 
-    if(!email.toLowerCase().match(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-]/)){
+    const match = !email.toLowerCase().match(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-]/);
+
+    if(match){
       errObj.email = 'Not a valid email'
     }
 
     let splitUser = username.split('')
-
-    if(splitUser.includes(' ')){
+    let userCheck = splitUser.includes(' ');
+    if(userCheck){
       errObj.username = 'Usernames contain no spaces'
     }else if(splitUser.length < 4){
       errObj.username = 'Usernames must be at least 4 characters long'
@@ -58,8 +60,8 @@ function SignupFormPage() {
     }
 
     let splitPass = password.split('')
-
-    if(splitPass.includes(' ')){
+    let passCheck = splitPass.includes(' ')
+    if(passCheck){
       errObj.password = 'Passwords contain no spaces'
     }
     else if(splitPass.length < 6){

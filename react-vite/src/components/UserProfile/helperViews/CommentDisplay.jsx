@@ -54,7 +54,7 @@ function CommentDisplay({ reviews, user }) {
                     <>
                         {
                             sorted.map(review => (
-                                <div className="reviewBlock" onClick={() => {
+                                <div key={review.id} className="reviewBlock" onClick={() => {
                                     navigate(`/articles/${review.article.id}`)
                                 }}>
                                     <div className="reviewBlockLeft">

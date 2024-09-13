@@ -70,7 +70,7 @@ function ReviewDisplay({ reviews }) {
                     ?
                     <>
                     {sorted.map(review => (
-                        <div className="reviewBlockManage" onClick={e => {
+                        <div key={review.id} className="reviewBlockManage" onClick={e => {
                             e.stopPropagation()
                             navigate(`/products/${review.product.id}`)
                         }}>

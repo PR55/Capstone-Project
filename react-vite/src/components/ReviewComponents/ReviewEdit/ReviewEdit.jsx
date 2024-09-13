@@ -92,8 +92,8 @@ export function ReviewEdit() {
                 </div>
                 <div>
                     <p>${productR && productR?.product.price}</p>
-                    <div>{productR && productR.product.description.map(text => (
-                                <p>{text}</p>
+                    <div>{productR && productR.product.description.map((text,index) => (
+                                <p key={index}>{text}</p>
                             ))}</div>
                 </div>
             </div>

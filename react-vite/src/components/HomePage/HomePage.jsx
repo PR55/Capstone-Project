@@ -28,7 +28,7 @@ function HomePage() {
                 e.stopPropagation()
                 setTradhover(false)
             }}
-            onTouchStart={e => {
+            onTouchStart={() => {
                 setTradhover(false)
             }}
             >Browse Traditional</button>
@@ -48,7 +48,7 @@ function HomePage() {
                 e.stopPropagation()
                 setElechover(false)
             }}
-            onTouchStart={e => {
+            onTouchStart={() => {
                 setElechover(false)
             }}
             >Browse Electronic</button>

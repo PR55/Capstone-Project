@@ -1,7 +1,7 @@
 const LOAD_MY_REVIEWS = 'review/all'
 const LOAD_ONE_REVIEW = 'review/one'
 const LOAD_DELETE_REVIEW = 'review/delete'
-const LOAD_CLEAR_THUNK = 'reviews/clear'
+// const LOAD_CLEAR_THUNK = 'reviews/clear'
 
 const loadReviews = (reviews) => ({
     type:LOAD_MY_REVIEWS,
@@ -18,9 +18,9 @@ const deleteReview = (id) => ({
     payload:id
 })
 
-const clearReviews = () => ({
-    type:LOAD_CLEAR_THUNK
-})
+// const clearReviews = () => ({
+//     type:LOAD_CLEAR_THUNK
+// })
 
 export const thunkMyReviewsLoad = () => async (dispatch) => {
     const response = await fetch('/api/reviews/')
