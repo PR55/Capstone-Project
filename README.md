@@ -78,7 +78,6 @@ Response 200 OK:
     "user":{
             "id":1,
             "username":"demo",
-            "email":"demo@aa.io",
             "products":[
                 {
                     "id":1,
@@ -94,7 +93,6 @@ Response 200 OK:
                     "owner":{
                         "id":1,
                         "username":"demo",
-                        "email":"demo@aa.io"
                     },
                     "price":13.99,
                     "purchased":false,
@@ -116,7 +114,6 @@ Response 200 OK:
                     "owner":{
                         "id":1,
                         "username":"demo",
-                        "email":"demo@aa.io"
                     },
                     "tags":[
                         {
@@ -137,7 +134,6 @@ Response 200 OK:
                     "owner":{
                         "id":1,
                         "username":"demo",
-                        "email":"demo@aa.io"
                     },
                     "product":4,
                     "timeUpdated":"Last Creation or Update Time"
@@ -151,7 +147,6 @@ Response 200 OK:
                     "owner":{
                         "id":1,
                         "username":"marnie",
-                        "email":"marnie@aa.io"
                     },
                     "product":1,
                     "timeUpdated":"Last Creation or Update Time"
@@ -165,7 +160,6 @@ Response 200 OK:
                     "owner":{
                         "id":1,
                         "username":"demo",
-                        "email":"demo@aa.io"
                     },
                     "article":{
                         "id":4,
@@ -184,7 +178,6 @@ Response 200 OK:
                     "owner":{
                         "id":2,
                         "username":"marnie",
-                        "email":"marnie@aa.io"
                     },
                     "article":{
                         "id":1,
@@ -229,7 +222,6 @@ Response 200 OK:
             "owner":{
                 "id":1,
                 "username":"demo",
-                "email":"demo@aa.io"
             },
             "price":13.99,
             "purchased":false,
@@ -262,7 +254,6 @@ Response 200 OK:
             "owner":{
                 "id":1,
                 "username":"demo",
-                "email":"demo@aa.io"
             },
             "tags":[
                 {
@@ -412,7 +403,6 @@ Response 200 OK:
             "owner":{
                 "id":1,
                 "username":"demo",
-                "email":"demo@aa.io"
             },
             "price":13.99,
             "purchased":false,
@@ -453,7 +443,6 @@ Response 200 OK:
         "owner":{
             "id":1,
             "username":"demo",
-            "email":"demo@aa.io"
         },
         "price":13.99,
         "purchased":false,
@@ -517,7 +506,6 @@ Response 200 OK:
         "owner":{
             "id":1,
             "username":"demo",
-            "email":"demo@aa.io"
         },
         "price":95.99,
         "purchased":false,
@@ -602,7 +590,6 @@ Response 200 OK:
         "owner":{
             "id":1,
             "username":"demo",
-            "email":"demo@aa.io"
         },
         "price":97.99,
         "purchased":false,
@@ -726,7 +713,6 @@ Response 200 OK:
         "owner":{
             "id":1,
             "username":"demo",
-            "email":"demo@aa.io"
         },
         "price":97.99,
         "purchased":false,
@@ -801,7 +787,6 @@ Response 200 OK:
         "owner":{
             "id":1,
             "username":"demo",
-            "email":"demo@aa.io"
         },
         "price":97.99,
         "purchased":false,
@@ -850,7 +835,6 @@ Response 200 OK:
             "owner":{
                 "id":1,
                 "username":"demo",
-                "email":"demo@aa.io"
             },
             "tags":[
                 {
@@ -864,7 +848,6 @@ Response 200 OK:
                     "owner":{
                         "":2,
                         "username":"marnie",
-                        "email":"marnie@aa.io"
                     },
                     "comment":"comment",
                     "rating":3,
@@ -896,7 +879,6 @@ Response 200 OK:
         "owner":{
             "id":1,
             "username":"demo",
-            "email":"demo@aa.io"
         },
         "tags":[
             {
@@ -910,7 +892,6 @@ Response 200 OK:
                 "owner":{
                     "id":2,
                     "username":"marnie",
-                    "email":"marnie@aa.io"
                 },
                 "comment":"comment",
                 "rating":3,
@@ -957,7 +938,6 @@ Response 200 OK:
         "owner":{
             "id":1,
             "username":"demo",
-            "email":"demo@aa.io"
         },
         "tags":[
             {
@@ -1019,7 +999,6 @@ Response 200 OK:
         "owner":{
             "id":1,
             "username":"demo",
-            "email":"demo@aa.io"
         },
         "tags":[
             {
@@ -1033,7 +1012,6 @@ Response 200 OK:
                 "owner":{
                     "id":2,
                     "username":"marnie",
-                    "email":"marnie@aa.io"
                 },
                 "comment":"comment",
                 "rating":3,
@@ -1119,7 +1097,6 @@ Response 200 OK:
             "owner":{
                 "id":1,
                 "username":"demo",
-                "email":"demo@aa.io",
             },
             "status":"pending",
             "products":[
@@ -1152,7 +1129,6 @@ Response 200 OK:
         "owner":{
             "id":1,
             "username":"demo",
-            "email":"demo@aa.io",
         },
         "status":"pending",
         "products":[
@@ -1202,7 +1178,6 @@ Response 200 OK:
     "owner":{
         "id":1,
         "username":"demo",
-        "email":"demo@aa.io",
     },
     "status":"pending",
     "products":[
@@ -1262,7 +1237,6 @@ Response 200 OK:
     "owner":{
         "id":1,
         "username":"demo",
-        "email":"demo@aa.io",
     },
     "status":"pending",
     "products":[
@@ -1370,7 +1344,6 @@ Response 200 OK:
             "owner":{
                 "id":1,
                 "user":"demo",
-                "user":"demo@aa.io",
             }
         }
     ]
@@ -1398,7 +1371,6 @@ Response 200 OK:
         "owner":{
             "id":1,
             "user":"demo",
-            "user":"demo@aa.io",
         }
     }
 }
@@ -1433,7 +1405,6 @@ Response 200 OK:
             "owner":{
                 "id":1,
                 "user":"demo",
-                "user":"demo@aa.io",
             }
         }
     ]
@@ -1463,7 +1434,6 @@ Response 200 OK:
         "owner":{
             "id":1,
             "user":"demo",
-            "user":"demo@aa.io",
         }
     }
 }
@@ -1503,7 +1473,6 @@ Response 200 OK:
         "owner":{
             "id":1,
             "user":"demo",
-            "user":"demo@aa.io",
         }
     }
 }
@@ -1588,7 +1557,6 @@ Response 200 OK:
             "owner":{
                 "id":1,
                 "user":"demo",
-                "user":"demo@aa.io",
             }
         }
     ]
@@ -1618,7 +1586,6 @@ Response 200 OK:
         "owner":{
             "id":1,
             "user":"demo",
-            "user":"demo@aa.io",
         }
     }
 }
@@ -1655,7 +1622,6 @@ Response 200 OK:
             "owner":{
                 "id":1,
                 "user":"demo",
-                "user":"demo@aa.io",
             }
         }
     ]
@@ -1687,7 +1653,6 @@ Response 200 OK:
         "owner":{
             "id":2,
             "user":"marnie",
-            "user":"marnie@aa.io",
         }
     }
 }
@@ -1729,7 +1694,6 @@ Response 200 OK:
         "owner":{
             "id":2,
             "user":"marnie",
-            "user":"marnie@aa.io",
         }
     }
 }
