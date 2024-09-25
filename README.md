@@ -1,4 +1,4 @@
-# ELot
+# ELot | [Live Site](https://pr55.github.io/loadingCapstone.html)
  Welcome to the ELot ReadMe! ELot is a simulated market storefront inspired by Ebay and Gamestop.
 
  This caused an idea to where what if you had a store that had news from the users and products from the users as well, only being a middleman company?
