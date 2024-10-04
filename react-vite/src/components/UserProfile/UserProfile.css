@@ -39,13 +39,34 @@
     font-size: 50px;
 }
 
+.username{
+    margin: 0;
+    padding: 0;
+}
+
 .ratingHolder{
-    font-size: 20px;
+    font-size: 25px;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 7.5%;
+    column-gap: 7px;
+    min-width: 17.5%;
 }
+
+.ratingHolder2{
+    font-size: 21px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 7px;
+    min-width: 17.5%;
+}
+
+
+.iconDescrip{
+    font-size: 30px;
+}
+
 .accountRating{
     display: flex;
 }
@@ -289,6 +310,19 @@
 
 .titleProfile{
     font-weight: bolder;
+}
+
+.ratingView{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0%;
+    padding: 0%;
+}
+
+.ratingView > *{
+    margin: 0%;
+    padding: 0%;
 }
 
 @media screen and (max-width:1350px){
