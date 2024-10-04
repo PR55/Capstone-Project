@@ -54,6 +54,7 @@ function ArticleDisplay({articles, user}){
                     <div key = {article.id} className="articleBlockProfile" onClick={e => {
                         e.stopPropagation()
                         navigate(`/articles/${article.id}`)
+                        window.scrollTo({top:0, left:0, behavior:"instant"})
                     }}>
                         <div className="articlePBImgHolder">
                             <img src={article.imageUrl}/>

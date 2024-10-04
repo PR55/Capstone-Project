@@ -26,6 +26,7 @@ function TransactionDetail() {
 
     if(!user){
         navigate('/')
+        window.scrollTo({top:0, left:0, behavior:"instant"})
     }
 
     const [isLoading, setLoading] = useState(false)
@@ -110,6 +111,7 @@ function TransactionDetail() {
             return
         }else{
             navigate('/my-transactions')
+            window.scrollTo({top:0, left:0, behavior:"instant"})
         }
     }
 
@@ -151,6 +153,7 @@ function TransactionDetail() {
                                         <div className="detailBlock" key={product.id}  onClick={(e) => {
                                             e.stopPropagation()
                                             navigate(`/products/${product.id}`)
+                                            window.scrollTo({top:0, left:0, behavior:"instant"})
                                         }}>
                                             <div className='imageHolderDetail'>
                                                 <img src={product.image.imageUrl} alt={'gameImg'} />
@@ -172,6 +175,7 @@ function TransactionDetail() {
                                                 <button onClick={e => {
                                                     e.stopPropagation()
                                                     navigate(`/reviews/${product.id}/new`)
+                                                    window.scrollTo({top:0, left:0, behavior:"instant"})
                                                 }}>Leave review</button>
                                             </div>
                                         </div>

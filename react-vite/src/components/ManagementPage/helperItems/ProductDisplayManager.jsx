@@ -80,6 +80,7 @@ function ProductDisplayManager({products, electronic}){
                             e.stopPropagation()
                             if(!product.purchased){
                                 navigate(`/products/${product.id}/edit`)
+                                window.scrollTo({top:0, left:0, behavior:"instant"})
                             }
                             }}
                             >Update</p>

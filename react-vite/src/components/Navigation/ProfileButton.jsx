@@ -43,17 +43,20 @@ function ProfileButton() {
     e.preventDefault()
     closeMenu();
     navigate('/manage')
+    window.scrollTo({top:0, left:0, behavior:"instant"})
   }
   const toTransactions = (e) => {
     e.preventDefault()
     closeMenu();
     navigate('/my-transactions')
+    window.scrollTo({top:0, left:0, behavior:"instant"})
   }
 
   const toProfile = (e) => {
     e.preventDefault()
     closeMenu();
     navigate(`/user/${user.id}`)
+    window.scrollTo({top:0, left:0, behavior:"instant"})
   }
 
   const logout = (e) => {
@@ -64,6 +67,7 @@ function ProfileButton() {
     clearCart();
     closeMenu();
     navigate('/')
+    window.scrollTo({top:0, left:0, behavior:"instant"})
   };
 
   return (

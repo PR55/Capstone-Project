@@ -59,6 +59,7 @@ function ProductDisplay({
                             <div className="profileProductBlock" key={product.id} onClick={e => {
                                 e.stopPropagation()
                                 navigate(`/products/${product.id}`)
+                                window.scrollTo({top:0, left:0, behavior:"instant"})
                             }}>
                                 <div className="profileProductImgHolder">
                                     <img src={product.image.imageUrl} alt="" />

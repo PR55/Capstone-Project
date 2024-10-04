@@ -37,6 +37,7 @@ function SignupFormPage() {
       setErrors(serverResponse);
     } else {
       navigate("/");
+      window.scrollTo({top:0, left:0, behavior:"instant"})
     }
   };
 

@@ -10,6 +10,7 @@ function AddToCart({user, product, navigate, setProcess, processCart}) {
                 onClick={(e) => {
                     e.stopPropagation()
                     navigate(`/products/${product.id}/edit`)
+                    window.scrollTo({top:0, left:0, behavior:"instant"})
                 }}
                 disabled={product.purchased}
                 className="addToCart">Update Product</button>

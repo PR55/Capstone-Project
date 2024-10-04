@@ -79,6 +79,7 @@ export function ReviewEdit() {
             return;
         }else{
             navigate('/manage')
+            window.scrollTo({top:0, left:0, behavior:"instant"})
         }
 
     }

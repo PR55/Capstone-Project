@@ -152,6 +152,7 @@ function EditProductForm() {
         }
 
         navigate(`/products/${d.id}`)
+        window.scrollTo({top:0, left:0, behavior:"instant"})
         // history.push("/images");
     }
 

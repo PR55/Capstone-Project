@@ -93,7 +93,10 @@ function ProductDetail() {
                         <div className="navBack">
                             <p
                                 className='placeholderNav'
-                                onClick={() => navigate(product.isTraditional ? '/traditional/products' : '/electronic/products')}
+                                onClick={() => {
+                                    navigate(product.isTraditional ? '/traditional/products' : '/electronic/products')
+                                    window.scrollTo({top:0, left:0, behavior:"instant"})
+                                }}
                             >{'< Back'}</p>
                         </div>
                         <div className='topInfo'>
@@ -168,6 +171,7 @@ function ProductDetail() {
                                         e.stopPropagation()
                                         e.preventDefault()
                                         navigate(`/user/${product.owner.id}`)
+                                        window.scrollTo({top:0, left:0, behavior:"instant"})
                                     }}>{product.owner.username}</p>
                                     <p className="ratingDisplay"><FaStar className="star" /> <FaRegStar className="starAbs" />{ownerRating.toFixed(1)}</p>
                                 </div>
@@ -185,7 +189,10 @@ function ProductDetail() {
                                 {
                                     (user && product.owner.id == user.id) ?
                                         <button
-                                            onClick={() => navigate('edit')}
+                                            onClick={() => {
+                                                navigate('edit')
+                                                window.scrollTo({top:0, left:0, behavior:"instant"})
+                                            }}
                                             className="cartButtonDetail"
                                             disabled={product.purchased}>Update Product</button>
                                         :
@@ -208,6 +215,7 @@ function ProductDetail() {
                                         e.stopPropagation()
                                         e.preventDefault()
                                         navigate(`/user/${product.owner.id}`)
+                                        window.scrollTo({top:0, left:0, behavior:"instant"})
                                     }}>{product.owner.username}</p>
                                     <p className="ratingDisplay"><FaStar className="star" /> <FaRegStar className="starAbs" />{ownerRating.toFixed(1)}</p>
                                 </div>
@@ -225,7 +233,10 @@ function ProductDetail() {
                                 {
                                     (user && product.owner.id == user.id) ?
                                         <button
-                                            onClick={() => navigate('edit')}
+                                            onClick={() => {
+                                                navigate('edit')
+                                                window.scrollTo({top:0, left:0, behavior:"instant"})
+                                            }}
                                             className="cartButtonDetail"
                                             disabled={product.purchased}>Update Product</button>
                                         :

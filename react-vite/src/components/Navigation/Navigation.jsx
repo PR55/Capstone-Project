@@ -28,6 +28,7 @@ function Navigation() {
     clearCart();
     setShowHamburger(false);
     navigate('/')
+    window.scrollTo({top:0, left:0, behavior:"instant"})
   };
 
   useEffect(() => {
@@ -64,10 +65,12 @@ function Navigation() {
                 onClick={(e) => {
                   e.preventDefault();
                   navigate('/login')
+                  window.scrollTo({top:0, left:0, behavior:"instant"})
                 }}>Login</button>
               <button onClick={(e) => {
                 e.preventDefault();
                 navigate('/signup')
+                window.scrollTo({top:0, left:0, behavior:"instant"})
               }}>Sign Up</button>
             </div>
             :
@@ -98,12 +101,14 @@ function Navigation() {
               e.preventDefault();
               setShowHamburger(false)
               navigate('/traditional/products')
+              window.scrollTo({top:0, left:0, behavior:"instant"})
             }}>Traditional Products</h1>
           <h1
             className="hamburgerButton" onClick={(e) => {
               e.preventDefault();
               setShowHamburger(false)
               navigate('/electronic/products')
+              window.scrollTo({top:0, left:0, behavior:"instant"})
             }}>Electronic Products</h1>
           <h1
             className={user ? 'hamburgerButton' : 'hidden'}
@@ -111,12 +116,14 @@ function Navigation() {
               e.preventDefault();
               setShowHamburger(false)
               navigate('/products/new')
+              window.scrollTo({top:0, left:0, behavior:"instant"})
             }}>Post Product</h1>
           <h1
             className="hamburgerButton" onClick={(e) => {
               e.preventDefault();
               setShowHamburger(false)
               navigate('/articles')
+              window.scrollTo({top:0, left:0, behavior:"instant"})
             }}>Articles</h1>
           <h1
             className={!user ? 'hidden' : 'hamburgerButton'}
@@ -124,6 +131,7 @@ function Navigation() {
               e.preventDefault();
               setShowHamburger(false)
               navigate('/articles/new')
+              window.scrollTo({top:0, left:0, behavior:"instant"})
             }}>Post Article</h1>
           {
             !user
@@ -135,12 +143,14 @@ function Navigation() {
                     e.preventDefault();
                     setShowHamburger(false)
                     navigate('/login')
+                    window.scrollTo({top:0, left:0, behavior:"instant"})
                   }}>Login</h1>
                 <h1
                   className="hamburgerButtonUser" onClick={(e) => {
                     e.preventDefault();
                     setShowHamburger(false)
                     navigate('/signup')
+                    window.scrollTo({top:0, left:0, behavior:"instant"})
                   }}>Sign Up</h1>
               </>
               :
@@ -151,6 +161,7 @@ function Navigation() {
                     e.stopPropagation()
                     setShowHamburger(false)
                     navigate(`/cart`)
+                    window.scrollTo({top:0, left:0, behavior:"instant"})
                   }}
                 >View Cart</h1>
                 <h1
@@ -159,6 +170,7 @@ function Navigation() {
                     e.stopPropagation()
                     setShowHamburger(false)
                     navigate(`/user/${user.id}`)
+                    window.scrollTo({top:0, left:0, behavior:"instant"})
                   }}
                 >View Profile</h1>
                 <h1
@@ -167,6 +179,7 @@ function Navigation() {
                     e.stopPropagation()
                     setShowHamburger(false)
                     navigate(`/manage`)
+                    window.scrollTo({top:0, left:0, behavior:"instant"})
                   }}
                 >Manage</h1>
                 <h1
@@ -175,6 +188,7 @@ function Navigation() {
                     e.stopPropagation()
                     setShowHamburger(false)
                     navigate(`/my-transactions`)
+                    window.scrollTo({top:0, left:0, behavior:"instant"})
                   }}
                 >Transactions</h1>
                 <h1

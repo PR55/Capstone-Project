@@ -136,6 +136,7 @@ function TransactionHistory() {
                             <div key={transaction.id} className="order-Block" onClick={(e) => {
                                 e.preventDefault()
                                 navigate(`/transaction/${transaction.id}`)
+                                window.scrollTo({top:0, left:0, behavior:"instant"})
                             }}>
                                 <div className="transac-header">
                                     <FaThumbtack className="transaceDecorator" color={randomColors[Math.floor(((randomColors.length) - 0) * Math.random())]}/>

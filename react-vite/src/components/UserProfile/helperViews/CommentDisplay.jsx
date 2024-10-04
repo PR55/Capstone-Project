@@ -56,6 +56,7 @@ function CommentDisplay({ reviews, user }) {
                             sorted.map(review => (
                                 <div key={review.id} className="reviewBlock" onClick={() => {
                                     navigate(`/articles/${review.article.id}`)
+                                    window.scrollTo({top:0, left:0, behavior:"instant"})
                                 }}>
                                     <div className="reviewBlockLeft">
                                         <div className="imgHolderReviewProfile">
@@ -96,6 +97,7 @@ function CommentDisplay({ reviews, user }) {
                                                     onClick={e => {
                                                         e.stopPropagation()
                                                         navigate(`/comments/${review.id}/edit`)
+                                                        window.scrollTo({top:0, left:0, behavior:"instant"})
                                                     }}
                                                 >Update</p>
                                                 :

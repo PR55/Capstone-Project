@@ -55,6 +55,7 @@ function ViewCart() {
             setComplete(true);
             setReload(!reloadCart);
             navigate('/my-transactions')
+            window.scrollTo({top:0, left:0, behavior:"instant"})
         }
     }
 
@@ -93,8 +94,14 @@ function ViewCart() {
                         <h1>Nothing to show. Go find some product(s) to purchase!</h1>
                         }
                         <div className="navButtonsCart">
-                            <button onClick={() => navigate('/traditional/products')}>Traditional Products</button>
-                            <button onClick={() => navigate('/electronic/products')}>Electronic Products</button>
+                            <button onClick={() => {
+                                navigate('/traditional/products')
+                                window.scrollTo({top:0, left:0, behavior:"instant"})
+                                }}>Traditional Products</button>
+                            <button onClick={() => {
+                                navigate('/electronic/products')
+                                window.scrollTo({top:0, left:0, behavior:"instant"})
+                                }}>Electronic Products</button>
                         </div>
                     </div>
                     :
@@ -108,6 +115,7 @@ function ViewCart() {
                                             <div className="cartBlock" key={product.id}  onClick={(e) => {
                                                 e.stopPropagation()
                                                 navigate(`/products/${product.id}`)
+                                                window.scrollTo({top:0, left:0, behavior:"instant"})
                                             }}>
                                                 <div className='imageHolderCart'>
                                                     <img src={product.images[0].imageUrl} alt={'gameImg'} />

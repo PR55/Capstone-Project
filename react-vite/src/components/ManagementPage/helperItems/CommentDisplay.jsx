@@ -73,6 +73,7 @@ function CommentDisplay({ reviews }) {
                         <div key={review.id} className="reviewBlockManage" onClick={e => {
                             e.stopPropagation()
                             navigate(`/articles/${review.article.id}`)
+                            window.scrollTo({top:0, left:0, behavior:"instant"})
                         }}>
                             <div className="reviewBlockMLeft">
                                 <div className="reviewBImageHolder">
@@ -109,6 +110,7 @@ function CommentDisplay({ reviews }) {
                                 <p className="toUpdateButton" onClick={e => {
                                     e.stopPropagation()
                                     navigate(`/comments/${review.id}/edit`)
+                                    window.scrollTo({top:0, left:0, behavior:"instant"})
                                 }}>Update</p>
                                 <OpenModalDelete
                                     product={review}

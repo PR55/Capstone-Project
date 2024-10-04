@@ -31,7 +31,10 @@ function DisplayArticlesHelper({ articles, navigate }) {
                         {
                             articles.map(product => {
                                 return (
-                                    <div key={product.id} className='productBlockArticle' onClick={() => navigate(`/articles/${product.id}`)}>
+                                    <div key={product.id} className='productBlockArticle' onClick={() => {
+                                        navigate(`/articles/${product.id}`)
+                                        window.scrollTo({top:0, left:0, behavior:"instant"})
+                                    }}>
                                         <div className='imageHolder'>
                                             <img src={product.imageUrl} alt={'gameImg'} />
                                         </div>

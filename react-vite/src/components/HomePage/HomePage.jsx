@@ -19,6 +19,7 @@ function HomePage() {
             <button className={elecHover&& window.innerWidth > 960  ?'traditionalButtonLower': 'traditionalButton'} onClick={e => {
                 e.preventDefault()
                 navigate('/traditional/products')
+                window.scrollTo({top:0, left:0, behavior:"instant"})
             }}
             onMouseEnter={e => {
                 e.stopPropagation()
@@ -39,6 +40,7 @@ function HomePage() {
             <button className={tradHover && window.innerWidth > 960  ? 'electronicButtonLower':'electronicButton'} onClick={e => {
                 e.preventDefault()
                 navigate('/electronic/products')
+                window.scrollTo({top:0, left:0, behavior:"instant"})
             }}
             onMouseEnter={e => {
                 e.stopPropagation()

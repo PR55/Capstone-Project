@@ -152,6 +152,7 @@ function ArticleDetail() {
                                             e.preventDefault()
                                             e.stopPropagation()
                                             navigate(`/user/${article.owner.id}`)
+                                            window.scrollTo({top:0, left:0, behavior:"instant"})
                                         }}
                                         >{article.owner.username}</h3>
                                         {
